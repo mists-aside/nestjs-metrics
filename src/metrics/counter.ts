@@ -1,21 +1,24 @@
-import { Injectable } from '@nestjs/common';
-import * as PromClient from 'prom-client';
-import {Counter as CounterInterface, Metric, Metrics, MetricOptions} from './metrics'
-import {getPrometheusMetric} from './prometheus';
+import { Metrics } from '../metrics';
+import { getPrometheusMetric } from '../prometheus/utils';
+import { getStatsdClient } from '../statsd/utils';
+import { CounterOptions } from './utils';
+import { Metric } from './metric';
 
-@Injectable()
-export class Counter extends Metric implements CounterInterface {
+export class Counter extends Metric {
+  constructor(
+    protected name: string,
+    protected options?: CounterOptions) {
+      super();
 
-  constructor(protected options: MetricOptions) {
-    super(options)
-    if (options.prometheus) {
-      this.prometheusMetric = getPrometheusMetric(Metrics.Counter, options.prometheus)
-    }
+      this.prometheusMetric = getPrometheusMetric(Metrics.Counter, {
+        ...(options.prometheus || {}),
+        name,
+        ...({ help: options.prometheus ? options.prometheus.help || name : name })
+      })
   }
 
   inc(): void {
-    if (this.prometheusMetric) {
-      (this.prometheusMetric as PromClient.Counter<string>).inc();
-    }
+    this.statsdClient.inc(this.name.replace(/_/ig, '.'));
+    this.prometheusMetric.inc();
   }
 }

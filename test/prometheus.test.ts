@@ -3,7 +3,7 @@ import {describe, it} from 'mocha';
 import * as PromClient from 'prom-client';
 
 import {Metrics} from '../src/metrics';
-import {getPrometheusMetric} from '../src/utils';
+import {getPrometheusMetric} from '../src/prometheus/utils';
 import {createStatsModule, TestHarness} from './utils';
 
 describe('src/prometheus', function () {

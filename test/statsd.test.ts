@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import * as StatsdClient from 'statsd-client';
 
-import { MetadataLabels } from '../src/metadata';
 import { getStatsdClient } from '../src/statsd/utils';
 import { createStatsModule, TestHarness } from './utils';
 
@@ -27,7 +26,7 @@ describe('src/statsd', function () {
 
   // eslint-disable-next-line mocha/no-mocha-arrows
   afterEach(async () => {
-    MetadataLabels.getInstance().reset();
+    // MetadataLabels.getInstance().reset();
   });
 
   describe('when no options are given for *', () => {
