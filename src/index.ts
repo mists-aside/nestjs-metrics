@@ -1,1 +1,2 @@
-export const hello = (name: string): string => `Hello ${name}!`;
+export * from './module';
+export {StatsOptions} from './config';
