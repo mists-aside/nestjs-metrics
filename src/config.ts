@@ -1,4 +1,10 @@
-import { CounterConfiguration, DefaultMetricsCollectorConfiguration, GaugeConfiguration, HistogramConfiguration, SummaryConfiguration } from 'prom-client';
+import {
+  CounterConfiguration,
+  DefaultMetricsCollectorConfiguration,
+  GaugeConfiguration,
+  HistogramConfiguration,
+  SummaryConfiguration,
+} from 'prom-client';
 
 /****************************************************************
  * PROMETHEUS
@@ -38,7 +44,7 @@ export const defaultPrometheusOptions: PrometheusOptions = {
  * STATSD
  ****************************************************************/
 
-interface Tags {
+export interface Tags {
   [key: string]: string | number;
 }
 

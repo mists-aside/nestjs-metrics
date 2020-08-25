@@ -1,34 +1,38 @@
 import {
-    CounterConfiguration, GaugeConfiguration, HistogramConfiguration, Metric, SummaryConfiguration
+  CounterConfiguration,
+  GaugeConfiguration,
+  HistogramConfiguration,
+  Metric,
+  SummaryConfiguration,
 } from 'prom-client';
 
-import { Config } from '../config';
-import { Metrics } from '../metrics';
+import {Config} from '../config';
+import {Metrics} from '../metrics';
 
 export type PrometheusMetricOptions =
-| GaugeConfiguration<string>
-| SummaryConfiguration<string>
-| CounterConfiguration<string>
-| HistogramConfiguration<string>
+  | GaugeConfiguration<string>
+  | SummaryConfiguration<string>
+  | CounterConfiguration<string>
+  | HistogramConfiguration<string>;
 
 /* eslint-disable @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-empty-function */
 
-const DummyCounter = {
+export const DummyCounter = {
   inc: (): void => {},
 };
 
-const DummyTimer = {
+export const DummyTimer = {
   startTimer: (): (() => void) => () => {},
 };
 
-const DummyGauge = {
+export const DummyGauge = {
   ...DummyCounter,
   dec: (): void => {},
   set: (): void => {},
   ...DummyTimer,
 };
 
-const DummyHistogram = {
+export const DummyHistogram = {
   observe: (): void => {},
   ...DummyTimer,
 };
@@ -38,7 +42,6 @@ const metrics = {
   [Metrics.Gauge]: DummyGauge,
   [Metrics.Histogram]: DummyHistogram,
   [Metrics.Summary]: DummyHistogram,
-  [Metrics.Timer]: DummyTimer,
 };
 
 /* eslint-enable @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-empty-function */
@@ -67,22 +70,22 @@ export const getPrometheusMetric = (type: Metrics, options: PrometheusMetricOpti
     case Metrics.Counter:
       return new PromClient.Counter({
         ...(config.prometheus.counter || {}),
-        ...options
+        ...options,
       });
     case Metrics.Gauge:
       return new PromClient.Gauge({
         ...(config.prometheus.gauge || {}),
-        ...options
+        ...options,
       });
     case Metrics.Histogram:
       return new PromClient.Histogram({
         ...(config.prometheus.histogram || {}),
-        ...options
+        ...options,
       });
     case Metrics.Summary:
       return new PromClient.Summary({
         ...(config.prometheus.summary || {}),
-        ...options
+        ...options,
       });
     default:
       throw new Error(`Unsupported metric type: ${type}`);

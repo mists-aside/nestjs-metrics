@@ -1,12 +1,23 @@
-import { expect } from 'chai';
+import * as chai from 'chai';
 import { describe, it } from 'mocha';
+import * as PromClient from 'prom-client';
+import * as sinon from 'sinon';
+import * as sinonChai from 'sinon-chai';
 import * as StatsdClient from 'statsd-client';
 
-import { getStatsdClient } from '../src/statsd/utils';
-import { createStatsModule, TestHarness } from './utils';
+import {DummyStatsdClient, getStatsdClient} from '../src/statsd/utils';
+import {createStatsModule, TestHarness} from './utils';
+
+chai.use(sinonChai)
 
 describe('src/statsd', function () {
   let harness: TestHarness;
+
+  // eslint-disable-next-line mocha/no-mocha-arrows
+  before(() => {
+    DummyStatsdClient.increment = sinon.fake()
+    StatsdClient.prototype.increment = sinon.fake()
+  })
 
   // eslint-disable-next-line mocha/no-mocha-arrows
   beforeEach(async () => {
@@ -14,7 +25,7 @@ describe('src/statsd', function () {
       prometheus: {
         defaultMetrics: {
           enabled: true,
-          config: {}
+          config: {},
         },
         route: '/metrics',
       },
@@ -34,8 +45,16 @@ describe('src/statsd', function () {
       await createStatsModule();
       const client = getStatsdClient();
 
-      expect(client).to.be.an('object');
-      expect(client).not.to.be.instanceOf(StatsdClient);
+      chai.expect(client).to.be.an('object');
+      chai.expect(client).not.to.be.instanceOf(StatsdClient);
+    });
+
+    it('metric.inc() should call a dummy object\'s inc function', async () => {
+      await createStatsModule();
+      const client = getStatsdClient();
+      client.increment('test')
+
+      chai.expect(DummyStatsdClient.increment).to.have.been.called;
     });
   });
 
@@ -43,8 +62,15 @@ describe('src/statsd', function () {
     it('statsd, statsdClientProvider provider should offer a StatsdClient object', async () => {
       const client = getStatsdClient();
 
-      expect(client).to.be.an('object');
-      expect(client).to.be.instanceOf(StatsdClient);
+      chai.expect(client).to.be.an('object');
+      chai.expect(client).to.be.instanceOf(StatsdClient);
+    });
+
+    it('metric.inc() should call a dummy object\'s inc function', async () => {
+      const client = getStatsdClient();
+      client.increment('test')
+
+      chai.expect(client.increment).to.have.been.called;
     });
   });
 });

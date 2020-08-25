@@ -1,6 +1,6 @@
-import { DynamicModule, Module } from '@nestjs/common';
+import {DynamicModule, Module} from '@nestjs/common';
 
-import { Config, StatsOptions } from './config';
+import {Config, StatsOptions} from './config';
 
 // import { PATH_METADATA } from "@nestjs/common/constants";
 // import { collectDefaultMetrics } from "prom-client";

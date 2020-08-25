@@ -1,11 +1,10 @@
-
 import {Config} from '../config';
 
 /* eslint-disable @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-empty-function */
 
 export const STATSD_CLIENT_LABEL = 'StatsdClient';
 
-const DummyStatsdClient = {
+export const DummyStatsdClient = {
   counter: () => {
     return DummyStatsdClient;
   },
@@ -43,4 +42,4 @@ export const getStatsdClient = (): any => {
     client = new klass(config.statsd);
   }
   return client;
-}
+};

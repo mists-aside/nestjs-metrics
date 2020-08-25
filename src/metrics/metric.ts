@@ -1,11 +1,14 @@
-import { getStatsdClient } from '../statsd/utils';
+import {getStatsdClient} from '../statsd/utils';
 
 export class Metric {
+  protected statsdClient: any;
+  protected prometheusMetric: any;
 
-  protected statsdClient: any
-  protected prometheusMetric: any
+  constructor(protected name: string) {
+    this.statsdClient = getStatsdClient();
+  }
 
-  constructor() {
-      this.statsdClient = getStatsdClient()
+  protected get statsdName(): string {
+    return this.name.replace(/_/gi, '.');
   }
 }

@@ -26,7 +26,7 @@
     "release": "release-it --ci --no-npm.publish",
     "test": "npm run test:single -- 'test/**/*.test.ts'",
     "test:junit": "npm run test -- --reporter mocha-junit-reporter --reporter-options mochaFile=.junit.xml",
-    "test:single": "nyc --reporter=html --reporter=lcov --reporter=text --extension .ts mocha --forbid-only",
+    "test:single": "nyc --reporter=html --reporter=lcov --reporter=text --extension .ts mocha",
     "test:watch": "nodemon --exec 'npm run test'"
   },
   "repository": {
@@ -51,6 +51,7 @@
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
     "@types/node": "^13.13.4",
+    "@types/sinon-chai": "^3.2.4",
     "@types/supertest": "^2.0.10",
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
@@ -93,6 +94,8 @@
     "@nestjs/common": "^7.4.2",
     "@types/statsd-client": "^0.4.0",
     "prom-client": "^12.0.0",
+    "sinon": "^9.0.3",
+    "sinon-chai": "^3.5.0",
     "statsd-client": "^0.4.5",
     "uuid": "^8.3.0"
   }

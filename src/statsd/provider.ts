@@ -1,8 +1,6 @@
-import { Provider } from '@nestjs/common';
+import {Provider} from '@nestjs/common';
 
-import { getStatsdClient, STATSD_CLIENT_LABEL } from './utils';
-
-
+import {getStatsdClient, STATSD_CLIENT_LABEL} from './utils';
 
 export const statsdClientProvider: Provider = {
   provide: STATSD_CLIENT_LABEL,
