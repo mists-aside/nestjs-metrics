@@ -1,10 +1,10 @@
-import { Metrics } from '../metrics';
-import { Counter } from './counter';
-import { Gauge } from './gauge';
-import { Histogram } from './histogram';
-import { Metric } from './metric';
-import { MetricOptions } from './options';
-import { Summary } from './summary';
+import {Metrics} from '../metrics';
+import {Counter} from './counter';
+import {Gauge} from './gauge';
+import {Histogram} from './histogram';
+import {Metric} from './metric';
+import {MetricOptions} from './options';
+import {Summary} from './summary';
 
 export const getToken = (name): string => `NESTJS_METRIC_${name.toUpperCase()}`;
 

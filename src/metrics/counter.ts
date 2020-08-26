@@ -1,4 +1,4 @@
-import { CounterOptions } from './options';
+import {CounterOptions} from './options';
 import {Metrics} from '../metrics';
 import {getPrometheusMetric} from '../prometheus/utils';
 import {Metric} from './metric';
