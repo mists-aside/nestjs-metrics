@@ -2,7 +2,7 @@ import {Metrics} from '../metrics';
 import {getPrometheusMetric} from '../prometheus/utils';
 import {Counter} from './counter';
 import {Timer} from './metric';
-import {GaugeOptions} from './utils';
+import {GaugeOptions} from './options';
 
 export class Gauge extends Timer(Counter) {
   constructor(protected name: string, protected options?: GaugeOptions) {

@@ -1,7 +1,7 @@
+import { CounterOptions } from './options';
 import {Metrics} from '../metrics';
 import {getPrometheusMetric} from '../prometheus/utils';
 import {Metric} from './metric';
-import {CounterOptions} from './utils';
 
 export class Counter extends Metric {
   constructor(protected name: string, protected options?: CounterOptions) {

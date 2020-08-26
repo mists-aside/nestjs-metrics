@@ -1,7 +1,7 @@
 import {Metrics} from '../metrics';
 import {Histogram} from './histogram';
 import {getPrometheusMetric} from '../prometheus/utils';
-import {SummaryOptions} from './utils';
+import {SummaryOptions} from './options';
 
 export class Summary extends Histogram {
   constructor(protected name: string, protected options?: SummaryOptions) {

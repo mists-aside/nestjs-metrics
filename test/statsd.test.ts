@@ -49,7 +49,7 @@ describe('src/statsd', function () {
       chai.expect(client).not.to.be.instanceOf(StatsdClient);
     });
 
-    it("metric.inc() should call a dummy object's inc function", async () => {
+    it("metric.increment() should call a dummy object's inc function", async () => {
       await createStatsModule();
       const client = getStatsdClient();
       client.increment('test');
@@ -66,7 +66,7 @@ describe('src/statsd', function () {
       chai.expect(client).to.be.instanceOf(StatsdClient);
     });
 
-    it("metric.inc() should call a dummy object's inc function", async () => {
+    it("metric.increment() should call a dummy object's inc function", async () => {
       const client = getStatsdClient();
       client.increment('test');
 

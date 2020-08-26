@@ -1,7 +1,7 @@
 import {Metrics} from '../metrics';
 import {getPrometheusMetric} from '../prometheus/utils';
 import {Timer} from './metric';
-import {HistogramOptions} from './utils';
+import {HistogramOptions} from './options';
 
 export class Histogram extends Timer() {
   constructor(protected name: string, protected options?: HistogramOptions) {
