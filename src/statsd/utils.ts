@@ -33,6 +33,7 @@ export const DummyStatsdClient = {
 
 /* eslint-enable @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-empty-function */
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getStatsdClient = (): any => {
   const config = Config.getInstance();
   let client = DummyStatsdClient;

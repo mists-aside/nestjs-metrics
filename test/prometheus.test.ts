@@ -1,28 +1,29 @@
 import * as chai from 'chai';
-import { describe, it } from 'mocha';
+import {describe, it} from 'mocha';
 import * as PromClient from 'prom-client';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
-import { DummyCounter } from '../src/prometheus/utils';
-import { Metrics } from '../src/metrics';
-import { getPrometheusMetric } from '../src/prometheus/utils';
-import { createStatsModule, TestHarness } from './utils';
+import {DummyCounter} from '../src/prometheus/utils';
+import {Metrics} from '../src/metrics';
+import {getPrometheusMetric} from '../src/prometheus/utils';
+import {createStatsModule} from './utils';
 
-chai.use(sinonChai)
+chai.use(sinonChai);
 
 describe('src/prometheus', function () {
-  let harness: TestHarness;
+  // let harness: TestHarness;
 
   // eslint-disable-next-line mocha/no-mocha-arrows
   before(() => {
-    DummyCounter.inc = sinon.fake()
-    PromClient.Counter.prototype.inc = sinon.fake()
-  })
+    DummyCounter.inc = sinon.fake();
+    PromClient.Counter.prototype.inc = sinon.fake();
+  });
 
   // eslint-disable-next-line mocha/no-mocha-arrows
   beforeEach(async () => {
-    harness = await createStatsModule({
+    // harness =
+    await createStatsModule({
       prometheus: {
         defaultMetrics: {
           enabled: true,
@@ -47,7 +48,7 @@ describe('src/prometheus', function () {
       chai.expect(metric).not.to.be.instanceOf(PromClient.Counter);
     });
 
-    it('metric.inc() should call a dummy object\'s inc function', async () => {
+    it("metric.inc() should call a dummy object's inc function", async () => {
       await createStatsModule();
       const metric = getPrometheusMetric(Metrics.Counter, {name: 'no_metric', help: 'no_metric'});
       (metric as PromClient.Counter<string>).inc();
@@ -64,7 +65,7 @@ describe('src/prometheus', function () {
       chai.expect(metric).to.be.instanceOf(PromClient.Counter);
     });
 
-    it('metric.inc() should call a dummy object\'s inc function', async () => {
+    it("metric.inc() should call a dummy object's inc function", async () => {
       const metric = getPrometheusMetric(Metrics.Counter, {name: 'no_metric_counter', help: 'no_metric'});
       (metric as PromClient.Counter<string>).inc();
 

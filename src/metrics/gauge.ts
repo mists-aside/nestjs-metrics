@@ -1,9 +1,10 @@
 import {Metrics} from '../metrics';
 import {getPrometheusMetric} from '../prometheus/utils';
 import {Counter} from './counter';
+import {Timer} from './metric';
 import {GaugeOptions} from './utils';
 
-export class Gauge extends Counter {
+export class Gauge extends Timer(Counter) {
   constructor(protected name: string, protected options?: GaugeOptions) {
     super(name);
 
@@ -27,15 +28,5 @@ export class Gauge extends Counter {
   set(value: number): void {
     this.prometheusMetric.set(value);
     this.statsdClient.gauge(this.statsdName, value, this.options.stasd || {});
-  }
-
-  startTimer(): () => void {
-    const prometheusEnd = this.prometheusMetric.startTimer();
-    const stasdStart = new Date();
-
-    return (): void => {
-      prometheusEnd();
-      this.statsdClient.histogram(this.statsdName, stasdStart);
-    };
   }
 }

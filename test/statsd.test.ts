@@ -1,27 +1,27 @@
 import * as chai from 'chai';
-import { describe, it } from 'mocha';
-import * as PromClient from 'prom-client';
+import {describe, it} from 'mocha';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 import * as StatsdClient from 'statsd-client';
 
 import {DummyStatsdClient, getStatsdClient} from '../src/statsd/utils';
-import {createStatsModule, TestHarness} from './utils';
+import {createStatsModule} from './utils';
 
-chai.use(sinonChai)
+chai.use(sinonChai);
 
 describe('src/statsd', function () {
-  let harness: TestHarness;
+  // let harness: TestHarness;
 
   // eslint-disable-next-line mocha/no-mocha-arrows
   before(() => {
-    DummyStatsdClient.increment = sinon.fake()
-    StatsdClient.prototype.increment = sinon.fake()
-  })
+    DummyStatsdClient.increment = sinon.fake();
+    StatsdClient.prototype.increment = sinon.fake();
+  });
 
   // eslint-disable-next-line mocha/no-mocha-arrows
   beforeEach(async () => {
-    harness = await createStatsModule({
+    // harness =
+    await createStatsModule({
       prometheus: {
         defaultMetrics: {
           enabled: true,
@@ -49,10 +49,10 @@ describe('src/statsd', function () {
       chai.expect(client).not.to.be.instanceOf(StatsdClient);
     });
 
-    it('metric.inc() should call a dummy object\'s inc function', async () => {
+    it("metric.inc() should call a dummy object's inc function", async () => {
       await createStatsModule();
       const client = getStatsdClient();
-      client.increment('test')
+      client.increment('test');
 
       chai.expect(DummyStatsdClient.increment).to.have.been.called;
     });
@@ -66,9 +66,9 @@ describe('src/statsd', function () {
       chai.expect(client).to.be.instanceOf(StatsdClient);
     });
 
-    it('metric.inc() should call a dummy object\'s inc function', async () => {
+    it("metric.inc() should call a dummy object's inc function", async () => {
       const client = getStatsdClient();
-      client.increment('test')
+      client.increment('test');
 
       chai.expect(client.increment).to.have.been.called;
     });

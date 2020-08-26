@@ -4,7 +4,7 @@ import {describe, it} from 'mocha';
 
 import {createStatsModule, TestHarness} from './utils';
 
-describe.skip('src/module', function () {
+describe('src/module', function () {
   let harness: TestHarness;
 
   // eslint-disable-next-line mocha/no-mocha-arrows

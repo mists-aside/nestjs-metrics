@@ -1,9 +1,9 @@
 import {Metrics} from '../metrics';
 import {getPrometheusMetric} from '../prometheus/utils';
-import {Metric} from './metric';
+import {Timer} from './metric';
 import {HistogramOptions} from './utils';
 
-export class Histogram extends Metric {
+export class Histogram extends Timer() {
   constructor(protected name: string, protected options?: HistogramOptions) {
     super(name);
 
@@ -17,15 +17,5 @@ export class Histogram extends Metric {
   observe(value: number): void {
     this.prometheusMetric.observe(value);
     this.statsdClient.histogram(this.statsdName, value, this.options.stasd || {});
-  }
-
-  startTimer(): () => void {
-    const prometheusEnd = this.prometheusMetric.startTimer();
-    const stasdStart = new Date();
-
-    return (): void => {
-      prometheusEnd();
-      this.statsdClient.histogram(this.statsdName, stasdStart);
-    };
   }
 }
