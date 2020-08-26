@@ -1,21 +1,15 @@
 import {CounterOptions} from './options';
-import {Metrics} from '../metrics';
-import {getPrometheusMetric} from '../prometheus/utils';
+import {Metrics} from '../enum';
 import {Metric} from './metric';
+import {Tags} from '../config';
 
 export class Counter extends Metric {
-  constructor(protected name: string, protected options?: CounterOptions) {
-    super(name);
-
-    this.prometheusMetric = getPrometheusMetric(Metrics.Counter, {
-      ...(options.prometheus || {}),
-      name,
-      ...{help: options.prometheus ? options.prometheus.help || name : name},
-    });
+  constructor(name: string, options?: CounterOptions) {
+    super(name, Metrics.Counter, options);
   }
 
-  inc(value = 1): void {
-    this.prometheusMetric.inc(value);
+  inc(value = 1, tags?: Tags): void {
+    this.prometheusMetric.inc(tags || {}, value);
     if (value === 1) {
       this.statsdClient.increment();
     } else {

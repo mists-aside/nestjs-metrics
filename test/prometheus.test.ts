@@ -5,7 +5,7 @@ import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
 import {DummyCounter} from '../src/prometheus/utils';
-import {Metrics} from '../src/metrics';
+import {Metrics} from '../src/enum';
 import {getPrometheusMetric} from '../src/prometheus/utils';
 import {createStatsModule} from './utils';
 

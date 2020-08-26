@@ -8,25 +8,19 @@ export const DummyStatsdClient = {
   counter: () => {
     return DummyStatsdClient;
   },
-  increment: () => {
-    return DummyStatsdClient;
-  },
-  decrement: () => {
-    return DummyStatsdClient;
-  },
   gauge: () => {
     return DummyStatsdClient;
   },
-  set: () => {
+  gaugeDelta: () => {
     return DummyStatsdClient;
   },
-  timing: () => {
+  increment: () => {
     return DummyStatsdClient;
   },
   histogram: () => {
     return DummyStatsdClient;
   },
-  close: () => {
+  timing: () => {
     return DummyStatsdClient;
   },
 };

@@ -7,7 +7,7 @@ import {
 } from 'prom-client';
 
 import {Config} from '../config';
-import {Metrics} from '../metrics';
+import {Metrics} from '../enum';
 
 export type PrometheusMetricOptions =
   | GaugeConfiguration<string>
@@ -37,11 +37,15 @@ export const DummyHistogram = {
   ...DummyTimer,
 };
 
-const metrics = {
+export const DummySummary = {
+  ...DummyHistogram,
+};
+
+export const metrics = {
   [Metrics.Counter]: DummyCounter,
   [Metrics.Gauge]: DummyGauge,
   [Metrics.Histogram]: DummyHistogram,
-  [Metrics.Summary]: DummyHistogram,
+  [Metrics.Summary]: DummySummary,
 };
 
 /* eslint-enable @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-empty-function */

@@ -1,16 +1,16 @@
-import {Metrics} from '../metrics';
+import {Metrics} from '../enum';
 import {Histogram} from './histogram';
-import {getPrometheusMetric} from '../prometheus/utils';
 import {SummaryOptions} from './options';
+import {getPrometheusMetric} from '../prometheus/utils';
 
 export class Summary extends Histogram {
-  constructor(protected name: string, protected options?: SummaryOptions) {
-    super(name);
+  constructor(name: string, options?: SummaryOptions) {
+    super(name, options);
 
     this.prometheusMetric = getPrometheusMetric(Metrics.Summary, {
-      ...(options.prometheus || {}),
+      ...(this.options.prometheus || {}),
       name,
-      ...{help: options.prometheus ? options.prometheus.help || name : name},
+      ...{help: this.options.prometheus ? this.options.prometheus.help || name : name},
     });
   }
 }

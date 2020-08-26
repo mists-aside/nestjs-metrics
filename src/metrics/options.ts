@@ -3,19 +3,18 @@ import {Tags} from '../config';
 
 export interface CounterOptions {
   prometheus?: Partial<Omit<CounterConfiguration<string>, 'name'>>;
+  stasd?: Tags;
 }
 
-export interface GaugeOptions {
+export interface GaugeOptions extends Omit<CounterOptions, 'prometheus'> {
   prometheus?: Partial<Omit<GaugeConfiguration<string>, 'name'>>;
-  stasd?: Tags;
 }
 
-export interface HistogramOptions {
+export interface HistogramOptions extends Omit<CounterOptions, 'prometheus'> {
   prometheus?: Partial<Omit<HistogramConfiguration<string>, 'name'>>;
-  stasd?: Tags;
 }
 
-export interface SummaryOptions extends Omit<HistogramOptions, 'prometheus'> {
+export interface SummaryOptions extends Omit<CounterOptions, 'prometheus'> {
   prometheus?: Partial<Omit<SummaryConfiguration<string>, 'name'>>;
 }
 

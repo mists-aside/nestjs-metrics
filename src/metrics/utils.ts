@@ -1,4 +1,4 @@
-import {Metrics} from '../metrics';
+import {Metrics} from '../enum';
 import {Counter} from './counter';
 import {Gauge} from './gauge';
 import {Histogram} from './histogram';

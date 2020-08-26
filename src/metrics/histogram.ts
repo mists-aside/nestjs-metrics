@@ -1,21 +1,24 @@
-import {Metrics} from '../metrics';
-import {getPrometheusMetric} from '../prometheus/utils';
-import {Timer} from './metric';
+import {Tags} from '../config';
+import {Metrics} from '../enum';
+import {Metric, Timer} from './metric';
 import {HistogramOptions} from './options';
 
-export class Histogram extends Timer() {
-  constructor(protected name: string, protected options?: HistogramOptions) {
-    super(name);
+export class Histogram extends Metric {
+  public startTimer: (tags?: Tags) => () => void;
 
-    this.prometheusMetric = getPrometheusMetric(Metrics.Histogram, {
-      ...(options.prometheus || {}),
-      name,
-      ...{help: options.prometheus ? options.prometheus.help || name : name},
-    });
+  constructor(name: string, options?: HistogramOptions) {
+    super(name, Metrics.Histogram, options);
   }
 
-  observe(value: number): void {
-    this.prometheusMetric.observe(value);
-    this.statsdClient.histogram(this.statsdName, value, this.options.stasd || {});
+  observe(value: number, tags?: Tags): void {
+    this.prometheusMetric.observe(tags || {}, value);
+    this.statsdClient.histogram(this.statsdName, value, tags || {});
+  }
+
+  reset(): void {
+    this.prometheusMetric.reset();
+    this.statsdClient.histogram(this.statsdName, 0);
   }
 }
+
+Histogram.prototype.startTimer = Timer.prototype.startTimer;

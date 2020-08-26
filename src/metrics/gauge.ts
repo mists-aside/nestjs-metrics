@@ -1,32 +1,29 @@
-import {Metrics} from '../metrics';
-import {getPrometheusMetric} from '../prometheus/utils';
-import {Counter} from './counter';
-import {Timer} from './metric';
+import {Metrics} from '../enum';
+import {Metric, Timer} from './metric';
 import {GaugeOptions} from './options';
+import {Tags} from '../config';
 
-export class Gauge extends Timer(Counter) {
-  constructor(protected name: string, protected options?: GaugeOptions) {
-    super(name);
+export class Gauge extends Metric {
+  public startTimer: (tags?: Tags) => () => void;
 
-    this.prometheusMetric = getPrometheusMetric(Metrics.Gauge, {
-      ...(options.prometheus || {}),
-      name,
-      ...{help: options.prometheus ? options.prometheus.help || name : name},
-    });
+  constructor(name: string, options?: GaugeOptions) {
+    super(name, Metrics.Gauge, options);
   }
 
-  dec(value = 1): void {
-    this.prometheusMetric.dec(value);
+  dec(value = 1, tags?: Tags): void {
+    this.prometheusMetric.dec(tags || {}, value);
     this.statsdClient.gaugeDelta(this.statsdName, value);
   }
 
-  inc(value = 1): void {
-    this.prometheusMetric.inc(value);
+  inc(value = 1, tags?: Tags): void {
+    this.prometheusMetric.inc(tags || {}, value);
     this.statsdClient.gaugeDelta(this.statsdName, value);
   }
 
-  set(value: number): void {
-    this.prometheusMetric.set(value);
+  set(value: number, tags?: Tags): void {
+    this.prometheusMetric.set(tags || {}, value);
     this.statsdClient.gauge(this.statsdName, value, this.options.stasd || {});
   }
 }
+
+Gauge.prototype.startTimer = Timer.prototype.startTimer;

@@ -1,5 +1,5 @@
 import {Provider} from '@nestjs/common';
-import {Metrics} from '../metrics';
+import {Metrics} from '../enum';
 import {PrometheusMetricOptions, getToken, getPrometheusMetric} from './utils';
 import {Metric} from 'prom-client';
 
