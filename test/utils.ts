@@ -14,6 +14,7 @@ export interface TestHarness {
 export async function createStatsModule(options?: StatsOptions): Promise<TestHarness> {
   const testingModule = await Test.createTestingModule({
     imports: [StatsModule.register(options)],
+    providers: [],
   }).compile();
 
   const app = testingModule.createNestApplication();
