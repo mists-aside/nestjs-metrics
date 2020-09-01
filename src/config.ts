@@ -163,7 +163,7 @@ export class Config {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private constructor() {}
+  // private constructor() {}
 
   private cTypes: StatsTypes[] = [];
   private cPrometheus?: PrometheusOptions;

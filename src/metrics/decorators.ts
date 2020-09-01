@@ -21,10 +21,12 @@ export const generateDecorator = (
   options?: MetricOptions,
 ): (() => MethodDecorator) => {
   const metric = getMetric(type, name, options);
+  // jscpd:ignore-start
   return (): MethodDecorator => {
     return (target: any, propertyKey: string | symbol, descriptor: PropertyDescriptor): PropertyDescriptor => {
       descriptor.value = wrapper(target, descriptor.value, metric, propertyKey, descriptor);
       return descriptor;
     };
   };
+  // jscpd:ignore-end
 };

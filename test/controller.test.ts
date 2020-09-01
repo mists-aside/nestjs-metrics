@@ -169,21 +169,45 @@ describe('src/module', () => {
     it('counter is defined as instanceof Counter', () => {
       chai.expect(controller.counter).to.be.an('object');
       chai.expect(controller.counter).to.be.instanceOf(Counter);
+
+      controller.counter.inc();
+      chai.expect(DummyCounter.inc).to.have.been.called;
+      chai.expect(DummyStatsdClient.increment).to.have.been.called;
     });
 
     it('gauge is defined as instanceof Gauge', () => {
       chai.expect(controller.gauge).to.be.an('object');
       chai.expect(controller.gauge).to.be.instanceOf(Gauge);
+
+      controller.gauge.inc();
+      chai.expect(DummyGauge.inc).to.have.been.called;
+      chai.expect(DummyStatsdClient.gaugeDelta).to.have.been.called;
+
+      controller.gauge.dec();
+      chai.expect(DummyGauge.dec).to.have.been.called;
+      chai.expect(DummyStatsdClient.gaugeDelta).to.have.been.called;
+
+      controller.gauge.set(10);
+      chai.expect(DummyGauge.set).to.have.been.called;
+      chai.expect(DummyStatsdClient.gauge).to.have.been.called;
     });
 
     it('histogram is defined as instanceof Histogram', () => {
       chai.expect(controller.histogram).to.be.an('object');
       chai.expect(controller.histogram).to.be.instanceOf(Histogram);
+
+      controller.histogram.observe(10);
+      chai.expect(DummyHistogram.observe).to.have.been.called;
+      chai.expect(DummyStatsdClient.histogram).to.have.been.called;
     });
 
     it('summary is defined as instanceof Summary', () => {
       chai.expect(controller.summary).to.be.an('object');
       chai.expect(controller.summary).to.be.instanceOf(Summary);
+
+      controller.summary.observe(10);
+      chai.expect(DummySummary.observe).to.have.been.called;
+      chai.expect(DummyStatsdClient.histogram).to.have.been.called;
     });
   });
 
@@ -233,7 +257,6 @@ describe('src/module', () => {
       chai.expect(controller.testPrometheusCounterDecorator()).to.equal('test_counter_decorator_prometheus');
 
       chai.expect(DummyCounter.inc).to.have.been.called;
-      // chai.expect(DummyStatsdClient.increment).to.have.been.called;
     });
 
     it('TestController.TestStgatsdMethodDecorator() to call dummy functions', () => {
