@@ -2,9 +2,9 @@ import * as StatsdClient from 'statsd-client';
 
 import {Provider} from '@nestjs/common';
 
+import {Config} from '../config';
 import {StatsdOptions} from './options';
 import {getStatsdClient, getToken} from './utils';
-import {Config} from '../config';
 
 /**
  * > To validate options typings, check the types `StatsdHttpOptions`, `StatsdTcpOptions`, `StatsdUdpOptions` defined in

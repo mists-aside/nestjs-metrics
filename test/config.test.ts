@@ -1,4 +1,3 @@
-import {TestingModule} from '@nestjs/testing';
 import {expect} from 'chai';
 import {describe, it} from 'mocha';
 import {Config, PrometheusOptions, StatsdOptions, StatsTypes} from '../src/config';
