@@ -14,12 +14,12 @@ import {Config, StatsOptions} from './config';
 
 @Module({})
 export class StatsModule {
-  public static register(options: StatsOptions = {types: []}): DynamicModule {
+  public static register(options: StatsOptions): DynamicModule {
     const config = Config.getInstance();
 
-    config.setTypes(options.types);
-    config.setPrometheusOptions(options.prometheus);
-    config.setStatsdOptions(options.statsd);
+    // config.setTypes(options.types || []);
+    // config.setPrometheusOptions(options.prometheus);
+    config.setStatsdOptions(options.statsd || 'dummy');
 
     return {
       module: StatsModule,

@@ -1,6 +1,13 @@
-import {STATSD_CLIENT_LABEL} from './utils';
 import {Inject} from '@nestjs/common';
 
-export function InjectStatsdClient(): (target: object, key: string | symbol, index?: number | undefined) => void {
-  return Inject(STATSD_CLIENT_LABEL);
+import {getToken} from './utils';
+
+/**
+ *
+ * @param options
+ */
+export function InjectMetric(name: string): (target: object, key: string | symbol, index?: number | undefined) => void {
+  const token = getToken(name);
+
+  return Inject(token);
 }

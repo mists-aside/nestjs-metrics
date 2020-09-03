@@ -1,40 +1,24 @@
-import {Config} from '../config';
+import * as StatsdClient from 'statsd-client';
 
-/* eslint-disable @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-empty-function */
+import {DummyStatsdClient} from './dummy';
+import {StatsdOptions} from './options';
 
-export const STATSD_CLIENT_LABEL = 'StatsdClient';
-
-export const DummyStatsdClient = {
-  counter: () => {
-    return DummyStatsdClient;
-  },
-  gauge: () => {
-    return DummyStatsdClient;
-  },
-  gaugeDelta: () => {
-    return DummyStatsdClient;
-  },
-  increment: () => {
-    return DummyStatsdClient;
-  },
-  histogram: () => {
-    return DummyStatsdClient;
-  },
-  timing: () => {
-    return DummyStatsdClient;
-  },
-};
-
-/* eslint-enable @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-empty-function */
+const instances: {[key: string]: StatsdClient} = {};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getStatsdClient = (): any => {
-  const config = Config.getInstance();
-  let client = DummyStatsdClient;
-  if (config.statsd) {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const klass = require('statsd-client');
-    client = new klass(config.statsd);
+export const getToken = (name: string): string => {
+  return `STATSD_CLIENT_${name}`;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getStatsdClient = (name: string, options: StatsdOptions): StatsdClient => {
+  const token = getToken(name);
+  if (!instances[token]) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    instances[token] = DummyStatsdClient as StatsdClient;
+    if (options !== 'dummy') {
+      instances[token] = new StatsdClient(options);
+    }
   }
-  return client;
+  return instances[token];
 };

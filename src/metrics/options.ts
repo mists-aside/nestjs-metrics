@@ -1,5 +1,5 @@
 import {CounterConfiguration, GaugeConfiguration, HistogramConfiguration, SummaryConfiguration} from 'prom-client';
-import {Tags} from '../config';
+import {Tags} from '../options';
 
 export interface CounterOptions {
   prometheus?: Partial<Omit<CounterConfiguration<string>, 'name'>>;

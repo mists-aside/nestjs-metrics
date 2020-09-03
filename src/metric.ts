@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {getStatsdClient} from '../statsd/utils';
+import {getStatsdClient} from './statsd/utils';
 import {MetricOptions} from './options';
-import {getPrometheusMetric} from '../prometheus/utils';
-import {Metrics} from '../enum';
-import {Tags} from '../config';
+import {getPrometheusMetric} from './prometheus/utils';
+import {Metrics} from './enum';
+import {Tags} from './config';
 
 export class Metric {
   protected statsdClient: any;
