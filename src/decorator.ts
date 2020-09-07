@@ -3,12 +3,12 @@ import {Tags} from './options';
 
 export type GenericMethod = (...args: any[]) => any;
 
-export type MetricNumericArgs = [string, number, Tags?];
-export type MetricDateArgs = [string, Tags?];
-export type MetricArgs = MetricNumericArgs | MetricDateArgs;
+// export type MetricNumericArgs = [string, number, Tags?];
+// export type MetricDateArgs = [string, Tags?];
+// export type MetricArgs = MetricNumericArgs | MetricDateArgs;
 
 export type MetricWrapper = (
-  metricArgs: MetricArgs, // generic arguments given to the decorator
+  metricArgs: any, // generic arguments given to the decorator
   metric: any, // metric entity
   oldMethod: GenericMethod, // decorator's descriptor.value
   target: any, // decorator argument, target
@@ -16,7 +16,7 @@ export type MetricWrapper = (
   descriptor: PropertyDescriptor, // decorator argument, descriptor
 ) => GenericMethod;
 
-export type GeneratedDecoratorWithArgs = (...args: MetricArgs) => MethodDecorator;
+export type GeneratedDecoratorWithArgs = (...args: any) => MethodDecorator;
 
 // /**
 //  *

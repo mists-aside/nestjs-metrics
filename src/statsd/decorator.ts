@@ -2,20 +2,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import {Config} from '../config';
-import {
-  GeneratedDecoratorWithArgs,
-  GenericMethod,
-  MetricArgs,
-  MetricDateArgs,
-  MetricNumericArgs,
-  MetricWrapper,
-} from '../decorator';
+import {GeneratedDecoratorWithArgs, GenericMethod, MetricWrapper} from '../decorator';
+import {Tags} from '../options';
 import {StatsdOptions} from './options';
 import {getStatsdClient} from './utils';
 
 // import {generateDecorator as genericDecorator} from '../decorator'
 import StatsdClient = require('statsd-client');
 
+export type MetricNumericArgs = [string, number, Tags?];
+export type MetricDateArgs = [string, Tags?];
+export type MetricArgs = MetricNumericArgs | MetricDateArgs;
+
+// jscpd:ignore-start
 export const generateDecorator = (wrapper: MetricWrapper, options?: StatsdOptions): GeneratedDecoratorWithArgs => {
   // return genericDecorator(wrapper, getStatsdClient(name, options || Config.getInstance().statsd || 'dummy'))
   return (...args: MetricArgs): MethodDecorator => {
@@ -28,7 +27,6 @@ export const generateDecorator = (wrapper: MetricWrapper, options?: StatsdOption
   };
 };
 
-// jscpd:ignore-start
 export const incrementWrapper: MetricWrapper = (
   metricArgs: MetricNumericArgs,
   metric: any,

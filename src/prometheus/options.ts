@@ -6,24 +6,22 @@ import {
   SummaryConfiguration,
 } from 'prom-client';
 
+export type PrometheusMetricOptions =
+  | GaugeConfiguration<string>
+  | SummaryConfiguration<string>
+  | CounterConfiguration<string>
+  | HistogramConfiguration<string>;
+
 export interface PrometheusDefaultMetricsOptions {
   enabled?: boolean;
   config: DefaultMetricsCollectorConfiguration;
 }
 
 export interface PrometheusOptions {
-  // default values for counter metric
-  counter?: Partial<Omit<CounterConfiguration<string>, 'name' | 'help'>>;
   // default options options
   defaultMetrics: PrometheusDefaultMetricsOptions;
-  // default options for gauge metric
-  gauge?: Partial<Omit<GaugeConfiguration<string>, 'name' | 'help'>>;
-  // default options for histogram metric
-  histogram?: Partial<Omit<HistogramConfiguration<string>, 'name' | 'help'>>;
   // route to read metrics from
   route?: string;
-  // default options for summary metric
-  summary?: Partial<Omit<SummaryConfiguration<string>, 'name' | 'help'>>;
 }
 
 export const defaultPrometheusOptions: PrometheusOptions = {

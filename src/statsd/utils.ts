@@ -6,9 +6,7 @@ import {StatsdOptions} from './options';
 const instances: {[key: string]: StatsdClient} = {};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getToken = (name: string): string => {
-  return `STATSD_CLIENT_${name}`;
-};
+export const getToken = (name: string): string => `STATSD_CLIENT_${name}`;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getStatsdClient = (name: string, options: StatsdOptions): StatsdClient => {

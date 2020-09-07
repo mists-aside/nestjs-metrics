@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {getStatsdClient} from './statsd/utils';
 import {MetricOptions} from './options';
-import {getPrometheusMetric} from './prometheus/utils';
+import {getMetric} from './prometheus/utils';
 import {Metrics} from './enum';
 import {Tags} from './config';
 
@@ -16,7 +16,7 @@ export class Metric {
       ...(options || {}),
     };
 
-    this.prometheusMetric = getPrometheusMetric(type, {
+    this.prometheusMetric = getMetric(type, {
       ...(options.prometheus || {}),
       name,
       ...{help: options.prometheus ? options.prometheus.help || name : name},

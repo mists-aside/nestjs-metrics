@@ -17,8 +17,10 @@ export class StatsModule {
   public static register(options: StatsOptions): DynamicModule {
     const config = Config.getInstance();
 
-    // config.setTypes(options.types || []);
-    // config.setPrometheusOptions(options.prometheus);
+    // config.setTypes(options.types || []);\
+    if (options.prometheus) {
+      config.setPrometheusOptions(options.prometheus);
+    }
     config.setStatsdOptions(options.statsd || 'dummy');
 
     return {

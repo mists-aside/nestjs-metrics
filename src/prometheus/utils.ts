@@ -1,66 +1,19 @@
-import {
-  CounterConfiguration,
-  GaugeConfiguration,
-  HistogramConfiguration,
-  Metric,
-  SummaryConfiguration,
-} from 'prom-client';
+import * as PromClient from 'prom-client';
 
 import {Config} from '../config';
 import {Metrics} from '../enum';
-
-export type PrometheusMetricOptions =
-  | GaugeConfiguration<string>
-  | SummaryConfiguration<string>
-  | CounterConfiguration<string>
-  | HistogramConfiguration<string>;
-
-/* eslint-disable @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-empty-function */
-
-export const DummyCounter = {
-  inc: (): void => {},
-};
-
-export const DummyTimer = {
-  startTimer: (): (() => void) => () => {},
-};
-
-export const DummyGauge = {
-  ...DummyCounter,
-  dec: (): void => {},
-  set: (): void => {},
-  ...DummyTimer,
-};
-
-export const DummyHistogram = {
-  observe: (): void => {},
-  ...DummyTimer,
-};
-
-export const DummySummary = {
-  ...DummyHistogram,
-};
-
-export const metrics = {
-  [Metrics.Counter]: DummyCounter,
-  [Metrics.Gauge]: DummyGauge,
-  [Metrics.Histogram]: DummyHistogram,
-  [Metrics.Summary]: DummySummary,
-};
-
-/* eslint-enable @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-empty-function */
+import {metrics} from './dummy';
+import {PrometheusMetricOptions} from './options';
 
 export const getToken = (name: string): string => `PROMETHEUS_METRIC_${name.toUpperCase()}`;
 
-export const getPrometheusMetric = (type: Metrics, options: PrometheusMetricOptions): Metric<string> => {
+export const getMetric = (type: Metrics, options: PrometheusMetricOptions): PromClient.Metric<string> => {
   const config = Config.getInstance();
 
   if (!config.prometheus) {
-    return metrics[type] as Metric<string>;
+    return metrics[type] as PromClient.Metric<string>;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const PromClient = require('prom-client');
   const register = config.prometheus
     ? config.prometheus.defaultMetrics.config.register || PromClient.register
     : PromClient.register;
@@ -70,28 +23,23 @@ export const getPrometheusMetric = (type: Metrics, options: PrometheusMetricOpti
     return existing;
   }
 
+  let metric: PromClient.Metric<string> = null;
   switch (type) {
     case Metrics.Counter:
-      return new PromClient.Counter({
-        ...(config.prometheus.counter || {}),
-        ...options,
-      });
+      metric = new PromClient.Counter(options);
+      break;
     case Metrics.Gauge:
-      return new PromClient.Gauge({
-        ...(config.prometheus.gauge || {}),
-        ...options,
-      });
+      metric = new PromClient.Gauge(options);
+      break;
     case Metrics.Histogram:
-      return new PromClient.Histogram({
-        ...(config.prometheus.histogram || {}),
-        ...options,
-      });
+      metric = new PromClient.Histogram(options);
+      break;
     case Metrics.Summary:
-      return new PromClient.Summary({
-        ...(config.prometheus.summary || {}),
-        ...options,
-      });
+      metric = new PromClient.Summary(options);
+      break;
     default:
       throw new Error(`Unsupported metric type: ${type}`);
   }
+  register.registerMetric(metric);
+  return metric;
 };

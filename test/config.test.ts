@@ -1,6 +1,8 @@
 import {expect} from 'chai';
 import {describe, it} from 'mocha';
-import {Config, PrometheusOptions, StatsdOptions, StatsTypes} from '../src/config';
+import {Config} from '../src/config';
+import {PrometheusOptions} from '../src/prometheus/options';
+import {StatsdOptions} from '../src/statsd/options';
 
 describe('src/config', function () {
   let config: Config;
@@ -27,11 +29,5 @@ describe('src/config', function () {
     };
     config.setStatsdOptions(options);
     expect(config.statsd).to.equal(options);
-  });
-
-  it('Config.setTypes() will set options', async () => {
-    const types = [StatsTypes.Prometheus];
-    config.setTypes(types);
-    expect(config.types).to.equal(types);
   });
 });
