@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Metrics} from '../enum';
-import {Metric} from './metric';
+import {Metric} from './generic';
 import {MetricOptions} from './options';
 import {getMetric} from './utils';
 

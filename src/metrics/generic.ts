@@ -1,22 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {getStatsdClient} from './statsd/utils';
+import {getStatsdClient} from '../statsd/utils';
 import {MetricOptions} from './options';
-import {getMetric} from './prometheus/utils';
-import {Metrics} from './enum';
-import {Tags} from './config';
+import {getPrometheusMetric} from '../prometheus/utils';
+import {Metrics} from '../enum';
+import {Tags} from '../options';
 
 export class Metric {
   protected statsdClient: any;
   protected prometheusMetric: any;
 
-  constructor(protected name: string, type: Metrics, protected options?: MetricOptions) {
-    this.statsdClient = getStatsdClient();
+  constructor(protected name: string, type: Metrics, protected options: MetricOptions) {
+    this.statsdClient = getStatsdClient(name, options.statsd);
 
-    this.options = options = {
-      ...(options || {}),
-    };
-
-    this.prometheusMetric = getMetric(type, {
+    this.prometheusMetric = getPrometheusMetric(type, {
       ...(options.prometheus || {}),
       name,
       ...{help: options.prometheus ? options.prometheus.help || name : name},
@@ -33,9 +29,9 @@ export class Timer extends Metric {
     const prometheusEnd = this.prometheusMetric.startTimer(tags || {});
     const stasdStart = new Date();
 
-    return (): void => {
-      prometheusEnd();
-      this.statsdClient.timing(this.statsdName, stasdStart);
+    return (newTags?: Tags): void => {
+      prometheusEnd(newTags || tags || {});
+      this.statsdClient.timing(this.statsdName, stasdStart, newTags || tags || {});
     };
   }
 }

@@ -1,9 +1,9 @@
+import {StatsdOptions} from '../statsd/options';
 import {CounterConfiguration, GaugeConfiguration, HistogramConfiguration, SummaryConfiguration} from 'prom-client';
-import {Tags} from '../options';
 
 export interface CounterOptions {
   prometheus?: Partial<Omit<CounterConfiguration<string>, 'name'>>;
-  stasd?: Tags;
+  statsd?: StatsdOptions;
 }
 
 export interface GaugeOptions extends Omit<CounterOptions, 'prometheus'> {

@@ -1,6 +1,6 @@
-import {Tags} from '../config';
+import {Tags} from '../options';
 import {Metrics} from '../enum';
-import {Metric, Timer} from './metric';
+import {Metric, Timer} from './generic';
 import {HistogramOptions} from './options';
 
 export class Histogram extends Metric {

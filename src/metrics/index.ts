@@ -6,4 +6,4 @@ export * from './injector';
 export * from './options';
 export * from './provider';
 export * from './summary';
-export {Metric} from './metric';
+export {Metric} from './generic';

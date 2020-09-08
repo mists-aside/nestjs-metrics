@@ -22,7 +22,7 @@ scripts:
   - npm run depcruise
   - npm run test
   - npm run test:junit
-  - npm run build
+  # - npm run build
 # after_script:
   - if [[ $TRAVIS_NODE_VERSION == '12' ]]; then npm run docs; fi
 notifications:

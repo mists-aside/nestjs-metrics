@@ -5,7 +5,7 @@ import {GeneratedDecoratorWithArgs, GenericMethod, MetricWrapper} from '../decor
 import {Metrics} from '../enum';
 import {Tags} from '../options';
 import {PrometheusMetricOptions} from './options';
-import {getMetric} from './utils';
+import {getPrometheusMetric} from './utils';
 
 export type MetricNumericArgs = [Tags, number];
 export type MetricDateArgs = [Tags?];
@@ -18,7 +18,7 @@ export const generateDecorator = (
   options?: PrometheusMetricOptions,
 ): GeneratedDecoratorWithArgs => {
   return (...args: MetricArgs): MethodDecorator => {
-    const metric = getMetric(type, options);
+    const metric = getPrometheusMetric(type, options);
     return (target: any, propertyKey: string | symbol, descriptor: PropertyDescriptor): PropertyDescriptor => {
       descriptor.value = wrapper(args, metric, descriptor.value, target, propertyKey, descriptor);
       return descriptor;

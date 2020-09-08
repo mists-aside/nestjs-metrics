@@ -2,7 +2,7 @@ import {Metrics} from '../enum';
 import {Counter} from './counter';
 import {Gauge} from './gauge';
 import {Histogram} from './histogram';
-import {Metric} from './metric';
+import {Metric} from './generic';
 import {MetricOptions} from './options';
 import {Summary} from './summary';
 
@@ -39,12 +39,12 @@ export const getMetric = (type: Metrics, name: string, options?: MetricOptions):
   return instances[token];
 };
 
-export const getMetricByName = (name: string): Metric => {
-  const token = getToken(name);
+// export const getMetricByName = (name: string): Metric => {
+//   const token = getToken(name);
 
-  if (!instances[token]) {
-    throw new Error(`No metric for the name: ${name}. You need to call 'makeMetricProvider'`);
-  }
+//   if (!instances[token]) {
+//     throw new Error(`No metric for the name: ${name}. You need to call 'makeMetricProvider'`);
+//   }
 
-  return instances[token];
-};
+//   return instances[token];
+// };

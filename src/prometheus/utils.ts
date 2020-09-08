@@ -7,7 +7,7 @@ import {PrometheusMetricOptions} from './options';
 
 export const getToken = (name: string): string => `PROMETHEUS_METRIC_${name.toUpperCase()}`;
 
-export const getMetric = (type: Metrics, options: PrometheusMetricOptions): PromClient.Metric<string> => {
+export const getPrometheusMetric = (type: Metrics, options: PrometheusMetricOptions): PromClient.Metric<string> => {
   const config = Config.getInstance();
 
   if (!config.prometheus) {

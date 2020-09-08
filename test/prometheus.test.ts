@@ -10,7 +10,7 @@ import {Metrics} from '../src';
 import {Config} from '../src/config';
 import {makeProvider} from '../src/prometheus';
 import {DummyCounter, DummyGauge, DummyHistogram, DummySummary} from '../src/prometheus/dummy';
-import {getMetric} from '../src/prometheus/utils';
+import {getPrometheusMetric} from '../src/prometheus/utils';
 import {mockerizeDummy} from './utils';
 import {TestHarness} from './utils/harness';
 import {createTestModule, genericOptions, PrometheusController, testTags} from './utils/prometheus';
@@ -183,7 +183,7 @@ describe('src/prometheus', () => {
     });
 
     it('getMetric(Metrics.Counter, ...) to container PromClient.Counter<string>', () => {
-      const metric = getMetric(Metrics.Counter, {
+      const metric = getPrometheusMetric(Metrics.Counter, {
         help: 'prometheus_counter',
         name: 'prometheus_counter',
       });
@@ -192,7 +192,7 @@ describe('src/prometheus', () => {
     });
 
     it('getMetric(Metrics.Gauge, ...) to container PromClient.Gauge<string>', () => {
-      const metric = getMetric(Metrics.Gauge, {
+      const metric = getPrometheusMetric(Metrics.Gauge, {
         help: 'prometheus_gauge',
         name: 'prometheus_gauge',
       });
@@ -202,7 +202,7 @@ describe('src/prometheus', () => {
     });
 
     it('getMetric(Metrics.Histogram, ...) to container PromClient.Histogram<string>', () => {
-      const metric = getMetric(Metrics.Histogram, {
+      const metric = getPrometheusMetric(Metrics.Histogram, {
         help: 'prometheus_histogram',
         name: 'prometheus_histogram',
       });
@@ -212,7 +212,7 @@ describe('src/prometheus', () => {
     });
 
     it('getMetric(Metrics.Summary, ...) to container PromClient.Summary<string>', () => {
-      const metric = getMetric(Metrics.Summary, {
+      const metric = getPrometheusMetric(Metrics.Summary, {
         help: 'prometheus_summary',
         name: 'prometheus_summary',
       });

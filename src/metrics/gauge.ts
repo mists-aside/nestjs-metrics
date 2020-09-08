@@ -1,7 +1,7 @@
 import {Metrics} from '../enum';
-import {Metric, Timer} from './metric';
+import {Metric, Timer} from './generic';
 import {GaugeOptions} from './options';
-import {Tags} from '../config';
+import {Tags} from '../options';
 
 export class Gauge extends Metric {
   public startTimer: (tags?: Tags) => () => void;
@@ -12,17 +12,17 @@ export class Gauge extends Metric {
 
   dec(value = 1, tags?: Tags): void {
     this.prometheusMetric.dec(tags || {}, value);
-    this.statsdClient.gaugeDelta(this.statsdName, value);
+    this.statsdClient.gaugeDelta(this.statsdName, value, tags || {});
   }
 
   inc(value = 1, tags?: Tags): void {
     this.prometheusMetric.inc(tags || {}, value);
-    this.statsdClient.gaugeDelta(this.statsdName, value);
+    this.statsdClient.gaugeDelta(this.statsdName, value, tags || {});
   }
 
   set(value: number, tags?: Tags): void {
     this.prometheusMetric.set(tags || {}, value);
-    this.statsdClient.gauge(this.statsdName, value, this.options.stasd || {});
+    this.statsdClient.gauge(this.statsdName, value, tags || {});
   }
 }
 
