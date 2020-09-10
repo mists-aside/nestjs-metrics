@@ -9,12 +9,9 @@ import {DummyStatsdClient} from '../src/statsd/dummy';
 import {makeProvider} from '../src/statsd/provider';
 import {mockerizeDummy} from './utils';
 import {TestHarness} from './utils/harness';
-import {
-  createTestModuleWithConfigBasedInjector,
-  createTestModuleWithCustomInjector,
-  CustomInjectorController,
-  StatsdController,
-} from './utils/statsd';
+import {CustomInjectorController, StatsdController} from './utils/statsd';
+
+import {createTestModule} from './utils/module';
 
 chai.use(sinonChai);
 const expect = chai.expect;
@@ -28,7 +25,13 @@ describe('src/statsd', () => {
 
     // eslint-disable-next-line mocha/no-mocha-arrows
     before(async () => {
-      harness = await createTestModuleWithCustomInjector();
+      harness = await createTestModule(
+        {},
+        {
+          controllers: [CustomInjectorController],
+          providers: [makeProvider('statsd_custom_injector', 'dummy')],
+        },
+      );
       controller = harness.testingModule.get<CustomInjectorController>(CustomInjectorController);
     });
 
@@ -137,7 +140,13 @@ describe('src/statsd', () => {
 
   describe('injector', () => {
     it('custom injected (makeProvider("name", {custom config})) statsd will call .increment() method', async () => {
-      const harness = await createTestModuleWithCustomInjector();
+      const harness = await createTestModule(
+        {},
+        {
+          controllers: [CustomInjectorController],
+          providers: [makeProvider('statsd_custom_injector', 'dummy')],
+        },
+      );
       const controller = harness.testingModule.get<CustomInjectorController>(CustomInjectorController);
       controller.testStatsdCustomInjector();
 
@@ -145,7 +154,15 @@ describe('src/statsd', () => {
     });
 
     it('default injected statsd (makeProvider("name"), using Config) will call .increment() method', async () => {
-      const harness = await createTestModuleWithConfigBasedInjector('dummy');
+      const harness = await createTestModule(
+        {
+          statsd: 'dummy',
+        },
+        {
+          controllers: [StatsdController],
+          providers: [makeProvider('statsd_injector')],
+        },
+      );
       const controller = harness.testingModule.get<StatsdController>(StatsdController);
       controller.testStatsdInjector();
 

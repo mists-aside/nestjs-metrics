@@ -6,9 +6,7 @@ import {GeneratedDecoratorWithArgs, GenericMethod, MetricWrapper} from '../decor
 import {Tags} from '../options';
 import {StatsdOptions} from './options';
 import {getStatsdClient} from './utils';
-
-// import {generateDecorator as genericDecorator} from '../decorator'
-import StatsdClient = require('statsd-client');
+import {StatsdClientAlike} from './options';
 
 export type MetricNumericArgs = [string, number, Tags?];
 export type MetricDateArgs = [string, Tags?];
@@ -16,7 +14,6 @@ export type MetricArgs = MetricNumericArgs | MetricDateArgs;
 
 // jscpd:ignore-start
 export const generateDecorator = (wrapper: MetricWrapper, options?: StatsdOptions): GeneratedDecoratorWithArgs => {
-  // return genericDecorator(wrapper, getStatsdClient(name, options || Config.getInstance().statsd || 'dummy'))
   return (...args: MetricArgs): MethodDecorator => {
     const [name] = args;
     const metric = getStatsdClient(name, options || Config.getInstance().statsd || 'dummy');
@@ -35,7 +32,7 @@ export const incrementWrapper: MetricWrapper = (
   propertyKey: string | symbol,
   descriptor: PropertyDescriptor,
 ): GenericMethod => (...args: any[]): any => {
-  (metric as StatsdClient).increment(...metricArgs);
+  (metric as StatsdClientAlike).increment(...metricArgs);
   return oldMethod.call(target, ...args);
 };
 
@@ -47,7 +44,7 @@ export const gaugeDeltaWrapper: MetricWrapper = (
   propertyKey: string | symbol,
   descriptor: PropertyDescriptor,
 ): GenericMethod => (...args: any[]): any => {
-  (metric as StatsdClient).gaugeDelta(...metricArgs);
+  (metric as StatsdClientAlike).gaugeDelta(...metricArgs);
   return oldMethod.call(target, ...args);
 };
 
@@ -59,7 +56,7 @@ export const gaugeWrapper = (
   propertyKey: string | symbol,
   descriptor: PropertyDescriptor,
 ): GenericMethod => (...args: any[]): any => {
-  (metric as StatsdClient).gauge(...metricArgs);
+  (metric as StatsdClientAlike).gauge(...metricArgs);
   return oldMethod.call(target, ...args);
 };
 
@@ -71,7 +68,7 @@ export const histogramWrapper = (
   propertyKey: string | symbol,
   descriptor: PropertyDescriptor,
 ): GenericMethod => (...args: any[]): any => {
-  (metric as StatsdClient).histogram(...metricArgs);
+  (metric as StatsdClientAlike).histogram(...metricArgs);
   return oldMethod.call(target, ...args);
 };
 
@@ -90,15 +87,15 @@ export const timingWrapper = (
   if (result instanceof Promise) {
     return result
       .then((...args: any[]) => {
-        (metric as StatsdClient).timing(name, date, tags);
+        (metric as StatsdClientAlike).timing(name, date, tags);
         return args;
       })
       .catch((error) => {
-        (metric as StatsdClient).timing(name, date, tags);
+        (metric as StatsdClientAlike).timing(name, date, tags);
         throw error;
       });
   } else {
-    (metric as StatsdClient).timing(name, date, tags);
+    (metric as StatsdClientAlike).timing(name, date, tags);
     return result;
   }
 };

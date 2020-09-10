@@ -10,7 +10,7 @@ export class Metric {
   protected prometheusMetric: any;
 
   constructor(protected name: string, type: Metrics, protected options: MetricOptions) {
-    this.statsdClient = getStatsdClient(name, options.statsd);
+    this.statsdClient = getStatsdClient(name, options.statsd || 'dummy');
 
     this.prometheusMetric = getPrometheusMetric(type, {
       ...(options.prometheus || {}),

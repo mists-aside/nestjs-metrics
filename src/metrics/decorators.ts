@@ -1,32 +1,122 @@
+import {GeneratedDecoratorWithArgs, GenericMethod, MetricWrapper} from '../decorator';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Metrics} from '../enum';
-import {Metric} from './generic';
+import {Tags} from '../options';
+import {Counter} from './counter';
+import {Gauge} from './gauge';
+import {Histogram} from './histogram';
 import {MetricOptions} from './options';
+import {Summary} from './summary';
 import {getMetric} from './utils';
 
-type GenericMethod = (...args: any[]) => any;
+export type MetricNumericArgs = [number, Tags];
+export type MetricDateArgs = [Tags?];
+export type MetricArgs = MetricNumericArgs | MetricDateArgs;
 
-type MethodWrapper = (
-  target: any,
-  method: GenericMethod,
-  metric: Metric,
-  propertyKey?: string | symbol,
-  descriptor?: PropertyDescriptor,
-) => GenericMethod;
+// jscpd:ignore-start
 
 export const generateDecorator = (
   type: Metrics,
   name: string,
-  wrapper: MethodWrapper,
+  wrapper: MetricWrapper,
   options?: MetricOptions,
-): (() => MethodDecorator) => {
-  const metric = getMetric(type, name, options);
-  // jscpd:ignore-start
-  return (): MethodDecorator => {
+): GeneratedDecoratorWithArgs => {
+  return (...args: MetricArgs): MethodDecorator => {
+    const metric = getMetric(type, name, options);
     return (target: any, propertyKey: string | symbol, descriptor: PropertyDescriptor): PropertyDescriptor => {
-      descriptor.value = wrapper(target, descriptor.value, metric, propertyKey, descriptor);
+      descriptor.value = wrapper(args, metric, descriptor.value, target, propertyKey, descriptor);
       return descriptor;
     };
   };
-  // jscpd:ignore-end
 };
+
+export const incrementWrapper: MetricWrapper = (
+  metricArgs: MetricNumericArgs,
+  metric: any,
+  oldMethod: GenericMethod,
+  target: any,
+  propertyKey: string | symbol,
+  descriptor: PropertyDescriptor,
+): GenericMethod => (...args: any[]): any => {
+  (metric as Counter).inc(...metricArgs);
+  return oldMethod.call(target, ...args);
+};
+
+// export const gaugeIncrementWrapper: MetricWrapper = (
+//   metricArgs: MetricNumericArgs,
+//   metric: any,
+//   oldMethod: GenericMethod,
+//   target: any,
+//   propertyKey: string | symbol,
+//   descriptor: PropertyDescriptor,
+// ): GenericMethod => (...args: any[]): any => {
+//   (metric as PromClient.Gauge<string>).inc(...metricArgs);
+//   return oldMethod.call(target, ...args);
+// };
+
+// export const gaugeDecrementWrapper: MetricWrapper = (
+//   metricArgs: MetricNumericArgs,
+//   metric: any,
+//   oldMethod: GenericMethod,
+//   target: any,
+//   propertyKey: string | symbol,
+//   descriptor: PropertyDescriptor,
+// ): GenericMethod => (...args: any[]): any => {
+//   (metric as PromClient.Gauge<string>).dec(...metricArgs);
+//   return oldMethod.call(target, ...args);
+// };
+
+// export const gaugeSetWrapper = (
+//   metricArgs: MetricNumericArgs,
+//   metric: any,
+//   oldMethod: GenericMethod,
+//   target: any,
+//   propertyKey: string | symbol,
+//   descriptor: PropertyDescriptor,
+// ): GenericMethod => (...args: any[]): any => {
+//   (metric as PromClient.Gauge<string>).set(...metricArgs);
+//   return oldMethod.call(target, ...args);
+// };
+
+// export const observeWrapper = (
+//   metricArgs: MetricNumericArgs,
+//   metric: any,
+//   oldMethod: GenericMethod,
+//   target: any,
+//   propertyKey: string | symbol,
+//   descriptor: PropertyDescriptor,
+// ): GenericMethod => <T extends PromClient.Histogram<string> | PromClient.Summary<string>>(...args: any[]): any => {
+//   (metric as T).observe(...metricArgs);
+//   return oldMethod.call(target, ...args);
+// };
+
+// export const timingWrapper = (
+//   metricArgs: MetricDateArgs,
+//   metric: any,
+//   oldMethod: GenericMethod,
+//   target: any,
+//   propertyKey: string | symbol,
+//   descriptor: PropertyDescriptor,
+// ): GenericMethod => <T extends PromClient.Gauge<string> | PromClient.Histogram<string> | PromClient.Summary<string>>(
+//   ...args: any[]
+// ): any => {
+//   const end = (metric as T).startTimer(...metricArgs);
+//   const result = oldMethod.call(target, ...args);
+
+//   if (result instanceof Promise) {
+//     return result
+//       .then((...args: any[]) => {
+//         end();
+//         return args;
+//       })
+//       .catch((error) => {
+//         end();
+//         throw error;
+//       });
+//   } else {
+//     end();
+//     return result;
+//   }
+// };
+
+// jscpd:ignore-end

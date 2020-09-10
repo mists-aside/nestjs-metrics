@@ -10,10 +10,6 @@ export class Counter extends Metric {
 
   inc(value = 1, tags?: Tags): void {
     this.prometheusMetric.inc(tags || {}, value);
-    if (value === 1) {
-      this.statsdClient.increment(tags || {});
-    } else {
-      this.statsdClient.counter(this.statsdName, value, tags || {});
-    }
+    this.statsdClient.increment(this.statsdName, value, tags || {});
   }
 }

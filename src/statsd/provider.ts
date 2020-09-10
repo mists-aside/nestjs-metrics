@@ -5,6 +5,7 @@ import {Provider} from '@nestjs/common';
 import {Config} from '../config';
 import {StatsdOptions} from './options';
 import {getStatsdClient, getToken} from './utils';
+import {StatsdClientAlike} from './options';
 
 /**
  * > To validate options typings, check the types `StatsdHttpOptions`, `StatsdTcpOptions`, `StatsdUdpOptions` defined in
@@ -17,7 +18,7 @@ export function makeProvider(name: string, options?: StatsdOptions): Provider {
   options = options || Config.getInstance().statsd;
   return {
     provide: getToken(name),
-    useFactory(): StatsdClient {
+    useFactory(): StatsdClientAlike {
       return getStatsdClient(name, options);
     },
   };
