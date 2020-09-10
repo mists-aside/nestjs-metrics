@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as PromClient from 'prom-client';
 
 import {GeneratedDecoratorWithArgs, GenericMethod, MetricWrapper} from '../decorator';

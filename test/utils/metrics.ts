@@ -1,11 +1,6 @@
-import * as request from 'supertest';
-
 import {Controller} from '@nestjs/common';
-import {Test} from '@nestjs/testing';
 
-import {Metrics, StatsModule, MetricOptions} from '../../src';
-import {Counter, InjectMetric, generateDecorator, incrementWrapper} from '../../src';
-import {TestHarness} from './harness';
+import {Counter, generateDecorator, incrementWrapper, InjectMetric, Metrics} from '../../src';
 
 export const genericOptions = {
   prometheus: {

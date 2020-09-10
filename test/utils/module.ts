@@ -8,6 +8,7 @@ import {TestHarness} from './harness';
 
 export async function createTestModule(
   options?: StatsOptions,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   testOptions?: {[key: string]: any[]},
 ): Promise<TestHarness> {
   testOptions = testOptions || {};
