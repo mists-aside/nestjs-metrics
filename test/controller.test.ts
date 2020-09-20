@@ -102,7 +102,8 @@ const expect = chai.expect;
 //   }
 // }
 
-describe('src/module', () => {
+// eslint-disable-next-line mocha/no-skipped-tests
+describe.skip('src/controller', () => {
   // let controller: TestController;
 
   // // eslint-disable-next-line mocha/no-mocha-arrows
@@ -267,6 +268,6 @@ describe('src/module', () => {
   // });
 
   it('generic', () => {
-    expect(true).to.equal(true);
+    expect(true).to.equal(false);
   });
 });

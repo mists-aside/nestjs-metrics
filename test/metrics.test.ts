@@ -65,90 +65,107 @@ describe('src/metrics', () => {
       });
     });
 
-    // describe('gauge', () => {
-    //   it(`using @Gauge(${JSON.stringify(
-    //     testTags,
-    //   )}, 10) decorator should call metrics Gauge.set() method`, async () => {
-    //     controller.testGaugeDecorator();
+    describe('gauge', () => {
+      it(`using @Gauge(${JSON.stringify(testTags)}, 10) decorator should call metrics Gauge.set() method`, async () => {
+        controller.testGaugeDecorator();
 
-    //     expect(DummyGauge.set).to.have.been.calledWith(testTags, 10);
-    //   });
+        expect(DummyStatsdClient.gauge).to.have.been.calledWith('metrics.gauge.decorator', 10, testTags);
+        expect(DummyGauge.set).to.have.been.calledWith(testTags, 10);
+      });
 
-    //   it(`using @GaugeIncrement(${JSON.stringify(
-    //     testTags,
-    //   )})) decorator should call metrics Gauge.inc() method`, async () => {
-    //     controller.testGaugeIncrementDecorator();
+      it(`using @GaugeIncrement(${JSON.stringify(
+        testTags,
+      )})) decorator should call metrics Gauge.inc() method`, async () => {
+        controller.testGaugeIncrementDecorator();
 
-    //     expect(DummyGauge.inc).to.have.been.calledWith(testTags);
-    //   });
+        expect(DummyStatsdClient.gaugeDelta).to.have.been.calledWith('metrics.gauge.decorator', 1, {});
+        expect(DummyGauge.inc).to.have.been.calledWith({}, 1);
+      });
 
-    //   it(`using @GaugeIncrement(${JSON.stringify(
-    //     testTags,
-    //   )}, 10)) decorator should call metrics Gauge.inc() method`, async () => {
-    //     controller.testGaugeIncrementDecoratorWithValue();
+      it(`using @GaugeIncrement(${JSON.stringify(
+        testTags,
+      )}, 10)) decorator should call metrics Gauge.inc() method`, async () => {
+        controller.testGaugeIncrementDecoratorWithValue();
 
-    //     expect(DummyGauge.inc).to.have.been.calledWith(testTags, 10);
-    //   });
-    //   it(`using @GaugeDecrement(${JSON.stringify(
-    //     testTags,
-    //   )})) decorator should call metrics Gauge.dec() method`, async () => {
-    //     controller.testGaugeDecrementDecorator();
+        expect(DummyStatsdClient.gaugeDelta).to.have.been.calledWith('metrics.gauge.decorator', 10, testTags);
+        expect(DummyGauge.inc).to.have.been.calledWith(testTags, 10);
+      });
 
-    //     expect(DummyGauge.dec).to.have.been.calledWith(testTags);
-    //   });
+      it(`using @GaugeDecrement(${JSON.stringify(
+        testTags,
+      )})) decorator should call metrics Gauge.dec() method`, async () => {
+        controller.testGaugeDecrementDecorator();
 
-    //   it(`using @GaugeDecrement(${JSON.stringify(
-    //     testTags,
-    //   )}, 10)) decorator should call metrics Gauge.dec() method`, async () => {
-    //     controller.testGaugeDecrementDecoratorWithValue();
+        expect(DummyStatsdClient.gaugeDelta).to.have.been.calledWith('metrics.gauge.decorator', -1, {});
+        expect(DummyGauge.dec).to.have.been.calledWith({}, 1);
+      });
 
-    //     expect(DummyGauge.dec).to.have.been.calledWith(testTags, 10);
-    //   });
+      it(`using @GaugeDecrement(${JSON.stringify(
+        testTags,
+      )}, 10)) decorator should call metrics Gauge.dec() method`, async () => {
+        controller.testGaugeDecrementDecoratorWithValue();
 
-    //   it(`using @GaugeTiming(${JSON.stringify(
-    //     testTags,
-    //   )})) decorator should call metrics Gauge.startTimer() method`, async () => {
-    //     controller.testGaugeTimingDecorator();
+        expect(DummyStatsdClient.gaugeDelta).to.have.been.calledWith('metrics.gauge.decorator', -10, testTags);
+        expect(DummyGauge.dec).to.have.been.calledWith(testTags, 10);
+      });
 
-    //     expect(DummyGauge.startTimer).to.have.been.calledWith(testTags);
-    //   });
-    // });
+      it(`using @GaugeTiming(${JSON.stringify(
+        testTags,
+      )})) decorator should call metrics Gauge.startTimer() method`, async () => {
+        controller.testGaugeTimingDecorator();
 
-    // describe('histogram', () => {
-    //   it(`using @HistogramObserve(${JSON.stringify(
-    //     testTags,
-    //   )}, 10)) decorator should call metrics Histogram.observe() method`, async () => {
-    //     controller.testHistogramObserveDecorator();
+        expect(DummyStatsdClient.timing).to.have.been.calledWith('metrics.gauge.decorator', sinon.match.date, testTags);
+        expect(DummyGauge.startTimer).to.have.been.calledWith(testTags);
+      });
+    });
 
-    //     expect(DummyHistogram.observe).to.have.been.calledWith(testTags, 10);
-    //   });
+    describe('histogram', () => {
+      it(`using @HistogramObserve(10, ${JSON.stringify(
+        testTags,
+      )})) decorator should call metrics Histogram.observe() method`, async () => {
+        controller.testHistogramObserveDecorator();
 
-    //   it(`using @HistogramTiming(${JSON.stringify(
-    //     testTags,
-    //   )})) decorator should call metrics Histogram.startTimer() method`, async () => {
-    //     controller.testHistogramTimingDecorator();
+        expect(DummyStatsdClient.histogram).to.have.been.calledWith('metrics.histogram.decorator', 10, testTags);
+        expect(DummyHistogram.observe).to.have.been.calledWith(testTags, 10);
+      });
 
-    //     expect(DummyHistogram.startTimer).to.have.been.calledWith(testTags);
-    //   });
-    // });
+      it(`using @HistogramTiming(${JSON.stringify(
+        testTags,
+      )})) decorator should call metrics Histogram.startTimer() method`, async () => {
+        controller.testHistogramTimingDecorator();
 
-    // describe('summary', () => {
-    //   it(`using @SummaryObserve(${JSON.stringify(
-    //     testTags,
-    //   )}, 10)) decorator should call metrics Summary.observe() method`, async () => {
-    //     controller.testSummaryObserveDecorator();
+        expect(DummyStatsdClient.timing).to.have.been.calledWith(
+          'metrics.histogram.decorator',
+          sinon.match.date,
+          testTags,
+        );
+        expect(DummyHistogram.startTimer).to.have.been.calledWith(testTags);
+      });
+    });
 
-    //     expect(DummySummary.observe).to.have.been.calledWith(testTags, 10);
-    //   });
+    describe('summary', () => {
+      it(`using @SummaryObserve(10, ${JSON.stringify(
+        testTags,
+      )})) decorator should call metrics Summary.observe() method`, async () => {
+        controller.testSummaryObserveDecorator();
 
-    //   it(`using @SummaryTiming(${JSON.stringify(
-    //     testTags,
-    //   )})) decorator should call metrics Summary.startTimer() method`, async () => {
-    //     controller.testSummaryTimingDecorator();
+        expect(DummyStatsdClient.histogram).to.have.been.calledWith('metrics.summary.decorator', 10, testTags);
+        expect(DummyHistogram.observe).to.have.been.calledWith(testTags, 10);
+      });
 
-    //     expect(DummySummary.startTimer).to.have.been.calledWith(testTags);
-    //   });
-    // });
+      it(`using @SummaryTiming(${JSON.stringify(
+        testTags,
+      )})) decorator should call metrics Summary.startTimer() method`, async () => {
+        controller.testSummaryTimingDecorator();
+
+        expect(DummyStatsdClient.timing).to.have.been.calledWith(
+          'metrics.summary.decorator',
+          sinon.match.date,
+          testTags,
+        );
+        expect(DummyHistogram.startTimer).to.have.been.calledWith(testTags);
+      });
+    });
 
     it('generic', () => {
       expect(true).to.equal(true);

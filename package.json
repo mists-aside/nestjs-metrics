@@ -2,7 +2,7 @@
   "name": "templ-project-javascript",
   "version": "0.0.1",
   "description": "Javascript Project Template",
-  "main": "dist/index.js",
+  "main": "dist/commonjs/index.js",
   "scripts": {
     "build": "rollup -c --environment NODE_ENV:production",
     "clean": "rimraf coverage dist",

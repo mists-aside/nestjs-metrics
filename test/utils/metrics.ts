@@ -1,6 +1,17 @@
 import {Controller} from '@nestjs/common';
 
-import {Counter, generateDecorator, incrementWrapper, InjectMetric, Metrics} from '../../src';
+import {
+  Counter,
+  generateDecorator,
+  incrementWrapper,
+  gaugeIncrementWrapper,
+  gaugeDecrementWrapper,
+  gaugeSetWrapper,
+  observeWrapper,
+  timingWrapper,
+  InjectMetric,
+  Metrics,
+} from '../../src';
 
 export const genericOptions = {
   prometheus: {
@@ -9,14 +20,34 @@ export const genericOptions = {
 };
 
 const Increment = generateDecorator(Metrics.Counter, 'metrics_counter_decorator', incrementWrapper, genericOptions);
-// const GaugeIncrement = generateDecorator(Metrics.Gauge, gaugeIncrementWrapper, genericOptions);
-// const GaugeDecrement = generateDecorator(Metrics.Gauge, gaugeDecrementWrapper, genericOptions);
-// const Gauge = generateDecorator(Metrics.Gauge, gaugeSetWrapper, genericOptions);
-// const GaugeTiming = generateDecorator(Metrics.Gauge, timingWrapper, genericOptions);
-// const HistogramObserve = generateDecorator(Metrics.Histogram, observeWrapper, genericOptions);
-// const HistogramTiming = generateDecorator(Metrics.Histogram, timingWrapper, genericOptions);
-// const SummaryObserve = generateDecorator(Metrics.Summary, observeWrapper, genericOptions);
-// const SummaryTiming = generateDecorator(Metrics.Summary, timingWrapper, genericOptions);
+const GaugeIncrement = generateDecorator(
+  Metrics.Gauge,
+  'metrics_gauge_decorator',
+  gaugeIncrementWrapper,
+  genericOptions,
+);
+const GaugeDecrement = generateDecorator(
+  Metrics.Gauge,
+  'metrics_gauge_decorator',
+  gaugeDecrementWrapper,
+  genericOptions,
+);
+const Gauge = generateDecorator(Metrics.Gauge, 'metrics_gauge_decorator', gaugeSetWrapper, genericOptions);
+const GaugeTiming = generateDecorator(Metrics.Gauge, 'metrics_gauge_decorator', timingWrapper, genericOptions);
+const HistogramObserve = generateDecorator(
+  Metrics.Histogram,
+  'metrics_histogram_decorator',
+  observeWrapper,
+  genericOptions,
+);
+const HistogramTiming = generateDecorator(
+  Metrics.Histogram,
+  'metrics_histogram_decorator',
+  timingWrapper,
+  genericOptions,
+);
+const SummaryObserve = generateDecorator(Metrics.Summary, 'metrics_summary_decorator', observeWrapper, genericOptions);
+const SummaryTiming = generateDecorator(Metrics.Summary, 'metrics_summary_decorator', timingWrapper, genericOptions);
 
 export const testTags = {label1: 'test', label2: 'test'};
 
@@ -39,53 +70,53 @@ export class MetricsController {
     return 'test_increment_decorator_with_value';
   }
 
-  // @Gauge(testTags, 10)
-  // public testGaugeDecorator(): string {
-  //   return 'test_gauge_decorator';
-  // }
+  @Gauge(10, testTags)
+  public testGaugeDecorator(): string {
+    return 'test_gauge_decorator';
+  }
 
-  // @GaugeIncrement(testTags)
-  // public testGaugeIncrementDecorator(): string {
-  //   return 'test_increment_decorator';
-  // }
+  @GaugeIncrement()
+  public testGaugeIncrementDecorator(): string {
+    return 'test_gauge_increment_decorator';
+  }
 
-  // @GaugeIncrement(testTags, 10)
-  // public testGaugeIncrementDecoratorWithValue(): string {
-  //   return 'test_increment_decorator_with_value';
-  // }
+  @GaugeIncrement(10, testTags)
+  public testGaugeIncrementDecoratorWithValue(): string {
+    return 'test_gauge_increment_decorator_with_value';
+  }
 
-  // @GaugeDecrement(testTags)
-  // public testGaugeDecrementDecorator(): string {
-  //   return 'test_increment_decorator';
-  // }
+  @GaugeDecrement()
+  public testGaugeDecrementDecorator(): string {
+    return 'test_gauge_decrement_decorator';
+  }
 
-  // @GaugeDecrement(testTags, 10)
-  // public testGaugeDecrementDecoratorWithValue(): string {
-  //   return 'test_increment_decorator_with_value';
-  // }
+  @GaugeDecrement(10, testTags)
+  public testGaugeDecrementDecoratorWithValue(): string {
+    return 'test_gauge_decrement_decorator_with_value';
+  }
 
-  // @GaugeTiming(testTags)
-  // public testGaugeTimingDecorator(): string {
-  //   return 'test_timing_decorator';
-  // }
+  @GaugeTiming(testTags)
+  public testGaugeTimingDecorator(): string {
+    return 'test_gauge_timing_decorator';
+  }
 
-  // @HistogramObserve(testTags, 10)
-  // public testHistogramObserveDecorator(): string {
-  //   return 'test_histogram_observe_decorator';
-  // }
+  @HistogramObserve(10, testTags)
+  public testHistogramObserveDecorator(): string {
+    return 'test_histogram_observe_decorator';
+  }
 
-  // @HistogramTiming(testTags)
-  // public testHistogramTimingDecorator(): string {
-  //   return 'test_histogram_timing_decorator';
-  // }
+  @HistogramTiming(testTags)
+  public testHistogramTimingDecorator(): string {
+    return 'test_histogram_timing_decorator';
+  }
 
-  // @SummaryObserve(testTags, 10)
-  // public testSummaryObserveDecorator(): string {
-  //   return 'test_summary_observe_decorator';
-  // }
+  @SummaryObserve(10, testTags)
+  public testSummaryObserveDecorator(): string {
+    return 'test_summary_observe_decorator';
+  }
 
-  // @SummaryTiming(testTags)
-  // public testSummaryTimingDecorator(): string {
-  //   return 'test_summary_timing_decorator';
-  // }
+  @SummaryTiming(testTags)
+  public testSummaryTimingDecorator(): string {
+    return 'test_summary_timing_decorator';
+  }
 }

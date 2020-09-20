@@ -3,7 +3,8 @@ import {describe, it} from 'mocha';
 
 // import {createStatsModule, TestHarness} from './utils';
 
-describe('src/module', function () {
+// eslint-disable-next-line mocha/no-skipped-tests
+describe.skip('src/module', function () {
   // let harness: TestHarness;
 
   // // eslint-disable-next-line mocha/no-mocha-arrows
@@ -27,6 +28,6 @@ describe('src/module', function () {
   // });
 
   it('generic', () => {
-    expect(true).to.equal(true);
+    expect(true).to.equal(false);
   });
 });

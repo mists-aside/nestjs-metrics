@@ -1,0 +1,9611 @@
+{
+	"id": 0,
+	"name": "templ-project-javascript",
+	"kind": 0,
+	"flags": {},
+	"originalName": "",
+	"children": [
+		{
+			"id": 118,
+			"name": "Metrics",
+			"kind": 4,
+			"kindString": "Enumeration",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 119,
+					"name": "Counter",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/enum.ts",
+							"line": 2,
+							"character": 9
+						}
+					]
+				},
+				{
+					"id": 120,
+					"name": "Gauge",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/enum.ts",
+							"line": 3,
+							"character": 7
+						}
+					]
+				},
+				{
+					"id": 121,
+					"name": "Histogram",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/enum.ts",
+							"line": 4,
+							"character": 11
+						}
+					]
+				},
+				{
+					"id": 122,
+					"name": "Summary",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/enum.ts",
+							"line": 5,
+							"character": 9
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Enumeration members",
+					"kind": 16,
+					"children": [
+						119,
+						120,
+						121,
+						122
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/enum.ts",
+					"line": 1,
+					"character": 19
+				}
+			]
+		},
+		{
+			"id": 4,
+			"name": "StatsTypes",
+			"kind": 4,
+			"kindString": "Enumeration",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 5,
+					"name": "Prometheus",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/options.ts",
+							"line": 11,
+							"character": 12
+						}
+					]
+				},
+				{
+					"id": 6,
+					"name": "Statsd",
+					"kind": 16,
+					"kindString": "Enumeration member",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/options.ts",
+							"line": 13,
+							"character": 8
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Enumeration members",
+					"kind": 16,
+					"children": [
+						5,
+						6
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/options.ts",
+					"line": 5,
+					"character": 22
+				}
+			]
+		},
+		{
+			"id": 69,
+			"name": "Config",
+			"kind": 128,
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 74,
+					"name": "cPrometheus",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isPrivate": true,
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "src/config.ts",
+							"line": 25,
+							"character": 21
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 10,
+						"name": "PrometheusOptions"
+					}
+				},
+				{
+					"id": 75,
+					"name": "cStatsd",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isPrivate": true,
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "src/config.ts",
+							"line": 26,
+							"character": 17
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 61,
+						"name": "StatsdOptions"
+					}
+				},
+				{
+					"id": 73,
+					"name": "cTypes",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isPrivate": true,
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/config.ts",
+							"line": 24,
+							"character": 16
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "reference",
+							"id": 4,
+							"name": "StatsTypes"
+						}
+					},
+					"defaultValue": "[]"
+				},
+				{
+					"id": 70,
+					"name": "instance",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isPrivate": true,
+						"isStatic": true,
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/config.ts",
+							"line": 12,
+							"character": 25
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 69,
+						"name": "Config"
+					}
+				},
+				{
+					"id": 76,
+					"name": "prometheus",
+					"kind": 262144,
+					"kindString": "Accessor",
+					"flags": {
+						"isPublic": true,
+						"isExported": true
+					},
+					"getSignature": [
+						{
+							"id": 77,
+							"name": "__get",
+							"kind": 524288,
+							"kindString": "Get signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "reference",
+										"id": 10,
+										"name": "PrometheusOptions"
+									},
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									}
+								]
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/config.ts",
+							"line": 28,
+							"character": 23
+						}
+					]
+				},
+				{
+					"id": 87,
+					"name": "statsd",
+					"kind": 262144,
+					"kindString": "Accessor",
+					"flags": {
+						"isPublic": true,
+						"isExported": true
+					},
+					"getSignature": [
+						{
+							"id": 88,
+							"name": "__get",
+							"kind": 524288,
+							"kindString": "Get signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 61,
+								"name": "StatsdOptions"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/config.ts",
+							"line": 44,
+							"character": 19
+						}
+					]
+				},
+				{
+					"id": 89,
+					"name": "types",
+					"kind": 262144,
+					"kindString": "Accessor",
+					"flags": {
+						"isPublic": true,
+						"isExported": true
+					},
+					"getSignature": [
+						{
+							"id": 90,
+							"name": "__get",
+							"kind": 524288,
+							"kindString": "Get signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "reference",
+									"id": 4,
+									"name": "StatsTypes"
+								}
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/config.ts",
+							"line": 48,
+							"character": 18
+						}
+					]
+				},
+				{
+					"id": 78,
+					"name": "setPrometheusOptions",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isPublic": true,
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 79,
+							"name": "setPrometheusOptions",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 80,
+									"name": "options",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 10,
+										"name": "PrometheusOptions"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/config.ts",
+							"line": 32,
+							"character": 29
+						}
+					]
+				},
+				{
+					"id": 81,
+					"name": "setStatsdOptions",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isPublic": true,
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 82,
+							"name": "setStatsdOptions",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 83,
+									"name": "options",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 61,
+										"name": "StatsdOptions"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/config.ts",
+							"line": 36,
+							"character": 25
+						}
+					]
+				},
+				{
+					"id": 84,
+					"name": "setTypes",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isPublic": true,
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 85,
+							"name": "setTypes",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 86,
+									"name": "types",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"id": 4,
+											"name": "StatsTypes"
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/config.ts",
+							"line": 40,
+							"character": 17
+						}
+					]
+				},
+				{
+					"id": 71,
+					"name": "getInstance",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isPublic": true,
+						"isStatic": true,
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 72,
+							"name": "getInstance",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 69,
+								"name": "Config"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/config.ts",
+							"line": 14,
+							"character": 27
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						74,
+						75,
+						73,
+						70
+					]
+				},
+				{
+					"title": "Accessors",
+					"kind": 262144,
+					"children": [
+						76,
+						87,
+						89
+					]
+				},
+				{
+					"title": "Methods",
+					"kind": 2048,
+					"children": [
+						78,
+						81,
+						84,
+						71
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/config.ts",
+					"line": 11,
+					"character": 19
+				}
+			]
+		},
+		{
+			"id": 245,
+			"name": "Counter",
+			"kind": 128,
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 246,
+					"name": "constructor",
+					"kind": 512,
+					"kindString": "Constructor",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 247,
+							"name": "new Counter",
+							"kind": 16384,
+							"kindString": "Constructor signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 248,
+									"name": "name",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 249,
+									"name": "options",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 127,
+										"name": "CounterOptions"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 245,
+								"name": "Counter"
+							},
+							"overwrites": {
+								"type": "reference",
+								"id": 219,
+								"name": "Metric.__constructor"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/counter.ts",
+							"line": 6,
+							"character": 37
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"id": 219,
+						"name": "Metric.__constructor"
+					}
+				},
+				{
+					"id": 256,
+					"name": "name",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true,
+						"isConstructorProperty": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 21,
+							"character": 28
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 220,
+						"name": "Metric.name"
+					}
+				},
+				{
+					"id": 257,
+					"name": "options",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true,
+						"isConstructorProperty": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 21,
+							"character": 70
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 139,
+						"name": "MetricOptions"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 221,
+						"name": "Metric.options"
+					}
+				},
+				{
+					"id": 255,
+					"name": "prometheusMetric",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"comment": {
+						"tags": [
+							{
+								"tag": "link",
+								"text": "https://github.com/siimon/prom-client/blob/master/index.d.ts#L114\n"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 19,
+							"character": 28
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "any"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 218,
+						"name": "Metric.prometheusMetric"
+					}
+				},
+				{
+					"id": 254,
+					"name": "statsdClient",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"comment": {
+						"tags": [
+							{
+								"tag": "link",
+								"text": "https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/statsd-client/index.d.ts#L115\n"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 15,
+							"character": 24
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "any"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 217,
+						"name": "Metric.statsdClient"
+					}
+				},
+				{
+					"id": 258,
+					"name": "statsdName",
+					"kind": 262144,
+					"kindString": "Accessor",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"getSignature": [
+						{
+							"id": 259,
+							"name": "__get",
+							"kind": 524288,
+							"kindString": "Get signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 226,
+								"name": "Metric.statsdName"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 31,
+							"character": 26
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 226,
+						"name": "Metric.statsdName"
+					}
+				},
+				{
+					"id": 250,
+					"name": "inc",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 251,
+							"name": "inc",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 252,
+									"name": "value",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									},
+									"defaultValue": "1"
+								},
+								{
+									"id": 253,
+									"name": "tags",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 1,
+										"name": "Tags"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/counter.ts",
+							"line": 11,
+							"character": 5
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"kind": 512,
+					"children": [
+						246
+					]
+				},
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						256,
+						257,
+						255,
+						254
+					]
+				},
+				{
+					"title": "Accessors",
+					"kind": 262144,
+					"children": [
+						258
+					]
+				},
+				{
+					"title": "Methods",
+					"kind": 2048,
+					"children": [
+						250
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/counter.ts",
+					"line": 6,
+					"character": 20
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reference",
+					"id": 216,
+					"name": "Metric"
+				}
+			]
+		},
+		{
+			"id": 260,
+			"name": "Gauge",
+			"kind": 128,
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 267,
+					"name": "constructor",
+					"kind": 512,
+					"kindString": "Constructor",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 268,
+							"name": "new Gauge",
+							"kind": 16384,
+							"kindString": "Constructor signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 269,
+									"name": "name",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 270,
+									"name": "options",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 130,
+										"name": "GaugeOptions"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 260,
+								"name": "Gauge"
+							},
+							"overwrites": {
+								"type": "reference",
+								"id": 219,
+								"name": "Metric.__constructor"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/gauge.ts",
+							"line": 7,
+							"character": 49
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"id": 219,
+						"name": "Metric.__constructor"
+					}
+				},
+				{
+					"id": 285,
+					"name": "name",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true,
+						"isConstructorProperty": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 21,
+							"character": 28
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 220,
+						"name": "Metric.name"
+					}
+				},
+				{
+					"id": 286,
+					"name": "options",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true,
+						"isConstructorProperty": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 21,
+							"character": 70
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 139,
+						"name": "MetricOptions"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 221,
+						"name": "Metric.options"
+					}
+				},
+				{
+					"id": 284,
+					"name": "prometheusMetric",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"comment": {
+						"tags": [
+							{
+								"tag": "link",
+								"text": "https://github.com/siimon/prom-client/blob/master/index.d.ts#L114\n"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 19,
+							"character": 28
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "any"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 218,
+						"name": "Metric.prometheusMetric"
+					}
+				},
+				{
+					"id": 261,
+					"name": "startTimer",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isPublic": true,
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/gauge.ts",
+							"line": 7,
+							"character": 19
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 262,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 263,
+									"name": "__call",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {
+										"isExported": true
+									},
+									"parameters": [
+										{
+											"id": 264,
+											"name": "tags",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {
+												"isExported": true,
+												"isOptional": true
+											},
+											"type": {
+												"type": "reference",
+												"id": 1,
+												"name": "Tags"
+											}
+										}
+									],
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 265,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {
+												"isExported": true
+											},
+											"signatures": [
+												{
+													"id": 266,
+													"name": "__call",
+													"kind": 4096,
+													"kindString": "Call signature",
+													"flags": {
+														"isExported": true
+													},
+													"type": {
+														"type": "intrinsic",
+														"name": "void"
+													}
+												}
+											],
+											"sources": [
+												{
+													"fileName": "src/metrics/gauge.ts",
+													"line": 7,
+													"character": 37
+												}
+											]
+										}
+									}
+								}
+							],
+							"sources": [
+								{
+									"fileName": "src/metrics/gauge.ts",
+									"line": 7,
+									"character": 20
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 283,
+					"name": "statsdClient",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"comment": {
+						"tags": [
+							{
+								"tag": "link",
+								"text": "https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/statsd-client/index.d.ts#L115\n"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 15,
+							"character": 24
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "any"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 217,
+						"name": "Metric.statsdClient"
+					}
+				},
+				{
+					"id": 287,
+					"name": "statsdName",
+					"kind": 262144,
+					"kindString": "Accessor",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"getSignature": [
+						{
+							"id": 288,
+							"name": "__get",
+							"kind": 524288,
+							"kindString": "Get signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 226,
+								"name": "Metric.statsdName"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 31,
+							"character": 26
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 226,
+						"name": "Metric.statsdName"
+					}
+				},
+				{
+					"id": 271,
+					"name": "dec",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 272,
+							"name": "dec",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 273,
+									"name": "value",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									},
+									"defaultValue": "1"
+								},
+								{
+									"id": 274,
+									"name": "tags",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 1,
+										"name": "Tags"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/gauge.ts",
+							"line": 13,
+							"character": 5
+						}
+					]
+				},
+				{
+					"id": 275,
+					"name": "inc",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 276,
+							"name": "inc",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 277,
+									"name": "value",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									},
+									"defaultValue": "1"
+								},
+								{
+									"id": 278,
+									"name": "tags",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 1,
+										"name": "Tags"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/gauge.ts",
+							"line": 19,
+							"character": 5
+						}
+					]
+				},
+				{
+					"id": 279,
+					"name": "set",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 280,
+							"name": "set",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 281,
+									"name": "value",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 282,
+									"name": "tags",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 1,
+										"name": "Tags"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/gauge.ts",
+							"line": 25,
+							"character": 5
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"kind": 512,
+					"children": [
+						267
+					]
+				},
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						285,
+						286,
+						284,
+						261,
+						283
+					]
+				},
+				{
+					"title": "Accessors",
+					"kind": 262144,
+					"children": [
+						287
+					]
+				},
+				{
+					"title": "Methods",
+					"kind": 2048,
+					"children": [
+						271,
+						275,
+						279
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/gauge.ts",
+					"line": 6,
+					"character": 18
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reference",
+					"id": 216,
+					"name": "Metric"
+				}
+			]
+		},
+		{
+			"id": 289,
+			"name": "Histogram",
+			"kind": 128,
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 296,
+					"name": "constructor",
+					"kind": 512,
+					"kindString": "Constructor",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 297,
+							"name": "new Histogram",
+							"kind": 16384,
+							"kindString": "Constructor signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 298,
+									"name": "name",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 299,
+									"name": "options",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 133,
+										"name": "HistogramOptions"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 289,
+								"name": "Histogram"
+							},
+							"overwrites": {
+								"type": "reference",
+								"id": 219,
+								"name": "Metric.__constructor"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/histogram.ts",
+							"line": 7,
+							"character": 49
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"id": 219,
+						"name": "Metric.__constructor"
+					}
+				},
+				{
+					"id": 308,
+					"name": "name",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true,
+						"isConstructorProperty": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 21,
+							"character": 28
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 220,
+						"name": "Metric.name"
+					}
+				},
+				{
+					"id": 309,
+					"name": "options",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true,
+						"isConstructorProperty": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 21,
+							"character": 70
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 139,
+						"name": "MetricOptions"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 221,
+						"name": "Metric.options"
+					}
+				},
+				{
+					"id": 307,
+					"name": "prometheusMetric",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"comment": {
+						"tags": [
+							{
+								"tag": "link",
+								"text": "https://github.com/siimon/prom-client/blob/master/index.d.ts#L114\n"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 19,
+							"character": 28
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "any"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 218,
+						"name": "Metric.prometheusMetric"
+					}
+				},
+				{
+					"id": 290,
+					"name": "startTimer",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isPublic": true,
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/histogram.ts",
+							"line": 7,
+							"character": 19
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 291,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 292,
+									"name": "__call",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {
+										"isExported": true
+									},
+									"parameters": [
+										{
+											"id": 293,
+											"name": "tags",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {
+												"isExported": true,
+												"isOptional": true
+											},
+											"type": {
+												"type": "reference",
+												"id": 1,
+												"name": "Tags"
+											}
+										}
+									],
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 294,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {
+												"isExported": true
+											},
+											"signatures": [
+												{
+													"id": 295,
+													"name": "__call",
+													"kind": 4096,
+													"kindString": "Call signature",
+													"flags": {
+														"isExported": true
+													},
+													"type": {
+														"type": "intrinsic",
+														"name": "void"
+													}
+												}
+											],
+											"sources": [
+												{
+													"fileName": "src/metrics/histogram.ts",
+													"line": 7,
+													"character": 37
+												}
+											]
+										}
+									}
+								}
+							],
+							"sources": [
+								{
+									"fileName": "src/metrics/histogram.ts",
+									"line": 7,
+									"character": 20
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 306,
+					"name": "statsdClient",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"comment": {
+						"tags": [
+							{
+								"tag": "link",
+								"text": "https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/statsd-client/index.d.ts#L115\n"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 15,
+							"character": 24
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "any"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 217,
+						"name": "Metric.statsdClient"
+					}
+				},
+				{
+					"id": 310,
+					"name": "statsdName",
+					"kind": 262144,
+					"kindString": "Accessor",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"getSignature": [
+						{
+							"id": 311,
+							"name": "__get",
+							"kind": 524288,
+							"kindString": "Get signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 226,
+								"name": "Metric.statsdName"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 31,
+							"character": 26
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 226,
+						"name": "Metric.statsdName"
+					}
+				},
+				{
+					"id": 300,
+					"name": "observe",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 301,
+							"name": "observe",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 302,
+									"name": "value",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 303,
+									"name": "tags",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 1,
+										"name": "Tags"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/histogram.ts",
+							"line": 13,
+							"character": 9
+						}
+					]
+				},
+				{
+					"id": 304,
+					"name": "reset",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 305,
+							"name": "reset",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/histogram.ts",
+							"line": 18,
+							"character": 7
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"kind": 512,
+					"children": [
+						296
+					]
+				},
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						308,
+						309,
+						307,
+						290,
+						306
+					]
+				},
+				{
+					"title": "Accessors",
+					"kind": 262144,
+					"children": [
+						310
+					]
+				},
+				{
+					"title": "Methods",
+					"kind": 2048,
+					"children": [
+						300,
+						304
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/histogram.ts",
+					"line": 6,
+					"character": 22
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reference",
+					"id": 216,
+					"name": "Metric"
+				}
+			],
+			"extendedBy": [
+				{
+					"type": "reference",
+					"id": 312,
+					"name": "Summary"
+				}
+			]
+		},
+		{
+			"id": 216,
+			"name": "Metric",
+			"kind": 128,
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "Abstract Metric Class, used to extends all supported metrics."
+			},
+			"children": [
+				{
+					"id": 219,
+					"name": "constructor",
+					"kind": 512,
+					"kindString": "Constructor",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 222,
+							"name": "new Metric",
+							"kind": 16384,
+							"kindString": "Constructor signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 223,
+									"name": "name",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 224,
+									"name": "type",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 118,
+										"name": "Metrics"
+									}
+								},
+								{
+									"id": 225,
+									"name": "options",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 139,
+										"name": "MetricOptions"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 216,
+								"name": "Metric"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 19,
+							"character": 34
+						}
+					]
+				},
+				{
+					"id": 220,
+					"name": "name",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true,
+						"isConstructorProperty": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 21,
+							"character": 28
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 221,
+					"name": "options",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true,
+						"isConstructorProperty": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 21,
+							"character": 70
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 139,
+						"name": "MetricOptions"
+					}
+				},
+				{
+					"id": 218,
+					"name": "prometheusMetric",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"comment": {
+						"tags": [
+							{
+								"tag": "link",
+								"text": "https://github.com/siimon/prom-client/blob/master/index.d.ts#L114\n"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 19,
+							"character": 28
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "any"
+					}
+				},
+				{
+					"id": 217,
+					"name": "statsdClient",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"comment": {
+						"tags": [
+							{
+								"tag": "link",
+								"text": "https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/statsd-client/index.d.ts#L115\n"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 15,
+							"character": 24
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "any"
+					}
+				},
+				{
+					"id": 226,
+					"name": "statsdName",
+					"kind": 262144,
+					"kindString": "Accessor",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"getSignature": [
+						{
+							"id": 227,
+							"name": "__get",
+							"kind": 524288,
+							"kindString": "Get signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 31,
+							"character": 26
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"kind": 512,
+					"children": [
+						219
+					]
+				},
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						220,
+						221,
+						218,
+						217
+					]
+				},
+				{
+					"title": "Accessors",
+					"kind": 262144,
+					"children": [
+						226
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/generic.ts",
+					"line": 11,
+					"character": 19
+				}
+			],
+			"extendedBy": [
+				{
+					"type": "reference",
+					"id": 228,
+					"name": "Timer"
+				},
+				{
+					"type": "reference",
+					"id": 245,
+					"name": "Counter"
+				},
+				{
+					"type": "reference",
+					"id": 260,
+					"name": "Gauge"
+				},
+				{
+					"type": "reference",
+					"id": 289,
+					"name": "Histogram"
+				}
+			]
+		},
+		{
+			"id": 91,
+			"name": "StatsController",
+			"kind": 128,
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"decorators": [
+				{
+					"name": "Controller",
+					"type": {
+						"type": "reference",
+						"name": "Controller"
+					},
+					"arguments": {}
+				}
+			],
+			"children": [
+				{
+					"id": 92,
+					"name": "constructor",
+					"kind": 512,
+					"kindString": "Constructor",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 95,
+							"name": "new StatsController",
+							"kind": 16384,
+							"kindString": "Constructor signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 96,
+									"name": "config",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 69,
+										"name": "Config"
+									}
+								},
+								{
+									"id": 97,
+									"name": "logger",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "reference",
+										"name": "Logger"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 91,
+								"name": "StatsController"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/controller.ts",
+							"line": 6,
+							"character": 30
+						}
+					]
+				},
+				{
+					"id": 93,
+					"name": "config",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isPrivate": true,
+						"isExported": true,
+						"isConstructorProperty": true
+					},
+					"sources": [
+						{
+							"fileName": "src/controller.ts",
+							"line": 7,
+							"character": 28
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 69,
+						"name": "Config"
+					}
+				},
+				{
+					"id": 94,
+					"name": "logger",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isPrivate": true,
+						"isExported": true,
+						"isConstructorProperty": true
+					},
+					"sources": [
+						{
+							"fileName": "src/controller.ts",
+							"line": 7,
+							"character": 52
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Logger"
+					}
+				},
+				{
+					"id": 98,
+					"name": "metrics",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 99,
+							"name": "metrics",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 100,
+									"name": "res",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"decorators": [
+										{
+											"name": "Res",
+											"type": {
+												"type": "reference",
+												"name": "Res"
+											},
+											"arguments": {}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/controller.ts",
+							"line": 14,
+							"character": 9
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"kind": 512,
+					"children": [
+						92
+					]
+				},
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						93,
+						94
+					]
+				},
+				{
+					"title": "Methods",
+					"kind": 2048,
+					"children": [
+						98
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/controller.ts",
+					"line": 6,
+					"character": 28
+				}
+			]
+		},
+		{
+			"id": 123,
+			"name": "StatsModule",
+			"kind": 128,
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"decorators": [
+				{
+					"name": "Module",
+					"type": {
+						"type": "reference",
+						"name": "Module"
+					},
+					"arguments": {
+						"metadata": "{}"
+					}
+				}
+			],
+			"children": [
+				{
+					"id": 124,
+					"name": "register",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isPublic": true,
+						"isStatic": true,
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 125,
+							"name": "register",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 126,
+									"name": "options",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 65,
+										"name": "StatsOptions"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "DynamicModule"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/module.ts",
+							"line": 17,
+							"character": 24
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Methods",
+					"kind": 2048,
+					"children": [
+						124
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/module.ts",
+					"line": 16,
+					"character": 24
+				}
+			]
+		},
+		{
+			"id": 312,
+			"name": "Summary",
+			"kind": 128,
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 313,
+					"name": "constructor",
+					"kind": 512,
+					"kindString": "Constructor",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 314,
+							"name": "new Summary",
+							"kind": 16384,
+							"kindString": "Constructor signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 315,
+									"name": "name",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 316,
+									"name": "options",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 136,
+										"name": "SummaryOptions"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 312,
+								"name": "Summary"
+							},
+							"overwrites": {
+								"type": "reference",
+								"id": 296,
+								"name": "Histogram.__constructor"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/summary.ts",
+							"line": 6,
+							"character": 40
+						}
+					],
+					"overwrites": {
+						"type": "reference",
+						"id": 296,
+						"name": "Histogram.__constructor"
+					}
+				},
+				{
+					"id": 331,
+					"name": "name",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true,
+						"isConstructorProperty": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 21,
+							"character": 28
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 220,
+						"name": "Metric.name"
+					}
+				},
+				{
+					"id": 332,
+					"name": "options",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true,
+						"isConstructorProperty": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 21,
+							"character": 70
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 139,
+						"name": "MetricOptions"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 221,
+						"name": "Metric.options"
+					}
+				},
+				{
+					"id": 330,
+					"name": "prometheusMetric",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"comment": {
+						"tags": [
+							{
+								"tag": "link",
+								"text": "https://github.com/siimon/prom-client/blob/master/index.d.ts#L114\n"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 19,
+							"character": 28
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "any"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 218,
+						"name": "Metric.prometheusMetric"
+					}
+				},
+				{
+					"id": 317,
+					"name": "startTimer",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isPublic": true,
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/histogram.ts",
+							"line": 7,
+							"character": 19
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 318,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 319,
+									"name": "__call",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {
+										"isExported": true
+									},
+									"parameters": [
+										{
+											"id": 320,
+											"name": "tags",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {
+												"isExported": true,
+												"isOptional": true
+											},
+											"type": {
+												"type": "reference",
+												"id": 1,
+												"name": "Tags"
+											}
+										}
+									],
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 321,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {
+												"isExported": true
+											},
+											"signatures": [
+												{
+													"id": 322,
+													"name": "__call",
+													"kind": 4096,
+													"kindString": "Call signature",
+													"flags": {
+														"isExported": true
+													},
+													"type": {
+														"type": "intrinsic",
+														"name": "void"
+													}
+												}
+											],
+											"sources": [
+												{
+													"fileName": "src/metrics/histogram.ts",
+													"line": 7,
+													"character": 37
+												}
+											]
+										}
+									}
+								}
+							],
+							"sources": [
+								{
+									"fileName": "src/metrics/histogram.ts",
+									"line": 7,
+									"character": 20
+								}
+							]
+						}
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 290,
+						"name": "Histogram.startTimer"
+					}
+				},
+				{
+					"id": 329,
+					"name": "statsdClient",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"comment": {
+						"tags": [
+							{
+								"tag": "link",
+								"text": "https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/statsd-client/index.d.ts#L115\n"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 15,
+							"character": 24
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "any"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 217,
+						"name": "Metric.statsdClient"
+					}
+				},
+				{
+					"id": 333,
+					"name": "statsdName",
+					"kind": 262144,
+					"kindString": "Accessor",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"getSignature": [
+						{
+							"id": 334,
+							"name": "__get",
+							"kind": 524288,
+							"kindString": "Get signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 226,
+								"name": "Metric.statsdName"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 31,
+							"character": 26
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 226,
+						"name": "Metric.statsdName"
+					}
+				},
+				{
+					"id": 323,
+					"name": "observe",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 324,
+							"name": "observe",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 325,
+									"name": "value",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 326,
+									"name": "tags",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 1,
+										"name": "Tags"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 300,
+								"name": "Histogram.observe"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/histogram.ts",
+							"line": 13,
+							"character": 9
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 300,
+						"name": "Histogram.observe"
+					}
+				},
+				{
+					"id": 327,
+					"name": "reset",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 328,
+							"name": "reset",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 304,
+								"name": "Histogram.reset"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/histogram.ts",
+							"line": 18,
+							"character": 7
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 304,
+						"name": "Histogram.reset"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"kind": 512,
+					"children": [
+						313
+					]
+				},
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						331,
+						332,
+						330,
+						317,
+						329
+					]
+				},
+				{
+					"title": "Accessors",
+					"kind": 262144,
+					"children": [
+						333
+					]
+				},
+				{
+					"title": "Methods",
+					"kind": 2048,
+					"children": [
+						323,
+						327
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/summary.ts",
+					"line": 6,
+					"character": 20
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reference",
+					"id": 289,
+					"name": "Histogram"
+				}
+			]
+		},
+		{
+			"id": 228,
+			"name": "Timer",
+			"kind": 128,
+			"kindString": "Class",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 236,
+					"name": "constructor",
+					"kind": 512,
+					"kindString": "Constructor",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 239,
+							"name": "new Timer",
+							"kind": 16384,
+							"kindString": "Constructor signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 240,
+									"name": "name",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 241,
+									"name": "type",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 118,
+										"name": "Metrics"
+									}
+								},
+								{
+									"id": 242,
+									"name": "options",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 139,
+										"name": "MetricOptions"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 228,
+								"name": "Timer"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 219,
+								"name": "Metric.__constructor"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 19,
+							"character": 34
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 219,
+						"name": "Metric.__constructor"
+					}
+				},
+				{
+					"id": 237,
+					"name": "name",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true,
+						"isConstructorProperty": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 21,
+							"character": 28
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 220,
+						"name": "Metric.name"
+					}
+				},
+				{
+					"id": 238,
+					"name": "options",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true,
+						"isConstructorProperty": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 21,
+							"character": 70
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 139,
+						"name": "MetricOptions"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 221,
+						"name": "Metric.options"
+					}
+				},
+				{
+					"id": 235,
+					"name": "prometheusMetric",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"comment": {
+						"tags": [
+							{
+								"tag": "link",
+								"text": "https://github.com/siimon/prom-client/blob/master/index.d.ts#L114\n"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 19,
+							"character": 28
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "any"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 218,
+						"name": "Metric.prometheusMetric"
+					}
+				},
+				{
+					"id": 234,
+					"name": "statsdClient",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"comment": {
+						"tags": [
+							{
+								"tag": "link",
+								"text": "https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/statsd-client/index.d.ts#L115\n"
+							}
+						]
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 15,
+							"character": 24
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "any"
+					},
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 217,
+						"name": "Metric.statsdClient"
+					}
+				},
+				{
+					"id": 243,
+					"name": "statsdName",
+					"kind": 262144,
+					"kindString": "Accessor",
+					"flags": {
+						"isProtected": true,
+						"isExported": true
+					},
+					"getSignature": [
+						{
+							"id": 244,
+							"name": "__get",
+							"kind": 524288,
+							"kindString": "Get signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"id": 226,
+								"name": "Metric.statsdName"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 31,
+							"character": 26
+						}
+					],
+					"inheritedFrom": {
+						"type": "reference",
+						"id": 226,
+						"name": "Metric.statsdName"
+					}
+				},
+				{
+					"id": 229,
+					"name": "startTimer",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 230,
+							"name": "startTimer",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 231,
+									"name": "tags",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 1,
+										"name": "Tags"
+									}
+								}
+							],
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 232,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {
+										"isExported": true
+									},
+									"signatures": [
+										{
+											"id": 233,
+											"name": "__call",
+											"kind": 4096,
+											"kindString": "Call signature",
+											"flags": {
+												"isExported": true
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "void"
+											}
+										}
+									],
+									"sources": [
+										{
+											"fileName": "src/metrics/generic.ts",
+											"line": 37,
+											"character": 26
+										}
+									]
+								}
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/metrics/generic.ts",
+							"line": 37,
+							"character": 12
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Constructors",
+					"kind": 512,
+					"children": [
+						236
+					]
+				},
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						237,
+						238,
+						235,
+						234
+					]
+				},
+				{
+					"title": "Accessors",
+					"kind": 262144,
+					"children": [
+						243
+					]
+				},
+				{
+					"title": "Methods",
+					"kind": 2048,
+					"children": [
+						229
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/generic.ts",
+					"line": 36,
+					"character": 18
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reference",
+					"id": 216,
+					"name": "Metric"
+				}
+			]
+		},
+		{
+			"id": 127,
+			"name": "CounterOptions",
+			"kind": 256,
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 128,
+					"name": "prometheus",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/options.ts",
+							"line": 5,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reference",
+						"typeArguments": [
+							{
+								"type": "reference",
+								"typeArguments": [
+									{
+										"type": "reference",
+										"typeArguments": [
+											{
+												"type": "intrinsic",
+												"name": "string"
+											}
+										],
+										"name": "CounterConfiguration"
+									},
+									{
+										"type": "stringLiteral",
+										"value": "name"
+									}
+								],
+								"name": "Omit"
+							}
+						],
+						"name": "Partial"
+					}
+				},
+				{
+					"id": 129,
+					"name": "statsd",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/options.ts",
+							"line": 6,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 61,
+						"name": "StatsdOptions"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						128,
+						129
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/options.ts",
+					"line": 4,
+					"character": 31
+				}
+			]
+		},
+		{
+			"id": 130,
+			"name": "GaugeOptions",
+			"kind": 256,
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 131,
+					"name": "prometheus",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/options.ts",
+							"line": 10,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reference",
+						"typeArguments": [
+							{
+								"type": "reference",
+								"typeArguments": [
+									{
+										"type": "reference",
+										"typeArguments": [
+											{
+												"type": "intrinsic",
+												"name": "string"
+											}
+										],
+										"name": "GaugeConfiguration"
+									},
+									{
+										"type": "stringLiteral",
+										"value": "name"
+									}
+								],
+								"name": "Omit"
+							}
+						],
+						"name": "Partial"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						131
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/options.ts",
+					"line": 9,
+					"character": 29
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reflection",
+					"declaration": {
+						"id": 132,
+						"name": "__type",
+						"kind": 65536,
+						"kindString": "Type literal",
+						"flags": {
+							"isExported": true
+						},
+						"sources": [
+							{
+								"fileName": "src/metrics/options.ts",
+								"line": 9,
+								"character": 37
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": 133,
+			"name": "HistogramOptions",
+			"kind": 256,
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 134,
+					"name": "prometheus",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/options.ts",
+							"line": 14,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reference",
+						"typeArguments": [
+							{
+								"type": "reference",
+								"typeArguments": [
+									{
+										"type": "reference",
+										"typeArguments": [
+											{
+												"type": "intrinsic",
+												"name": "string"
+											}
+										],
+										"name": "HistogramConfiguration"
+									},
+									{
+										"type": "stringLiteral",
+										"value": "name"
+									}
+								],
+								"name": "Omit"
+							}
+						],
+						"name": "Partial"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						134
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/options.ts",
+					"line": 13,
+					"character": 33
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reflection",
+					"declaration": {
+						"id": 135,
+						"name": "__type",
+						"kind": 65536,
+						"kindString": "Type literal",
+						"flags": {
+							"isExported": true
+						},
+						"sources": [
+							{
+								"fileName": "src/metrics/options.ts",
+								"line": 13,
+								"character": 41
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": 335,
+			"name": "MetricInstances",
+			"kind": 256,
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"indexSignature": [
+				{
+					"id": 336,
+					"name": "__index",
+					"kind": 8192,
+					"kindString": "Index signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 337,
+							"name": "key",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 216,
+						"name": "Metric"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/utils.ts",
+					"line": 9,
+					"character": 25
+				}
+			]
+		},
+		{
+			"id": 7,
+			"name": "PrometheusDefaultMetricsOptions",
+			"kind": 256,
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 9,
+					"name": "config",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/prometheus/options.ts",
+							"line": 17,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "DefaultMetricsCollectorConfiguration"
+					}
+				},
+				{
+					"id": 8,
+					"name": "enabled",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "src/prometheus/options.ts",
+							"line": 16,
+							"character": 9
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "boolean"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						9,
+						8
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/prometheus/options.ts",
+					"line": 15,
+					"character": 48
+				}
+			]
+		},
+		{
+			"id": 10,
+			"name": "PrometheusOptions",
+			"kind": 256,
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 11,
+					"name": "defaultMetrics",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/prometheus/options.ts",
+							"line": 22,
+							"character": 16
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 7,
+						"name": "PrometheusDefaultMetricsOptions"
+					}
+				},
+				{
+					"id": 12,
+					"name": "route",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "src/prometheus/options.ts",
+							"line": 24,
+							"character": 7
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						11,
+						12
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/prometheus/options.ts",
+					"line": 20,
+					"character": 34
+				}
+			]
+		},
+		{
+			"id": 65,
+			"name": "StatsOptions",
+			"kind": 256,
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 67,
+					"name": "prometheus",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "src/config.ts",
+							"line": 7,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 10,
+						"name": "PrometheusOptions"
+					}
+				},
+				{
+					"id": 68,
+					"name": "statsd",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "src/config.ts",
+							"line": 8,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 61,
+						"name": "StatsdOptions"
+					}
+				},
+				{
+					"id": 66,
+					"name": "types",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "src/config.ts",
+							"line": 6,
+							"character": 7
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "reference",
+							"id": 4,
+							"name": "StatsTypes"
+						}
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						67,
+						68,
+						66
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/config.ts",
+					"line": 5,
+					"character": 29
+				}
+			]
+		},
+		{
+			"id": 20,
+			"name": "StatsdClientAlike",
+			"kind": 256,
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 21,
+					"name": "counter",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 22,
+							"name": "counter",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 23,
+									"name": "metric",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 24,
+									"name": "delta",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 25,
+									"name": "tags",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 1,
+										"name": "Tags"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "this"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/statsd/options.ts",
+							"line": 6,
+							"character": 9
+						}
+					]
+				},
+				{
+					"id": 31,
+					"name": "decrement",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 32,
+							"name": "decrement",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 33,
+									"name": "metric",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 34,
+									"name": "delta",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 35,
+									"name": "tags",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 1,
+										"name": "Tags"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "this"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/statsd/options.ts",
+							"line": 8,
+							"character": 11
+						}
+					]
+				},
+				{
+					"id": 36,
+					"name": "gauge",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 37,
+							"name": "gauge",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 38,
+									"name": "name",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 39,
+									"name": "value",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 40,
+									"name": "tags",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 1,
+										"name": "Tags"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "this"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/statsd/options.ts",
+							"line": 9,
+							"character": 7
+						}
+					]
+				},
+				{
+					"id": 41,
+					"name": "gaugeDelta",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 42,
+							"name": "gaugeDelta",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 43,
+									"name": "name",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 44,
+									"name": "delta",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 45,
+									"name": "tags",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 1,
+										"name": "Tags"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "this"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/statsd/options.ts",
+							"line": 10,
+							"character": 12
+						}
+					]
+				},
+				{
+					"id": 56,
+					"name": "histogram",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 57,
+							"name": "histogram",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 58,
+									"name": "name",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 59,
+									"name": "value",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 60,
+									"name": "tags",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 1,
+										"name": "Tags"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "this"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/statsd/options.ts",
+							"line": 13,
+							"character": 11
+						}
+					]
+				},
+				{
+					"id": 26,
+					"name": "increment",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 27,
+							"name": "increment",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 28,
+									"name": "metric",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 29,
+									"name": "delta",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 30,
+									"name": "tags",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 1,
+										"name": "Tags"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "this"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/statsd/options.ts",
+							"line": 7,
+							"character": 11
+						}
+					]
+				},
+				{
+					"id": 46,
+					"name": "set",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 47,
+							"name": "set",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 48,
+									"name": "name",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 49,
+									"name": "value",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 50,
+									"name": "tags",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 1,
+										"name": "Tags"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "this"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/statsd/options.ts",
+							"line": 11,
+							"character": 5
+						}
+					]
+				},
+				{
+					"id": 51,
+					"name": "timing",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 52,
+							"name": "timing",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 53,
+									"name": "name",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								},
+								{
+									"id": 54,
+									"name": "startOrDuration",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "union",
+										"types": [
+											{
+												"type": "reference",
+												"name": "Date"
+											},
+											{
+												"type": "intrinsic",
+												"name": "number"
+											}
+										]
+									}
+								},
+								{
+									"id": 55,
+									"name": "tags",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isOptional": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 1,
+										"name": "Tags"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "this"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/statsd/options.ts",
+							"line": 12,
+							"character": 8
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Methods",
+					"kind": 2048,
+					"children": [
+						21,
+						31,
+						36,
+						41,
+						56,
+						26,
+						46,
+						51
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/statsd/options.ts",
+					"line": 5,
+					"character": 34
+				}
+			]
+		},
+		{
+			"id": 136,
+			"name": "SummaryOptions",
+			"kind": 256,
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 137,
+					"name": "prometheus",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "src/metrics/options.ts",
+							"line": 18,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reference",
+						"typeArguments": [
+							{
+								"type": "reference",
+								"typeArguments": [
+									{
+										"type": "reference",
+										"typeArguments": [
+											{
+												"type": "intrinsic",
+												"name": "string"
+											}
+										],
+										"name": "SummaryConfiguration"
+									},
+									{
+										"type": "stringLiteral",
+										"value": "name"
+									}
+								],
+								"name": "Omit"
+							}
+						],
+						"name": "Partial"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						137
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/options.ts",
+					"line": 17,
+					"character": 31
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reflection",
+					"declaration": {
+						"id": 138,
+						"name": "__type",
+						"kind": 65536,
+						"kindString": "Type literal",
+						"flags": {
+							"isExported": true
+						},
+						"sources": [
+							{
+								"fileName": "src/metrics/options.ts",
+								"line": 17,
+								"character": 39
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": 1,
+			"name": "Tags",
+			"kind": 256,
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"indexSignature": [
+				{
+					"id": 2,
+					"name": "__index",
+					"kind": 8192,
+					"kindString": "Index signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 3,
+							"name": "key",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							},
+							{
+								"type": "intrinsic",
+								"name": "number"
+							}
+						]
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/options.ts",
+					"line": 1,
+					"character": 21
+				}
+			]
+		},
+		{
+			"id": 114,
+			"name": "GeneratedDecoratorWithArgs",
+			"kind": 4194304,
+			"kindString": "Type alias",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "src/decorator.ts",
+					"line": 14,
+					"character": 38
+				}
+			],
+			"type": {
+				"type": "reflection",
+				"declaration": {
+					"id": 115,
+					"name": "__type",
+					"kind": 65536,
+					"kindString": "Type literal",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 116,
+							"name": "__call",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 117,
+									"name": "args",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isRest": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "MethodDecorator"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/decorator.ts",
+							"line": 14,
+							"character": 40
+						}
+					]
+				}
+			}
+		},
+		{
+			"id": 101,
+			"name": "GenericMethod",
+			"kind": 4194304,
+			"kindString": "Type alias",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "src/decorator.ts",
+					"line": 3,
+					"character": 25
+				}
+			],
+			"type": {
+				"type": "reflection",
+				"declaration": {
+					"id": 102,
+					"name": "__type",
+					"kind": 65536,
+					"kindString": "Type literal",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 103,
+							"name": "__call",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 104,
+									"name": "args",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isRest": true
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "intrinsic",
+											"name": "any"
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/decorator.ts",
+							"line": 3,
+							"character": 27
+						}
+					]
+				}
+			}
+		},
+		{
+			"id": 347,
+			"name": "MetricArgs",
+			"kind": 4194304,
+			"kindString": "Type alias",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "src/metrics/decorators.ts",
+					"line": 14,
+					"character": 22
+				},
+				{
+					"fileName": "src/prometheus/decorator.ts",
+					"line": 13,
+					"character": 22
+				},
+				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 13,
+					"character": 22
+				}
+			],
+			"type": {
+				"type": "union",
+				"types": [
+					{
+						"type": "reference",
+						"id": 345,
+						"name": "MetricNumericArgs"
+					},
+					{
+						"type": "reference",
+						"id": 346,
+						"name": "MetricDateArgs"
+					}
+				]
+			}
+		},
+		{
+			"id": 346,
+			"name": "MetricDateArgs",
+			"kind": 4194304,
+			"kindString": "Type alias",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "src/metrics/decorators.ts",
+					"line": 13,
+					"character": 26
+				},
+				{
+					"fileName": "src/prometheus/decorator.ts",
+					"line": 12,
+					"character": 26
+				},
+				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 12,
+					"character": 26
+				}
+			],
+			"type": {
+				"type": "tuple",
+				"elements": [
+					{
+						"type": "intrinsic",
+						"name": "string"
+					},
+					{
+						"type": "reference",
+						"id": 1,
+						"name": "Tags"
+					}
+				]
+			}
+		},
+		{
+			"id": 345,
+			"name": "MetricNumericArgs",
+			"kind": 4194304,
+			"kindString": "Type alias",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "src/metrics/decorators.ts",
+					"line": 12,
+					"character": 29
+				},
+				{
+					"fileName": "src/prometheus/decorator.ts",
+					"line": 11,
+					"character": 29
+				},
+				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 11,
+					"character": 29
+				}
+			],
+			"type": {
+				"type": "tuple",
+				"elements": [
+					{
+						"type": "intrinsic",
+						"name": "string"
+					},
+					{
+						"type": "intrinsic",
+						"name": "number"
+					},
+					{
+						"type": "reference",
+						"id": 1,
+						"name": "Tags"
+					}
+				]
+			}
+		},
+		{
+			"id": 139,
+			"name": "MetricOptions",
+			"kind": 4194304,
+			"kindString": "Type alias",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "src/metrics/options.ts",
+					"line": 21,
+					"character": 25
+				}
+			],
+			"type": {
+				"type": "union",
+				"types": [
+					{
+						"type": "reference",
+						"id": 127,
+						"name": "CounterOptions"
+					},
+					{
+						"type": "reference",
+						"id": 130,
+						"name": "GaugeOptions"
+					},
+					{
+						"type": "reference",
+						"id": 133,
+						"name": "HistogramOptions"
+					},
+					{
+						"type": "reference",
+						"id": 136,
+						"name": "SummaryOptions"
+					}
+				]
+			}
+		},
+		{
+			"id": 105,
+			"name": "MetricWrapper",
+			"kind": 4194304,
+			"kindString": "Type alias",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "src/decorator.ts",
+					"line": 5,
+					"character": 25
+				}
+			],
+			"type": {
+				"type": "reflection",
+				"declaration": {
+					"id": 106,
+					"name": "__type",
+					"kind": 65536,
+					"kindString": "Type literal",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 107,
+							"name": "__call",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 108,
+									"name": "metricArgs",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								},
+								{
+									"id": 109,
+									"name": "metric",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								},
+								{
+									"id": 110,
+									"name": "oldMethod",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "reference",
+										"id": 101,
+										"name": "GenericMethod"
+									}
+								},
+								{
+									"id": 111,
+									"name": "target",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								},
+								{
+									"id": 112,
+									"name": "propertyKey",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "union",
+										"types": [
+											{
+												"type": "intrinsic",
+												"name": "string"
+											},
+											{
+												"type": "intrinsic",
+												"name": "symbol"
+											}
+										]
+									}
+								},
+								{
+									"id": 113,
+									"name": "descriptor",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true
+									},
+									"type": {
+										"type": "reference",
+										"name": "PropertyDescriptor"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/decorator.ts",
+							"line": 5,
+							"character": 27
+						}
+					]
+				}
+			}
+		},
+		{
+			"id": 13,
+			"name": "PrometheusMetricOptions",
+			"kind": 4194304,
+			"kindString": "Type alias",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "src/prometheus/options.ts",
+					"line": 9,
+					"character": 35
+				}
+			],
+			"type": {
+				"type": "union",
+				"types": [
+					{
+						"type": "reference",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						],
+						"name": "GaugeConfiguration"
+					},
+					{
+						"type": "reference",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						],
+						"name": "SummaryConfiguration"
+					},
+					{
+						"type": "reference",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						],
+						"name": "CounterConfiguration"
+					},
+					{
+						"type": "reference",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						],
+						"name": "HistogramConfiguration"
+					}
+				]
+			}
+		},
+		{
+			"id": 61,
+			"name": "StatsdOptions",
+			"kind": 4194304,
+			"kindString": "Type alias",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "src/statsd/options.ts",
+					"line": 16,
+					"character": 25
+				}
+			],
+			"type": {
+				"type": "union",
+				"types": [
+					{
+						"type": "reflection",
+						"declaration": {
+							"id": 62,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {
+								"isExported": true
+							},
+							"indexSignature": [
+								{
+									"id": 63,
+									"name": "__index",
+									"kind": 8192,
+									"kindString": "Index signature",
+									"flags": {
+										"isExported": true
+									},
+									"parameters": [
+										{
+											"id": 64,
+											"name": "key",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {
+												"isExported": true
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "string"
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								}
+							],
+							"sources": [
+								{
+									"fileName": "src/statsd/options.ts",
+									"line": 16,
+									"character": 27
+								}
+							]
+						}
+					},
+					{
+						"type": "stringLiteral",
+						"value": "dummy"
+					}
+				]
+			}
+		},
+		{
+			"id": 165,
+			"name": "instances",
+			"kind": 32,
+			"kindString": "Variable",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"sources": [
+				{
+					"fileName": "src/statsd/utils.ts",
+					"line": 6,
+					"character": 15
+				},
+				{
+					"fileName": "src/metrics/utils.ts",
+					"line": 13,
+					"character": 15
+				}
+			],
+			"type": {
+				"type": "reference",
+				"id": 335,
+				"name": "MetricInstances"
+			}
+		},
+		{
+			"id": 402,
+			"name": "InjectMetric",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {},
+			"signatures": [
+				{
+					"id": 403,
+					"name": "InjectMetric",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {},
+					"parameters": [
+						{
+							"id": 404,
+							"name": "name",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 405,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 406,
+									"name": "__call",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {
+										"isExported": true
+									},
+									"parameters": [
+										{
+											"id": 407,
+											"name": "target",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {
+												"isExported": true
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "object"
+											}
+										},
+										{
+											"id": 408,
+											"name": "key",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {
+												"isExported": true
+											},
+											"type": {
+												"type": "union",
+												"types": [
+													{
+														"type": "intrinsic",
+														"name": "string"
+													},
+													{
+														"type": "intrinsic",
+														"name": "symbol"
+													}
+												]
+											}
+										},
+										{
+											"id": 409,
+											"name": "index",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {
+												"isExported": true,
+												"isOptional": true
+											},
+											"type": {
+												"type": "union",
+												"types": [
+													{
+														"type": "intrinsic",
+														"name": "number"
+													},
+													{
+														"type": "intrinsic",
+														"name": "undefined"
+													}
+												]
+											}
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "void"
+									}
+								}
+							],
+							"sources": [
+								{
+									"fileName": "src/metrics/injector.ts",
+									"line": 5,
+									"character": 43
+								}
+							]
+						}
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/injector.ts",
+					"line": 5,
+					"character": 28
+				},
+				{
+					"fileName": "src/prometheus/injector.ts",
+					"line": 5,
+					"character": 28
+				},
+				{
+					"fileName": "src/statsd/injector.ts",
+					"line": 9,
+					"character": 28
+				}
+			]
+		},
+		{
+			"id": 370,
+			"name": "gaugeDecrementWrapper",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"signatures": [
+				{
+					"id": 371,
+					"name": "gaugeDecrementWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 372,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 345,
+								"name": "MetricNumericArgs"
+							}
+						},
+						{
+							"id": 373,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 374,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 375,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 376,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 377,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 101,
+						"name": "GenericMethod"
+					}
+				},
+				{
+					"id": 433,
+					"name": "gaugeDecrementWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 434,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 345,
+								"name": "MetricNumericArgs"
+							}
+						},
+						{
+							"id": 435,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 436,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 437,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 438,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 439,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 101,
+						"name": "GenericMethod"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/decorators.ts",
+					"line": 57,
+					"character": 34
+				},
+				{
+					"fileName": "src/prometheus/decorator.ts",
+					"line": 54,
+					"character": 34
+				}
+			]
+		},
+		{
+			"id": 475,
+			"name": "gaugeDeltaWrapper",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"signatures": [
+				{
+					"id": 476,
+					"name": "gaugeDeltaWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 477,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 345,
+								"name": "MetricNumericArgs"
+							}
+						},
+						{
+							"id": 478,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 479,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 480,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 481,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 482,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 101,
+						"name": "GenericMethod"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 39,
+					"character": 30
+				}
+			]
+		},
+		{
+			"id": 362,
+			"name": "gaugeIncrementWrapper",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"signatures": [
+				{
+					"id": 363,
+					"name": "gaugeIncrementWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 364,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 345,
+								"name": "MetricNumericArgs"
+							}
+						},
+						{
+							"id": 365,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 366,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 367,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 368,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 369,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 101,
+						"name": "GenericMethod"
+					}
+				},
+				{
+					"id": 426,
+					"name": "gaugeIncrementWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 427,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 345,
+								"name": "MetricNumericArgs"
+							}
+						},
+						{
+							"id": 428,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 429,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 430,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 431,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 432,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 101,
+						"name": "GenericMethod"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/decorators.ts",
+					"line": 45,
+					"character": 34
+				},
+				{
+					"fileName": "src/prometheus/decorator.ts",
+					"line": 42,
+					"character": 34
+				}
+			]
+		},
+		{
+			"id": 378,
+			"name": "gaugeSetWrapper",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"signatures": [
+				{
+					"id": 379,
+					"name": "gaugeSetWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 380,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 345,
+								"name": "MetricNumericArgs"
+							}
+						},
+						{
+							"id": 381,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 382,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 383,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 384,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 385,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 101,
+						"name": "GenericMethod"
+					}
+				},
+				{
+					"id": 440,
+					"name": "gaugeSetWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 441,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 345,
+								"name": "MetricNumericArgs"
+							}
+						},
+						{
+							"id": 442,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 443,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 444,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 445,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 446,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 101,
+						"name": "GenericMethod"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/decorators.ts",
+					"line": 69,
+					"character": 28
+				},
+				{
+					"fileName": "src/prometheus/decorator.ts",
+					"line": 66,
+					"character": 28
+				}
+			]
+		},
+		{
+			"id": 483,
+			"name": "gaugeWrapper",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"signatures": [
+				{
+					"id": 484,
+					"name": "gaugeWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 485,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 345,
+								"name": "MetricNumericArgs"
+							}
+						},
+						{
+							"id": 486,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 487,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 488,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 489,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 490,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 101,
+						"name": "GenericMethod"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 51,
+					"character": 25
+				}
+			]
+		},
+		{
+			"id": 348,
+			"name": "generateDecorator",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"signatures": [
+				{
+					"id": 349,
+					"name": "generateDecorator",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 350,
+							"name": "type",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 118,
+								"name": "Metrics"
+							}
+						},
+						{
+							"id": 351,
+							"name": "name",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 352,
+							"name": "wrapper",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 105,
+								"name": "MetricWrapper"
+							}
+						},
+						{
+							"id": 353,
+							"name": "options",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 139,
+								"name": "MetricOptions"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 114,
+						"name": "GeneratedDecoratorWithArgs"
+					}
+				},
+				{
+					"id": 415,
+					"name": "generateDecorator",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 416,
+							"name": "type",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 118,
+								"name": "Metrics"
+							}
+						},
+						{
+							"id": 417,
+							"name": "wrapper",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 105,
+								"name": "MetricWrapper"
+							}
+						},
+						{
+							"id": 418,
+							"name": "options",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 13,
+								"name": "PrometheusMetricOptions"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 114,
+						"name": "GeneratedDecoratorWithArgs"
+					}
+				},
+				{
+					"id": 465,
+					"name": "generateDecorator",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 466,
+							"name": "wrapper",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 105,
+								"name": "MetricWrapper"
+							}
+						},
+						{
+							"id": 467,
+							"name": "options",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 61,
+								"name": "StatsdOptions"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 114,
+						"name": "GeneratedDecoratorWithArgs"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/decorators.ts",
+					"line": 18,
+					"character": 30
+				},
+				{
+					"fileName": "src/prometheus/decorator.ts",
+					"line": 16,
+					"character": 30
+				},
+				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 16,
+					"character": 30
+				}
+			]
+		},
+		{
+			"id": 340,
+			"name": "getMetric",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"signatures": [
+				{
+					"id": 341,
+					"name": "getMetric",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 342,
+							"name": "type",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 118,
+								"name": "Metrics"
+							}
+						},
+						{
+							"id": 343,
+							"name": "name",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 344,
+							"name": "options",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 139,
+								"name": "MetricOptions"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 216,
+						"name": "Metric"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/utils.ts",
+					"line": 17,
+					"character": 22
+				}
+			]
+		},
+		{
+			"id": 212,
+			"name": "getPrometheusMetric",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"signatures": [
+				{
+					"id": 213,
+					"name": "getPrometheusMetric",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 214,
+							"name": "type",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 118,
+								"name": "Metrics"
+							}
+						},
+						{
+							"id": 215,
+							"name": "options",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 13,
+								"name": "PrometheusMetricOptions"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						],
+						"name": "PromClient.Metric"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/prometheus/utils.ts",
+					"line": 10,
+					"character": 32
+				}
+			]
+		},
+		{
+			"id": 172,
+			"name": "getStatsdClient",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"signatures": [
+				{
+					"id": 173,
+					"name": "getStatsdClient",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 174,
+							"name": "name",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 175,
+							"name": "options",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 61,
+								"name": "StatsdOptions"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 20,
+						"name": "StatsdClientAlike"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/statsd/utils.ts",
+					"line": 12,
+					"character": 28
+				}
+			]
+		},
+		{
+			"id": 169,
+			"name": "getToken",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"signatures": [
+				{
+					"id": 170,
+					"name": "getToken",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 171,
+							"name": "name",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 210,
+					"name": "getToken",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 211,
+							"name": "name",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				},
+				{
+					"id": 338,
+					"name": "getToken",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 339,
+							"name": "name",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/statsd/utils.ts",
+					"line": 9,
+					"character": 21
+				},
+				{
+					"fileName": "src/prometheus/utils.ts",
+					"line": 8,
+					"character": 21
+				},
+				{
+					"fileName": "src/metrics/utils.ts",
+					"line": 15,
+					"character": 21
+				}
+			]
+		},
+		{
+			"id": 491,
+			"name": "histogramWrapper",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"signatures": [
+				{
+					"id": 492,
+					"name": "histogramWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 493,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 345,
+								"name": "MetricNumericArgs"
+							}
+						},
+						{
+							"id": 494,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 495,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 496,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 497,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 498,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 101,
+						"name": "GenericMethod"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 63,
+					"character": 29
+				}
+			]
+		},
+		{
+			"id": 354,
+			"name": "incrementWrapper",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"signatures": [
+				{
+					"id": 355,
+					"name": "incrementWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 356,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 345,
+								"name": "MetricNumericArgs"
+							}
+						},
+						{
+							"id": 357,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 358,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 359,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 360,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 361,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 101,
+						"name": "GenericMethod"
+					}
+				},
+				{
+					"id": 419,
+					"name": "incrementWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 420,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 345,
+								"name": "MetricNumericArgs"
+							}
+						},
+						{
+							"id": 421,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 422,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 423,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 424,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 425,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 101,
+						"name": "GenericMethod"
+					}
+				},
+				{
+					"id": 468,
+					"name": "incrementWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 469,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 345,
+								"name": "MetricNumericArgs"
+							}
+						},
+						{
+							"id": 470,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 471,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 472,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 473,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 474,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 101,
+						"name": "GenericMethod"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/decorators.ts",
+					"line": 33,
+					"character": 29
+				},
+				{
+					"fileName": "src/prometheus/decorator.ts",
+					"line": 30,
+					"character": 29
+				},
+				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 27,
+					"character": 29
+				}
+			]
+		},
+		{
+			"id": 410,
+			"name": "makeMetricProvider",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"signatures": [
+				{
+					"id": 411,
+					"name": "makeMetricProvider",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 412,
+							"name": "type",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 118,
+								"name": "Metrics"
+							}
+						},
+						{
+							"id": 413,
+							"name": "name",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						},
+						{
+							"id": 414,
+							"name": "options",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 139,
+								"name": "MetricOptions"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Provider"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/provider.ts",
+					"line": 9,
+					"character": 31
+				}
+			]
+		},
+		{
+			"id": 461,
+			"name": "makeProvider",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "> To validate options typings, check the types `StatsdHttpOptions`, `StatsdTcpOptions`, `StatsdUdpOptions` defined in\n> [@types/statsd-client](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/statsd-client/index.d.ts)\n> and the [statsd-client](https://github.com/msiebuhr/node-statsd-client) project."
+			},
+			"signatures": [
+				{
+					"id": 462,
+					"name": "makeProvider",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "> To validate options typings, check the types `StatsdHttpOptions`, `StatsdTcpOptions`, `StatsdUdpOptions` defined in\n> [@types/statsd-client](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/statsd-client/index.d.ts)\n> and the [statsd-client](https://github.com/msiebuhr/node-statsd-client) project."
+					},
+					"parameters": [
+						{
+							"id": 463,
+							"name": "type",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 118,
+								"name": "Metrics"
+							}
+						},
+						{
+							"id": 464,
+							"name": "options",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"comment": {
+								"shortText": "\n"
+							},
+							"type": {
+								"type": "reference",
+								"id": 13,
+								"name": "PrometheusMetricOptions"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Provider"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/prometheus/provider.ts",
+					"line": 9,
+					"character": 28
+				},
+				{
+					"fileName": "src/statsd/provider.ts",
+					"line": 17,
+					"character": 28
+				}
+			]
+		},
+		{
+			"id": 394,
+			"name": "observeWrapper",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"signatures": [
+				{
+					"id": 395,
+					"name": "observeWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 396,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 345,
+								"name": "MetricNumericArgs"
+							}
+						},
+						{
+							"id": 397,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 398,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 399,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 400,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 401,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 101,
+						"name": "GenericMethod"
+					}
+				},
+				{
+					"id": 447,
+					"name": "observeWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 448,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 345,
+								"name": "MetricNumericArgs"
+							}
+						},
+						{
+							"id": 449,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 450,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 451,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 452,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 453,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 101,
+						"name": "GenericMethod"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/decorators.ts",
+					"line": 110,
+					"character": 27
+				},
+				{
+					"fileName": "src/prometheus/decorator.ts",
+					"line": 78,
+					"character": 27
+				}
+			]
+		},
+		{
+			"id": 386,
+			"name": "timingWrapper",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"signatures": [
+				{
+					"id": 387,
+					"name": "timingWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 388,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 346,
+								"name": "MetricDateArgs"
+							}
+						},
+						{
+							"id": 389,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 390,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 391,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 392,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 393,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 101,
+						"name": "GenericMethod"
+					}
+				},
+				{
+					"id": 454,
+					"name": "timingWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 455,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 346,
+								"name": "MetricDateArgs"
+							}
+						},
+						{
+							"id": 456,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 457,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 458,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 459,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 460,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 101,
+						"name": "GenericMethod"
+					}
+				},
+				{
+					"id": 499,
+					"name": "timingWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"parameters": [
+						{
+							"id": 500,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 346,
+								"name": "MetricDateArgs"
+							}
+						},
+						{
+							"id": 501,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 502,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 101,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 503,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 504,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 505,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 101,
+						"name": "GenericMethod"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/metrics/decorators.ts",
+					"line": 81,
+					"character": 26
+				},
+				{
+					"fileName": "src/prometheus/decorator.ts",
+					"line": 90,
+					"character": 26
+				},
+				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 75,
+					"character": 26
+				}
+			]
+		},
+		{
+			"id": 176,
+			"name": "DummyCounter",
+			"kind": 2097152,
+			"kindString": "Object literal",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"children": [
+				{
+					"id": 177,
+					"name": "inc",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 178,
+							"name": "inc",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/prometheus/dummy.ts",
+							"line": 5,
+							"character": 5
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						177
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/prometheus/dummy.ts",
+					"line": 4,
+					"character": 25
+				}
+			],
+			"type": {
+				"type": "intrinsic",
+				"name": "object"
+			}
+		},
+		{
+			"id": 184,
+			"name": "DummyGauge",
+			"kind": 2097152,
+			"kindString": "Object literal",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"children": [
+				{
+					"id": 185,
+					"name": "dec",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 186,
+							"name": "dec",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/prometheus/dummy.ts",
+							"line": 14,
+							"character": 5
+						}
+					]
+				},
+				{
+					"id": 187,
+					"name": "set",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 188,
+							"name": "set",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/prometheus/dummy.ts",
+							"line": 15,
+							"character": 5
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						185,
+						187
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/prometheus/dummy.ts",
+					"line": 12,
+					"character": 23
+				}
+			],
+			"type": {
+				"type": "intrinsic",
+				"name": "object"
+			}
+		},
+		{
+			"id": 189,
+			"name": "DummyHistogram",
+			"kind": 2097152,
+			"kindString": "Object literal",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"children": [
+				{
+					"id": 190,
+					"name": "observe",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 191,
+							"name": "observe",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "void"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/prometheus/dummy.ts",
+							"line": 20,
+							"character": 9
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						190
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/prometheus/dummy.ts",
+					"line": 19,
+					"character": 27
+				}
+			],
+			"type": {
+				"type": "intrinsic",
+				"name": "object"
+			}
+		},
+		{
+			"id": 140,
+			"name": "DummyStatsdClient",
+			"kind": 2097152,
+			"kindString": "Object literal",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"comment": {
+				"shortText": "See definition of `StatsdClient` from the [statsd-client](https://github.com/msiebuhr/node-statsd-client) project"
+			},
+			"children": [
+				{
+					"id": 141,
+					"name": "counter",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 142,
+							"name": "counter",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 143,
+									"name": "args",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isRest": true
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "intrinsic",
+											"name": "any"
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 20,
+								"name": "StatsdClientAlike"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/statsd/dummy.ts",
+							"line": 9,
+							"character": 9
+						}
+					]
+				},
+				{
+					"id": 147,
+					"name": "decrement",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 148,
+							"name": "decrement",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 149,
+									"name": "args",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isRest": true
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "intrinsic",
+											"name": "any"
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 20,
+								"name": "StatsdClientAlike"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/statsd/dummy.ts",
+							"line": 11,
+							"character": 11
+						}
+					]
+				},
+				{
+					"id": 150,
+					"name": "gauge",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 151,
+							"name": "gauge",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 152,
+									"name": "args",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isRest": true
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "intrinsic",
+											"name": "any"
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 20,
+								"name": "StatsdClientAlike"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/statsd/dummy.ts",
+							"line": 12,
+							"character": 7
+						}
+					]
+				},
+				{
+					"id": 153,
+					"name": "gaugeDelta",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 154,
+							"name": "gaugeDelta",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 155,
+									"name": "args",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isRest": true
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "intrinsic",
+											"name": "any"
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 20,
+								"name": "StatsdClientAlike"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/statsd/dummy.ts",
+							"line": 13,
+							"character": 12
+						}
+					]
+				},
+				{
+					"id": 162,
+					"name": "histogram",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 163,
+							"name": "histogram",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 164,
+									"name": "args",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isRest": true
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "intrinsic",
+											"name": "any"
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 20,
+								"name": "StatsdClientAlike"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/statsd/dummy.ts",
+							"line": 16,
+							"character": 11
+						}
+					]
+				},
+				{
+					"id": 144,
+					"name": "increment",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 145,
+							"name": "increment",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 146,
+									"name": "args",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isRest": true
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "intrinsic",
+											"name": "any"
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 20,
+								"name": "StatsdClientAlike"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/statsd/dummy.ts",
+							"line": 10,
+							"character": 11
+						}
+					]
+				},
+				{
+					"id": 156,
+					"name": "set",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 157,
+							"name": "set",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 158,
+									"name": "args",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isRest": true
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "intrinsic",
+											"name": "any"
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 20,
+								"name": "StatsdClientAlike"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/statsd/dummy.ts",
+							"line": 14,
+							"character": 5
+						}
+					]
+				},
+				{
+					"id": 159,
+					"name": "timing",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 160,
+							"name": "timing",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"parameters": [
+								{
+									"id": 161,
+									"name": "args",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isExported": true,
+										"isRest": true
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "intrinsic",
+											"name": "any"
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"id": 20,
+								"name": "StatsdClientAlike"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/statsd/dummy.ts",
+							"line": 15,
+							"character": 8
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						141,
+						147,
+						150,
+						153,
+						162,
+						144,
+						156,
+						159
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/statsd/dummy.ts",
+					"line": 8,
+					"character": 30
+				}
+			],
+			"type": {
+				"type": "intrinsic",
+				"name": "object"
+			}
+		},
+		{
+			"id": 192,
+			"name": "DummySummary",
+			"kind": 2097152,
+			"kindString": "Object literal",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"sources": [
+				{
+					"fileName": "src/prometheus/dummy.ts",
+					"line": 24,
+					"character": 25
+				}
+			],
+			"type": {
+				"type": "intrinsic",
+				"name": "object"
+			}
+		},
+		{
+			"id": 179,
+			"name": "DummyTimer",
+			"kind": 2097152,
+			"kindString": "Object literal",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"children": [
+				{
+					"id": 180,
+					"name": "startTimer",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 181,
+							"name": "startTimer",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 182,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {
+										"isExported": true
+									},
+									"signatures": [
+										{
+											"id": 183,
+											"name": "__call",
+											"kind": 4096,
+											"kindString": "Call signature",
+											"flags": {
+												"isExported": true
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "void"
+											}
+										}
+									],
+									"sources": [
+										{
+											"fileName": "src/prometheus/dummy.ts",
+											"line": 9,
+											"character": 17
+										}
+									]
+								}
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/prometheus/dummy.ts",
+							"line": 9,
+							"character": 12
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						180
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/prometheus/dummy.ts",
+					"line": 8,
+					"character": 23
+				}
+			],
+			"type": {
+				"type": "intrinsic",
+				"name": "object"
+			}
+		},
+		{
+			"id": 14,
+			"name": "defaultPrometheusOptions",
+			"kind": 2097152,
+			"kindString": "Object literal",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"children": [
+				{
+					"id": 19,
+					"name": "route",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/prometheus/options.ts",
+							"line": 34,
+							"character": 7
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "string"
+					},
+					"defaultValue": "\"/metrics\""
+				},
+				{
+					"id": 15,
+					"name": "defaultMetrics",
+					"kind": 2097152,
+					"kindString": "Object literal",
+					"flags": {
+						"isExported": true
+					},
+					"children": [
+						{
+							"id": 17,
+							"name": "config",
+							"kind": 32,
+							"kindString": "Variable",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "src/prometheus/options.ts",
+									"line": 30,
+									"character": 10
+								}
+							],
+							"type": {
+								"type": "reflection",
+								"declaration": {
+									"id": 18,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {
+										"isExported": true
+									}
+								}
+							}
+						},
+						{
+							"id": 16,
+							"name": "enabled",
+							"kind": 32,
+							"kindString": "Variable",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "src/prometheus/options.ts",
+									"line": 29,
+									"character": 11
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "true"
+							},
+							"defaultValue": "true"
+						}
+					],
+					"groups": [
+						{
+							"title": "Variables",
+							"kind": 32,
+							"children": [
+								17,
+								16
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/prometheus/options.ts",
+							"line": 28,
+							"character": 16
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "object"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Variables",
+					"kind": 32,
+					"children": [
+						19
+					]
+				},
+				{
+					"title": "Object literals",
+					"kind": 2097152,
+					"children": [
+						15
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/prometheus/options.ts",
+					"line": 27,
+					"character": 37
+				}
+			],
+			"type": {
+				"type": "intrinsic",
+				"name": "object"
+			}
+		},
+		{
+			"id": 193,
+			"name": "metrics",
+			"kind": 2097152,
+			"kindString": "Object literal",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"children": [
+				{
+					"id": 194,
+					"name": "[Metrics.Counter]",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/prometheus/dummy.ts",
+							"line": 29,
+							"character": 19
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 195,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {
+								"isExported": true
+							},
+							"children": [
+								{
+									"id": 196,
+									"name": "inc",
+									"kind": 64,
+									"kindString": "Function",
+									"flags": {
+										"isExported": true
+									},
+									"signatures": [
+										{
+											"id": 197,
+											"name": "inc",
+											"kind": 4096,
+											"kindString": "Call signature",
+											"flags": {
+												"isExported": true
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "void"
+											}
+										}
+									],
+									"sources": [
+										{
+											"fileName": "src/prometheus/dummy.ts",
+											"line": 5,
+											"character": 5
+										}
+									]
+								}
+							],
+							"groups": [
+								{
+									"title": "Functions",
+									"kind": 64,
+									"children": [
+										196
+									]
+								}
+							]
+						}
+					},
+					"defaultValue": "DummyCounter"
+				},
+				{
+					"id": 198,
+					"name": "[Metrics.Gauge]",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/prometheus/dummy.ts",
+							"line": 30,
+							"character": 17
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 199,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {
+								"isExported": true
+							},
+							"children": [
+								{
+									"id": 200,
+									"name": "dec",
+									"kind": 64,
+									"kindString": "Function",
+									"flags": {
+										"isExported": true
+									},
+									"signatures": [
+										{
+											"id": 201,
+											"name": "dec",
+											"kind": 4096,
+											"kindString": "Call signature",
+											"flags": {
+												"isExported": true
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "void"
+											}
+										}
+									],
+									"sources": [
+										{
+											"fileName": "src/prometheus/dummy.ts",
+											"line": 14,
+											"character": 5
+										}
+									]
+								},
+								{
+									"id": 202,
+									"name": "set",
+									"kind": 64,
+									"kindString": "Function",
+									"flags": {
+										"isExported": true
+									},
+									"signatures": [
+										{
+											"id": 203,
+											"name": "set",
+											"kind": 4096,
+											"kindString": "Call signature",
+											"flags": {
+												"isExported": true
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "void"
+											}
+										}
+									],
+									"sources": [
+										{
+											"fileName": "src/prometheus/dummy.ts",
+											"line": 15,
+											"character": 5
+										}
+									]
+								}
+							],
+							"groups": [
+								{
+									"title": "Functions",
+									"kind": 64,
+									"children": [
+										200,
+										202
+									]
+								}
+							]
+						}
+					},
+					"defaultValue": "DummyGauge"
+				},
+				{
+					"id": 204,
+					"name": "[Metrics.Histogram]",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/prometheus/dummy.ts",
+							"line": 31,
+							"character": 21
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 205,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {
+								"isExported": true
+							},
+							"children": [
+								{
+									"id": 206,
+									"name": "observe",
+									"kind": 64,
+									"kindString": "Function",
+									"flags": {
+										"isExported": true
+									},
+									"signatures": [
+										{
+											"id": 207,
+											"name": "observe",
+											"kind": 4096,
+											"kindString": "Call signature",
+											"flags": {
+												"isExported": true
+											},
+											"type": {
+												"type": "intrinsic",
+												"name": "void"
+											}
+										}
+									],
+									"sources": [
+										{
+											"fileName": "src/prometheus/dummy.ts",
+											"line": 20,
+											"character": 9
+										}
+									]
+								}
+							],
+							"groups": [
+								{
+									"title": "Functions",
+									"kind": 64,
+									"children": [
+										206
+									]
+								}
+							]
+						}
+					},
+					"defaultValue": "DummyHistogram"
+				},
+				{
+					"id": 208,
+					"name": "[Metrics.Summary]",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "src/prometheus/dummy.ts",
+							"line": 32,
+							"character": 19
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 209,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {
+								"isExported": true
+							}
+						}
+					},
+					"defaultValue": "DummySummary"
+				}
+			],
+			"groups": [
+				{
+					"title": "Variables",
+					"kind": 32,
+					"children": [
+						194,
+						198,
+						204,
+						208
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/prometheus/dummy.ts",
+					"line": 28,
+					"character": 20
+				}
+			],
+			"type": {
+				"type": "intrinsic",
+				"name": "object"
+			}
+		}
+	],
+	"groups": [
+		{
+			"title": "Enumerations",
+			"kind": 4,
+			"children": [
+				118,
+				4
+			]
+		},
+		{
+			"title": "Classes",
+			"kind": 128,
+			"children": [
+				69,
+				245,
+				260,
+				289,
+				216,
+				91,
+				123,
+				312,
+				228
+			]
+		},
+		{
+			"title": "Interfaces",
+			"kind": 256,
+			"children": [
+				127,
+				130,
+				133,
+				335,
+				7,
+				10,
+				65,
+				20,
+				136,
+				1
+			]
+		},
+		{
+			"title": "Type aliases",
+			"kind": 4194304,
+			"children": [
+				114,
+				101,
+				347,
+				346,
+				345,
+				139,
+				105,
+				13,
+				61
+			]
+		},
+		{
+			"title": "Variables",
+			"kind": 32,
+			"children": [
+				165
+			]
+		},
+		{
+			"title": "Functions",
+			"kind": 64,
+			"children": [
+				402,
+				370,
+				475,
+				362,
+				378,
+				483,
+				348,
+				340,
+				212,
+				172,
+				169,
+				491,
+				354,
+				410,
+				461,
+				394,
+				386
+			]
+		},
+		{
+			"title": "Object literals",
+			"kind": 2097152,
+			"children": [
+				176,
+				184,
+				189,
+				140,
+				192,
+				179,
+				14,
+				193
+			]
+		}
+	]
+}

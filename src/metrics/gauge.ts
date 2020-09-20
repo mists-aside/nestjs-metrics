@@ -11,11 +11,13 @@ export class Gauge extends Metric {
   }
 
   dec(value = 1, tags?: Tags): void {
+    console.log('Gauge.dec', value, tags);
     this.prometheusMetric.dec(tags || {}, value);
-    this.statsdClient.gaugeDelta(this.statsdName, value, tags || {});
+    this.statsdClient.gaugeDelta(this.statsdName, -value, tags || {});
   }
 
   inc(value = 1, tags?: Tags): void {
+    console.log('Gauge.inc', value, tags);
     this.prometheusMetric.inc(tags || {}, value);
     this.statsdClient.gaugeDelta(this.statsdName, value, tags || {});
   }
