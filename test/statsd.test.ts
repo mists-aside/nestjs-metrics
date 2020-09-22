@@ -2,6 +2,7 @@
 
 import * as chai from 'chai';
 import {describe, it} from 'mocha';
+import * as PromClient from 'prom-client';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
@@ -9,9 +10,8 @@ import {DummyStatsdClient} from '../src/statsd/dummy';
 import {makeProvider} from '../src/statsd/provider';
 import {mockerizeDummy} from './utils';
 import {TestHarness} from './utils/harness';
-import {CustomInjectorController, StatsdController} from './utils/statsd';
-
 import {createTestModule} from './utils/module';
+import {CustomInjectorController, StatsdController} from './utils/statsd';
 
 chai.use(sinonChai);
 const expect = chai.expect;
@@ -19,8 +19,18 @@ const expect = chai.expect;
 mockerizeDummy(DummyStatsdClient);
 
 describe('src/statsd', () => {
+  let harness: TestHarness;
+
+  // eslint-disable-next-line mocha/no-mocha-arrows
+  afterEach(async () => {
+    if (harness) {
+      PromClient.register.clear();
+      await harness.app.close();
+      harness = undefined;
+    }
+  });
+
   describe('decorator', () => {
-    let harness: TestHarness;
     let controller: CustomInjectorController;
 
     // eslint-disable-next-line mocha/no-mocha-arrows
@@ -140,7 +150,11 @@ describe('src/statsd', () => {
 
   describe('injector', () => {
     it('custom injected (makeProvider("name", {custom config})) statsd will call .increment() method', async () => {
-      const harness = await createTestModule(
+      if (harness) {
+        await harness.app.close();
+        PromClient.register.clear();
+      }
+      harness = await createTestModule(
         {},
         {
           controllers: [CustomInjectorController],
@@ -154,7 +168,11 @@ describe('src/statsd', () => {
     });
 
     it('default injected statsd (makeProvider("name"), using Config) will call .increment() method', async () => {
-      const harness = await createTestModule(
+      if (harness) {
+        await harness.app.close();
+        PromClient.register.clear();
+      }
+      harness = await createTestModule(
         {
           statsd: 'dummy',
         },

@@ -28,8 +28,18 @@ DummySummary.startTimer = sinon.fake.returns(() => {});
 /* eslint-enable @typescript-eslint/no-empty-function */
 
 describe('src/prometheus', () => {
+  let harness: TestHarness;
+
+  // eslint-disable-next-line mocha/no-mocha-arrows
+  afterEach(async () => {
+    if (harness) {
+      PromClient.register.clear();
+      await harness.app.close();
+      harness = undefined;
+    }
+  });
+
   describe('decorator', () => {
-    let harness: TestHarness;
     let controller: PrometheusController;
 
     // eslint-disable-next-line mocha/no-mocha-arrows
@@ -144,7 +154,11 @@ describe('src/prometheus', () => {
 
   describe('injector', () => {
     it('custom injected (makeProvider(Metrics.Counter, {config})) prometheus will call .inc() method', async () => {
-      const harness = await createTestModule();
+      if (harness) {
+        await harness.app.close();
+        PromClient.register.clear();
+      }
+      harness = await createTestModule();
       const controller = harness.testingModule.get<PrometheusController>(PrometheusController);
       controller.testPrometheusCustomInjector();
 

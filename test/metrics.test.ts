@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as chai from 'chai';
 import {describe, it} from 'mocha';
+import * as PromClient from 'prom-client';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
@@ -29,8 +30,18 @@ DummySummary.startTimer = sinon.fake.returns(() => {});
 /* eslint-enable @typescript-eslint/no-empty-function */
 
 describe('src/metrics', () => {
+  let harness: TestHarness;
+
+  // eslint-disable-next-line mocha/no-mocha-arrows
+  afterEach(async () => {
+    if (harness) {
+      PromClient.register.clear();
+      await harness.app.close();
+      harness = undefined;
+    }
+  });
+
   describe('decorator', () => {
-    let harness: TestHarness;
     let controller: MetricsController;
 
     // eslint-disable-next-line mocha/no-mocha-arrows
@@ -173,8 +184,6 @@ describe('src/metrics', () => {
   });
 
   describe('injector', () => {
-    let harness: TestHarness;
-
     // eslint-disable-next-line mocha/no-hooks-for-single-case, mocha/no-mocha-arrows
     beforeEach(async () => {
       harness = await createTestModule(
@@ -225,7 +234,7 @@ describe('src/metrics', () => {
   describe('utils', () => {
     // eslint-disable-next-line mocha/no-hooks-for-single-case, mocha/no-mocha-arrows
     beforeEach(async () => {
-      await createTestModule({
+      harness = await createTestModule({
         prometheus: {
           defaultMetrics: {
             enabled: true,

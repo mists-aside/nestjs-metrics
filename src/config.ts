@@ -2,12 +2,6 @@ import {StatsTypes} from './options';
 import {PrometheusOptions} from './prometheus/options';
 import {StatsdOptions} from './statsd/options';
 
-export interface StatsOptions {
-  types?: StatsTypes[];
-  prometheus?: PrometheusOptions;
-  statsd?: StatsdOptions;
-}
-
 export class Config {
   private static instance: Config;
 
