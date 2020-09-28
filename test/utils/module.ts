@@ -3,7 +3,7 @@ import * as request from 'supertest';
 import {Injectable} from '@nestjs/common';
 import {Test} from '@nestjs/testing';
 
-import {StatsAsyncOptions, StatsController, StatsModule, StatsOptions, StatsOptionsFactory} from '../../src';
+import {StatsAsyncOptions, MetricsController, MetricsModule, StatsOptions, StatsOptionsFactory} from '../../src';
 import {TestHarness} from './harness';
 
 export const createTestModule = async (
@@ -14,8 +14,8 @@ export const createTestModule = async (
   testOptions = testOptions || {};
 
   const testingModule = await Test.createTestingModule({
-    controllers: [StatsController, ...(testOptions.controllers || [])],
-    imports: [StatsModule.register(options || {}), ...(testOptions.imports || [])],
+    controllers: [MetricsController, ...(testOptions.controllers || [])],
+    imports: [MetricsModule.register(options || {}), ...(testOptions.imports || [])],
     providers: [...(testOptions.providers || [])],
   }).compile();
 
@@ -55,8 +55,8 @@ export const createAsyncTestModule = async (
   testOptions = testOptions || {};
 
   const testingModule = await Test.createTestingModule({
-    controllers: [StatsController, ...(testOptions.controllers || [])],
-    imports: [StatsModule.registerAsync(options || {}), ...(testOptions.imports || [])],
+    controllers: [MetricsController, ...(testOptions.controllers || [])],
+    imports: [MetricsModule.registerAsync(options || {}), ...(testOptions.imports || [])],
     providers: [...(testOptions.providers || [])],
   }).compile();
 

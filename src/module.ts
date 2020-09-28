@@ -1,44 +1,105 @@
 import {DynamicModule, Module, Provider} from '@nestjs/common';
 
 import {Config} from './config';
-import {StatsController} from './controller';
+import {MetricsController} from './controller';
 import {StatsAsyncOptions, StatsOptions, StatsOptionsFactory} from './options';
 import {PATH_METADATA} from '@nestjs/common/constants';
 
-// import { collectDefaultMetrics } from "prom-client";
-// import { PROMETHEUS_OPTIONS } from "./constants";
-// import { PrometheusController } from "./controller";
-// import {
-//   StatsAsyncOptions,
-//   StatsOptions,
-//   StatsOptionsFactory,
-// } from "./interfaces";
-
+/**
+ * Metrics module class.
+ * This class will be used to initialize the metrics module within NestJs.
+ *
+ * ```
+ * import { Module } from "@nestjs/common";
+ * import { MetricsModule } from "@mists/nestjs-metrics";
+ *
+ * @Module({
+ *   imports: [MetricsModule.register({
+ *     prometheus: {
+ *       // ...
+ *     },
+ *     statsd: {
+ *       // ...
+ *     }
+ *   })],
+ * })
+ * export class AppModule {}
+ * ```
+ */
 @Module({})
-export class StatsModule {
+export class MetricsModule {
+  /**
+   * Module (sync) register method.
+   *
+   * ```
+   * import { Module } from "@nestjs/common";
+   * import { MetricsModule } from "@mists/nestjs-metrics";
+   *
+   * @Module({
+   *   imports: [MetricsModule.register({
+   *     prometheus: {
+   *       // ...
+   *     },
+   *     statsd: {
+   *       // ...
+   *     }
+   *   })],
+   * })
+   * export class AppModule {}
+   * ```
+   *
+   *
+   * @param options
+   */
   public static register(options: StatsOptions): DynamicModule {
     const config = Config.getInstance();
 
-    // config.setTypes(options.types || []);\
     if (options.prometheus) {
       config.setPrometheusOptions(options.prometheus);
     }
     config.setStatsdOptions(options.statsd || 'dummy');
 
-    StatsModule.configureServer(options);
+    MetricsModule.configureServer(options);
 
     return {
-      module: StatsModule,
-      controllers: [], //[PrometheusController],
+      module: MetricsModule,
+      controllers: [],
     };
   }
 
+  /**
+   * Module async register method.
+   *
+   * ```
+   * import { Module } from "@nestjs/common";
+   * import { MetricsModule } from "@mists/nestjs-metrics";
+   *
+   * @Injectable()
+   * export class StatsOptionsService implements StatsOptionsFactory {
+   *   createStatsOptions(): StatsOptions {
+   *     return new Promise(resolve => ({
+   *       // see the MetricsModule::register() options
+   *     }));
+   *   }
+   * }
+   *
+   * @Module({
+   *   imports: [MetricsModule.registerAsync({
+   *     useClass: StatsOptionsService,
+   *     inject: [StatsOptionsService],
+   *   })],
+   * })
+   * export class AppModule {}
+   * ```
+   *
+   * @param options
+   */
   public static registerAsync(options: StatsAsyncOptions): DynamicModule {
     const asyncProviders = this.createAsyncProviders(options);
 
     return {
-      module: StatsModule,
-      controllers: [], //[PrometheusController],
+      module: MetricsModule,
+      controllers: [],
       imports: options.imports,
       providers: [...asyncProviders],
     };
@@ -60,32 +121,18 @@ export class StatsModule {
     ];
   }
 
-  public static createAsyncOptionsProvider(options: StatsAsyncOptions): Provider {
-    /**
-     * Not currently supported since there doesn't seem to be a way to get
-     * the result of the function during configuration.
-     */
-    // if (options.useFactory) {
-    //   return {
-    //     provide: PROMETHEUS_OPTIONS,
-    //     useFactory: options.useFactory,
-    //     inject: options.inject || [],
-    //   };
-    // }
-
+  protected static createAsyncOptionsProvider(options: StatsAsyncOptions): Provider {
     const inject = options.useClass || options.useExisting;
-
     if (!inject) {
       throw new Error('Invalid configuration. Must provide useClass or useExisting');
     }
-
     return {
       provide: 'NEST_METRICS_OPTIONS',
       async useFactory(optionsFactory: StatsOptionsFactory): Promise<StatsOptions> {
         const userOptions = await optionsFactory.createStatsOptions();
-        const opts = StatsModule.makeDefaultOptions(userOptions);
+        const opts = MetricsModule.makeDefaultOptions(userOptions);
 
-        StatsModule.configureServer(opts);
+        MetricsModule.configureServer(opts);
 
         return opts;
       },
@@ -95,7 +142,7 @@ export class StatsModule {
 
   private static configureServer(options: StatsOptions): void {
     if (options.prometheus && options.prometheus.route) {
-      Reflect.defineMetadata(PATH_METADATA, options.prometheus.route, StatsController);
+      Reflect.defineMetadata(PATH_METADATA, options.prometheus.route, MetricsController);
     }
   }
 

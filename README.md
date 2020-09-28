@@ -1,75 +1,203 @@
-# Templ Javascript
+# NestJs Metrics Module
 
-```
-npm i @types/statsd-client prom-client statsd-client
-```
-
-[![HitCount](http://hits.dwyl.com/templ-project/javascript.svg)](http://hits.dwyl.com/templ-project/javascript)
-[![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/templ-project/javascript/issues)
-[![TravisCI](https://travis-ci.org/templ-project/javascript.svg?branch=master)](https://travis-ci.org/templ-project/javascript)
+[![HitCount](http://hits.dwyl.com/mists-aside/nestjs-metrics.svg)](http://hits.dwyl.com/mists-aside/nestjs-metrics)
+[![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/mists-aside/nestjs-metrics/issues)
+[![TravisCI](https://travis-ci.org/mists-aside/nestjs-metrics.svg?branch=master)](https://travis-ci.org/mists-aside/nestjs-metrics)
 ![JSCPD](.jscpd/jscpd-badge.svg?raw=true)
 <!-- CI Badges -->
-<!-- [![CircleCI](https://circleci.com/gh/templ-project/javascript.svg?style=shield)](https://circleci.com/gh/templ-project/javascript) -->
+<!-- [![CircleCI](https://circleci.com/gh/mists-aside/nestjs-metrics.svg?style=shield)](https://circleci.com/gh/mists-aside/nestjs-metrics) -->
 
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=templ-project_javascript&metric=alert_status)](https://sonarcloud.io/dashboard?id=templ-project_javascript)
-[![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=templ-project_javascript&metric=coverage)](https://sonarcloud.io/component_measures/metric/coverage/list?id=templ-project_javascript)
-[![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=templ-project_javascript&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=templ-project_javascript)
-[![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=templ-project_javascript&metric=vulnerabilities)](https://sonarcloud.io/component_measures/metric/security_rating/list?id=templ-project_javascript)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=mists-aside_nestjs-metrics&metric=alert_status)](https://sonarcloud.io/dashboard?id=mists-aside_nestjs-metrics)
+[![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=mists-aside_nestjs-metrics&metric=coverage)](https://sonarcloud.io/component_measures/metric/coverage/list?id=mists-aside_nestjs-metrics)
+[![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=mists-aside_nestjs-metrics&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=mists-aside_nestjs-metrics)
+[![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=mists-aside_nestjs-metrics&metric=vulnerabilities)](https://sonarcloud.io/component_measures/metric/security_rating/list?id=mists-aside_nestjs-metrics)
 
 <!-- Donation Badges -->
 [![Donate to this project using Patreon](https://img.shields.io/badge/patreon-donate-yellow.svg)](https://patreon.com/dragoscirjan)
 [![Donate to this project using Paypal](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QBP6DEBJDEMV2&source=url)
 
-<img alt="JavaScript Logo" src="https://github.com/templ-project/javascript/blob/master/javascript.svg?raw=true" width="20%" align="right" />
-<img alt="TypeScript Logo" src="https://github.com/templ-project/javascript/blob/master/typescript.svg?raw=true" width="20%" align="right" />
-
 > *Any fool can write code that a computer can understand. Good programmers write code that humans can understand.* – Martin Fowler
 
-> **javascript** is a template project, designed by [Templ Project](http://templ-project.github.io).
->
-> **javascript** includes instructions for initializing a new
-> **JavaScript/[TypeScript](https://www.typescriptlang.org/)** project, and configuring it for development, unit
-> testing as well as code linting and analysis.
->
-> **javascript** implements:
->
-> - [jscpd](https://github.com/kucherenko/jscpd), [dependency-cruiser](https://github.com/sverweij/dependency-cruiser) for code analisys
-> - [prettier](https://prettier.io/) for code formatting
-> - [eslint](https://eslint.org/) for linting
->
-> By default, this implementation uses [npm](https://www.npmjs.com/), but you can easily change it to [yarn](https://yarnpkg.com/) or [pnpm](https://pnpm.js.org/) or any other package manager.
+<!-- TOC -->
+
+- [NestJs Metrics Module](#nestjs-metrics-module)
+  - [Getting Started](#getting-started)
+    - [Prerequisites / Dependencies](#prerequisites--dependencies)
+    - [Installation](#installation)
+      - [Documentation](#documentation)
+        - [Registering Module](#registering-module)
+        - [Registering Metrics](#registering-metrics)
+        - [Registering Metrics Controller](#registering-metrics-controller)
+        - [Metrics Decorators](#metrics-decorators)
+      - [API Documentation](#api-documentation)
+    - [Development](#development)
+      - [Requirements](#requirements)
+    - [Testing](#testing)
+      - [Single Tests](#single-tests)
+    - [Deployment](#deployment)
+  - [Authors](#authors)
+  - [Issues / Support](#issues--support)
+  - [License](#license)
+- [Project Title](#project-title)
+  - [Getting Started](#getting-started-1)
+    - [Prereqiusites / Dependencies](#prereqiusites--dependencies)
+      - [For Windows](#for-windows)
+      - [For Linux](#for-linux)
+      - [Known Issues / Troubleshooting](#known-issues--troubleshooting)
+    - [Installation](#installation-1)
+      - [Say what the step will be](#say-what-the-step-will-be)
+      - [And repeat](#and-repeat)
+    - [Development](#development-1)
+    - [Testing](#testing-1)
+      - [Break down into (at least) unit tests](#break-down-into-at-least-unit-tests)
+      - [and end to end tests](#and-end-to-end-tests)
+      - [And coding style tests](#and-coding-style-tests)
+    - [Deployment](#deployment-1)
+  - [Authors](#authors-1)
+  - [Issues / Support](#issues--support-1)
+  - [License](#license-1)
+  - [Changelog](#changelog)
+
+<!-- /TOC -->
 
 ## Getting Started
 
 ### Prerequisites / Dependencies
 
-##### For Windows
+Depends on the following modules:
 
-- Please install [git-scm](https://git-scm.com/download/win) tool.
-- Please install a form of make
-  - Install [Make for Windows](http://gnuwin32.sourceforge.net/packages/make.htm)
-  - Install [make](https://sourceforge.net/projects/ezwinports/files/) from [ezwinports](https://sourceforge.net/projects/ezwinports/files/)
-  - Install [chocolatey](https://chocolatey.org/), run `choco install make`
-
-##### For Linux/Unix/OSX
-
-- Please install `git` and `make`
-
-```bash
-# i.e debian
-sudo apt-get install git make -y
-# i.e mac OS
-brew install make git
-```
-
-<!-- #### Known Issues / Troubleshooting
-
-None for now. -->
+* [node-statsd-client](https://github.com/msiebuhr/node-statsd-client) (with the additonal `@types/node-statsd-client` for TypeScript)
+* [prom-client](https://github.com/siimon/prom-client)
 
 ### Installation
 
 ```bash
-git clone https://github.com/templ-project/javascript your_project
+npm install -S @mists/nestjs-metrics
+# yarn add --dev @mists/nestjs-metrics
+```
+
+#### Documentation
+
+##### Registering Module
+
+**Using (sync) `register()` method**:
+
+```javascript
+@Module({
+  imports: [MetricsModule.register({
+    prometheus: {
+      // ...
+    },
+    statsd: {
+      // ...
+    }
+  })],
+})
+export class AppModule {}
+```
+
+**Using async `registerAsync()` method**:
+
+```javascript
+import { Module } from "@nestjs/common";
+import { MetricsModule } from "@mists/nestjs-metrics";
+
+@Injectable()
+export class StatsOptionsService implements StatsOptionsFactory {
+  createStatsOptions(): StatsOptions {
+    return new Promise(resolve => ({
+      // see the MetricsModule::register() options
+    }));
+  }
+}
+
+@Module({
+  imports: [MetricsModule.registerAsync({
+    useClass: StatsOptionsService,
+    inject: [StatsOptionsService],
+  })],
+})
+export class AppModule {}
+```
+
+##### Registering Metrics
+
+There are currently
+
+* `Counter` used for counting events; reflected by:
+  * [`PromClient.Counter`](https://github.com/siimon/prom-client#counter)
+  * [`StatsdClient.increment`](https://github.com/msiebuhr/node-statsd-client#counting-stuff)
+* `Gauge` used for counting events (with the possibility of decreasing or resetting a value as well) and for timing them; reflected by
+  * [`PromClient.Gauge`](https://github.com/siimon/prom-client#gauge)
+  * [`StatsdClient.gauge` and `StatsdClient.gaugeDelta`](https://github.com/msiebuhr/node-statsd-client#gauges) and [`StatsdClient.timing`](https://github.com/msiebuhr/node-statsd-client#delays)
+* `Histogram` similar to Gauge, but used for tracking sized and frequency of events; reflected by 
+  * [`PromClient.Histogram`](https://github.com/siimon/prom-client#histogram)
+  * [`StatsdClient.histogram`](https://github.com/msiebuhr/node-statsd-client#histogram) (and adding [`StatsdClient.timing`](https://github.com/msiebuhr/node-statsd-client#delays) for complete support)
+* `Summary` similar to Histogram, but used to calculate percentiles of observed values; reflected by
+  * [`PromClient.Summary`](https://github.com/siimon/prom-client#summary)
+  * on the side of `statsd`, to support compatibility (not sure if it's good or bad, yet), the same methods as for `Histogram`
+
+You will need to create a provider first,
+
+```javascript
+import { Module } from "@nestjs/common";
+import { MetricsModule, MetricsController, Counter,  } from "@mists/nestjs-metrics";
+
+@Module({
+  controllers: [MetricsController],
+  imports: [MetricsModule.register({/* ... */})],
+  providers: [makeMetricProvider(Metrics.Counter, 'metrics_injector', {})],
+})
+export class AppModule {}
+```
+
+then, inject your new counter in the controller class:
+
+```javascript
+@Controller('/route')
+export class MetricsController {
+  constructor(@InjectMetric('metrics_injector') protected counter: Counter) {}
+
+  @Get()
+  public yourMetricMethod(): string {
+    // ...
+    this.counter.inc();
+    // ...
+  }
+}
+```
+
+##### Registering Metrics Controller
+
+> used currently by Prometheus only
+
+```javascript
+import { Module } from "@nestjs/common";
+import { MetricsModule, MetricsController } from "@mists/nestjs-metrics";
+
+@Module({
+  controllers: [MetricsController],
+  imports: [MetricsModule.register({
+    prometheus: {
+      route: '/metrics',
+      // ...
+    }
+  })],
+})
+export class AppModule {}
+```
+
+##### Metrics Decorators
+
+
+#### API Documentation
+
+See [API documentation here](https://mists-aside.github.io/nestjs-metrics).
+
+### Development
+
+```bash
+git clone https://github.com/mists-aside/nestjs-metrics your_project
 cd your_project
 rm -rf .git
 git init
@@ -84,8 +212,6 @@ npm install
 # yarn install
 # pnpm install
 ```
-
-### Development
 
 #### Requirements
 
@@ -125,7 +251,7 @@ npm run release
 
 ## Issues / Support
 
-Add a set of links to the [issues](/templ-project/javascript/issues) page/website, so people can know where to add issues/bugs or ask for support.
+Add a set of links to the [issues](/mists-aside/nestjs-metrics/issues) page/website, so people can know where to add issues/bugs or ask for support.
 
 ## License
 
@@ -193,43 +319,6 @@ This can be done using [AlanWalk.markdown-toc](https://marketplace.visualstudio.
 which is also included in 
 [itmcdev.generic-extension-pack](https://marketplace.visualstudio.com/items?itemName=itmcdev.generic-extension-pack) extension pack.
 -->
-<!-- TOC -->
-
-- [Templ Javascript](#templ-javascript)
-  - [Getting Started](#getting-started)
-    - [Prerequisites / Dependencies](#prerequisites--dependencies)
-        - [For Windows](#for-windows)
-        - [For Linux/Unix/OSX](#for-linuxunixosx)
-    - [Installation](#installation)
-    - [Development](#development)
-      - [Requirements](#requirements)
-    - [Testing](#testing)
-      - [Single Tests](#single-tests)
-    - [Deployment](#deployment)
-  - [Authors](#authors)
-  - [Issues / Support](#issues--support)
-  - [License](#license)
-- [Project Title](#project-title)
-  - [Getting Started](#getting-started-1)
-    - [Prereqiusites / Dependencies](#prereqiusites--dependencies)
-      - [For Windows](#for-windows-1)
-      - [For Linux](#for-linux)
-      - [Known Issues / Troubleshooting](#known-issues--troubleshooting)
-    - [Installation](#installation-1)
-      - [Say what the step will be](#say-what-the-step-will-be)
-      - [And repeat](#and-repeat)
-    - [Development](#development-1)
-    - [Testing](#testing-1)
-      - [Break down into (at least) unit tests](#break-down-into-at-least-unit-tests)
-      - [and end to end tests](#and-end-to-end-tests)
-      - [And coding style tests](#and-coding-style-tests)
-    - [Deployment](#deployment-1)
-  - [Authors](#authors-1)
-  - [Issues / Support](#issues--support-1)
-  - [License](#license-1)
-  - [Changelog](#changelog)
-
-<!-- /TOC -->
 
 ## Getting Started
 

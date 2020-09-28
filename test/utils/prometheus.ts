@@ -4,7 +4,7 @@ import * as request from 'supertest';
 import {Controller} from '@nestjs/common';
 import {Test} from '@nestjs/testing';
 
-import {Metrics, StatsModule} from '../../src';
+import {Metrics, MetricsModule} from '../../src';
 import {
   gaugeDecrementWrapper,
   gaugeIncrementWrapper,
@@ -111,7 +111,7 @@ export async function createTestModule(options?: PrometheusOptions): Promise<Tes
   const testingModule = await Test.createTestingModule({
     controllers: [PrometheusController],
     imports: [
-      StatsModule.register(
+      MetricsModule.register(
         options
           ? {
               prometheus: options,
