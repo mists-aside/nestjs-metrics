@@ -3,7 +3,7 @@ os:
   - linux
 node_js: # a good example: https://github.com/pillarjs/router/blob/master/.travis.yml
   - "10"
-  - "11"
+  # - "11"
   - "12"
   - "13"
   - "14"
