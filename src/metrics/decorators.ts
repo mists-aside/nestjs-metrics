@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
 import {GeneratedDecoratorWithArgs, GenericMethod, MetricWrapper} from '../decorator';
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Metrics} from '../enum';
 import {Tags} from '../options';
 import {Counter} from './counter';

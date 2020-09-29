@@ -86,6 +86,7 @@ export class Histogram extends Metric {
    *
    * See {@link Timer.startTimer} for usage.
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   startTimer(tags?: Tags): TimerEnd {
     return null;
   }

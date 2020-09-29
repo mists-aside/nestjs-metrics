@@ -1,4 +1,4 @@
-import {Controller, Get, Logger, Res} from '@nestjs/common';
+import {Controller, Get, Res} from '@nestjs/common';
 import {Config} from './config';
 import * as PromClient from 'prom-client';
 
@@ -31,8 +31,8 @@ export class MetricsController {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Get()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   metrics(@Res() res: any): void {
     res.set('Content-Type', PromClient.register.contentType);
     res.end(PromClient.register.metrics());
