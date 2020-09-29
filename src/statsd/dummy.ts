@@ -4,6 +4,7 @@ import {StatsdClientAlike} from './options';
 
 /**
  * See definition of `StatsdClient` from the [statsd-client](https://github.com/msiebuhr/node-statsd-client) project
+ * @ignore
  */
 export const DummyStatsdClient: StatsdClientAlike = {
   counter: (...args: any[]) => DummyStatsdClient,

@@ -2,13 +2,13 @@ import {Controller} from '@nestjs/common';
 
 import {
   Counter,
-  generateDecorator,
-  incrementWrapper,
-  gaugeIncrementWrapper,
-  gaugeDecrementWrapper,
-  gaugeSetWrapper,
-  observeWrapper,
-  timingWrapper,
+  generateMetricDecorator,
+  metricIncrementWrapper,
+  metricGaugeIncrementWrapper,
+  metricGaugeDecrementWrapper,
+  metricGaugeSetWrapper,
+  metricObserveWrapper,
+  metricTimingWrapper,
   InjectMetric,
   Metrics,
 } from '../../src';
@@ -19,35 +19,55 @@ export const genericOptions = {
   },
 };
 
-const Increment = generateDecorator(Metrics.Counter, 'metrics_counter_decorator', incrementWrapper, genericOptions);
-const GaugeIncrement = generateDecorator(
+const Increment = generateMetricDecorator(
+  Metrics.Counter,
+  'metrics_counter_decorator',
+  metricIncrementWrapper,
+  genericOptions,
+);
+const GaugeIncrement = generateMetricDecorator(
   Metrics.Gauge,
   'metrics_gauge_decorator',
-  gaugeIncrementWrapper,
+  metricGaugeIncrementWrapper,
   genericOptions,
 );
-const GaugeDecrement = generateDecorator(
+const GaugeDecrement = generateMetricDecorator(
   Metrics.Gauge,
   'metrics_gauge_decorator',
-  gaugeDecrementWrapper,
+  metricGaugeDecrementWrapper,
   genericOptions,
 );
-const Gauge = generateDecorator(Metrics.Gauge, 'metrics_gauge_decorator', gaugeSetWrapper, genericOptions);
-const GaugeTiming = generateDecorator(Metrics.Gauge, 'metrics_gauge_decorator', timingWrapper, genericOptions);
-const HistogramObserve = generateDecorator(
+const Gauge = generateMetricDecorator(Metrics.Gauge, 'metrics_gauge_decorator', metricGaugeSetWrapper, genericOptions);
+const GaugeTiming = generateMetricDecorator(
+  Metrics.Gauge,
+  'metrics_gauge_decorator',
+  metricTimingWrapper,
+  genericOptions,
+);
+const HistogramObserve = generateMetricDecorator(
   Metrics.Histogram,
   'metrics_histogram_decorator',
-  observeWrapper,
+  metricObserveWrapper,
   genericOptions,
 );
-const HistogramTiming = generateDecorator(
+const HistogramTiming = generateMetricDecorator(
   Metrics.Histogram,
   'metrics_histogram_decorator',
-  timingWrapper,
+  metricTimingWrapper,
   genericOptions,
 );
-const SummaryObserve = generateDecorator(Metrics.Summary, 'metrics_summary_decorator', observeWrapper, genericOptions);
-const SummaryTiming = generateDecorator(Metrics.Summary, 'metrics_summary_decorator', timingWrapper, genericOptions);
+const SummaryObserve = generateMetricDecorator(
+  Metrics.Summary,
+  'metrics_summary_decorator',
+  metricObserveWrapper,
+  genericOptions,
+);
+const SummaryTiming = generateMetricDecorator(
+  Metrics.Summary,
+  'metrics_summary_decorator',
+  metricTimingWrapper,
+  genericOptions,
+);
 
 export const testTags = {label1: 'test', label2: 'test'};
 

@@ -1,5 +1,3 @@
-import * as StatsdClient from 'statsd-client';
-
 import {Provider} from '@nestjs/common';
 
 import {Config} from '../config';
@@ -14,7 +12,7 @@ import {StatsdClientAlike} from './options';
  * @param options
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function makeProvider(name: string, options?: StatsdOptions): Provider {
+export function makeStatsdProvider(name: string, options?: StatsdOptions): Provider {
   options = options || Config.getInstance().statsd;
   return {
     provide: getToken(name),

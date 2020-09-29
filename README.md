@@ -28,6 +28,7 @@
         - [Registering Module](#registering-module)
         - [Registering Metrics](#registering-metrics)
         - [Registering Metrics Controller](#registering-metrics-controller)
+        - [Use Decorators](#use-decorators)
         - [Metrics Decorators](#metrics-decorators)
       - [API Documentation](#api-documentation)
     - [Development](#development)
@@ -185,6 +186,89 @@ import { MetricsModule, MetricsController } from "@mists/nestjs-metrics";
   })],
 })
 export class AppModule {}
+```
+
+##### Use Decorators
+
+```javascript
+import { Module } from "@nestjs/common";
+import { MetricsModule, CustomController } from "@mists/nestjs-metrics";
+
+@Module({
+  controllers: [CustomController],
+  imports: [MetricsModule.register()],
+})
+export class AppModule {}
+```
+
+```typescript
+import { Controller, Get } from "@nestjs/common";
+import { generateMetricDecorator, metricIncrementWrapper } from '@mists/nestjs-metrics';
+
+
+const Increment = generateMetricDecorator(Metrics.Counter, 'metrics_counter_decorator', metricIncrementWrapper, genericOptions);
+const GaugeIncrement = generateMetricDecorator(
+  Metrics.Gauge,
+  'metrics_gauge_decorator',
+  metricGaugeIncrementWrapper,
+  genericOptions,
+);
+const GaugeDecrement = generateMetricDecorator(
+  Metrics.Gauge,
+  'metrics_gauge_decorator',
+  metricGaugeDecrementWrapper,
+  genericOptions,
+);
+const Gauge = generateMetricDecorator(Metrics.Gauge, 'metrics_gauge_decorator', metricGaugeSetWrapper, genericOptions);
+const GaugeTiming = generateMetricDecorator(Metrics.Gauge, 'metrics_gauge_decorator', metricTimingWrapper, genericOptions);
+const HistogramObserve = generateMetricDecorator(
+  Metrics.Histogram,
+  'metrics_histogram_decorator',
+  metricObserveWrapper,
+  genericOptions,
+);
+const HistogramTiming = generateMetricDecorator(
+  Metrics.Histogram,
+  'metrics_histogram_decorator',
+  metricTimingWrapper,
+  genericOptions,
+);
+const SummaryObserve = generateMetricDecorator(Metrics.Summary, 'metrics_summary_decorator', metricObserveWrapper, genericOptions);
+const SummaryTiming = generateMetricDecorator(Metrics.Summary, 'metrics_summary_decorator', metricTimingWrapper, genericOptions);
+
+
+
+const IncrementHttpCalls = generateMetricDecorator(
+  Metrics.Counter,
+  'metric_http_calls',
+  metricIncrementWrapper
+);
+
+export const customMetricWrapper: MetricWrapper = (
+  metricArgs: MetricNumericArgs,
+  metric: any,
+  oldMethod: GenericMethod,
+  target: any,
+  propertyKey: string | symbol,
+  descriptor: PropertyDescriptor,
+): GenericMethod => (...args: any[]): any => {
+  (metric as Gauge).inc(...metricArgs);
+  return oldMethod.call(target, ...args);
+};
+
+const CustomIncrementHttpCalls = generateMetricDecorator(
+  Metrics.Gauge,
+  'metric_http_calls_custom',
+  customMetricWrapper
+);
+
+@Controller('/test')
+class CustomController {
+  @Get()
+  @IncrementHttpCalls()
+  @CustomIncrementHttpCalls(1, { serverId: 'server_1' })
+  testMethod() {}
+}
 ```
 
 ##### Metrics Decorators

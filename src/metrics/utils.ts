@@ -10,10 +10,19 @@ interface MetricInstances {
   [key: string]: Metric;
 }
 
+/**
+ * @ignore
+ */
 const instances: MetricInstances = {};
 
+/**
+ * @ignore
+ */
 export const getToken = (name): string => `NESTJS_METRIC_${name.toUpperCase()}`;
 
+/**
+ * @ignore
+ */
 export const getMetric = (type: Metrics, name: string, options?: MetricOptions): Metric => {
   const token = getToken(name);
 
@@ -38,13 +47,3 @@ export const getMetric = (type: Metrics, name: string, options?: MetricOptions):
 
   return instances[token];
 };
-
-// export const getMetricByName = (name: string): Metric => {
-//   const token = getToken(name);
-
-//   if (!instances[token]) {
-//     throw new Error(`No metric for the name: ${name}. You need to call 'makeMetricProvider'`);
-//   }
-
-//   return instances[token];
-// };

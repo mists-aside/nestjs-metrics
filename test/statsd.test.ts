@@ -7,7 +7,7 @@ import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
 import {DummyStatsdClient} from '../src/statsd/dummy';
-import {makeProvider} from '../src/statsd/provider';
+import {makeStatsdProvider} from '../src/statsd/provider';
 import {mockerizeDummy} from './utils';
 import {TestHarness} from './utils/harness';
 import {createTestModule} from './utils/module';
@@ -39,7 +39,7 @@ describe('src/statsd', () => {
         {},
         {
           controllers: [CustomInjectorController],
-          providers: [makeProvider('statsd_custom_injector', 'dummy')],
+          providers: [makeStatsdProvider('statsd_custom_injector', 'dummy')],
         },
       );
       controller = harness.testingModule.get<CustomInjectorController>(CustomInjectorController);
@@ -158,7 +158,7 @@ describe('src/statsd', () => {
         {},
         {
           controllers: [CustomInjectorController],
-          providers: [makeProvider('statsd_custom_injector', 'dummy')],
+          providers: [makeStatsdProvider('statsd_custom_injector', 'dummy')],
         },
       );
       const controller = harness.testingModule.get<CustomInjectorController>(CustomInjectorController);
@@ -178,7 +178,7 @@ describe('src/statsd', () => {
         },
         {
           controllers: [StatsdController],
-          providers: [makeProvider('statsd_injector')],
+          providers: [makeStatsdProvider('statsd_injector')],
         },
       );
       const controller = harness.testingModule.get<StatsdController>(StatsdController);
@@ -190,14 +190,14 @@ describe('src/statsd', () => {
 
   describe('provider', () => {
     it('makeProvider will return a valid provider', () => {
-      const provider = makeProvider('test', 'dummy');
+      const provider = makeStatsdProvider('test', 'dummy');
       expect(provider).to.be.an('object');
       expect((provider as any).provide).to.be.a('string');
       expect((provider as any).useFactory).to.be.a('function');
     });
 
     it('makeProvider().useFactory() will return a valid instance of StatsdClient', () => {
-      const provider = makeProvider('test', 'dummy');
+      const provider = makeStatsdProvider('test', 'dummy');
       (provider as any).useFactory().increment('test');
 
       // can only test this way, since returned instance is a dummy

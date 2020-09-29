@@ -4,7 +4,7 @@ import {Controller} from '@nestjs/common';
 import {
   generateDecorator,
   incrementWrapper,
-  InjectMetric,
+  InjectStatsdMetric,
   gaugeWrapper,
   gaugeDeltaWrapper,
   histogramWrapper,
@@ -19,7 +19,7 @@ const Timing = generateDecorator(timingWrapper, 'dummy');
 
 @Controller()
 export class CustomInjectorController {
-  constructor(@InjectMetric('statsd_custom_injector') protected statsd: StatsdClient) {}
+  constructor(@InjectStatsdMetric('statsd_custom_injector') protected statsd: StatsdClient) {}
 
   public testStatsdCustomInjector(): string {
     this.statsd.increment('statsd.custom.injector', 10);
@@ -96,7 +96,7 @@ export class CustomInjectorController {
 
 @Controller()
 export class StatsdController {
-  constructor(@InjectMetric('statsd_injector') protected statsd: StatsdClient) {}
+  constructor(@InjectStatsdMetric('statsd_injector') protected statsd: StatsdClient) {}
 
   public testStatsdInjector(): string {
     this.statsd.increment('statsd.injector', 10);

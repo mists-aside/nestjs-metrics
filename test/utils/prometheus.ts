@@ -11,8 +11,8 @@ import {
   gaugeSetWrapper,
   generateDecorator,
   incrementWrapper,
-  InjectMetric,
-  makeProvider,
+  InjectPrometheusMetric,
+  makePrometheusProvider,
   observeWrapper,
   timingWrapper,
 } from '../../src/prometheus';
@@ -39,7 +39,7 @@ export const testTags = {label1: 'test', label2: 'test'};
 
 @Controller()
 export class PrometheusController {
-  constructor(@InjectMetric('prometheus_injector') protected counter: PromClient.Counter<string>) {}
+  constructor(@InjectPrometheusMetric('prometheus_injector') protected counter: PromClient.Counter<string>) {}
 
   public testPrometheusCustomInjector(): string {
     this.counter.inc();
@@ -119,7 +119,7 @@ export async function createTestModule(options?: PrometheusOptions): Promise<Tes
           : {},
       ),
     ],
-    providers: [makeProvider(Metrics.Counter, {name: 'prometheus_injector', help: 'prometheus_injector'})],
+    providers: [makePrometheusProvider(Metrics.Counter, {name: 'prometheus_injector', help: 'prometheus_injector'})],
   }).compile();
 
   const app = testingModule.createNestApplication();

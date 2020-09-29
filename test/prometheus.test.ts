@@ -7,7 +7,7 @@ import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
 import {Metrics} from '../src';
-import {makeProvider} from '../src/prometheus';
+import {makePrometheusProvider} from '../src/prometheus';
 import {DummyCounter, DummyGauge, DummyHistogram, DummySummary} from '../src/prometheus/dummy';
 import {getPrometheusMetric} from '../src/prometheus/utils';
 import {mockerizeDummy} from './utils';
@@ -168,14 +168,14 @@ describe('src/prometheus', () => {
 
   describe('provider', () => {
     it('makeProvider will return a valid provider', () => {
-      const provider = makeProvider(Metrics.Counter, genericOptions);
+      const provider = makePrometheusProvider(Metrics.Counter, genericOptions);
       expect(provider).to.be.an('object');
       expect((provider as any).provide).to.be.a('string');
       expect((provider as any).useFactory).to.be.a('function');
     });
 
     it('makeProvider().useFactory() will return a valid instance of PrometheusClient', () => {
-      const provider = makeProvider(Metrics.Counter, genericOptions);
+      const provider = makePrometheusProvider(Metrics.Counter, genericOptions);
       (provider as any).useFactory().inc();
 
       // can only test this way, since returned instance is a dummy

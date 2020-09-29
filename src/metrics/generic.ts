@@ -8,7 +8,7 @@ import {Tags} from '../options';
 /**
  * Abstract Metric Class, used to extends all supported metrics.
  *
- * ```javascript
+ * ```typescript
  * import { Metrics } from "@mists/nestjs-metrics";
  *
  * export class CustomMetric extends Metric {
@@ -86,8 +86,8 @@ export class Timer {
   /**
    * Timer initialization method
    *
-   * ```javascript
-   * const timer = new Timer('timing_is_everything');
+   * ```typescript
+   * const gauge = new Gauge('timing_is_everything');
    * const endTimer = gauge.startTimer();
    * setTimeout(endTimer, 2000);
    * // or
