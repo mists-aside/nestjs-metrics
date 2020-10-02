@@ -5,9 +5,15 @@ import {StatsDOptions, StatsDClientAlike} from './options';
 
 const instances: {[key: string]: StatsdClient} = {};
 
+/**
+ * @ignore
+ */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getToken = (name: string): string => `STATSD_CLIENT_${name}`;
 
+/**
+ * @ignore
+ */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getStatsdClient = (name: string, options: StatsDOptions): StatsDClientAlike => {
   const token = getToken(name);
