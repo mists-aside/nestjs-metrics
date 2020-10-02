@@ -3,3 +3,4 @@ export * from './enum';
 export * from './module';
 export * from './metrics';
 export * from './options';
+export * from './tags';

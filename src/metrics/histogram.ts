@@ -1,4 +1,4 @@
-import {Tags} from '../options';
+import {Tags} from '../tags';
 import {Metrics} from '../enum';
 import {Metric, Timer, TimerEnd} from './generic';
 import {HistogramOptions} from './options';

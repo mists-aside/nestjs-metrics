@@ -3,7 +3,7 @@
 
 import {Config} from '../config';
 import {GeneratedDecoratorWithArgs, GenericMethod, MetricWrapper} from '../decorator';
-import {Tags} from '../options';
+import {Tags} from '../tags';
 import {StatsDOptions} from './options';
 import {getStatsdClient} from './utils';
 import {StatsDClientAlike} from './options';

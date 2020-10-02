@@ -4,7 +4,7 @@ import * as PromClient from 'prom-client';
 import {GeneratedDecoratorWithArgs, GenericMethod, MetricWrapper} from '../decorator';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Metrics} from '../enum';
-import {Tags} from '../options';
+import {Tags} from '../tags';
 import {PrometheusMetricOptions} from './options';
 import {getPrometheusMetric} from './utils';
 

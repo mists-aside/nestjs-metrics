@@ -1,7 +1,7 @@
 import {Metrics} from '../enum';
 import {Metric, Timer, TimerEnd} from './generic';
 import {GaugeOptions} from './options';
-import {Tags} from '../options';
+import {Tags} from '../tags';
 
 /**
  * Gauge Metric

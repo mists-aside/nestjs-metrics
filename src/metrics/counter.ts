@@ -1,7 +1,7 @@
 import {CounterOptions} from './options';
 import {Metrics} from '../enum';
 import {Metric} from './generic';
-import {Tags} from '../options';
+import {Tags} from '../tags';
 
 /**
  * Counter Metric

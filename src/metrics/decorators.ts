@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
 import {GeneratedDecoratorWithArgs, GenericMethod, MetricWrapper} from '../decorator';
 import {Metrics} from '../enum';
-import {Tags} from '../options';
+import {Tags} from '../tags';
 import {Counter} from './counter';
 import {Gauge} from './gauge';
 import {Histogram} from './histogram';

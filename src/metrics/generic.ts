@@ -3,7 +3,7 @@ import {getStatsdClient} from '../statsd/utils';
 import {MetricOptions} from './options';
 import {getPrometheusMetric} from '../prometheus/utils';
 import {Metrics} from '../enum';
-import {Tags} from '../options';
+import {Tags} from '../tags';
 
 /**
  * Abstract Metric Class, used to extends all supported metrics.

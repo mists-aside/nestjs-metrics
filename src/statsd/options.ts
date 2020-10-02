@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import {Tags} from '../options';
+import {Tags} from '../tags';
 
 /**
  * Dummy clone of {@link https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/statsd-client/index.d.ts | StatsDClient}

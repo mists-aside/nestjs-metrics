@@ -3,10 +3,6 @@ import {StatsDOptions} from './statsd/options';
 import {ModuleMetadata} from '@nestjs/common/interfaces';
 import {Type} from '@nestjs/common';
 
-export interface Tags {
-  [key: string]: string | number;
-}
-
 export enum StatsTypes {
   // // https://collectd.org/
   // Collectd,
