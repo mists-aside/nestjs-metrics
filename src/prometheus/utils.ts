@@ -5,8 +5,14 @@ import {Metrics} from '../enum';
 import {metrics} from './dummy';
 import {PrometheusMetricOptions} from './options';
 
+/**
+ * @ignore
+ */
 export const getToken = (name: string): string => `PROMETHEUS_METRIC_${name.toUpperCase()}`;
 
+/**
+ * @ignore
+ */
 export const getPrometheusMetric = (type: Metrics, options: PrometheusMetricOptions): PromClient.Metric<string> => {
   const config = Config.getInstance();
 

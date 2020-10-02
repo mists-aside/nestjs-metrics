@@ -6,15 +6,15 @@ import {Test} from '@nestjs/testing';
 
 import {Metrics, MetricsModule} from '../../src';
 import {
-  gaugeDecrementWrapper,
-  gaugeIncrementWrapper,
-  gaugeSetWrapper,
-  generateDecorator,
-  incrementWrapper,
+  prometheusGaugeDecrementWrapper,
+  prometheusGaugeIncrementWrapper,
+  prometheusGaugeSetWrapper,
+  generatePrometheusDecorator,
+  prometheusIncrementWrapper,
   InjectPrometheusMetric,
   makePrometheusProvider,
-  observeWrapper,
-  timingWrapper,
+  prometheusObserveWrapper,
+  prometheusTimingWrapper,
 } from '../../src/prometheus';
 import {TestHarness} from './harness';
 import {PrometheusOptions} from 'src/prometheus/options';
@@ -25,15 +25,15 @@ export const genericOptions = {
   name: 'prometheus_generic',
 };
 
-const Increment = generateDecorator(Metrics.Counter, incrementWrapper, genericOptions);
-const GaugeIncrement = generateDecorator(Metrics.Gauge, gaugeIncrementWrapper, genericOptions);
-const GaugeDecrement = generateDecorator(Metrics.Gauge, gaugeDecrementWrapper, genericOptions);
-const Gauge = generateDecorator(Metrics.Gauge, gaugeSetWrapper, genericOptions);
-const GaugeTiming = generateDecorator(Metrics.Gauge, timingWrapper, genericOptions);
-const HistogramObserve = generateDecorator(Metrics.Histogram, observeWrapper, genericOptions);
-const HistogramTiming = generateDecorator(Metrics.Histogram, timingWrapper, genericOptions);
-const SummaryObserve = generateDecorator(Metrics.Summary, observeWrapper, genericOptions);
-const SummaryTiming = generateDecorator(Metrics.Summary, timingWrapper, genericOptions);
+const Increment = generatePrometheusDecorator(Metrics.Counter, prometheusIncrementWrapper, genericOptions);
+const GaugeIncrement = generatePrometheusDecorator(Metrics.Gauge, prometheusGaugeIncrementWrapper, genericOptions);
+const GaugeDecrement = generatePrometheusDecorator(Metrics.Gauge, prometheusGaugeDecrementWrapper, genericOptions);
+const Gauge = generatePrometheusDecorator(Metrics.Gauge, prometheusGaugeSetWrapper, genericOptions);
+const GaugeTiming = generatePrometheusDecorator(Metrics.Gauge, prometheusTimingWrapper, genericOptions);
+const HistogramObserve = generatePrometheusDecorator(Metrics.Histogram, prometheusObserveWrapper, genericOptions);
+const HistogramTiming = generatePrometheusDecorator(Metrics.Histogram, prometheusTimingWrapper, genericOptions);
+const SummaryObserve = generatePrometheusDecorator(Metrics.Summary, prometheusObserveWrapper, genericOptions);
+const SummaryTiming = generatePrometheusDecorator(Metrics.Summary, prometheusTimingWrapper, genericOptions);
 
 export const testTags = {label1: 'test', label2: 'test'};
 

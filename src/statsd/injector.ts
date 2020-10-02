@@ -3,9 +3,9 @@ import {Inject} from '@nestjs/common';
 import {getToken} from './utils';
 
 /**
- * Metric Injector
+ * StatsD Metric Injector
  *
- * This will help you inject metrics into your controllers or any other classes.
+ * This will help you inject statsd metrics into your controllers or any other classes.
  *
  * Remember you'll first need to create a provider for your metric,
  *

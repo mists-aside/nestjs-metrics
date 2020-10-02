@@ -8,17 +8,51 @@ import {Tags} from '../tags';
 import {PrometheusMetricOptions} from './options';
 import {getPrometheusMetric} from './utils';
 
-export type MetricNumericArgs = [Tags, number];
-export type MetricDateArgs = [Tags?];
-export type MetricArgs = MetricNumericArgs | MetricDateArgs;
+export type PrometheusMetricNumericArgs = [Tags, number];
+export type PrometheusMetricDateArgs = [Tags?];
+export type PrometheusMetricArgs = PrometheusMetricNumericArgs | PrometheusMetricDateArgs;
 
 // jscpd:ignore-start
-export const generateDecorator = (
+/**
+ * Generate a Metric Decorator. Can use wrappers like {@link prometheusIncrementWrapper},
+ * {@link prometheusGaugeDecrementWrapper}, {@link prometheusGaugeIncrementWrapper}, {@link prometheusGaugeSetWrapper},
+ * {@link prometheusTimingWrapper}, {@link prometheusObserveWrapper}, or custom defined metric wrappers.
+ *
+ * ```typescript
+ * const IncrementHttpCalls = generatePrometheusDecorator(Metrics.Counter, 'metric_http_calls');
+ *
+ * export const customMetricWrapper: MetricWrapper = (
+ *   metricArgs: MetricNumericArgs,
+ *   metric: any,
+ *   oldMethod: GenericMethod,
+ *   target: any,
+ *   propertyKey: string | symbol,
+ *   descriptor: PropertyDescriptor,
+ * ): GenericMethod => (...args: any[]): any => {
+ *   (metric as PromClient.Counter<string>).inc(...metricArgs);
+ *   return oldMethod.call(target, ...args);
+ * };
+ *
+ * const CustomIncrementHttpCalls = generatePrometheusDecorator(
+ *   Metrics.Gauge,
+ *   'metric_http_calls_custom'
+ * );
+ *
+ * @Controller('/test')
+ * class CustomController {
+ *   @Get()
+ *   @IncrementHttpCalls()
+ *   @CustomIncrementHttpCalls(1, { serverId: 'server_1' })
+ *   testMethod() {}
+ * }
+ * ```
+ */
+export const generatePrometheusDecorator = (
   type: Metrics,
   wrapper: MetricWrapper,
   options?: PrometheusMetricOptions,
 ): GeneratedDecoratorWithArgs => {
-  return (...args: MetricArgs): MethodDecorator => {
+  return (...args: PrometheusMetricArgs): MethodDecorator => {
     const metric = getPrometheusMetric(type, options);
     return (target: any, propertyKey: string | symbol, descriptor: PropertyDescriptor): PropertyDescriptor => {
       descriptor.value = wrapper(args, metric, descriptor.value, target, propertyKey, descriptor);
@@ -27,8 +61,29 @@ export const generateDecorator = (
   };
 };
 
-export const incrementWrapper: MetricWrapper = (
-  metricArgs: MetricNumericArgs,
+/**
+ * Prometheus Increment Wrapper
+ * Used for generating {@link https://github.com/siimon/prom-client#counter | PromClient.Counter.inc} trigger
+ *
+ * ```typescript
+ * import { Controller, Get } from "@nestjs/common";
+ * import { generatePrometheusDecorator, prometheusIncrementWrapper } from '@mists/nestjs-metrics/dist/prometheus';
+ *
+ * const Increment = generatePrometheusDecorator(
+ *   Metrics.Counter,
+ *   prometheusIncrementWrapper
+ * );
+ *
+ * @Controller('/test')
+ * class CustomController {
+ *   @Get()
+ *   @Increment()
+ *   controllerAction() {}
+ * }
+ * ```
+ */
+export const prometheusIncrementWrapper: MetricWrapper = (
+  metricArgs: PrometheusMetricNumericArgs,
   metric: any,
   oldMethod: GenericMethod,
   target: any,
@@ -39,8 +94,29 @@ export const incrementWrapper: MetricWrapper = (
   return oldMethod.call(target, ...args);
 };
 
-export const gaugeIncrementWrapper: MetricWrapper = (
-  metricArgs: MetricNumericArgs,
+/**
+ * Prometheus Gauge Increment Wrapper
+ * Used for generating {@link https://github.com/siimon/prom-client#gauge | PromClient.Gauge.inc} trigger
+ *
+ * ```typescript
+ * import { Controller, Get } from "@nestjs/common";
+ * import { generatePrometheusDecorator, prometheusGaugeIncrementWrapper } from '@mists/nestjs-metrics/dist/prometheus';
+ *
+ * const GaugeInc = generatePrometheusDecorator(
+ *   Metrics.Gauge,
+ *   prometheusGaugeIncrementWrapper
+ * );
+ *
+ * @Controller('/test')
+ * class CustomController {
+ *   @Get()
+ *   @GaugeInc()
+ *   controllerAction() {}
+ * }
+ * ```
+ */
+export const prometheusGaugeIncrementWrapper: MetricWrapper = (
+  metricArgs: PrometheusMetricNumericArgs,
   metric: any,
   oldMethod: GenericMethod,
   target: any,
@@ -51,8 +127,29 @@ export const gaugeIncrementWrapper: MetricWrapper = (
   return oldMethod.call(target, ...args);
 };
 
-export const gaugeDecrementWrapper: MetricWrapper = (
-  metricArgs: MetricNumericArgs,
+/**
+ * Prometheus Gauge Decrement Wrapper
+ * Used for generating {@link https://github.com/siimon/prom-client#gauge | PromClient.Gauge.dec} trigger
+ *
+ * ```typescript
+ * import { Controller, Get } from "@nestjs/common";
+ * import { generatePrometheusDecorator, prometheusGaugeDecrementWrapper } from '@mists/nestjs-metrics/dist/prometheus';
+ *
+ * const GaugeDec = generatePrometheusDecorator(
+ *   Metrics.Gauge,
+ *   prometheusGaugeDecrementWrapper
+ * );
+ *
+ * @Controller('/test')
+ * class CustomController {
+ *   @Get()
+ *   @GaugeDec()
+ *   controllerAction() {}
+ * }
+ * ```
+ */
+export const prometheusGaugeDecrementWrapper: MetricWrapper = (
+  metricArgs: PrometheusMetricNumericArgs,
   metric: any,
   oldMethod: GenericMethod,
   target: any,
@@ -63,8 +160,29 @@ export const gaugeDecrementWrapper: MetricWrapper = (
   return oldMethod.call(target, ...args);
 };
 
-export const gaugeSetWrapper = (
-  metricArgs: MetricNumericArgs,
+/**
+ * Prometheus Gauge Set Wrapper
+ * Used for generating {@link https://github.com/siimon/prom-client#gauge | PromClient.Gauge.set} trigger
+ *
+ * ```typescript
+ * import { Controller, Get } from "@nestjs/common";
+ * import { generatePrometheusDecorator, prometheusGaugeSetWrapper } from '@mists/nestjs-metrics/dist/prometheus';
+ *
+ * const GaugeSet = generatePrometheusDecorator(
+ *   Metrics.Gauge,
+ *   prometheusGaugeSetWrapper
+ * );
+ *
+ * @Controller('/test')
+ * class CustomController {
+ *   @Get()
+ *   @GaugeSet(1)
+ *   controllerAction() {}
+ * }
+ * ```
+ */
+export const prometheusGaugeSetWrapper = (
+  metricArgs: PrometheusMetricNumericArgs,
   metric: any,
   oldMethod: GenericMethod,
   target: any,
@@ -75,8 +193,30 @@ export const gaugeSetWrapper = (
   return oldMethod.call(target, ...args);
 };
 
-export const observeWrapper = (
-  metricArgs: MetricNumericArgs,
+/**
+ * Prometheus Histogram/Summary Observe Wrapper
+ * Used for generating {@link https://github.com/siimon/prom-client#histogram | PromClient.Histogram.observe} or
+ * {@link https://github.com/siimon/prom-client#summary | PromClient.Summary.observe} trigger
+ *
+ * ```typescript
+ * import { Controller, Get } from "@nestjs/common";
+ * import { generatePrometheusDecorator, prometheusObserveWrapper } from '@mists/nestjs-metrics/dist/prometheus';
+ *
+ * const Observe = generatePrometheusDecorator(
+ *   Metrics.Histogram,
+ *   prometheusObserveWrapper
+ * );
+ *
+ * @Controller('/test')
+ * class CustomController {
+ *   @Get()
+ *   @Observe(1)
+ *   controllerAction() {}
+ * }
+ * ```
+ */
+export const prometheusObserveWrapper = (
+  metricArgs: PrometheusMetricNumericArgs,
   metric: any,
   oldMethod: GenericMethod,
   target: any,
@@ -87,8 +227,31 @@ export const observeWrapper = (
   return oldMethod.call(target, ...args);
 };
 
-export const timingWrapper = (
-  metricArgs: MetricDateArgs,
+/**
+ * Prometheus Histogram/Summary Observe Wrapper
+ * Used for generating {@link https://github.com/siimon/prom-client#gauge | PromClient.Gauge.startTimer} or
+ * {@link https://github.com/siimon/prom-client#histogram | PromClient.Histogram.startTimer} or
+ * {@link https://github.com/siimon/prom-client#summary | PromClient.Summary.startTimer} trigger
+ *
+ * ```typescript
+ * import { Controller, Get } from "@nestjs/common";
+ * import { generatePrometheusDecorator, prometheusTimingWrapper } from '@mists/nestjs-metrics/dist/prometheus';
+ *
+ * const Timing = generatePrometheusDecorator(
+ *   Metrics.Histogram,
+ *   prometheusTimingWrapper
+ * );
+ *
+ * @Controller('/test')
+ * class CustomController {
+ *   @Get()
+ *   @Timing()
+ *   controllerAction() {}
+ * }
+ * ```
+ */
+export const prometheusTimingWrapper = (
+  metricArgs: PrometheusMetricDateArgs,
   metric: any,
   oldMethod: GenericMethod,
   target: any,
