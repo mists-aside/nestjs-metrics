@@ -211,7 +211,7 @@
 					"type": {
 						"type": "reference",
 						"id": 55,
-						"name": "StatsdOptions"
+						"name": "StatsDOptions"
 					}
 				},
 				{
@@ -326,7 +326,7 @@
 							"type": {
 								"type": "reference",
 								"id": 55,
-								"name": "StatsdOptions"
+								"name": "StatsDOptions"
 							}
 						}
 					],
@@ -452,7 +452,7 @@
 									"type": {
 										"type": "reference",
 										"id": 55,
-										"name": "StatsdOptions"
+										"name": "StatsDOptions"
 									}
 								}
 							],
@@ -1507,7 +1507,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/gauge.ts",
-							"line": 123,
+							"line": 124,
 							"character": 12
 						}
 					]
@@ -1982,7 +1982,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/histogram.ts",
-							"line": 89,
+							"line": 90,
 							"character": 12
 						}
 					]
@@ -3285,7 +3285,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/histogram.ts",
-							"line": 89,
+							"line": 90,
 							"character": 12
 						}
 					],
@@ -3505,7 +3505,7 @@
 					"type": {
 						"type": "reference",
 						"id": 55,
-						"name": "StatsdOptions"
+						"name": "StatsDOptions"
 					}
 				}
 			],
@@ -4075,7 +4075,7 @@
 					"type": {
 						"type": "reference",
 						"id": 55,
-						"name": "StatsdOptions"
+						"name": "StatsDOptions"
 					}
 				}
 			],
@@ -4169,643 +4169,6 @@
 					"fileName": "src/options.ts",
 					"line": 26,
 					"character": 36
-				}
-			]
-		},
-		{
-			"id": 14,
-			"name": "StatsdClientAlike",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {
-				"isExported": true
-			},
-			"children": [
-				{
-					"id": 15,
-					"name": "counter",
-					"kind": 2048,
-					"kindString": "Method",
-					"flags": {
-						"isExported": true
-					},
-					"signatures": [
-						{
-							"id": 16,
-							"name": "counter",
-							"kind": 4096,
-							"kindString": "Call signature",
-							"flags": {
-								"isExported": true
-							},
-							"parameters": [
-								{
-									"id": 17,
-									"name": "metric",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true
-									},
-									"type": {
-										"type": "intrinsic",
-										"name": "string"
-									}
-								},
-								{
-									"id": 18,
-									"name": "delta",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true
-									},
-									"type": {
-										"type": "intrinsic",
-										"name": "number"
-									}
-								},
-								{
-									"id": 19,
-									"name": "tags",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true,
-										"isOptional": true
-									},
-									"type": {
-										"type": "reference",
-										"id": 59,
-										"name": "Tags"
-									}
-								}
-							],
-							"type": {
-								"type": "intrinsic",
-								"name": "this"
-							}
-						}
-					],
-					"sources": [
-						{
-							"fileName": "src/statsd/options.ts",
-							"line": 6,
-							"character": 9
-						}
-					]
-				},
-				{
-					"id": 25,
-					"name": "decrement",
-					"kind": 2048,
-					"kindString": "Method",
-					"flags": {
-						"isExported": true
-					},
-					"signatures": [
-						{
-							"id": 26,
-							"name": "decrement",
-							"kind": 4096,
-							"kindString": "Call signature",
-							"flags": {
-								"isExported": true
-							},
-							"parameters": [
-								{
-									"id": 27,
-									"name": "metric",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true
-									},
-									"type": {
-										"type": "intrinsic",
-										"name": "string"
-									}
-								},
-								{
-									"id": 28,
-									"name": "delta",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true,
-										"isOptional": true
-									},
-									"type": {
-										"type": "intrinsic",
-										"name": "number"
-									}
-								},
-								{
-									"id": 29,
-									"name": "tags",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true,
-										"isOptional": true
-									},
-									"type": {
-										"type": "reference",
-										"id": 59,
-										"name": "Tags"
-									}
-								}
-							],
-							"type": {
-								"type": "intrinsic",
-								"name": "this"
-							}
-						}
-					],
-					"sources": [
-						{
-							"fileName": "src/statsd/options.ts",
-							"line": 8,
-							"character": 11
-						}
-					]
-				},
-				{
-					"id": 30,
-					"name": "gauge",
-					"kind": 2048,
-					"kindString": "Method",
-					"flags": {
-						"isExported": true
-					},
-					"signatures": [
-						{
-							"id": 31,
-							"name": "gauge",
-							"kind": 4096,
-							"kindString": "Call signature",
-							"flags": {
-								"isExported": true
-							},
-							"parameters": [
-								{
-									"id": 32,
-									"name": "name",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true
-									},
-									"type": {
-										"type": "intrinsic",
-										"name": "string"
-									}
-								},
-								{
-									"id": 33,
-									"name": "value",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true
-									},
-									"type": {
-										"type": "intrinsic",
-										"name": "number"
-									}
-								},
-								{
-									"id": 34,
-									"name": "tags",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true,
-										"isOptional": true
-									},
-									"type": {
-										"type": "reference",
-										"id": 59,
-										"name": "Tags"
-									}
-								}
-							],
-							"type": {
-								"type": "intrinsic",
-								"name": "this"
-							}
-						}
-					],
-					"sources": [
-						{
-							"fileName": "src/statsd/options.ts",
-							"line": 9,
-							"character": 7
-						}
-					]
-				},
-				{
-					"id": 35,
-					"name": "gaugeDelta",
-					"kind": 2048,
-					"kindString": "Method",
-					"flags": {
-						"isExported": true
-					},
-					"signatures": [
-						{
-							"id": 36,
-							"name": "gaugeDelta",
-							"kind": 4096,
-							"kindString": "Call signature",
-							"flags": {
-								"isExported": true
-							},
-							"parameters": [
-								{
-									"id": 37,
-									"name": "name",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true
-									},
-									"type": {
-										"type": "intrinsic",
-										"name": "string"
-									}
-								},
-								{
-									"id": 38,
-									"name": "delta",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true
-									},
-									"type": {
-										"type": "intrinsic",
-										"name": "number"
-									}
-								},
-								{
-									"id": 39,
-									"name": "tags",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true,
-										"isOptional": true
-									},
-									"type": {
-										"type": "reference",
-										"id": 59,
-										"name": "Tags"
-									}
-								}
-							],
-							"type": {
-								"type": "intrinsic",
-								"name": "this"
-							}
-						}
-					],
-					"sources": [
-						{
-							"fileName": "src/statsd/options.ts",
-							"line": 10,
-							"character": 12
-						}
-					]
-				},
-				{
-					"id": 50,
-					"name": "histogram",
-					"kind": 2048,
-					"kindString": "Method",
-					"flags": {
-						"isExported": true
-					},
-					"signatures": [
-						{
-							"id": 51,
-							"name": "histogram",
-							"kind": 4096,
-							"kindString": "Call signature",
-							"flags": {
-								"isExported": true
-							},
-							"parameters": [
-								{
-									"id": 52,
-									"name": "name",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true
-									},
-									"type": {
-										"type": "intrinsic",
-										"name": "string"
-									}
-								},
-								{
-									"id": 53,
-									"name": "value",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true
-									},
-									"type": {
-										"type": "intrinsic",
-										"name": "number"
-									}
-								},
-								{
-									"id": 54,
-									"name": "tags",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true,
-										"isOptional": true
-									},
-									"type": {
-										"type": "reference",
-										"id": 59,
-										"name": "Tags"
-									}
-								}
-							],
-							"type": {
-								"type": "intrinsic",
-								"name": "this"
-							}
-						}
-					],
-					"sources": [
-						{
-							"fileName": "src/statsd/options.ts",
-							"line": 13,
-							"character": 11
-						}
-					]
-				},
-				{
-					"id": 20,
-					"name": "increment",
-					"kind": 2048,
-					"kindString": "Method",
-					"flags": {
-						"isExported": true
-					},
-					"signatures": [
-						{
-							"id": 21,
-							"name": "increment",
-							"kind": 4096,
-							"kindString": "Call signature",
-							"flags": {
-								"isExported": true
-							},
-							"parameters": [
-								{
-									"id": 22,
-									"name": "metric",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true
-									},
-									"type": {
-										"type": "intrinsic",
-										"name": "string"
-									}
-								},
-								{
-									"id": 23,
-									"name": "delta",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true,
-										"isOptional": true
-									},
-									"type": {
-										"type": "intrinsic",
-										"name": "number"
-									}
-								},
-								{
-									"id": 24,
-									"name": "tags",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true,
-										"isOptional": true
-									},
-									"type": {
-										"type": "reference",
-										"id": 59,
-										"name": "Tags"
-									}
-								}
-							],
-							"type": {
-								"type": "intrinsic",
-								"name": "this"
-							}
-						}
-					],
-					"sources": [
-						{
-							"fileName": "src/statsd/options.ts",
-							"line": 7,
-							"character": 11
-						}
-					]
-				},
-				{
-					"id": 40,
-					"name": "set",
-					"kind": 2048,
-					"kindString": "Method",
-					"flags": {
-						"isExported": true
-					},
-					"signatures": [
-						{
-							"id": 41,
-							"name": "set",
-							"kind": 4096,
-							"kindString": "Call signature",
-							"flags": {
-								"isExported": true
-							},
-							"parameters": [
-								{
-									"id": 42,
-									"name": "name",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true
-									},
-									"type": {
-										"type": "intrinsic",
-										"name": "string"
-									}
-								},
-								{
-									"id": 43,
-									"name": "value",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true
-									},
-									"type": {
-										"type": "intrinsic",
-										"name": "number"
-									}
-								},
-								{
-									"id": 44,
-									"name": "tags",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true,
-										"isOptional": true
-									},
-									"type": {
-										"type": "reference",
-										"id": 59,
-										"name": "Tags"
-									}
-								}
-							],
-							"type": {
-								"type": "intrinsic",
-								"name": "this"
-							}
-						}
-					],
-					"sources": [
-						{
-							"fileName": "src/statsd/options.ts",
-							"line": 11,
-							"character": 5
-						}
-					]
-				},
-				{
-					"id": 45,
-					"name": "timing",
-					"kind": 2048,
-					"kindString": "Method",
-					"flags": {
-						"isExported": true
-					},
-					"signatures": [
-						{
-							"id": 46,
-							"name": "timing",
-							"kind": 4096,
-							"kindString": "Call signature",
-							"flags": {
-								"isExported": true
-							},
-							"parameters": [
-								{
-									"id": 47,
-									"name": "name",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true
-									},
-									"type": {
-										"type": "intrinsic",
-										"name": "string"
-									}
-								},
-								{
-									"id": 48,
-									"name": "startOrDuration",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true
-									},
-									"type": {
-										"type": "union",
-										"types": [
-											{
-												"type": "reference",
-												"name": "Date"
-											},
-											{
-												"type": "intrinsic",
-												"name": "number"
-											}
-										]
-									}
-								},
-								{
-									"id": 49,
-									"name": "tags",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true,
-										"isOptional": true
-									},
-									"type": {
-										"type": "reference",
-										"id": 59,
-										"name": "Tags"
-									}
-								}
-							],
-							"type": {
-								"type": "intrinsic",
-								"name": "this"
-							}
-						}
-					],
-					"sources": [
-						{
-							"fileName": "src/statsd/options.ts",
-							"line": 12,
-							"character": 8
-						}
-					]
-				}
-			],
-			"groups": [
-				{
-					"title": "Methods",
-					"kind": 2048,
-					"children": [
-						15,
-						25,
-						30,
-						35,
-						50,
-						20,
-						40,
-						45
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "src/statsd/options.ts",
-					"line": 5,
-					"character": 34
 				}
 			]
 		},
@@ -5108,11 +4471,6 @@
 					"fileName": "src/prometheus/decorator.ts",
 					"line": 13,
 					"character": 22
-				},
-				{
-					"fileName": "src/statsd/decorator.ts",
-					"line": 13,
-					"character": 22
 				}
 			],
 			"type": {
@@ -5149,20 +4507,11 @@
 					"fileName": "src/prometheus/decorator.ts",
 					"line": 12,
 					"character": 26
-				},
-				{
-					"fileName": "src/statsd/decorator.ts",
-					"line": 12,
-					"character": 26
 				}
 			],
 			"type": {
 				"type": "tuple",
 				"elements": [
-					{
-						"type": "intrinsic",
-						"name": "string"
-					},
 					{
 						"type": "reference",
 						"id": 59,
@@ -5189,28 +4538,19 @@
 					"fileName": "src/prometheus/decorator.ts",
 					"line": 11,
 					"character": 29
-				},
-				{
-					"fileName": "src/statsd/decorator.ts",
-					"line": 11,
-					"character": 29
 				}
 			],
 			"type": {
 				"type": "tuple",
 				"elements": [
 					{
-						"type": "intrinsic",
-						"name": "string"
+						"type": "reference",
+						"id": 59,
+						"name": "Tags"
 					},
 					{
 						"type": "intrinsic",
 						"name": "number"
-					},
-					{
-						"type": "reference",
-						"id": 59,
-						"name": "Tags"
 					}
 				]
 			}
@@ -5459,8 +4799,8 @@
 			}
 		},
 		{
-			"id": 55,
-			"name": "StatsdOptions",
+			"id": 487,
+			"name": "StatsDMetricArgs",
 			"kind": 4194304,
 			"kindString": "Type alias",
 			"flags": {
@@ -5468,8 +4808,106 @@
 			},
 			"sources": [
 				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 13,
+					"character": 28
+				}
+			],
+			"type": {
+				"type": "union",
+				"types": [
+					{
+						"type": "reference",
+						"id": 485,
+						"name": "StatsDMetricNumericArgs"
+					},
+					{
+						"type": "reference",
+						"id": 486,
+						"name": "StatsDMetricDateArgs"
+					}
+				]
+			}
+		},
+		{
+			"id": 486,
+			"name": "StatsDMetricDateArgs",
+			"kind": 4194304,
+			"kindString": "Type alias",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 12,
+					"character": 32
+				}
+			],
+			"type": {
+				"type": "tuple",
+				"elements": [
+					{
+						"type": "intrinsic",
+						"name": "string"
+					},
+					{
+						"type": "reference",
+						"id": 59,
+						"name": "Tags"
+					}
+				]
+			}
+		},
+		{
+			"id": 485,
+			"name": "StatsDMetricNumericArgs",
+			"kind": 4194304,
+			"kindString": "Type alias",
+			"flags": {
+				"isExported": true
+			},
+			"sources": [
+				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 11,
+					"character": 35
+				}
+			],
+			"type": {
+				"type": "tuple",
+				"elements": [
+					{
+						"type": "intrinsic",
+						"name": "string"
+					},
+					{
+						"type": "intrinsic",
+						"name": "number"
+					},
+					{
+						"type": "reference",
+						"id": 59,
+						"name": "Tags"
+					}
+				]
+			}
+		},
+		{
+			"id": 55,
+			"name": "StatsDOptions",
+			"kind": 4194304,
+			"kindString": "Type alias",
+			"flags": {
+				"isExported": true
+			},
+			"comment": {
+				"shortText": "To validate options typings, check the types `StatsdHttpOptions`, `StatsdTcpOptions`, `StatsdUdpOptions` defined in\n{@link https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/statsd-client/index.d.ts | @types/statsd-client}\nand the {@link https://github.com/msiebuhr/node-statsd-client | statsd-client} project."
+			},
+			"sources": [
+				{
 					"fileName": "src/statsd/options.ts",
-					"line": 16,
+					"line": 26,
 					"character": 25
 				}
 			],
@@ -5519,7 +4957,7 @@
 							"sources": [
 								{
 									"fileName": "src/statsd/options.ts",
-									"line": 16,
+									"line": 26,
 									"character": 27
 								}
 							]
@@ -5860,8 +5298,8 @@
 							"sources": [
 								{
 									"fileName": "src/prometheus/injector.ts",
-									"line": 5,
-									"character": 53
+									"line": 7,
+									"character": 2
 								}
 							]
 						}
@@ -5877,7 +5315,7 @@
 			]
 		},
 		{
-			"id": 526,
+			"id": 532,
 			"name": "InjectStatsdMetric",
 			"kind": 64,
 			"kindString": "Function",
@@ -5886,17 +5324,20 @@
 			},
 			"signatures": [
 				{
-					"id": 527,
+					"id": 533,
 					"name": "InjectStatsdMetric",
 					"kind": 4096,
 					"kindString": "Call signature",
 					"flags": {
 						"isExported": true
 					},
-					"comment": {},
+					"comment": {
+						"shortText": "Metric Injector",
+						"text": "This will help you inject metrics into your controllers or any other classes.\n\nRemember you'll first need to create a provider for your metric,\n\n```typescript\nimport { Module } from \"@nestjs/common\";\nimport { MetricsModule } from \"@mists/nestjs-metrics\";\nimport { makeStatsdProvider } from \"@mists/nestjs-metrics/dist/statsd\";\n\n@Module({\n  imports: [MetricsModule.register()],\n  providers: [makeStatsdProvider('statsd_metric')],\n})\nexport class AppModule {}\n```\n\nthen inject it into your class:\n\n```typescript\nimport { Controller } from \"@nestjs/common\";\nimport { StatsDClient } from \"statsd-client\";\nimport { InjectStatsdMetric } from \"@mists/nestjs-metrics/dist/statsd\";\n\n@Controller('/route')\nexport class MetricsController {\n  constructor(@InjectStatsdMetric('statsd_metric') protected metric: StatsDClient) {}\n\n  @Get()\n  public yourMetricMethod(): string {\n    // ...\n    this.metric.inc('name.space');\n    // ...\n  }\n}\n```\n"
+					},
 					"parameters": [
 						{
-							"id": 528,
+							"id": 534,
 							"name": "name",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -5912,7 +5353,7 @@
 					"type": {
 						"type": "reflection",
 						"declaration": {
-							"id": 529,
+							"id": 535,
 							"name": "__type",
 							"kind": 65536,
 							"kindString": "Type literal",
@@ -5921,7 +5362,7 @@
 							},
 							"signatures": [
 								{
-									"id": 530,
+									"id": 536,
 									"name": "__call",
 									"kind": 4096,
 									"kindString": "Call signature",
@@ -5930,7 +5371,7 @@
 									},
 									"parameters": [
 										{
-											"id": 531,
+											"id": 537,
 											"name": "target",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -5943,7 +5384,7 @@
 											}
 										},
 										{
-											"id": 532,
+											"id": 538,
 											"name": "key",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -5965,7 +5406,7 @@
 											}
 										},
 										{
-											"id": 533,
+											"id": 539,
 											"name": "index",
 											"kind": 32768,
 											"kindString": "Parameter",
@@ -5997,8 +5438,8 @@
 							"sources": [
 								{
 									"fileName": "src/statsd/injector.ts",
-									"line": 9,
-									"character": 49
+									"line": 46,
+									"character": 2
 								}
 							]
 						}
@@ -6008,7 +5449,7 @@
 			"sources": [
 				{
 					"fileName": "src/statsd/injector.ts",
-					"line": 9,
+					"line": 44,
 					"character": 34
 				}
 			]
@@ -6134,130 +5575,6 @@
 					"fileName": "src/prometheus/decorator.ts",
 					"line": 54,
 					"character": 34
-				}
-			]
-		},
-		{
-			"id": 495,
-			"name": "gaugeDeltaWrapper",
-			"kind": 64,
-			"kindString": "Function",
-			"flags": {
-				"isExported": true,
-				"isConst": true
-			},
-			"signatures": [
-				{
-					"id": 496,
-					"name": "gaugeDeltaWrapper",
-					"kind": 4096,
-					"kindString": "Call signature",
-					"flags": {
-						"isExported": true
-					},
-					"parameters": [
-						{
-							"id": 497,
-							"name": "metricArgs",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"id": 350,
-								"name": "MetricNumericArgs"
-							}
-						},
-						{
-							"id": 498,
-							"name": "metric",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "intrinsic",
-								"name": "any"
-							}
-						},
-						{
-							"id": 499,
-							"name": "oldMethod",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"id": 104,
-								"name": "GenericMethod"
-							}
-						},
-						{
-							"id": 500,
-							"name": "target",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "intrinsic",
-								"name": "any"
-							}
-						},
-						{
-							"id": 501,
-							"name": "propertyKey",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "union",
-								"types": [
-									{
-										"type": "intrinsic",
-										"name": "string"
-									},
-									{
-										"type": "intrinsic",
-										"name": "symbol"
-									}
-								]
-							}
-						},
-						{
-							"id": 502,
-							"name": "descriptor",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"name": "PropertyDescriptor"
-							}
-						}
-					],
-					"type": {
-						"type": "reference",
-						"id": 104,
-						"name": "GenericMethod"
-					}
-				}
-			],
-			"sources": [
-				{
-					"fileName": "src/statsd/decorator.ts",
-					"line": 39,
-					"character": 30
 				}
 			]
 		},
@@ -6510,130 +5827,6 @@
 			]
 		},
 		{
-			"id": 503,
-			"name": "gaugeWrapper",
-			"kind": 64,
-			"kindString": "Function",
-			"flags": {
-				"isExported": true,
-				"isConst": true
-			},
-			"signatures": [
-				{
-					"id": 504,
-					"name": "gaugeWrapper",
-					"kind": 4096,
-					"kindString": "Call signature",
-					"flags": {
-						"isExported": true
-					},
-					"parameters": [
-						{
-							"id": 505,
-							"name": "metricArgs",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"id": 350,
-								"name": "MetricNumericArgs"
-							}
-						},
-						{
-							"id": 506,
-							"name": "metric",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "intrinsic",
-								"name": "any"
-							}
-						},
-						{
-							"id": 507,
-							"name": "oldMethod",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"id": 104,
-								"name": "GenericMethod"
-							}
-						},
-						{
-							"id": 508,
-							"name": "target",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "intrinsic",
-								"name": "any"
-							}
-						},
-						{
-							"id": 509,
-							"name": "propertyKey",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "union",
-								"types": [
-									{
-										"type": "intrinsic",
-										"name": "string"
-									},
-									{
-										"type": "intrinsic",
-										"name": "symbol"
-									}
-								]
-							}
-						},
-						{
-							"id": 510,
-							"name": "descriptor",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"name": "PropertyDescriptor"
-							}
-						}
-					],
-					"type": {
-						"type": "reference",
-						"id": 104,
-						"name": "GenericMethod"
-					}
-				}
-			],
-			"sources": [
-				{
-					"fileName": "src/statsd/decorator.ts",
-					"line": 51,
-					"character": 25
-				}
-			]
-		},
-		{
 			"id": 420,
 			"name": "generateDecorator",
 			"kind": 64,
@@ -6701,61 +5894,11 @@
 						"id": 117,
 						"name": "GeneratedDecoratorWithArgs"
 					}
-				},
-				{
-					"id": 485,
-					"name": "generateDecorator",
-					"kind": 4096,
-					"kindString": "Call signature",
-					"flags": {
-						"isExported": true
-					},
-					"parameters": [
-						{
-							"id": 486,
-							"name": "wrapper",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"id": 108,
-								"name": "MetricWrapper"
-							}
-						},
-						{
-							"id": 487,
-							"name": "options",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true,
-								"isOptional": true
-							},
-							"type": {
-								"type": "reference",
-								"id": 55,
-								"name": "StatsdOptions"
-							}
-						}
-					],
-					"type": {
-						"type": "reference",
-						"id": 117,
-						"name": "GeneratedDecoratorWithArgs"
-					}
 				}
 			],
 			"sources": [
 				{
 					"fileName": "src/prometheus/decorator.ts",
-					"line": 16,
-					"character": 30
-				},
-				{
-					"fileName": "src/statsd/decorator.ts",
 					"line": 16,
 					"character": 30
 				}
@@ -6772,7 +5915,7 @@
 			},
 			"comment": {
 				"shortText": "Generate a Metric Decorator. Can use wrappers like {@link metricIncrementWrapper},\n{@link metricGaugeDecrementWrapper}, {@link metricGaugeIncrementWrapper}, {@link metricGaugeSetWrapper},\n{@link metricTimingWrapper}, {@link metricObserveWrapper}, or custom defined metric wrappers.",
-				"text": "```typescript\nconst IncrementHttpCalls = generateMetricDecorator(Metrics.Counter, 'metric_http_calls', metricIncrementWrapper, genericOptions);\n\nexport const customMetricWrapper: MetricWrapper = (\n  metricArgs: MetricNumericArgs,\n  metric: any,\n  oldMethod: GenericMethod,\n  target: any,\n  propertyKey: string | symbol,\n  descriptor: PropertyDescriptor,\n): GenericMethod => (...args: any[]): any => {\n  (metric as Gauge).inc(...metricArgs);\n  return oldMethod.call(target, ...args);\n};\n\nconst CustomIncrementHttpCalls = generateMetricDecorator(\n  Metrics.Gauge,\n  'metric_http_calls_custom',\n  customMetricWrapper,\n  genericOptions\n);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @IncrementHttpCalls()\n  @CustomIncrementHttpCalls(1, { serverId: 'server_1' })\n  testMethod() {}\n}\n```\n\n"
+				"text": "```typescript\nconst IncrementHttpCalls = generateMetricDecorator(Metrics.Counter, 'metric_http_calls', metricIncrementWrapper, genericOptions);\n\nexport const customMetricWrapper: MetricWrapper = (\n  metricArgs: MetricNumericArgs,\n  metric: any,\n  oldMethod: GenericMethod,\n  target: any,\n  propertyKey: string | symbol,\n  descriptor: PropertyDescriptor,\n): GenericMethod => (...args: any[]): any => {\n  (metric as Gauge).inc(...metricArgs);\n  return oldMethod.call(target, ...args);\n};\n\nconst CustomIncrementHttpCalls = generateMetricDecorator(\n  Metrics.Gauge,\n  'metric_http_calls_custom',\n  customMetricWrapper,\n  genericOptions\n);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @IncrementHttpCalls()\n  @CustomIncrementHttpCalls(1, { serverId: 'server_1' })\n  testMethod() {}\n}\n```\n"
 			},
 			"signatures": [
 				{
@@ -6785,7 +5928,7 @@
 					},
 					"comment": {
 						"shortText": "Generate a Metric Decorator. Can use wrappers like {@link metricIncrementWrapper},\n{@link metricGaugeDecrementWrapper}, {@link metricGaugeIncrementWrapper}, {@link metricGaugeSetWrapper},\n{@link metricTimingWrapper}, {@link metricObserveWrapper}, or custom defined metric wrappers.",
-						"text": "```typescript\nconst IncrementHttpCalls = generateMetricDecorator(Metrics.Counter, 'metric_http_calls', metricIncrementWrapper, genericOptions);\n\nexport const customMetricWrapper: MetricWrapper = (\n  metricArgs: MetricNumericArgs,\n  metric: any,\n  oldMethod: GenericMethod,\n  target: any,\n  propertyKey: string | symbol,\n  descriptor: PropertyDescriptor,\n): GenericMethod => (...args: any[]): any => {\n  (metric as Gauge).inc(...metricArgs);\n  return oldMethod.call(target, ...args);\n};\n\nconst CustomIncrementHttpCalls = generateMetricDecorator(\n  Metrics.Gauge,\n  'metric_http_calls_custom',\n  customMetricWrapper,\n  genericOptions\n);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @IncrementHttpCalls()\n  @CustomIncrementHttpCalls(1, { serverId: 'server_1' })\n  testMethod() {}\n}\n```\n\n"
+						"text": "```typescript\nconst IncrementHttpCalls = generateMetricDecorator(Metrics.Counter, 'metric_http_calls', metricIncrementWrapper, genericOptions);\n\nexport const customMetricWrapper: MetricWrapper = (\n  metricArgs: MetricNumericArgs,\n  metric: any,\n  oldMethod: GenericMethod,\n  target: any,\n  propertyKey: string | symbol,\n  descriptor: PropertyDescriptor,\n): GenericMethod => (...args: any[]): any => {\n  (metric as Gauge).inc(...metricArgs);\n  return oldMethod.call(target, ...args);\n};\n\nconst CustomIncrementHttpCalls = generateMetricDecorator(\n  Metrics.Gauge,\n  'metric_http_calls_custom',\n  customMetricWrapper,\n  genericOptions\n);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @IncrementHttpCalls()\n  @CustomIncrementHttpCalls(1, { serverId: 'server_1' })\n  testMethod() {}\n}\n```\n"
 					},
 					"parameters": [
 						{
@@ -6795,9 +5938,6 @@
 							"kindString": "Parameter",
 							"flags": {
 								"isExported": true
-							},
-							"comment": {
-								"shortText": "Metric type"
 							},
 							"type": {
 								"type": "reference",
@@ -6813,9 +5953,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "Metric name"
-							},
 							"type": {
 								"type": "intrinsic",
 								"name": "string"
@@ -6828,9 +5965,6 @@
 							"kindString": "Parameter",
 							"flags": {
 								"isExported": true
-							},
-							"comment": {
-								"shortText": "Metric wrapper"
 							},
 							"type": {
 								"type": "reference",
@@ -6846,9 +5980,6 @@
 							"flags": {
 								"isExported": true,
 								"isOptional": true
-							},
-							"comment": {
-								"shortText": "Metric options\n"
 							},
 							"type": {
 								"type": "reference",
@@ -6867,7 +5998,79 @@
 			"sources": [
 				{
 					"fileName": "src/metrics/decorators.ts",
-					"line": 59,
+					"line": 53,
+					"character": 36
+				}
+			]
+		},
+		{
+			"id": 488,
+			"name": "generateStatsDDecorator",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"comment": {
+				"shortText": "Generate a Metric Decorator. Can use wrappers like {@link metricIncrementWrapper},\n{@link metricGaugeDecrementWrapper}, {@link metricGaugeIncrementWrapper}, {@link metricGaugeSetWrapper},\n{@link metricTimingWrapper}, {@link metricObserveWrapper}, or custom defined metric wrappers.",
+				"text": "```typescript\nimport {Controller} from \"@netsjs/common\";\nimport {MetricWrapper, GenericMethod} from \"@mists/nestjs-metrics\";\nimport {StatsDMetricNumericArgs, generateStatsDDecorator} from \"@mists/nestjs-metrics/dist/statsd\";\n\nexport const customMetricWrapper: MetricWrapper = (\n  metricArgs: StatsDMetricNumericArgs,\n  metric: any,\n  oldMethod: GenericMethod,\n  target: any,\n  propertyKey: string | symbol,\n  descriptor: PropertyDescriptor,\n): GenericMethod => (...args: any[]): any => {\n  (metric as StatsDClientAlike).increment(...metricArgs);\n  return oldMethod.call(target, ...args);\n};\n\n\nconst IncrementHttpCalls = generateStatsDDecorator(metricIncrementWrapper);\n\nconst CustomIncrementHttpCalls = generateStatsDDecorator(customMetricWrapper);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @IncrementHttpCalls()\n  @CustomIncrementHttpCalls(1, { serverId: 'server_1' })\n  testMethod() {}\n}\n```\n"
+			},
+			"signatures": [
+				{
+					"id": 489,
+					"name": "generateStatsDDecorator",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "Generate a Metric Decorator. Can use wrappers like {@link metricIncrementWrapper},\n{@link metricGaugeDecrementWrapper}, {@link metricGaugeIncrementWrapper}, {@link metricGaugeSetWrapper},\n{@link metricTimingWrapper}, {@link metricObserveWrapper}, or custom defined metric wrappers.",
+						"text": "```typescript\nimport {Controller} from \"@netsjs/common\";\nimport {MetricWrapper, GenericMethod} from \"@mists/nestjs-metrics\";\nimport {StatsDMetricNumericArgs, generateStatsDDecorator} from \"@mists/nestjs-metrics/dist/statsd\";\n\nexport const customMetricWrapper: MetricWrapper = (\n  metricArgs: StatsDMetricNumericArgs,\n  metric: any,\n  oldMethod: GenericMethod,\n  target: any,\n  propertyKey: string | symbol,\n  descriptor: PropertyDescriptor,\n): GenericMethod => (...args: any[]): any => {\n  (metric as StatsDClientAlike).increment(...metricArgs);\n  return oldMethod.call(target, ...args);\n};\n\n\nconst IncrementHttpCalls = generateStatsDDecorator(metricIncrementWrapper);\n\nconst CustomIncrementHttpCalls = generateStatsDDecorator(customMetricWrapper);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @IncrementHttpCalls()\n  @CustomIncrementHttpCalls(1, { serverId: 'server_1' })\n  testMethod() {}\n}\n```\n"
+					},
+					"parameters": [
+						{
+							"id": 490,
+							"name": "wrapper",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 108,
+								"name": "MetricWrapper"
+							}
+						},
+						{
+							"id": 491,
+							"name": "options",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 55,
+								"name": "StatsDOptions"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 117,
+						"name": "GeneratedDecoratorWithArgs"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 52,
 					"character": 36
 				}
 			]
@@ -6983,14 +6186,13 @@
 							"type": {
 								"type": "reference",
 								"id": 55,
-								"name": "StatsdOptions"
+								"name": "StatsDOptions"
 							}
 						}
 					],
 					"type": {
 						"type": "reference",
-						"id": 14,
-						"name": "StatsdClientAlike"
+						"name": "StatsDClientAlike"
 					}
 				}
 			],
@@ -7116,130 +6318,6 @@
 			]
 		},
 		{
-			"id": 511,
-			"name": "histogramWrapper",
-			"kind": 64,
-			"kindString": "Function",
-			"flags": {
-				"isExported": true,
-				"isConst": true
-			},
-			"signatures": [
-				{
-					"id": 512,
-					"name": "histogramWrapper",
-					"kind": 4096,
-					"kindString": "Call signature",
-					"flags": {
-						"isExported": true
-					},
-					"parameters": [
-						{
-							"id": 513,
-							"name": "metricArgs",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"id": 350,
-								"name": "MetricNumericArgs"
-							}
-						},
-						{
-							"id": 514,
-							"name": "metric",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "intrinsic",
-								"name": "any"
-							}
-						},
-						{
-							"id": 515,
-							"name": "oldMethod",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"id": 104,
-								"name": "GenericMethod"
-							}
-						},
-						{
-							"id": 516,
-							"name": "target",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "intrinsic",
-								"name": "any"
-							}
-						},
-						{
-							"id": 517,
-							"name": "propertyKey",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "union",
-								"types": [
-									{
-										"type": "intrinsic",
-										"name": "string"
-									},
-									{
-										"type": "intrinsic",
-										"name": "symbol"
-									}
-								]
-							}
-						},
-						{
-							"id": 518,
-							"name": "descriptor",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"name": "PropertyDescriptor"
-							}
-						}
-					],
-					"type": {
-						"type": "reference",
-						"id": 104,
-						"name": "GenericMethod"
-					}
-				}
-			],
-			"sources": [
-				{
-					"fileName": "src/statsd/decorator.ts",
-					"line": 63,
-					"character": 29
-				}
-			]
-		},
-		{
 			"id": 425,
 			"name": "incrementWrapper",
 			"kind": 64,
@@ -7353,122 +6431,12 @@
 						"id": 104,
 						"name": "GenericMethod"
 					}
-				},
-				{
-					"id": 488,
-					"name": "incrementWrapper",
-					"kind": 4096,
-					"kindString": "Call signature",
-					"flags": {
-						"isExported": true
-					},
-					"parameters": [
-						{
-							"id": 489,
-							"name": "metricArgs",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"id": 350,
-								"name": "MetricNumericArgs"
-							}
-						},
-						{
-							"id": 490,
-							"name": "metric",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "intrinsic",
-								"name": "any"
-							}
-						},
-						{
-							"id": 491,
-							"name": "oldMethod",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"id": 104,
-								"name": "GenericMethod"
-							}
-						},
-						{
-							"id": 492,
-							"name": "target",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "intrinsic",
-								"name": "any"
-							}
-						},
-						{
-							"id": 493,
-							"name": "propertyKey",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "union",
-								"types": [
-									{
-										"type": "intrinsic",
-										"name": "string"
-									},
-									{
-										"type": "intrinsic",
-										"name": "symbol"
-									}
-								]
-							}
-						},
-						{
-							"id": 494,
-							"name": "descriptor",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"name": "PropertyDescriptor"
-							}
-						}
-					],
-					"type": {
-						"type": "reference",
-						"id": 104,
-						"name": "GenericMethod"
-					}
 				}
 			],
 			"sources": [
 				{
 					"fileName": "src/prometheus/decorator.ts",
 					"line": 30,
-					"character": 29
-				},
-				{
-					"fileName": "src/statsd/decorator.ts",
-					"line": 27,
 					"character": 29
 				}
 			]
@@ -7619,7 +6587,7 @@
 			]
 		},
 		{
-			"id": 534,
+			"id": 540,
 			"name": "makeStatsdProvider",
 			"kind": 64,
 			"kindString": "Function",
@@ -7628,7 +6596,7 @@
 			},
 			"signatures": [
 				{
-					"id": 535,
+					"id": 541,
 					"name": "makeStatsdProvider",
 					"kind": 4096,
 					"kindString": "Call signature",
@@ -7636,11 +6604,12 @@
 						"isExported": true
 					},
 					"comment": {
-						"shortText": "> To validate options typings, check the types `StatsdHttpOptions`, `StatsdTcpOptions`, `StatsdUdpOptions` defined in\n> [@types/statsd-client](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/statsd-client/index.d.ts)\n> and the [statsd-client](https://github.com/msiebuhr/node-statsd-client) project."
+						"shortText": "To validate options typings, check the types `TcpOptions`, `UdpOptions`, `HttpOptions` defined in\n{@link https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/statsd-client/index.d.ts | @types/statsd-client}\nand the {@link https://github.com/msiebuhr/node-statsd-client | statsd-client} project.",
+						"text": "```typescript\nimport { Module } from \"@nestjs/common\";\nimport { MetricsModule } from \"@mists/nestjs-metrics\";\nimport { makeStatsdProvider } from \"@mists/nestjs-metrics/dist/statsd\";\n\n@Module({\n  imports: [MetricsModule.register()],\n  providers: [makeStatsdProvider('metrics_statsd_counter')],\n})\nexport class AppModule {}\n```\n"
 					},
 					"parameters": [
 						{
-							"id": 536,
+							"id": 542,
 							"name": "name",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -7653,7 +6622,7 @@
 							}
 						},
 						{
-							"id": 537,
+							"id": 543,
 							"name": "options",
 							"kind": 32768,
 							"kindString": "Parameter",
@@ -7661,13 +6630,10 @@
 								"isExported": true,
 								"isOptional": true
 							},
-							"comment": {
-								"text": "\n"
-							},
 							"type": {
 								"type": "reference",
 								"id": 55,
-								"name": "StatsdOptions"
+								"name": "StatsDOptions"
 							}
 						}
 					],
@@ -7680,7 +6646,7 @@
 			"sources": [
 				{
 					"fileName": "src/statsd/provider.ts",
-					"line": 15,
+					"line": 26,
 					"character": 34
 				}
 			]
@@ -7720,9 +6686,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "Argument's used by the {@link Gauge.dec} method"
-							},
 							"type": {
 								"type": "reference",
 								"id": 350,
@@ -7737,9 +6700,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "Metric instance"
-							},
 							"type": {
 								"type": "intrinsic",
 								"name": "any"
@@ -7752,9 +6712,6 @@
 							"kindString": "Parameter",
 							"flags": {
 								"isExported": true
-							},
-							"comment": {
-								"shortText": "Old method, obtained from `descriptor.value`"
 							},
 							"type": {
 								"type": "reference",
@@ -7770,7 +6727,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {},
 							"type": {
 								"type": "intrinsic",
 								"name": "any"
@@ -7784,7 +6740,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {},
 							"type": {
 								"type": "union",
 								"types": [
@@ -7807,9 +6762,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "\n"
-							},
 							"type": {
 								"type": "reference",
 								"name": "PropertyDescriptor"
@@ -7826,7 +6778,7 @@
 			"sources": [
 				{
 					"fileName": "src/metrics/decorators.ts",
-					"line": 146,
+					"line": 126,
 					"character": 40
 				}
 			]
@@ -7866,9 +6818,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "Argument's used by the {@link Gauge.inc} method"
-							},
 							"type": {
 								"type": "reference",
 								"id": 350,
@@ -7883,9 +6832,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "Metric instance"
-							},
 							"type": {
 								"type": "intrinsic",
 								"name": "any"
@@ -7898,9 +6844,6 @@
 							"kindString": "Parameter",
 							"flags": {
 								"isExported": true
-							},
-							"comment": {
-								"shortText": "Old method, obtained from `descriptor.value`"
 							},
 							"type": {
 								"type": "reference",
@@ -7916,7 +6859,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {},
 							"type": {
 								"type": "intrinsic",
 								"name": "any"
@@ -7930,7 +6872,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {},
 							"type": {
 								"type": "union",
 								"types": [
@@ -7953,9 +6894,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "\n"
-							},
 							"type": {
 								"type": "reference",
 								"name": "PropertyDescriptor"
@@ -7972,7 +6910,7 @@
 			"sources": [
 				{
 					"fileName": "src/metrics/decorators.ts",
-					"line": 188,
+					"line": 161,
 					"character": 40
 				}
 			]
@@ -8012,9 +6950,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "Argument's used by the {@link Gauge.set} method"
-							},
 							"type": {
 								"type": "reference",
 								"id": 350,
@@ -8029,9 +6964,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "Metric instance"
-							},
 							"type": {
 								"type": "intrinsic",
 								"name": "any"
@@ -8044,9 +6976,6 @@
 							"kindString": "Parameter",
 							"flags": {
 								"isExported": true
-							},
-							"comment": {
-								"shortText": "Old method, obtained from `descriptor.value`"
 							},
 							"type": {
 								"type": "reference",
@@ -8062,7 +6991,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {},
 							"type": {
 								"type": "intrinsic",
 								"name": "any"
@@ -8076,7 +7004,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {},
 							"type": {
 								"type": "union",
 								"types": [
@@ -8099,9 +7026,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "\n"
-							},
 							"type": {
 								"type": "reference",
 								"name": "PropertyDescriptor"
@@ -8118,7 +7042,7 @@
 			"sources": [
 				{
 					"fileName": "src/metrics/decorators.ts",
-					"line": 230,
+					"line": 196,
 					"character": 34
 				}
 			]
@@ -8158,9 +7082,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "Argument's used by the {@link Counter.inc} method"
-							},
 							"type": {
 								"type": "reference",
 								"id": 350,
@@ -8175,9 +7096,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "Metric instance"
-							},
 							"type": {
 								"type": "intrinsic",
 								"name": "any"
@@ -8190,9 +7108,6 @@
 							"kindString": "Parameter",
 							"flags": {
 								"isExported": true
-							},
-							"comment": {
-								"shortText": "Old method, obtained from `descriptor.value`"
 							},
 							"type": {
 								"type": "reference",
@@ -8208,7 +7123,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {},
 							"type": {
 								"type": "intrinsic",
 								"name": "any"
@@ -8222,7 +7136,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {},
 							"type": {
 								"type": "union",
 								"types": [
@@ -8245,9 +7158,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "\n"
-							},
 							"type": {
 								"type": "reference",
 								"name": "PropertyDescriptor"
@@ -8264,7 +7174,7 @@
 			"sources": [
 				{
 					"fileName": "src/metrics/decorators.ts",
-					"line": 104,
+					"line": 91,
 					"character": 35
 				}
 			]
@@ -8304,9 +7214,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "Argument's used by the {@link Gauge.set} method"
-							},
 							"type": {
 								"type": "reference",
 								"id": 350,
@@ -8321,9 +7228,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "Metric instance"
-							},
 							"type": {
 								"type": "intrinsic",
 								"name": "any"
@@ -8336,9 +7240,6 @@
 							"kindString": "Parameter",
 							"flags": {
 								"isExported": true
-							},
-							"comment": {
-								"shortText": "Old method, obtained from `descriptor.value`"
 							},
 							"type": {
 								"type": "reference",
@@ -8354,7 +7255,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {},
 							"type": {
 								"type": "intrinsic",
 								"name": "any"
@@ -8368,7 +7268,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {},
 							"type": {
 								"type": "union",
 								"types": [
@@ -8391,9 +7290,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "\n"
-							},
 							"type": {
 								"type": "reference",
 								"name": "PropertyDescriptor"
@@ -8410,7 +7306,7 @@
 			"sources": [
 				{
 					"fileName": "src/metrics/decorators.ts",
-					"line": 329,
+					"line": 281,
 					"character": 33
 				}
 			]
@@ -8450,9 +7346,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "Argument's used by the {@link Gauge.set} method"
-							},
 							"type": {
 								"type": "reference",
 								"id": 351,
@@ -8467,9 +7360,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "Metric instance"
-							},
 							"type": {
 								"type": "intrinsic",
 								"name": "any"
@@ -8482,9 +7372,6 @@
 							"kindString": "Parameter",
 							"flags": {
 								"isExported": true
-							},
-							"comment": {
-								"shortText": "Old method, obtained from `descriptor.value`"
 							},
 							"type": {
 								"type": "reference",
@@ -8500,7 +7387,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {},
 							"type": {
 								"type": "intrinsic",
 								"name": "any"
@@ -8514,7 +7400,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {},
 							"type": {
 								"type": "union",
 								"types": [
@@ -8537,9 +7422,6 @@
 							"flags": {
 								"isExported": true
 							},
-							"comment": {
-								"shortText": "\n"
-							},
 							"type": {
 								"type": "reference",
 								"name": "PropertyDescriptor"
@@ -8556,7 +7438,7 @@
 			"sources": [
 				{
 					"fileName": "src/metrics/decorators.ts",
-					"line": 272,
+					"line": 231,
 					"character": 32
 				}
 			]
@@ -8686,6 +7568,666 @@
 			]
 		},
 		{
+			"id": 500,
+			"name": "statsdGaugeDeltaWrapper",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"comment": {
+				"shortText": "StatsD GaugeDelta Wrapper",
+				"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generateStatsDDecorator, statsdGaugeDeltaWrapper } from \"@mists/nestjs-metrics/dist/statsd\";\n\nconst GaugeDelta = generateStatsDDecorator(statsdGaugeDeltaWrapper);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @GaugeDelta(-1)\n  controllerAction() {}\n}\n```\n"
+			},
+			"signatures": [
+				{
+					"id": 501,
+					"name": "statsdGaugeDeltaWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "StatsD GaugeDelta Wrapper",
+						"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generateStatsDDecorator, statsdGaugeDeltaWrapper } from \"@mists/nestjs-metrics/dist/statsd\";\n\nconst GaugeDelta = generateStatsDDecorator(statsdGaugeDeltaWrapper);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @GaugeDelta(-1)\n  controllerAction() {}\n}\n```\n"
+					},
+					"parameters": [
+						{
+							"id": 502,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 485,
+								"name": "StatsDMetricNumericArgs"
+							}
+						},
+						{
+							"id": 503,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 504,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 104,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 505,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 506,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 507,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 104,
+						"name": "GenericMethod"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 109,
+					"character": 36
+				}
+			]
+		},
+		{
+			"id": 508,
+			"name": "statsdGaugeWrapper",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"comment": {
+				"shortText": "StatsD Gauge Wrapper",
+				"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generateStatsDDecorator, statsdGaugeWrapper } from \"@mists/nestjs-metrics/dist/statsd\";\n\nconst GaugeSet = generateStatsDDecorator(statsdGaugeWrapper);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @GaugeSet(1)\n  controllerAction() {}\n}\n```\n"
+			},
+			"signatures": [
+				{
+					"id": 509,
+					"name": "statsdGaugeWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "StatsD Gauge Wrapper",
+						"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generateStatsDDecorator, statsdGaugeWrapper } from \"@mists/nestjs-metrics/dist/statsd\";\n\nconst GaugeSet = generateStatsDDecorator(statsdGaugeWrapper);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @GaugeSet(1)\n  controllerAction() {}\n}\n```\n"
+					},
+					"parameters": [
+						{
+							"id": 510,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 485,
+								"name": "StatsDMetricNumericArgs"
+							}
+						},
+						{
+							"id": 511,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 512,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 104,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 513,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 514,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 515,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 104,
+						"name": "GenericMethod"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 138,
+					"character": 31
+				}
+			]
+		},
+		{
+			"id": 516,
+			"name": "statsdHistogramWrapper",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"comment": {
+				"shortText": "StatsD Histogram Wrapper",
+				"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generateStatsDDecorator, statsdHistogramWrapper } from \"@mists/nestjs-metrics/dist/statsd\";\n\nconst Histogram = generateStatsDDecorator(statsdHistogramWrapper);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @Histogram(1)\n  controllerAction() {}\n}\n```\n"
+			},
+			"signatures": [
+				{
+					"id": 517,
+					"name": "statsdHistogramWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "StatsD Histogram Wrapper",
+						"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generateStatsDDecorator, statsdHistogramWrapper } from \"@mists/nestjs-metrics/dist/statsd\";\n\nconst Histogram = generateStatsDDecorator(statsdHistogramWrapper);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @Histogram(1)\n  controllerAction() {}\n}\n```\n"
+					},
+					"parameters": [
+						{
+							"id": 518,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 485,
+								"name": "StatsDMetricNumericArgs"
+							}
+						},
+						{
+							"id": 519,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 520,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 104,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 521,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 522,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 523,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 104,
+						"name": "GenericMethod"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 167,
+					"character": 35
+				}
+			]
+		},
+		{
+			"id": 492,
+			"name": "statsdIncrementWrapper",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"comment": {
+				"shortText": "Increment Wrapper",
+				"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generateStatsDDecorator, statsdIncrementWrapper } from \"@mists/nestjs-metrics/dist/statsd\";\n\nconst Increment = generateStatsDDecorator(statsdIncrementWrapper);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @Increment()\n  controllerAction() {}\n}\n```\n"
+			},
+			"signatures": [
+				{
+					"id": 493,
+					"name": "statsdIncrementWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "Increment Wrapper",
+						"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generateStatsDDecorator, statsdIncrementWrapper } from \"@mists/nestjs-metrics/dist/statsd\";\n\nconst Increment = generateStatsDDecorator(statsdIncrementWrapper);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @Increment()\n  controllerAction() {}\n}\n```\n"
+					},
+					"parameters": [
+						{
+							"id": 494,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 485,
+								"name": "StatsDMetricNumericArgs"
+							}
+						},
+						{
+							"id": 495,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 496,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 104,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 497,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 498,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 499,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 104,
+						"name": "GenericMethod"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 80,
+					"character": 35
+				}
+			]
+		},
+		{
+			"id": 524,
+			"name": "statsdTimingWrapper",
+			"kind": 64,
+			"kindString": "Function",
+			"flags": {
+				"isExported": true,
+				"isConst": true
+			},
+			"comment": {
+				"shortText": "StatsD Timing Wrapper",
+				"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generateStatsDDecorator, statsdTimingWrapper } from \"@mists/nestjs-metrics/dist/statsd\";\n\nconst Timing = generateStatsDDecorator(statsdTimingWrapper);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @Timing()\n  controllerAction() {}\n}\n```\n"
+			},
+			"signatures": [
+				{
+					"id": 525,
+					"name": "statsdTimingWrapper",
+					"kind": 4096,
+					"kindString": "Call signature",
+					"flags": {
+						"isExported": true
+					},
+					"comment": {
+						"shortText": "StatsD Timing Wrapper",
+						"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generateStatsDDecorator, statsdTimingWrapper } from \"@mists/nestjs-metrics/dist/statsd\";\n\nconst Timing = generateStatsDDecorator(statsdTimingWrapper);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @Timing()\n  controllerAction() {}\n}\n```\n"
+					},
+					"parameters": [
+						{
+							"id": 526,
+							"name": "metricArgs",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 486,
+								"name": "StatsDMetricDateArgs"
+							}
+						},
+						{
+							"id": 527,
+							"name": "metric",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 528,
+							"name": "oldMethod",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"id": 104,
+								"name": "GenericMethod"
+							}
+						},
+						{
+							"id": 529,
+							"name": "target",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						},
+						{
+							"id": 530,
+							"name": "propertyKey",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "string"
+									},
+									{
+										"type": "intrinsic",
+										"name": "symbol"
+									}
+								]
+							}
+						},
+						{
+							"id": 531,
+							"name": "descriptor",
+							"kind": 32768,
+							"kindString": "Parameter",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "reference",
+								"name": "PropertyDescriptor"
+							}
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 104,
+						"name": "GenericMethod"
+					}
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/statsd/decorator.ts",
+					"line": 196,
+					"character": 32
+				}
+			]
+		},
+		{
 			"id": 465,
 			"name": "timingWrapper",
 			"kind": 64,
@@ -8799,122 +8341,12 @@
 						"id": 104,
 						"name": "GenericMethod"
 					}
-				},
-				{
-					"id": 519,
-					"name": "timingWrapper",
-					"kind": 4096,
-					"kindString": "Call signature",
-					"flags": {
-						"isExported": true
-					},
-					"parameters": [
-						{
-							"id": 520,
-							"name": "metricArgs",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"id": 351,
-								"name": "MetricDateArgs"
-							}
-						},
-						{
-							"id": 521,
-							"name": "metric",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "intrinsic",
-								"name": "any"
-							}
-						},
-						{
-							"id": 522,
-							"name": "oldMethod",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"id": 104,
-								"name": "GenericMethod"
-							}
-						},
-						{
-							"id": 523,
-							"name": "target",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "intrinsic",
-								"name": "any"
-							}
-						},
-						{
-							"id": 524,
-							"name": "propertyKey",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "union",
-								"types": [
-									{
-										"type": "intrinsic",
-										"name": "string"
-									},
-									{
-										"type": "intrinsic",
-										"name": "symbol"
-									}
-								]
-							}
-						},
-						{
-							"id": 525,
-							"name": "descriptor",
-							"kind": 32768,
-							"kindString": "Parameter",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"name": "PropertyDescriptor"
-							}
-						}
-					],
-					"type": {
-						"type": "reference",
-						"id": 104,
-						"name": "GenericMethod"
-					}
 				}
 			],
 			"sources": [
 				{
 					"fileName": "src/prometheus/decorator.ts",
 					"line": 90,
-					"character": 26
-				},
-				{
-					"fileName": "src/statsd/decorator.ts",
-					"line": 75,
 					"character": 26
 				}
 			]
@@ -9098,7 +8530,6 @@
 				71,
 				65,
 				68,
-				14,
 				154,
 				59
 			]
@@ -9115,6 +8546,9 @@
 				157,
 				108,
 				7,
+				487,
+				486,
+				485,
 				55,
 				255
 			]
@@ -9125,22 +8559,20 @@
 			"children": [
 				407,
 				473,
-				526,
+				532,
 				441,
-				495,
 				433,
 				449,
-				503,
 				420,
 				353,
+				488,
 				230,
 				190,
 				187,
-				511,
 				425,
 				415,
 				481,
-				534,
+				540,
 				367,
 				375,
 				383,
@@ -9148,6 +8580,11 @@
 				399,
 				391,
 				457,
+				500,
+				508,
+				516,
+				492,
+				524,
 				465
 			]
 		},

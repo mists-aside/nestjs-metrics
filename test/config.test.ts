@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {describe, it} from 'mocha';
 import {Config} from '../src/config';
 import {PrometheusOptions} from '../src/prometheus/options';
-import {StatsdOptions} from '../src/statsd/options';
+import {StatsDOptions} from '../src/statsd/options';
 
 describe('src/config', function () {
   let config: Config;
@@ -24,7 +24,7 @@ describe('src/config', function () {
   });
 
   it('Config.setStatsdOptions() will set options', async () => {
-    const options: StatsdOptions = {
+    const options: StatsDOptions = {
       host: 'test',
     };
     config.setStatsdOptions(options);

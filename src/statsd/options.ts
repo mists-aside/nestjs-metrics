@@ -2,7 +2,12 @@
 
 import {Tags} from '../options';
 
-export interface StatsdClientAlike {
+/**
+ * Dummy clone of {@link https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/statsd-client/index.d.ts | StatsDClient}
+ *
+ * @ignore
+ */
+export interface StatsDClientAlike {
   counter(metric: string, delta: number, tags?: Tags): this;
   increment(metric: string, delta?: number, tags?: Tags): this;
   decrement(metric: string, delta?: number, tags?: Tags): this;
@@ -13,4 +18,9 @@ export interface StatsdClientAlike {
   histogram(name: string, value: number, tags?: Tags): this;
 }
 
-export type StatsdOptions = {[key: string]: any} | 'dummy';
+/**
+ * To validate options typings, check the types `StatsdHttpOptions`, `StatsdTcpOptions`, `StatsdUdpOptions` defined in
+ * {@link https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/statsd-client/index.d.ts | @types/statsd-client}
+ * and the {@link https://github.com/msiebuhr/node-statsd-client | statsd-client} project.
+ */
+export type StatsDOptions = {[key: string]: any} | 'dummy';

@@ -1,6 +1,6 @@
 import {StatsTypes} from './options';
 import {PrometheusOptions} from './prometheus/options';
-import {StatsdOptions} from './statsd/options';
+import {StatsDOptions} from './statsd/options';
 
 export class Config {
   private static instance: Config;
@@ -17,7 +17,7 @@ export class Config {
 
   private cTypes: StatsTypes[] = [];
   private cPrometheus?: PrometheusOptions;
-  private cStatsd?: StatsdOptions;
+  private cStatsd?: StatsDOptions;
 
   public get prometheus(): PrometheusOptions | undefined {
     return this.cPrometheus;
@@ -27,7 +27,7 @@ export class Config {
     this.cPrometheus = options;
   }
 
-  public setStatsdOptions(options: StatsdOptions): void {
+  public setStatsdOptions(options: StatsDOptions): void {
     this.cStatsd = options;
   }
 
@@ -35,7 +35,7 @@ export class Config {
     this.cTypes = types;
   }
 
-  public get statsd(): StatsdOptions {
+  public get statsd(): StatsDOptions {
     return this.cStatsd;
   }
 

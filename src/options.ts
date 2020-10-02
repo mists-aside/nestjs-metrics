@@ -1,5 +1,5 @@
 import {PrometheusOptions} from './prometheus/options';
-import {StatsdOptions} from './statsd/options';
+import {StatsDOptions} from './statsd/options';
 import {ModuleMetadata} from '@nestjs/common/interfaces';
 import {Type} from '@nestjs/common';
 
@@ -20,7 +20,7 @@ export enum StatsTypes {
 
 export interface StatsOptions {
   prometheus?: PrometheusOptions;
-  statsd?: StatsdOptions;
+  statsd?: StatsDOptions;
 }
 
 export interface StatsOptionsFactory {

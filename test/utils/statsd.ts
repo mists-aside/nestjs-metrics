@@ -2,20 +2,20 @@ import * as StatsdClient from 'statsd-client';
 
 import {Controller} from '@nestjs/common';
 import {
-  generateDecorator,
-  incrementWrapper,
+  generateStatsDDecorator,
+  statsdIncrementWrapper,
   InjectStatsdMetric,
-  gaugeWrapper,
-  gaugeDeltaWrapper,
-  histogramWrapper,
-  timingWrapper,
+  statsdGaugeWrapper,
+  statsdGaugeDeltaWrapper,
+  statsdHistogramWrapper,
+  statsdTimingWrapper,
 } from '../../src/statsd';
 
-const Increment = generateDecorator(incrementWrapper, 'dummy');
-const GaugeDelta = generateDecorator(gaugeDeltaWrapper, 'dummy');
-const Gauge = generateDecorator(gaugeWrapper, 'dummy');
-const Histogram = generateDecorator(histogramWrapper, 'dummy');
-const Timing = generateDecorator(timingWrapper, 'dummy');
+const Increment = generateStatsDDecorator(statsdIncrementWrapper, 'dummy');
+const GaugeDelta = generateStatsDDecorator(statsdGaugeDeltaWrapper, 'dummy');
+const Gauge = generateStatsDDecorator(statsdGaugeWrapper, 'dummy');
+const Histogram = generateStatsDDecorator(statsdHistogramWrapper, 'dummy');
+const Timing = generateStatsDDecorator(statsdTimingWrapper, 'dummy');
 
 @Controller()
 export class CustomInjectorController {

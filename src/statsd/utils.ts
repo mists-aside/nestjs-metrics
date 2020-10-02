@@ -1,7 +1,7 @@
 import * as StatsdClient from 'statsd-client';
 
 import {DummyStatsdClient} from './dummy';
-import {StatsdOptions, StatsdClientAlike} from './options';
+import {StatsDOptions, StatsDClientAlike} from './options';
 
 const instances: {[key: string]: StatsdClient} = {};
 
@@ -9,7 +9,7 @@ const instances: {[key: string]: StatsdClient} = {};
 export const getToken = (name: string): string => `STATSD_CLIENT_${name}`;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getStatsdClient = (name: string, options: StatsdOptions): StatsdClientAlike => {
+export const getStatsdClient = (name: string, options: StatsDOptions): StatsDClientAlike => {
   const token = getToken(name);
   if (!instances[token]) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

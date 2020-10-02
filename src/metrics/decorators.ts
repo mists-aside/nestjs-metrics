@@ -49,12 +49,6 @@ export type MetricArgs = MetricNumericArgs | MetricDateArgs;
  *   testMethod() {}
  * }
  * ```
- *
- *
- * @param type Metric type
- * @param name Metric name
- * @param wrapper Metric wrapper
- * @param options Metric options
  */
 export const generateMetricDecorator = (
   type: Metrics,
@@ -93,13 +87,6 @@ export const generateMetricDecorator = (
  *   controllerAction() {}
  * }
  * ```
- *
- * @param metricArgs Argument's used by the {@link Counter.inc} method
- * @param metric Metric instance
- * @param oldMethod Old method, obtained from `descriptor.value`
- * @param target
- * @param propertyKey
- * @param descriptor
  */
 export const metricIncrementWrapper: MetricWrapper = (
   metricArgs: MetricNumericArgs,
@@ -135,13 +122,6 @@ export const metricIncrementWrapper: MetricWrapper = (
  *   controllerAction() {}
  * }
  * ```
- *
- * @param metricArgs Argument's used by the {@link Gauge.dec} method
- * @param metric Metric instance
- * @param oldMethod Old method, obtained from `descriptor.value`
- * @param target
- * @param propertyKey
- * @param descriptor
  */
 export const metricGaugeDecrementWrapper: MetricWrapper = (
   metricArgs: MetricNumericArgs,
@@ -177,13 +157,6 @@ export const metricGaugeDecrementWrapper: MetricWrapper = (
  *   controllerAction() {}
  * }
  * ```
- *
- * @param metricArgs Argument's used by the {@link Gauge.inc} method
- * @param metric Metric instance
- * @param oldMethod Old method, obtained from `descriptor.value`
- * @param target
- * @param propertyKey
- * @param descriptor
  */
 export const metricGaugeIncrementWrapper: MetricWrapper = (
   metricArgs: MetricNumericArgs,
@@ -219,13 +192,6 @@ export const metricGaugeIncrementWrapper: MetricWrapper = (
  *   controllerAction() {}
  * }
  * ```
- *
- * @param metricArgs Argument's used by the {@link Gauge.set} method
- * @param metric Metric instance
- * @param oldMethod Old method, obtained from `descriptor.value`
- * @param target
- * @param propertyKey
- * @param descriptor
  */
 export const metricGaugeSetWrapper = (
   metricArgs: MetricNumericArgs,
@@ -261,13 +227,6 @@ export const metricGaugeSetWrapper = (
  *   controllerAction() {}
  * }
  * ```
- *
- * @param metricArgs Argument's used by the {@link Gauge.set} method
- * @param metric Metric instance
- * @param oldMethod Old method, obtained from `descriptor.value`
- * @param target
- * @param propertyKey
- * @param descriptor
  */
 export const metricTimingWrapper = (
   metricArgs: MetricDateArgs,
@@ -318,13 +277,6 @@ export const metricTimingWrapper = (
  *   controllerAction() {}
  * }
  * ```
- *
- * @param metricArgs Argument's used by the {@link Gauge.set} method
- * @param metric Metric instance
- * @param oldMethod Old method, obtained from `descriptor.value`
- * @param target
- * @param propertyKey
- * @param descriptor
  */
 export const metricObserveWrapper = (
   metricArgs: MetricNumericArgs,
@@ -337,5 +289,4 @@ export const metricObserveWrapper = (
   (metric as T).observe(...metricArgs);
   return oldMethod.call(target, ...args);
 };
-
 // jscpd:ignore-end
