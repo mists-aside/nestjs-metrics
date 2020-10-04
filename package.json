@@ -31,14 +31,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dragoscirjan/template-javascript.git"
+    "url": "https://github.com/mists-aside/nestjs-metrics.git"
   },
   "author": "Dragos Cirjan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dragoscirjan/template-javascript/issues"
+    "url": "https://github.com/mists-aside/nestjs-metrics/issues"
   },
-  "homepage": "https://github.com/dragoscirjan/template-javascript#readme",
+  "homepage": "https://github.com/mists-aside/nestjs-metrics#readme",
   "devDependencies": {
     "@commitlint/cli": "^9.0.1",
     "@commitlint/config-conventional": "^9.0.1",
