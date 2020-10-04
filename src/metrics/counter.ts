@@ -9,6 +9,8 @@ import {Tags} from '../tags';
  * * For Statsd, counters go up, and reset when stasd daemon is restarted.
  *
  * ```typescript
+ * import { Counter } from '@mists/nestjs-metrics';
+ *
  * const counter = new Counter('metric_counter');
  *
  * // force prometheus settings
@@ -44,6 +46,8 @@ export class Counter extends Metric {
    * Increment method.
    *
    * ```typescript
+   * import { Counter } from '@mists/nestjs-metrics';
+   *
    * const counter = new Counter('metric_counter');
    *
    * // will increment by 1 (the default value)

@@ -12,6 +12,8 @@ import {getPrometheusMetric} from '../prometheus/utils';
  * > Note that from <b>statsd</b> point of view, summaries are treated as histograms.
  *
  * ```typescript
+ * import { Summary } from '@mists/nestjs-metrics';
+ *
  * const summary = new Summary('metric_summary');
  *
  * // force prometheus settings

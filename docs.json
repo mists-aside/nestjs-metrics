@@ -160,442 +160,6 @@
 			]
 		},
 		{
-			"id": 76,
-			"name": "Config",
-			"kind": 128,
-			"kindString": "Class",
-			"flags": {
-				"isExported": true
-			},
-			"children": [
-				{
-					"id": 81,
-					"name": "cPrometheus",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isPrivate": true,
-						"isExported": true,
-						"isOptional": true
-					},
-					"sources": [
-						{
-							"fileName": "src/config.ts",
-							"line": 19,
-							"character": 21
-						}
-					],
-					"type": {
-						"type": "reference",
-						"id": 4,
-						"name": "PrometheusOptions"
-					}
-				},
-				{
-					"id": 82,
-					"name": "cStatsd",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isPrivate": true,
-						"isExported": true,
-						"isOptional": true
-					},
-					"sources": [
-						{
-							"fileName": "src/config.ts",
-							"line": 20,
-							"character": 17
-						}
-					],
-					"type": {
-						"type": "reference",
-						"id": 58,
-						"name": "StatsDOptions"
-					}
-				},
-				{
-					"id": 80,
-					"name": "cTypes",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isPrivate": true,
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "src/config.ts",
-							"line": 18,
-							"character": 16
-						}
-					],
-					"type": {
-						"type": "array",
-						"elementType": {
-							"type": "reference",
-							"id": 62,
-							"name": "StatsTypes"
-						}
-					},
-					"defaultValue": "[]"
-				},
-				{
-					"id": 77,
-					"name": "instance",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isPrivate": true,
-						"isStatic": true,
-						"isExported": true
-					},
-					"sources": [
-						{
-							"fileName": "src/config.ts",
-							"line": 6,
-							"character": 25
-						}
-					],
-					"type": {
-						"type": "reference",
-						"id": 76,
-						"name": "Config"
-					}
-				},
-				{
-					"id": 83,
-					"name": "prometheus",
-					"kind": 262144,
-					"kindString": "Accessor",
-					"flags": {
-						"isPublic": true,
-						"isExported": true
-					},
-					"getSignature": [
-						{
-							"id": 84,
-							"name": "__get",
-							"kind": 524288,
-							"kindString": "Get signature",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "union",
-								"types": [
-									{
-										"type": "reference",
-										"id": 4,
-										"name": "PrometheusOptions"
-									},
-									{
-										"type": "intrinsic",
-										"name": "undefined"
-									}
-								]
-							}
-						}
-					],
-					"sources": [
-						{
-							"fileName": "src/config.ts",
-							"line": 22,
-							"character": 23
-						}
-					]
-				},
-				{
-					"id": 94,
-					"name": "statsd",
-					"kind": 262144,
-					"kindString": "Accessor",
-					"flags": {
-						"isPublic": true,
-						"isExported": true
-					},
-					"getSignature": [
-						{
-							"id": 95,
-							"name": "__get",
-							"kind": 524288,
-							"kindString": "Get signature",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"id": 58,
-								"name": "StatsDOptions"
-							}
-						}
-					],
-					"sources": [
-						{
-							"fileName": "src/config.ts",
-							"line": 38,
-							"character": 19
-						}
-					]
-				},
-				{
-					"id": 96,
-					"name": "types",
-					"kind": 262144,
-					"kindString": "Accessor",
-					"flags": {
-						"isPublic": true,
-						"isExported": true
-					},
-					"getSignature": [
-						{
-							"id": 97,
-							"name": "__get",
-							"kind": 524288,
-							"kindString": "Get signature",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "array",
-								"elementType": {
-									"type": "reference",
-									"id": 62,
-									"name": "StatsTypes"
-								}
-							}
-						}
-					],
-					"sources": [
-						{
-							"fileName": "src/config.ts",
-							"line": 42,
-							"character": 18
-						}
-					]
-				},
-				{
-					"id": 85,
-					"name": "setPrometheusOptions",
-					"kind": 2048,
-					"kindString": "Method",
-					"flags": {
-						"isPublic": true,
-						"isExported": true
-					},
-					"signatures": [
-						{
-							"id": 86,
-							"name": "setPrometheusOptions",
-							"kind": 4096,
-							"kindString": "Call signature",
-							"flags": {
-								"isExported": true
-							},
-							"parameters": [
-								{
-									"id": 87,
-									"name": "options",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true
-									},
-									"type": {
-										"type": "reference",
-										"id": 4,
-										"name": "PrometheusOptions"
-									}
-								}
-							],
-							"type": {
-								"type": "intrinsic",
-								"name": "void"
-							}
-						}
-					],
-					"sources": [
-						{
-							"fileName": "src/config.ts",
-							"line": 26,
-							"character": 29
-						}
-					]
-				},
-				{
-					"id": 88,
-					"name": "setStatsdOptions",
-					"kind": 2048,
-					"kindString": "Method",
-					"flags": {
-						"isPublic": true,
-						"isExported": true
-					},
-					"signatures": [
-						{
-							"id": 89,
-							"name": "setStatsdOptions",
-							"kind": 4096,
-							"kindString": "Call signature",
-							"flags": {
-								"isExported": true
-							},
-							"parameters": [
-								{
-									"id": 90,
-									"name": "options",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true
-									},
-									"type": {
-										"type": "reference",
-										"id": 58,
-										"name": "StatsDOptions"
-									}
-								}
-							],
-							"type": {
-								"type": "intrinsic",
-								"name": "void"
-							}
-						}
-					],
-					"sources": [
-						{
-							"fileName": "src/config.ts",
-							"line": 30,
-							"character": 25
-						}
-					]
-				},
-				{
-					"id": 91,
-					"name": "setTypes",
-					"kind": 2048,
-					"kindString": "Method",
-					"flags": {
-						"isPublic": true,
-						"isExported": true
-					},
-					"signatures": [
-						{
-							"id": 92,
-							"name": "setTypes",
-							"kind": 4096,
-							"kindString": "Call signature",
-							"flags": {
-								"isExported": true
-							},
-							"parameters": [
-								{
-									"id": 93,
-									"name": "types",
-									"kind": 32768,
-									"kindString": "Parameter",
-									"flags": {
-										"isExported": true
-									},
-									"type": {
-										"type": "array",
-										"elementType": {
-											"type": "reference",
-											"id": 62,
-											"name": "StatsTypes"
-										}
-									}
-								}
-							],
-							"type": {
-								"type": "intrinsic",
-								"name": "void"
-							}
-						}
-					],
-					"sources": [
-						{
-							"fileName": "src/config.ts",
-							"line": 34,
-							"character": 17
-						}
-					]
-				},
-				{
-					"id": 78,
-					"name": "getInstance",
-					"kind": 2048,
-					"kindString": "Method",
-					"flags": {
-						"isPublic": true,
-						"isStatic": true,
-						"isExported": true
-					},
-					"signatures": [
-						{
-							"id": 79,
-							"name": "getInstance",
-							"kind": 4096,
-							"kindString": "Call signature",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "reference",
-								"id": 76,
-								"name": "Config"
-							}
-						}
-					],
-					"sources": [
-						{
-							"fileName": "src/config.ts",
-							"line": 8,
-							"character": 27
-						}
-					]
-				}
-			],
-			"groups": [
-				{
-					"title": "Properties",
-					"kind": 1024,
-					"children": [
-						81,
-						82,
-						80,
-						77
-					]
-				},
-				{
-					"title": "Accessors",
-					"kind": 262144,
-					"children": [
-						83,
-						94,
-						96
-					]
-				},
-				{
-					"title": "Methods",
-					"kind": 2048,
-					"children": [
-						85,
-						88,
-						91,
-						78
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "src/config.ts",
-					"line": 5,
-					"character": 19
-				}
-			]
-		},
-		{
 			"id": 259,
 			"name": "Counter",
 			"kind": 128,
@@ -605,7 +169,7 @@
 			},
 			"comment": {
 				"shortText": "Counter Metric\n* For Prometheus, counters go up, and reset when the process restarts.\n* For Statsd, counters go up, and reset when stasd daemon is restarted.",
-				"text": "```typescript\nconst counter = new Counter('metric_counter');\n\n// force prometheus settings\nconst counter = new Counter('metric_counter', {\n  prometheus: {\n    help: 'This is a counter metric'\n  }\n})\n\n// force statsd settings; if no settings are provided here,\n// default settings will be used\nconst counter = new Counter('metric_counter', {\n  statsd: {\n    host: 'localhost',\n    socketTimeout: 2000,\n  }\n})\n```\n"
+				"text": "```typescript\nimport { Counter } from '@mists/nestjs-metrics';\n\nconst counter = new Counter('metric_counter');\n\n// force prometheus settings\nconst counter = new Counter('metric_counter', {\n  prometheus: {\n    help: 'This is a counter metric'\n  }\n})\n\n// force statsd settings; if no settings are provided here,\n// default settings will be used\nconst counter = new Counter('metric_counter', {\n  statsd: {\n    host: 'localhost',\n    socketTimeout: 2000,\n  }\n})\n```\n"
 			},
 			"children": [
 				{
@@ -678,7 +242,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/counter.ts",
-							"line": 31,
+							"line": 33,
 							"character": 37
 						}
 					],
@@ -878,7 +442,7 @@
 							},
 							"comment": {
 								"shortText": "Increment method.",
-								"text": "```typescript\nconst counter = new Counter('metric_counter');\n\n// will increment by 1 (the default value)\ncounter.inc();\n\n// will increment by 10 (custom value)\ncounter.inc(10);\n\n// will increment by 1, attaching also a `server_id` label\ncounter.inc(1, {server_id: 'instance_1'})\n```\n"
+								"text": "```typescript\nimport { Counter } from '@mists/nestjs-metrics';\n\nconst counter = new Counter('metric_counter');\n\n// will increment by 1 (the default value)\ncounter.inc();\n\n// will increment by 10 (custom value)\ncounter.inc(10);\n\n// will increment by 1, attaching also a `server_id` label\ncounter.inc(1, {server_id: 'instance_1'})\n```\n"
 							},
 							"parameters": [
 								{
@@ -926,7 +490,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/counter.ts",
-							"line": 62,
+							"line": 66,
 							"character": 5
 						}
 					]
@@ -968,7 +532,7 @@
 			"sources": [
 				{
 					"fileName": "src/metrics/counter.ts",
-					"line": 31,
+					"line": 33,
 					"character": 20
 				}
 			],
@@ -990,7 +554,7 @@
 			},
 			"comment": {
 				"shortText": "Gauge Metric",
-				"text": "Gauges are similar to Gauges. Only difference is that they can be decreased or reset at demand.\nOne more feature for gauges, is the timer metric which can record duration of events.\n\n```typescript\nconst gauge = new Gauge('metric_gauge');\n\n// force prometheus settings\nconst gauge = new Gauge('metric_gauge', {\n  prometheus: {\n    help: 'This is a gauge metric'\n  }\n})\n\n// force statsd settings; if no settings are provided here,\n// default settings will be used\nconst gauge = new Gauge('metric_gauge', {\n  statsd: {\n    host: 'localhost',\n    socketTimeout: 2000,\n  }\n})\n```\n"
+				"text": "Gauges are similar to Gauges. Only difference is that they can be decreased or reset at demand.\nOne more feature for gauges, is the timer metric which can record duration of events.\n\n```typescript\nimport { Gauge } from '@mists/nestjs-metrics';\n\nconst gauge = new Gauge('metric_gauge');\n\n// force prometheus settings\nconst gauge = new Gauge('metric_gauge', {\n  prometheus: {\n    help: 'This is a gauge metric'\n  }\n})\n\n// force statsd settings; if no settings are provided here,\n// default settings will be used\nconst gauge = new Gauge('metric_gauge', {\n  statsd: {\n    host: 'localhost',\n    socketTimeout: 2000,\n  }\n})\n```\n"
 			},
 			"children": [
 				{
@@ -1063,7 +627,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/gauge.ts",
-							"line": 32,
+							"line": 34,
 							"character": 35
 						}
 					],
@@ -1263,7 +827,7 @@
 							},
 							"comment": {
 								"shortText": "Decrement method.",
-								"text": "```typescript\nconst gauge = new Gauge('metric_gauge');\n\n// will decrement by 1 (the default value)\ngauge.dec();\n\n// will decrement by 10 (custom value)\ngauge.dec(10);\n\n// will decrement by 1, attaching also a `server_id` label\ngauge.dec(1, {server_id: 'instance_1'})\n```\n"
+								"text": "```typescript\nimport { Gauge } from '@mists/nestjs-metrics';\n\nconst gauge = new Gauge('metric_gauge');\n\n// will decrement by 1 (the default value)\ngauge.dec();\n\n// will decrement by 10 (custom value)\ngauge.dec(10);\n\n// will decrement by 1, attaching also a `server_id` label\ngauge.dec(1, {server_id: 'instance_1'})\n```\n"
 							},
 							"parameters": [
 								{
@@ -1311,7 +875,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/gauge.ts",
-							"line": 63,
+							"line": 67,
 							"character": 5
 						}
 					]
@@ -1335,7 +899,7 @@
 							},
 							"comment": {
 								"shortText": "Increment method.",
-								"text": "```typescript\nconst gauge = new Gauge('metric_gauge');\n\n// will increment by 1 (the default value)\ngauge.inc();\n\n// will increment by 10 (custom value)\ngauge.inc(10);\n\n// will increment by 1, attaching also a `server_id` label\ngauge.inc(1, {server_id: 'instance_1'})\n```\n"
+								"text": "```typescript\nimport { Gauge } from '@mists/nestjs-metrics';\n\nconst gauge = new Gauge('metric_gauge');\n\n// will increment by 1 (the default value)\ngauge.inc();\n\n// will increment by 10 (custom value)\ngauge.inc(10);\n\n// will increment by 1, attaching also a `server_id` label\ngauge.inc(1, {server_id: 'instance_1'})\n```\n"
 							},
 							"parameters": [
 								{
@@ -1383,7 +947,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/gauge.ts",
-							"line": 88,
+							"line": 94,
 							"character": 5
 						}
 					]
@@ -1407,7 +971,7 @@
 							},
 							"comment": {
 								"shortText": "Set method.",
-								"text": "```typescript\nconst gauge = new Gauge('metric_gauge');\n\n// will set gauge value to 0 (the default value)\ngauge.set(0);\n\n// will set gauge value to 10 (custom value)\ngauge.set(10);\n\n// will set gauge value to 1, attaching also a `server_id` label\ngauge.set(1, {server_id: 'instance_1'})\n```\n"
+								"text": "```typescript\nimport { Gauge } from '@mists/nestjs-metrics';\n\nconst gauge = new Gauge('metric_gauge');\n\n// will set gauge value to 0 (the default value)\ngauge.set(0);\n\n// will set gauge value to 10 (custom value)\ngauge.set(10);\n\n// will set gauge value to 1, attaching also a `server_id` label\ngauge.set(1, {server_id: 'instance_1'})\n```\n"
 							},
 							"parameters": [
 								{
@@ -1454,7 +1018,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/gauge.ts",
-							"line": 113,
+							"line": 121,
 							"character": 5
 						}
 					]
@@ -1507,7 +1071,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/gauge.ts",
-							"line": 124,
+							"line": 132,
 							"character": 12
 						}
 					]
@@ -1552,7 +1116,7 @@
 			"sources": [
 				{
 					"fileName": "src/metrics/gauge.ts",
-					"line": 32,
+					"line": 34,
 					"character": 18
 				}
 			],
@@ -1574,7 +1138,7 @@
 			},
 			"comment": {
 				"shortText": "Histogram Metric",
-				"text": "Histograms track sizes and frequency of ecents.\nOne more feature for histograms, is the timer metric which can record duration of events.\n\n```typescript\nconst histogram = new Histogram('metric_histogram');\n\n// force prometheus settings\nconst histogram = new Histogram('metric_histogram', {\n  prometheus: {\n    help: 'This is a histogram metric'\n  }\n})\n\n// force statsd settings; if no settings are provided here,\n// default settings will be used\nconst histogram = new Histogram('metric_histogram', {\n  statsd: {\n    host: 'localhost',\n    socketTimeout: 2000,\n  }\n})\n```\n"
+				"text": "Histograms track sizes and frequency of ecents.\nOne more feature for histograms, is the timer metric which can record duration of events.\n\n```typescript\nimport { Histogram } from '@mists/nestjs-metrics';\n\nconst histogram = new Histogram('metric_histogram');\n\n// force prometheus settings\nconst histogram = new Histogram('metric_histogram', {\n  prometheus: {\n    help: 'This is a histogram metric'\n  }\n})\n\n// force statsd settings; if no settings are provided here,\n// default settings will be used\nconst histogram = new Histogram('metric_histogram', {\n  statsd: {\n    host: 'localhost',\n    socketTimeout: 2000,\n  }\n})\n```\n"
 			},
 			"children": [
 				{
@@ -1647,7 +1211,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/histogram.ts",
-							"line": 32,
+							"line": 34,
 							"character": 39
 						}
 					],
@@ -1847,7 +1411,7 @@
 							},
 							"comment": {
 								"shortText": "Observe method.",
-								"text": "```typescript\nconst histogram = new Histogram('metric_histogram');\n\n// will observe value 10 (custom value)\nhistogram.observe(10);\n\n// will observe value 1, attaching also a `server_id` label\nhistogram.observe(1, {server_id: 'instance_1'})\n```\n"
+								"text": "```typescript\nimport { Histogram } from '@mists/nestjs-metrics';\n\nconst histogram = new Histogram('metric_histogram');\n\n// will observe value 10 (custom value)\nhistogram.observe(10);\n\n// will observe value 1, attaching also a `server_id` label\nhistogram.observe(1, {server_id: 'instance_1'})\n```\n"
 							},
 							"parameters": [
 								{
@@ -1894,7 +1458,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/histogram.ts",
-							"line": 60,
+							"line": 64,
 							"character": 9
 						}
 					]
@@ -1918,7 +1482,7 @@
 							},
 							"comment": {
 								"shortText": "Reset method.",
-								"text": "```typescript\nconst histogram = new Histogram('metric_histogram');\n\n// will reset all histogram values\nhistogram.reset();\n\n```\n"
+								"text": "```typescript\nimport { Histogram } from '@mists/nestjs-metrics';\n\nconst histogram = new Histogram('metric_histogram');\n\n// will reset all histogram values\nhistogram.reset();\n\n```\n"
 							},
 							"type": {
 								"type": "intrinsic",
@@ -1929,7 +1493,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/histogram.ts",
-							"line": 79,
+							"line": 85,
 							"character": 7
 						}
 					]
@@ -1982,7 +1546,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/histogram.ts",
-							"line": 90,
+							"line": 96,
 							"character": 12
 						}
 					]
@@ -2026,7 +1590,7 @@
 			"sources": [
 				{
 					"fileName": "src/metrics/histogram.ts",
-					"line": 32,
+					"line": 34,
 					"character": 22
 				}
 			],
@@ -2860,7 +2424,7 @@
 			},
 			"comment": {
 				"shortText": "Summary Metric",
-				"text": "Summaries calculate percentiles of observed values.\nOne more feature for summaries, is the timer metric which can record duration of events.\n\n> Note that from <b>statsd</b> point of view, summaries are treated as histograms.\n\n```typescript\nconst summary = new Summary('metric_summary');\n\n// force prometheus settings\nconst summary = new Summary('metric_summary', {\n  prometheus: {\n    help: 'This is a summary metric'\n  }\n})\n\n// force statsd settings; if no settings are provided here,\n// default settings will be used\nconst summary = new Summary('metric_summary', {\n  statsd: {\n    host: 'localhost',\n    socketTimeout: 2000,\n  }\n})\n```\n"
+				"text": "Summaries calculate percentiles of observed values.\nOne more feature for summaries, is the timer metric which can record duration of events.\n\n> Note that from <b>statsd</b> point of view, summaries are treated as histograms.\n\n```typescript\nimport { Summary } from '@mists/nestjs-metrics';\n\nconst summary = new Summary('metric_summary');\n\n// force prometheus settings\nconst summary = new Summary('metric_summary', {\n  prometheus: {\n    help: 'This is a summary metric'\n  }\n})\n\n// force statsd settings; if no settings are provided here,\n// default settings will be used\nconst summary = new Summary('metric_summary', {\n  statsd: {\n    host: 'localhost',\n    socketTimeout: 2000,\n  }\n})\n```\n"
 			},
 			"children": [
 				{
@@ -2925,7 +2489,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/summary.ts",
-							"line": 34,
+							"line": 36,
 							"character": 40
 						}
 					],
@@ -3125,7 +2689,7 @@
 							},
 							"comment": {
 								"shortText": "Observe method.",
-								"text": "```typescript\nconst histogram = new Histogram('metric_histogram');\n\n// will observe value 10 (custom value)\nhistogram.observe(10);\n\n// will observe value 1, attaching also a `server_id` label\nhistogram.observe(1, {server_id: 'instance_1'})\n```\n"
+								"text": "```typescript\nimport { Histogram } from '@mists/nestjs-metrics';\n\nconst histogram = new Histogram('metric_histogram');\n\n// will observe value 10 (custom value)\nhistogram.observe(10);\n\n// will observe value 1, attaching also a `server_id` label\nhistogram.observe(1, {server_id: 'instance_1'})\n```\n"
 							},
 							"parameters": [
 								{
@@ -3177,7 +2741,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/histogram.ts",
-							"line": 60,
+							"line": 64,
 							"character": 9
 						}
 					],
@@ -3206,7 +2770,7 @@
 							},
 							"comment": {
 								"shortText": "Reset method.",
-								"text": "```typescript\nconst histogram = new Histogram('metric_histogram');\n\n// will reset all histogram values\nhistogram.reset();\n\n```\n"
+								"text": "```typescript\nimport { Histogram } from '@mists/nestjs-metrics';\n\nconst histogram = new Histogram('metric_histogram');\n\n// will reset all histogram values\nhistogram.reset();\n\n```\n"
 							},
 							"type": {
 								"type": "intrinsic",
@@ -3222,7 +2786,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/histogram.ts",
-							"line": 79,
+							"line": 85,
 							"character": 7
 						}
 					],
@@ -3285,7 +2849,7 @@
 					"sources": [
 						{
 							"fileName": "src/metrics/histogram.ts",
-							"line": 90,
+							"line": 96,
 							"character": 12
 						}
 					],
@@ -3334,7 +2898,7 @@
 			"sources": [
 				{
 					"fileName": "src/metrics/summary.ts",
-					"line": 34,
+					"line": 36,
 					"character": 20
 				}
 			],
@@ -6802,6 +6366,10 @@
 				"isExported": true,
 				"isConst": true
 			},
+			"comment": {
+				"shortText": "Prometheus Gauge Decrement Wrapper\nUsed for generating {@link https://github.com/siimon/prom-client#gauge | PromClient.Gauge.dec} trigger",
+				"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generatePrometheusDecorator, prometheusGaugeDecrementWrapper } from '@mists/nestjs-metrics/dist/prometheus';\n\nconst GaugeDec = generatePrometheusDecorator(\n  Metrics.Gauge,\n  prometheusGaugeDecrementWrapper\n);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @GaugeDec()\n  controllerAction() {}\n}\n```\n"
+			},
 			"signatures": [
 				{
 					"id": 445,
@@ -6810,6 +6378,10 @@
 					"kindString": "Call signature",
 					"flags": {
 						"isExported": true
+					},
+					"comment": {
+						"shortText": "Prometheus Gauge Decrement Wrapper\nUsed for generating {@link https://github.com/siimon/prom-client#gauge | PromClient.Gauge.dec} trigger",
+						"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generatePrometheusDecorator, prometheusGaugeDecrementWrapper } from '@mists/nestjs-metrics/dist/prometheus';\n\nconst GaugeDec = generatePrometheusDecorator(\n  Metrics.Gauge,\n  prometheusGaugeDecrementWrapper\n);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @GaugeDec()\n  controllerAction() {}\n}\n```\n"
 					},
 					"parameters": [
 						{
@@ -6912,7 +6484,7 @@
 			"sources": [
 				{
 					"fileName": "src/prometheus/decorator.ts",
-					"line": 109,
+					"line": 151,
 					"character": 44
 				}
 			]
@@ -6926,6 +6498,10 @@
 				"isExported": true,
 				"isConst": true
 			},
+			"comment": {
+				"shortText": "Prometheus Gauge Increment Wrapper\nUsed for generating {@link https://github.com/siimon/prom-client#gauge | PromClient.Gauge.inc} trigger",
+				"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generatePrometheusDecorator, prometheusGaugeIncrementWrapper } from '@mists/nestjs-metrics/dist/prometheus';\n\nconst GaugeInc = generatePrometheusDecorator(\n  Metrics.Gauge,\n  prometheusGaugeIncrementWrapper\n);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @GaugeInc()\n  controllerAction() {}\n}\n```\n"
+			},
 			"signatures": [
 				{
 					"id": 437,
@@ -6934,6 +6510,10 @@
 					"kindString": "Call signature",
 					"flags": {
 						"isExported": true
+					},
+					"comment": {
+						"shortText": "Prometheus Gauge Increment Wrapper\nUsed for generating {@link https://github.com/siimon/prom-client#gauge | PromClient.Gauge.inc} trigger",
+						"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generatePrometheusDecorator, prometheusGaugeIncrementWrapper } from '@mists/nestjs-metrics/dist/prometheus';\n\nconst GaugeInc = generatePrometheusDecorator(\n  Metrics.Gauge,\n  prometheusGaugeIncrementWrapper\n);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @GaugeInc()\n  controllerAction() {}\n}\n```\n"
 					},
 					"parameters": [
 						{
@@ -7036,7 +6616,7 @@
 			"sources": [
 				{
 					"fileName": "src/prometheus/decorator.ts",
-					"line": 97,
+					"line": 118,
 					"character": 44
 				}
 			]
@@ -7050,6 +6630,10 @@
 				"isExported": true,
 				"isConst": true
 			},
+			"comment": {
+				"shortText": "Prometheus Gauge Set Wrapper\nUsed for generating {@link https://github.com/siimon/prom-client#gauge | PromClient.Gauge.set} trigger",
+				"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generatePrometheusDecorator, prometheusGaugeSetWrapper } from '@mists/nestjs-metrics/dist/prometheus';\n\nconst GaugeSet = generatePrometheusDecorator(\n  Metrics.Gauge,\n  prometheusGaugeSetWrapper\n);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @GaugeSet(1)\n  controllerAction() {}\n}\n```\n"
+			},
 			"signatures": [
 				{
 					"id": 453,
@@ -7058,6 +6642,10 @@
 					"kindString": "Call signature",
 					"flags": {
 						"isExported": true
+					},
+					"comment": {
+						"shortText": "Prometheus Gauge Set Wrapper\nUsed for generating {@link https://github.com/siimon/prom-client#gauge | PromClient.Gauge.set} trigger",
+						"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generatePrometheusDecorator, prometheusGaugeSetWrapper } from '@mists/nestjs-metrics/dist/prometheus';\n\nconst GaugeSet = generatePrometheusDecorator(\n  Metrics.Gauge,\n  prometheusGaugeSetWrapper\n);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @GaugeSet(1)\n  controllerAction() {}\n}\n```\n"
 					},
 					"parameters": [
 						{
@@ -7160,7 +6748,7 @@
 			"sources": [
 				{
 					"fileName": "src/prometheus/decorator.ts",
-					"line": 121,
+					"line": 184,
 					"character": 38
 				}
 			]
@@ -7306,6 +6894,10 @@
 				"isExported": true,
 				"isConst": true
 			},
+			"comment": {
+				"shortText": "Prometheus Histogram/Summary Observe Wrapper\nUsed for generating {@link https://github.com/siimon/prom-client#histogram | PromClient.Histogram.observe} or\n{@link https://github.com/siimon/prom-client#summary | PromClient.Summary.observe} trigger",
+				"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generatePrometheusDecorator, prometheusObserveWrapper } from '@mists/nestjs-metrics/dist/prometheus';\n\nconst Observe = generatePrometheusDecorator(\n  Metrics.Histogram,\n  prometheusObserveWrapper\n);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @Observe(1)\n  controllerAction() {}\n}\n```\n"
+			},
 			"signatures": [
 				{
 					"id": 461,
@@ -7314,6 +6906,10 @@
 					"kindString": "Call signature",
 					"flags": {
 						"isExported": true
+					},
+					"comment": {
+						"shortText": "Prometheus Histogram/Summary Observe Wrapper\nUsed for generating {@link https://github.com/siimon/prom-client#histogram | PromClient.Histogram.observe} or\n{@link https://github.com/siimon/prom-client#summary | PromClient.Summary.observe} trigger",
+						"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generatePrometheusDecorator, prometheusObserveWrapper } from '@mists/nestjs-metrics/dist/prometheus';\n\nconst Observe = generatePrometheusDecorator(\n  Metrics.Histogram,\n  prometheusObserveWrapper\n);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @Observe(1)\n  controllerAction() {}\n}\n```\n"
 					},
 					"parameters": [
 						{
@@ -7416,7 +7012,7 @@
 			"sources": [
 				{
 					"fileName": "src/prometheus/decorator.ts",
-					"line": 133,
+					"line": 218,
 					"character": 37
 				}
 			]
@@ -7430,6 +7026,10 @@
 				"isExported": true,
 				"isConst": true
 			},
+			"comment": {
+				"shortText": "Prometheus Histogram/Summary Observe Wrapper\nUsed for generating {@link https://github.com/siimon/prom-client#gauge | PromClient.Gauge.startTimer} or\n{@link https://github.com/siimon/prom-client#histogram | PromClient.Histogram.startTimer} or\n{@link https://github.com/siimon/prom-client#summary | PromClient.Summary.startTimer} trigger",
+				"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generatePrometheusDecorator, prometheusTimingWrapper } from '@mists/nestjs-metrics/dist/prometheus';\n\nconst Timing = generatePrometheusDecorator(\n  Metrics.Histogram,\n  prometheusTimingWrapper\n);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @Timing()\n  controllerAction() {}\n}\n```\n"
+			},
 			"signatures": [
 				{
 					"id": 469,
@@ -7438,6 +7038,10 @@
 					"kindString": "Call signature",
 					"flags": {
 						"isExported": true
+					},
+					"comment": {
+						"shortText": "Prometheus Histogram/Summary Observe Wrapper\nUsed for generating {@link https://github.com/siimon/prom-client#gauge | PromClient.Gauge.startTimer} or\n{@link https://github.com/siimon/prom-client#histogram | PromClient.Histogram.startTimer} or\n{@link https://github.com/siimon/prom-client#summary | PromClient.Summary.startTimer} trigger",
+						"text": "```typescript\nimport { Controller, Get } from \"@nestjs/common\";\nimport { generatePrometheusDecorator, prometheusTimingWrapper } from '@mists/nestjs-metrics/dist/prometheus';\n\nconst Timing = generatePrometheusDecorator(\n  Metrics.Histogram,\n  prometheusTimingWrapper\n);\n\n@Controller('/test')\nclass CustomController {\n  @Get()\n  @Timing()\n  controllerAction() {}\n}\n```\n"
 					},
 					"parameters": [
 						{
@@ -7540,7 +7144,7 @@
 			"sources": [
 				{
 					"fileName": "src/prometheus/decorator.ts",
-					"line": 145,
+					"line": 253,
 					"character": 36
 				}
 			]
@@ -8360,7 +7964,6 @@
 			"title": "Classes",
 			"kind": 128,
 			"children": [
-				76,
 				259,
 				274,
 				300,

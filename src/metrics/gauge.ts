@@ -10,6 +10,8 @@ import {Tags} from '../tags';
  * One more feature for gauges, is the timer metric which can record duration of events.
  *
  * ```typescript
+ * import { Gauge } from '@mists/nestjs-metrics';
+ *
  * const gauge = new Gauge('metric_gauge');
  *
  * // force prometheus settings
@@ -45,6 +47,8 @@ export class Gauge extends Metric {
    * Decrement method.
    *
    * ```typescript
+   * import { Gauge } from '@mists/nestjs-metrics';
+   *
    * const gauge = new Gauge('metric_gauge');
    *
    * // will decrement by 1 (the default value)
@@ -70,6 +74,8 @@ export class Gauge extends Metric {
    * Increment method.
    *
    * ```typescript
+   * import { Gauge } from '@mists/nestjs-metrics';
+   *
    * const gauge = new Gauge('metric_gauge');
    *
    * // will increment by 1 (the default value)
@@ -95,6 +101,8 @@ export class Gauge extends Metric {
    * Set method.
    *
    * ```typescript
+   * import { Gauge } from '@mists/nestjs-metrics';
+   *
    * const gauge = new Gauge('metric_gauge');
    *
    * // will set gauge value to 0 (the default value)

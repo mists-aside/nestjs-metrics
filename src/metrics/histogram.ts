@@ -10,6 +10,8 @@ import {HistogramOptions} from './options';
  * One more feature for histograms, is the timer metric which can record duration of events.
  *
  * ```typescript
+ * import { Histogram } from '@mists/nestjs-metrics';
+ *
  * const histogram = new Histogram('metric_histogram');
  *
  * // force prometheus settings
@@ -45,6 +47,8 @@ export class Histogram extends Metric {
    * Observe method.
    *
    * ```typescript
+   * import { Histogram } from '@mists/nestjs-metrics';
+   *
    * const histogram = new Histogram('metric_histogram');
    *
    * // will observe value 10 (custom value)
@@ -66,6 +70,8 @@ export class Histogram extends Metric {
    * Reset method.
    *
    * ```typescript
+   * import { Histogram } from '@mists/nestjs-metrics';
+   *
    * const histogram = new Histogram('metric_histogram');
    *
    * // will reset all histogram values

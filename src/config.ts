@@ -2,6 +2,9 @@ import {StatsTypes} from './options';
 import {PrometheusOptions} from './prometheus/options';
 import {StatsDOptions} from './statsd/options';
 
+/**
+ * @ignore
+ */
 export class Config {
   private static instance: Config;
 
