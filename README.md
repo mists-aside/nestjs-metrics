@@ -35,6 +35,10 @@
   - [Documentation](#documentation)
     - [API](#api)
     - [Metrics](#metrics)
+      - [Counter](#counter)
+      - [Gauge](#gauge)
+      - [Histogram](#histogram)
+      - [Summary](#summary)
     - [Registering Module](#registering-module)
     - [Registering Metrics](#registering-metrics)
     - [Registering Metrics Controller](#registering-metrics-controller)
@@ -122,20 +126,37 @@ For a better understanding of the API, the the following [API documentation](htt
 
 <!-- TODO: -->
 
-There are currently
+#### Counter
 
-* `Counter` used for counting events; reflected by:
-  * [`PromClient.Counter`](https://github.com/siimon/prom-client#counter)
-  * [`StatsdClient.increment`](https://github.com/msiebuhr/node-statsd-client#counting-stuff)
-* `Gauge` used for counting events (with the possibility of decreasing or resetting a value as well) and for timing them; reflected by
-  * [`PromClient.Gauge`](https://github.com/siimon/prom-client#gauge)
-  * [`StatsdClient.gauge` and `StatsdClient.gaugeDelta`](https://github.com/msiebuhr/node-statsd-client#gauges) and [`StatsdClient.timing`](https://github.com/msiebuhr/node-statsd-client#delays)
-* `Histogram` similar to Gauge, but used for tracking sized and frequency of events; reflected by 
-  * [`PromClient.Histogram`](https://github.com/siimon/prom-client#histogram)
-  * [`StatsdClient.histogram`](https://github.com/msiebuhr/node-statsd-client#histogram) (and adding [`StatsdClient.timing`](https://github.com/msiebuhr/node-statsd-client#delays) for complete support)
-* `Summary` similar to Histogram, but used to calculate percentiles of observed values; reflected by
-  * [`PromClient.Summary`](https://github.com/siimon/prom-client#summary)
-  * on the side of `statsd`, to support compatibility (not sure if it's good or bad, yet), the same methods as for `Histogram`
+[Counters](https://mists-aside.github.io/nestjs-metrics/classes/counter.html) are used for counting events. They can only grow, never decrease or reset.
+
+Reflected by
+* [`PromClient.Counter`](https://github.com/siimon/prom-client#counter)
+* [`StatsdClient.increment`](https://github.com/msiebuhr/node-statsd-client#counting-stuff)
+
+#### Gauge
+
+[Gauges](https://mists-aside.github.io/nestjs-metrics/classes/gauge.html) are used for counting events (with the possibility of decreasing or resetting a value as well) and for timing them
+
+Reflected by
+* [`PromClient.Gauge`](https://github.com/siimon/prom-client#gauge)
+* [`StatsdClient.gauge` and `StatsdClient.gaugeDelta`](https://github.com/msiebuhr/node-statsd-client#gauges) and [`StatsdClient.timing`](https://github.com/msiebuhr/node-statsd-client#delays)
+
+#### Histogram
+
+[Histograms](https://mists-aside.github.io/nestjs-metrics/classes/histogram.html) are similar to Gauge, but used for tracking sized and frequency of events
+
+Reflected by 
+* [`PromClient.Histogram`](https://github.com/siimon/prom-client#histogram)
+* StatsD does not know the concept of summary, so we emulated it using the `StatsDClient.histogram` methods.
+
+#### Summary
+
+[Summaries](https://mists-aside.github.io/nestjs-metrics/classes/summary.html) are similar to Histogram, but used to calculate percentiles of observed values
+
+Reflected by
+* [`PromClient.Summary`](https://github.com/siimon/prom-client#summary)
+* on the side of `statsd`, to support compatibility (not sure if it's good or bad, yet), the same methods as for `Histogram`
 
 ### Registering Module
 
