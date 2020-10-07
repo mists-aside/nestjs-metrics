@@ -2103,7 +2103,7 @@
 									"type": {
 										"type": "reference",
 										"id": 65,
-										"name": "StatsOptions"
+										"name": "MetricsModuleOptions"
 									}
 								}
 							],
@@ -2152,7 +2152,7 @@
 									"type": {
 										"type": "reference",
 										"id": 71,
-										"name": "StatsAsyncOptions"
+										"name": "MetricsModuleAsyncOptions"
 									}
 								}
 							],
@@ -2201,7 +2201,7 @@
 									"type": {
 										"type": "reference",
 										"id": 71,
-										"name": "StatsAsyncOptions"
+										"name": "MetricsModuleAsyncOptions"
 									}
 								}
 							],
@@ -2254,7 +2254,7 @@
 									"type": {
 										"type": "reference",
 										"id": 65,
-										"name": "StatsOptions"
+										"name": "MetricsModuleOptions"
 									}
 								}
 							],
@@ -2264,7 +2264,7 @@
 									{
 										"type": "reference",
 										"id": 65,
-										"name": "StatsOptions"
+										"name": "MetricsModuleOptions"
 									}
 								],
 								"name": "Required"
@@ -2317,7 +2317,7 @@
 									"type": {
 										"type": "reference",
 										"id": 65,
-										"name": "StatsOptions"
+										"name": "MetricsModuleOptions"
 									}
 								}
 							],
@@ -2373,7 +2373,7 @@
 									"type": {
 										"type": "reference",
 										"id": 71,
-										"name": "StatsAsyncOptions"
+										"name": "MetricsModuleAsyncOptions"
 									}
 								}
 							],
@@ -3321,6 +3321,283 @@
 			]
 		},
 		{
+			"id": 71,
+			"name": "MetricsModuleAsyncOptions",
+			"kind": 256,
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 74,
+					"name": "inject",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "src/options.ts",
+							"line": 30,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "array",
+						"elementType": {
+							"type": "intrinsic",
+							"name": "any"
+						}
+					}
+				},
+				{
+					"id": 73,
+					"name": "useClass",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "src/options.ts",
+							"line": 28,
+							"character": 10
+						}
+					],
+					"type": {
+						"type": "reference",
+						"typeArguments": [
+							{
+								"type": "reference",
+								"id": 68,
+								"name": "MetricsModuleOptionsFactory"
+							}
+						],
+						"name": "Type"
+					}
+				},
+				{
+					"id": 72,
+					"name": "useExisting",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "src/options.ts",
+							"line": 27,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "reference",
+						"typeArguments": [
+							{
+								"type": "reference",
+								"id": 68,
+								"name": "MetricsModuleOptionsFactory"
+							}
+						],
+						"name": "Type"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						74,
+						73,
+						72
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/options.ts",
+					"line": 26,
+					"character": 42
+				}
+			],
+			"extendedTypes": [
+				{
+					"type": "reflection",
+					"declaration": {
+						"id": 75,
+						"name": "__type",
+						"kind": 65536,
+						"kindString": "Type literal",
+						"flags": {
+							"isExported": true
+						},
+						"sources": [
+							{
+								"fileName": "src/options.ts",
+								"line": 26,
+								"character": 50
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"id": 65,
+			"name": "MetricsModuleOptions",
+			"kind": 256,
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 66,
+					"name": "prometheus",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "src/options.ts",
+							"line": 18,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 4,
+						"name": "PrometheusOptions"
+					}
+				},
+				{
+					"id": 67,
+					"name": "statsd",
+					"kind": 1024,
+					"kindString": "Property",
+					"flags": {
+						"isExported": true,
+						"isOptional": true
+					},
+					"sources": [
+						{
+							"fileName": "src/options.ts",
+							"line": 19,
+							"character": 8
+						}
+					],
+					"type": {
+						"type": "reference",
+						"id": 58,
+						"name": "StatsDOptions"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Properties",
+					"kind": 1024,
+					"children": [
+						66,
+						67
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/options.ts",
+					"line": 17,
+					"character": 37
+				}
+			]
+		},
+		{
+			"id": 68,
+			"name": "MetricsModuleOptionsFactory",
+			"kind": 256,
+			"kindString": "Interface",
+			"flags": {
+				"isExported": true
+			},
+			"children": [
+				{
+					"id": 69,
+					"name": "createStatsOptions",
+					"kind": 2048,
+					"kindString": "Method",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 70,
+							"name": "createStatsOptions",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {
+								"isExported": true
+							},
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "reference",
+										"typeArguments": [
+											{
+												"type": "reference",
+												"id": 65,
+												"name": "MetricsModuleOptions"
+											}
+										],
+										"name": "Promise"
+									},
+									{
+										"type": "reference",
+										"id": 65,
+										"name": "MetricsModuleOptions"
+									}
+								]
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "src/options.ts",
+							"line": 23,
+							"character": 20
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Methods",
+					"kind": 2048,
+					"children": [
+						69
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "src/options.ts",
+					"line": 22,
+					"character": 44
+				}
+			]
+		},
+		{
 			"id": 1,
 			"name": "PrometheusDefaultMetricsOptions",
 			"kind": 256,
@@ -3456,283 +3733,6 @@
 					"fileName": "src/prometheus/options.ts",
 					"line": 20,
 					"character": 34
-				}
-			]
-		},
-		{
-			"id": 71,
-			"name": "StatsAsyncOptions",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {
-				"isExported": true
-			},
-			"children": [
-				{
-					"id": 74,
-					"name": "inject",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"sources": [
-						{
-							"fileName": "src/options.ts",
-							"line": 30,
-							"character": 8
-						}
-					],
-					"type": {
-						"type": "array",
-						"elementType": {
-							"type": "intrinsic",
-							"name": "any"
-						}
-					}
-				},
-				{
-					"id": 73,
-					"name": "useClass",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"sources": [
-						{
-							"fileName": "src/options.ts",
-							"line": 28,
-							"character": 10
-						}
-					],
-					"type": {
-						"type": "reference",
-						"typeArguments": [
-							{
-								"type": "reference",
-								"id": 68,
-								"name": "StatsOptionsFactory"
-							}
-						],
-						"name": "Type"
-					}
-				},
-				{
-					"id": 72,
-					"name": "useExisting",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"sources": [
-						{
-							"fileName": "src/options.ts",
-							"line": 27,
-							"character": 13
-						}
-					],
-					"type": {
-						"type": "reference",
-						"typeArguments": [
-							{
-								"type": "reference",
-								"id": 68,
-								"name": "StatsOptionsFactory"
-							}
-						],
-						"name": "Type"
-					}
-				}
-			],
-			"groups": [
-				{
-					"title": "Properties",
-					"kind": 1024,
-					"children": [
-						74,
-						73,
-						72
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "src/options.ts",
-					"line": 26,
-					"character": 34
-				}
-			],
-			"extendedTypes": [
-				{
-					"type": "reflection",
-					"declaration": {
-						"id": 75,
-						"name": "__type",
-						"kind": 65536,
-						"kindString": "Type literal",
-						"flags": {
-							"isExported": true
-						},
-						"sources": [
-							{
-								"fileName": "src/options.ts",
-								"line": 26,
-								"character": 42
-							}
-						]
-					}
-				}
-			]
-		},
-		{
-			"id": 65,
-			"name": "StatsOptions",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {
-				"isExported": true
-			},
-			"children": [
-				{
-					"id": 66,
-					"name": "prometheus",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"sources": [
-						{
-							"fileName": "src/options.ts",
-							"line": 18,
-							"character": 12
-						}
-					],
-					"type": {
-						"type": "reference",
-						"id": 4,
-						"name": "PrometheusOptions"
-					}
-				},
-				{
-					"id": 67,
-					"name": "statsd",
-					"kind": 1024,
-					"kindString": "Property",
-					"flags": {
-						"isExported": true,
-						"isOptional": true
-					},
-					"sources": [
-						{
-							"fileName": "src/options.ts",
-							"line": 19,
-							"character": 8
-						}
-					],
-					"type": {
-						"type": "reference",
-						"id": 58,
-						"name": "StatsDOptions"
-					}
-				}
-			],
-			"groups": [
-				{
-					"title": "Properties",
-					"kind": 1024,
-					"children": [
-						66,
-						67
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "src/options.ts",
-					"line": 17,
-					"character": 29
-				}
-			]
-		},
-		{
-			"id": 68,
-			"name": "StatsOptionsFactory",
-			"kind": 256,
-			"kindString": "Interface",
-			"flags": {
-				"isExported": true
-			},
-			"children": [
-				{
-					"id": 69,
-					"name": "createStatsOptions",
-					"kind": 2048,
-					"kindString": "Method",
-					"flags": {
-						"isExported": true
-					},
-					"signatures": [
-						{
-							"id": 70,
-							"name": "createStatsOptions",
-							"kind": 4096,
-							"kindString": "Call signature",
-							"flags": {
-								"isExported": true
-							},
-							"type": {
-								"type": "union",
-								"types": [
-									{
-										"type": "reference",
-										"typeArguments": [
-											{
-												"type": "reference",
-												"id": 65,
-												"name": "StatsOptions"
-											}
-										],
-										"name": "Promise"
-									},
-									{
-										"type": "reference",
-										"id": 65,
-										"name": "StatsOptions"
-									}
-								]
-							}
-						}
-					],
-					"sources": [
-						{
-							"fileName": "src/options.ts",
-							"line": 23,
-							"character": 20
-						}
-					]
-				}
-			],
-			"groups": [
-				{
-					"title": "Methods",
-					"kind": 2048,
-					"children": [
-						69
-					]
-				}
-			],
-			"sources": [
-				{
-					"fileName": "src/options.ts",
-					"line": 22,
-					"character": 36
 				}
 			]
 		},
@@ -7982,11 +7982,11 @@
 				148,
 				151,
 				340,
-				1,
-				4,
 				71,
 				65,
 				68,
+				1,
+				4,
 				154,
 				14
 			]

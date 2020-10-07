@@ -33,12 +33,12 @@
       - [Single Tests](#single-tests)
     - [Deployment](#deployment)
   - [Documentation](#documentation)
+    - [API](#api)
+    - [Metrics](#metrics)
     - [Registering Module](#registering-module)
     - [Registering Metrics](#registering-metrics)
     - [Registering Metrics Controller](#registering-metrics-controller)
-    - [Use Decorators](#use-decorators)
-    - [Metrics Decorators](#metrics-decorators)
-  - [API Documentation](#api-documentation)
+    - [Metric Decorators](#metric-decorators)
   - [Authors](#authors)
   - [Issues / Support](#issues--support)
   - [License](#license)
@@ -112,53 +112,15 @@ Please check [release-it](https://www.npmjs.com/package/release-it) for making r
 npm run release
 ```
 
----------------------------------
-
 ## Documentation
 
-### Registering Module
+### API
 
-**Using (sync) `register()` method**:
+For a better understanding of the API, the the following [API documentation](https://mists-aside.github.io/nestjs-metrics).
 
-```javascript
-@Module({
-  imports: [MetricsModule.register({
-    prometheus: {
-      // ...
-    },
-    statsd: {
-      // ...
-    }
-  })],
-})
-export class AppModule {}
-```
+### Metrics
 
-**Using async `registerAsync()` method**:
-
-```javascript
-import { Module } from "@nestjs/common";
-import { MetricsModule } from "@mists/nestjs-metrics";
-
-@Injectable()
-export class StatsOptionsService implements StatsOptionsFactory {
-  createStatsOptions(): StatsOptions {
-    return new Promise(resolve => ({
-      // see the MetricsModule::register() options
-    }));
-  }
-}
-
-@Module({
-  imports: [MetricsModule.registerAsync({
-    useClass: StatsOptionsService,
-    inject: [StatsOptionsService],
-  })],
-})
-export class AppModule {}
-```
-
-### Registering Metrics
+<!-- TODO: -->
 
 There are currently
 
@@ -175,7 +137,47 @@ There are currently
   * [`PromClient.Summary`](https://github.com/siimon/prom-client#summary)
   * on the side of `statsd`, to support compatibility (not sure if it's good or bad, yet), the same methods as for `Histogram`
 
-You will need to create a provider first,
+### Registering Module
+
+**Using (sync) `register()` method**:
+
+```javascript
+@Module({
+  imports: [MetricsModule.register({/* ... */})],
+})
+export class AppModule {}
+```
+
+**Using async `registerAsync()` method**:
+
+```javascript
+import { Module } from "@nestjs/common";
+import { MetricsModule } from "@mists/nestjs-metrics";
+
+@Injectable()
+export class StatsOptionsService implements StatsOptionsFactory {
+  createStatsOptions(): StatsOptions {
+    return new Promise(resolve => ({
+      /* see the MetricsModule::register() options */
+    }));
+  }
+}
+
+@Module({
+  imports: [MetricsModule.registerAsync({
+    useClass: StatsOptionsService,
+    inject: [StatsOptionsService],
+  })],
+})
+export class AppModule {}
+```
+
+### Registering Metrics
+
+You will need to create a metric provider first. This will be done using the 
+[`makeMetricProvider`](https://mists-aside.github.io/nestjs-metrics/index.html#makemetricprovider) method.
+
+See more details about [MetricsModuleOptions](https://mists-aside.github.io/nestjs-metrics/interfaces/metricsmoduleoptions.html) before you continue. 
 
 ```javascript
 import { Module } from "@nestjs/common";
@@ -184,12 +186,14 @@ import { MetricsModule, MetricsController, Counter,  } from "@mists/nestjs-metri
 @Module({
   controllers: [MetricsController],
   imports: [MetricsModule.register({/* ... */})],
-  providers: [makeMetricProvider(Metrics.Counter, 'metrics_injector', {})],
+  providers: [
+    makeMetricProvider(Metrics.Counter, 'metrics_injector', {})
+  ],
 })
 export class AppModule {}
 ```
 
-then, inject your new counter in the controller class:
+Then, inject your new metric in the controller class like this:
 
 ```javascript
 @Controller('/route')
@@ -207,7 +211,7 @@ export class MetricsController {
 
 ### Registering Metrics Controller
 
-> used currently by Prometheus only
+> The Metrics controller used currently by Prometheus only
 
 ```javascript
 import { Module } from "@nestjs/common";
@@ -225,18 +229,13 @@ import { MetricsModule, MetricsController } from "@mists/nestjs-metrics";
 export class AppModule {}
 ```
 
-### Use Decorators
+### Metric Decorators
 
-```javascript
-import { Module } from "@nestjs/common";
-import { MetricsModule, CustomController } from "@mists/nestjs-metrics";
+> Do not rely on decorators only since they have a very limited scope.
 
-@Module({
-  controllers: [CustomController],
-  imports: [MetricsModule.register()],
-})
-export class AppModule {}
-```
+Decorators do not require providers, as they have their own mechanism of instantiation, based on the one that creates the providers. 
+
+First step is to create a decorator using the default created wrappers:
 
 ```typescript
 import { Controller, Get } from "@nestjs/common";
@@ -274,12 +273,16 @@ const SummaryObserve = generateMetricDecorator(Metrics.Summary, 'metrics_summary
 const SummaryTiming = generateMetricDecorator(Metrics.Summary, 'metrics_summary_decorator', metricTimingWrapper, genericOptions);
 
 
-
 const IncrementHttpCalls = generateMetricDecorator(
   Metrics.Counter,
   'metric_http_calls',
   metricIncrementWrapper
 );
+```
+
+Or by defining your own metric wrapper:
+
+```typescript
 
 export const customMetricWrapper: MetricWrapper = (
   metricArgs: MetricNumericArgs,
@@ -298,7 +301,11 @@ const CustomIncrementHttpCalls = generateMetricDecorator(
   'metric_http_calls_custom',
   customMetricWrapper
 );
+```
 
+Then apply the decorator on a controller method:
+
+```typescript
 @Controller('/test')
 class CustomController {
   @Get()
@@ -307,15 +314,6 @@ class CustomController {
   testMethod() {}
 }
 ```
-
-### Metrics Decorators
-
-
-## API Documentation
-
-See [API documentation here](https://mists-aside.github.io/nestjs-metrics).
-
-------------------
 
 ## Authors
 

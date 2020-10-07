@@ -14,18 +14,18 @@ export enum StatsTypes {
   Statsd,
 }
 
-export interface StatsOptions {
+export interface MetricsModuleOptions {
   prometheus?: PrometheusOptions;
   statsd?: StatsDOptions;
 }
 
-export interface StatsOptionsFactory {
-  createStatsOptions(): Promise<StatsOptions> | StatsOptions;
+export interface MetricsModuleOptionsFactory {
+  createStatsOptions(): Promise<MetricsModuleOptions> | MetricsModuleOptions;
 }
 
-export interface StatsAsyncOptions extends Pick<ModuleMetadata, 'imports'> {
-  useExisting?: Type<StatsOptionsFactory>;
-  useClass?: Type<StatsOptionsFactory>;
+export interface MetricsModuleAsyncOptions extends Pick<ModuleMetadata, 'imports'> {
+  useExisting?: Type<MetricsModuleOptionsFactory>;
+  useClass?: Type<MetricsModuleOptionsFactory>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   inject?: any[];
   /**

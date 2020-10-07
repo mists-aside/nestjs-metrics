@@ -3,11 +3,11 @@ import * as request from 'supertest';
 import {Injectable} from '@nestjs/common';
 import {Test} from '@nestjs/testing';
 
-import {StatsAsyncOptions, MetricsController, MetricsModule, StatsOptions, StatsOptionsFactory} from '../../src';
+import {MetricsModuleAsyncOptions, MetricsController, MetricsModule, MetricsModuleOptions, MetricsModuleOptionsFactory} from '../../src';
 import {TestHarness} from './harness';
 
 export const createTestModule = async (
-  options?: StatsOptions,
+  options?: MetricsModuleOptions,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   testOptions?: {[key: string]: any[]},
 ): Promise<TestHarness> => {
@@ -32,8 +32,8 @@ export const createTestModule = async (
 };
 
 @Injectable()
-export class StatsOptionsService implements StatsOptionsFactory {
-  createStatsOptions(): StatsOptions {
+export class StatsOptionsService implements MetricsModuleOptionsFactory {
+  createStatsOptions(): MetricsModuleOptions {
     return {
       statsd: 'dummy',
       prometheus: {
@@ -48,7 +48,7 @@ export class StatsOptionsService implements StatsOptionsFactory {
 }
 
 export const createAsyncTestModule = async (
-  options?: StatsAsyncOptions,
+  options?: MetricsModuleAsyncOptions,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   testOptions?: {[key: string]: any[]},
 ): Promise<TestHarness> => {
