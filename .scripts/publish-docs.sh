@@ -1,4 +1,5 @@
 #! /bin/bash
+set -xe
 
 # https://gist.github.com/willprice/e07efd73fb7f13f917ea
 
