@@ -18,7 +18,8 @@ git config user.name "Travis CI"
 git add .
 git commit --message "Travis build $TRAVIS_BUILD_NUMBER :: $1 Docs"
 
-git push --quiet --set-upstream origin master
+git remote add origin-docs https://${GH_TOKEN}@github.com/mists-aside/mists-aside.github.io
+git push --quiet --set-upstream origin-docs master
 
 cd ..
 rm -rf mists-aside.github.io
