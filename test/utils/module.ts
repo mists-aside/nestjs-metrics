@@ -3,7 +3,13 @@ import * as request from 'supertest';
 import {Injectable} from '@nestjs/common';
 import {Test} from '@nestjs/testing';
 
-import {MetricsModuleAsyncOptions, MetricsController, MetricsModule, MetricsModuleOptions, MetricsModuleOptionsFactory} from '../../src';
+import {
+  MetricsModuleAsyncOptions,
+  MetricsController,
+  MetricsModule,
+  MetricsModuleOptions,
+  MetricsModuleOptionsFactory,
+} from '../../src';
 import {TestHarness} from './harness';
 
 export const createTestModule = async (

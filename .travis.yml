@@ -23,8 +23,8 @@ scripts:
   - npm run test
   - npm run test:junit
   # - npm run build
-# after_script:
-  - if [[ $TRAVIS_NODE_VERSION == '12' ]]; then npm run docs; fi
+after_script:
+  - if [[ "$TRAVIS_BRANCH" == "develop" ]] && [[ $TRAVIS_NODE_VERSION == '12' ]]; then bash ./.scripts/publish-docs.sh nestjs-metrics; fi
 notifications:
   email:
     recipients:
