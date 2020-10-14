@@ -1,42 +1,61 @@
 {
-  "name": "templ-project-javascript",
+  "name": "@mists/nestjs-metrics",
   "version": "0.0.1",
-  "description": "Javascript Project Template",
-  "main": "dist/index.js",
+  "description": "A NestJs plugin for metrics",
+  "main": "dist/commonjs/index.js",
   "scripts": {
     "build": "rollup -c --environment NODE_ENV:production",
-    "change:language": "node .scripts/change-language.js",
     "clean": "rimraf coverage dist",
     "depcruise": "depcruise --config .dependency-cruiser.js src",
     "doc:watch": "nodemon --exec 'npm run doc'",
+    "docs": "npx typedoc --out docs --json docs.json --readme none --theme minimal --mode file src",
+    "git-hook:pre-commit": "npm run prettier:write && npm run lint:write && npm run jscpd && npm run depcruise && npm run test",
     "inspector": "jsinspector server --port 9543",
+    "jscpd": "jscpd ./src --blame --format typescript",
     "jscpd:html": "npm run jscpd -- --reporters html",
-    "lint:write": "npm run lint -- --fix",
+    "lint": "eslint ./{src,test}/**/*.ts",
     "lint:watch": "nodemon --exec 'npm run lint'",
-    "prettier:check": "npm run prettier -- --list-different",
-    "prettier:write": "npm run prettier -- --write",
+    "lint:write": "npm run lint -- --fix",
     "prebuild": "npm run clean",
     "predocs": "rimraf docs",
     "prerelease": "npm run build",
     "pretest": "npm run clean",
+    "prettier": "prettier ./{src,test}/**/*.ts",
+    "prettier:check": "npm run prettier -- --list-different",
+    "prettier:write": "npm run prettier -- --write",
     "release": "release-it --ci --no-npm.publish",
+    "test": "npm run test:single -- 'test/**/*.test.ts'",
     "test:junit": "npm run test -- --reporter mocha-junit-reporter --reporter-options mochaFile=.junit.xml",
+    "test:single": "nyc --reporter=html --reporter=lcov --reporter=text --extension .ts mocha",
     "test:watch": "nodemon --exec 'npm run test'"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dragoscirjan/template-javascript.git"
+    "url": "https://github.com/mists-aside/nestjs-metrics.git"
   },
   "author": "Dragos Cirjan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dragoscirjan/template-javascript/issues"
+    "url": "https://github.com/mists-aside/nestjs-metrics/issues"
   },
-  "homepage": "https://github.com/dragoscirjan/template-javascript#readme",
+  "homepage": "https://github.com/mists-aside/nestjs-metrics#readme",
   "devDependencies": {
     "@commitlint/cli": "^9.0.1",
     "@commitlint/config-conventional": "^9.0.1",
+    "@nestjs/cli": "^7.4.1",
+    "@nestjs/core": "^7.4.2",
+    "@nestjs/platform-express": "^7.4.2",
+    "@nestjs/schematics": "^7.0.1",
+    "@nestjs/testing": "^7.4.2",
     "@release-it/conventional-changelog": "^1.1.4",
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.13.4",
+    "@types/sinon-chai": "^3.2.4",
+    "@types/supertest": "^2.0.10",
+    "@types/uuid": "^8.3.0",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "@typescript-eslint/parser": "^2.30.0",
     "chai": "^4.2.0",
     "dependency-cruiser": "^9.8.1",
     "eslint": "^7.4.0",
@@ -49,12 +68,35 @@
     "nodemon": "^2.0.4",
     "nyc": "^15.1.0",
     "prettier": "^2.0.5",
+    "reflect-metadata": "^0.1.13",
     "release-it": "^13.6.4",
     "rimraf": "^3.0.2",
     "rollup": "^2.20.0",
+    "rollup-plugin-dts": "^1.4.7",
+    "rollup-plugin-typescript2": "^0.27.1",
+    "statsd": "^0.8.6",
+    "supertest": "^4.0.2",
+    "ts-node": "^8.10.1",
+    "typedoc": "^0.17.7",
+    "typescript": "^3.8.3",
     "yorkie": "^2.0.0"
   },
+  "peerDependencies": {
+    "@types/statsd-client": "^0.4.0",
+    "prom-client": "^12.0.0",
+    "statsd-client": "^0.4.5"
+  },
   "gitHooks": {
-    "commit-msg": "commitlint -e -V "
+    "commit-msg": "commitlint -e -V ",
+    "pre-commit": "npm run git-hook:pre-commit && git add ."
+  },
+  "dependencies": {
+    "@nestjs/common": "^7.4.2",
+    "@types/statsd-client": "^0.4.0",
+    "prom-client": "^12.0.0",
+    "sinon": "^9.0.3",
+    "sinon-chai": "^3.5.0",
+    "statsd-client": "^0.4.5",
+    "uuid": "^8.3.0"
   }
 }
