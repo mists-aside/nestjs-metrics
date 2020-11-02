@@ -1,8 +1,15 @@
 {
   "name": "@mists/nestjs-metrics",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "A NestJs plugin for metrics",
   "main": "dist/commonjs/index.js",
+  "files": [
+    "CHANGELOG.md",
+    "dist",
+    "docs.json",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "rollup -c --environment NODE_ENV:production",
     "clean": "rimraf coverage dist",
