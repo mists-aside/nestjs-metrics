@@ -9,7 +9,6 @@ node_js: # a good example: https://github.com/pillarjs/router/blob/master/.travi
   - "14"
   - lts/*
   - node
-sudo: false
 cache:
   directories:
     - node_modules
@@ -25,8 +24,8 @@ scripts:
 after_script:
   - if [[ $TRAVIS_NODE_VERSION == '12' ]] && [[ $TRAVIS_OS_NAME == 'linux' ]]; then
     sonar-scanner;
-    if [[ "$TRAVIS_BRANCH" == "develop" ]]; then bash ./.scripts/publish-docs.sh nestjs-metrics; fi
-    if [[ "$TRAVIS_BRANCH" == "master" ]]; then npm run release -- patch; npm publish; fi
+    if [[ "$TRAVIS_BRANCH" == "develop" ]]; then bash ./.scripts/publish-docs.sh nestjs-metrics; fi;
+    if [[ "$TRAVIS_BRANCH" == "master" ]]; then npm run release -- patch; npm publish; fi;
     fi
 notifications:
   email:
