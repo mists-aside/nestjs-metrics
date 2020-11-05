@@ -7,4 +7,6 @@ git symbolic-ref HEAD refs/heads/master
 
 echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
 
+git status
+
 npm run release -- patch --dry-run
