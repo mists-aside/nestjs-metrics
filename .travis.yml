@@ -26,8 +26,10 @@ after_script:
   - git status
   - if [[ $TRAVIS_NODE_VERSION == '12' ]] && [[ $TRAVIS_OS_NAME == 'linux' ]]; then
     sonar-scanner;
-    if [[ "$TRAVIS_BRANCH" == "develop" ]]; then bash ./.scripts/publish-docs.sh nestjs-metrics; fi;
-    if [[ "$TRAVIS_BRANCH" == "master" ]]; then npm run release -- patch; npm publish; fi;
+    if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+    bash ./.scripts/travis-publish-docs.sh nestjs-metrics;
+    bash ./.scripts/travis-release-it.sh nestjs-metrics;
+    fi;
     fi
 notifications:
   email:
