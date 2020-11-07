@@ -14,4 +14,4 @@ echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
 
 git status
 
-npm run release -- patch --dry-run
+npm run release -- patch --no-git.requireUpstream --dry-run
