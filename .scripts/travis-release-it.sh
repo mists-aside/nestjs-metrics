@@ -16,4 +16,4 @@ git status
 
 npm run release -- patch --no-git.requireUpstream #--dry-run
 
-# npm release
+npm release
