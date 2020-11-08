@@ -27,10 +27,19 @@ jobs:
     - name: test-sonar
       script: sonar-scanner
       node_js: 12
-    # - name: deploy-docs
-    #   script: bash ./.scripts/travis-publish-docs.sh nestjs-metrics
-    # - name: deploy-code
-    #   script: bash ./.scripts/travis-release-it.sh
+      if: branch = 'master'
+    - name: deploy-docs
+      script: bash ./.scripts/travis-publish-docs.sh nestjs-metrics
+      node_js: 12
+      if: |
+        branch = 'master' AND
+        commit_message =~ /^chore: release/
+    - name: deploy-code
+      script: bash ./.scripts/travis-release-it.sh
+      node_js: 12
+      if: |
+        branch = 'master' AND
+        commit_message =~ /^chore: release/
 # stages:
 #   - install
 #   - test-code
