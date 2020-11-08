@@ -33,13 +33,13 @@ jobs:
       node_js: 12
       if: |
         branch = 'master' AND
-        commit_message =~ /^chore: release/
+        NOT commit_message =~ /^chore: release/
     - name: deploy-code
       script: bash ./.scripts/travis-release-it.sh
       node_js: 12
       if: |
         branch = 'master' AND
-        commit_message =~ /^chore: release/
+        NOT commit_message =~ /^chore: release/
 # stages:
 #   - install
 #   - test-code
