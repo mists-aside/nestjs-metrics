@@ -14,54 +14,53 @@ cache:
     - node_modules
 jobs:
   include:
-    - name: install
-      script: npm i
-    - name: test-code
-      script: npm run prettier:write &&
-        npm run lint:write &&
-        npm run jscpd &&
-        npm run depcruise &&
-        npm run test
-    - name: build
-      script: np run build
+    # - name: install
+    #   script: npm i
+    # - name: test-code
+    #   script: npm run prettier:write &&
+    #     npm run lint:write &&
+    #     npm run jscpd &&
+    #     npm run depcruise &&
+    #     npm run test
+    # - name: build
+    #   script: np run build
     - name: test-sonar
       script: sonar-scanner
-    - name: deploy-docs
-      script: bash ./.scripts/travis-publish-docs.sh nestjs-metrics
-    - name: deploy-code
-      script: bash ./.scripts/travis-release-it.sh
-stages:
-  - install
-  - test-code
-  - name: test-sonar
-    if: |
-      branch = 'master' AND
-      env(TRAVIS_NODE_VERSION) = '12' AND
-      env(TRAVIS_OS_NAME) = 'linux'
-  - build
-  - name: deploy-docs
-    if: |
-      branch = 'master' AND
-      env(TRAVIS_NODE_VERSION) = '12' AND
-      env(TRAVIS_OS_NAME) = 'linux'
-  - name: deploy-code
-    if: |
-      branch = 'master' AND
-      env(TRAVIS_NODE_VERSION) = '12' AND
-      env(TRAVIS_OS_NAME) = 'linux' AND
-      NOT commit_message =~ /^chore: release/
-# scripts:
-#   - set -e
-#   - npm i
-#   - npm run prettier:write
-#   - npm run lint:write
-#   - npm run jscpd
-#   - npm run depcruise
-#   - npm run test
-#   - npm run build
+      node_js: 12
+    # - name: deploy-docs
+    #   script: bash ./.scripts/travis-publish-docs.sh nestjs-metrics
+    # - name: deploy-code
+    #   script: bash ./.scripts/travis-release-it.sh
+# stages:
+#   - install
+#   - test-code
+#   - name: test-sonar
+#     if: |
+#       branch = 'master' AND
+#       env(TRAVIS_NODE_VERSION) = '12' AND
+#       env(TRAVIS_OS_NAME) = 'linux'
+#   - build
+#   - name: deploy-docs
+#     if: |
+#       branch = 'master' AND
+#       env(TRAVIS_NODE_VERSION) = '12' AND
+#       env(TRAVIS_OS_NAME) = 'linux'
+#   - name: deploy-code
+#     if: |
+#       branch = 'master' AND
+#       env(TRAVIS_NODE_VERSION) = '12' AND
+#       env(TRAVIS_OS_NAME) = 'linux' AND
+#       NOT commit_message =~ /^chore: release/
+scripts:
+  - set -e
+  - npm i
+  - npm run prettier:write
+  - npm run lint:write
+  - npm run jscpd
+  - npm run depcruise
+  - npm run test
+  - npm run build
 # after_script:
-#   if: |
-#     commit_message =~ /^chore: release/
 #   - git checkout .
 #   - git status
 #   - if [[ $TRAVIS_NODE_VERSION == '12' ]] && [[ $TRAVIS_OS_NAME == 'linux' ]]; then sonar-scanner; fi
