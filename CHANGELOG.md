@@ -1,3 +1,5 @@
+## [0.0.2](https://github.com/mists-aside/nestjs-metrics/compare/0.0.1...0.0.2) (2020-11-08)
+
 ## 0.0.1 (2020-11-08)
 
 
