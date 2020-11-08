@@ -1,6 +1,6 @@
 {
   "name": "@mists/nestjs-metrics",
-  "version": "0.0.49",
+  "version": "0.0.50",
   "description": "A NestJs plugin for metrics",
   "main": "dist/commonjs/index.js",
   "files": [
