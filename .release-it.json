@@ -1,4 +1,8 @@
 {
+  "git": {
+    "commitMessage": "chore: release v${version}",
+    "requireBranch": "master"
+  },
   "plugins": {
     "@release-it/conventional-changelog": {
       "preset": "angular",
