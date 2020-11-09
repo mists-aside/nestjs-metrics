@@ -1,3 +1,10 @@
+## [0.0.2](https://github.com/mists-aside/nestjs-metrics/compare/0.0.1...0.0.2) (2020-11-08)
+
+
+### Bug Fixes
+
+* release reset debug - v5 ([9120d72](https://github.com/mists-aside/nestjs-metrics/commit/9120d723475a3eccea91621d76c30a7d9d85e9bc))
+
 ## 0.0.1 (2020-11-08)
 
 
