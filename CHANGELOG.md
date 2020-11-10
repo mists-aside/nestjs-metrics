@@ -1,3 +1,10 @@
+## [0.0.2](https://github.com/mists-aside/nestjs-metrics/compare/0.0.1...0.0.2) (2020-11-10)
+
+
+### Bug Fixes
+
+* one more try @ auto publish - v2 ([9704942](https://github.com/mists-aside/nestjs-metrics/commit/970494297c95ea58799eb1284dd4a27d923a340e))
+
 ## 0.0.1 (2020-11-10)
 
 
