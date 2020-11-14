@@ -27,10 +27,10 @@ jobs:
     - name: deploy-code
       script: bash ./.scripts/travis-release-it.sh
       node_js: 12
-      # deploy:
-      #   provider: npm
-      #   email: $NPM_EMAIL
-      #   api_key: $NPM_TOKEN
+      deploy:
+        provider: npm
+        email: dragos.cirjan@gmail.com
+        api_key: Y1e8p5HgFk/VDVM1KaitRLM0EFnd2TcRlEhJF4JZ2v/sTKMPLYOKXaPnG7KFJ72wn/FvJG/Bf4Vt0Bmk+lRBV4POLizvUra252TEbQXJiLAmBTBM+2Rl+p6eVScnZz2hNZKFypHWF69Vim/Mz9sy63orZ6XUgKKJPb7N4KLAOAegO61tE+9/qGIMMX1tKHed7zJmMLay9ESgef6fT8eRIq04kfN4iQxnEpAz3jj04aHn7sfRVV4rSYbsoArAQTyByAQsUtXFdS9y50Fj/pwVxQiRvuGyOG/fg6rtKcKcK3w6+N+S082Pg4rpXBgGaLk77go/DbsH8LkAMDiHgfjaMstocI3ApHNz0Cm4hDHlRPXiYbSIp7MXiBijknFYWb5dWACcIoipFZHbAHwpI0H8e9ZD/F45vgPW/eTHoIE/T6I1RgmX9AkOVX37gTpSv5rBiynygDPXCGV9XAOXdmf9kAdjyMy5vDzzs40B22xL3DvzVVv7OhBHxhK7ItQ1JN0LelSaOR9gTl5ReYwNp1JXiemJtmvbhA8oUvkaULrtVN6oMtHlB8603133c/MWtNKWGot4D6dE0UPpozJD/O4SEKaXJoD/cgPSH9XU4sLXBV1LPGnYheNK2nD3lffKQyqAL16VP+FO/OzNBlmZMhGW7l4dy4qCcPWGZ7S0CeCHXRc=
       if: |
         branch = 'master' AND
         NOT commit_message =~ /^chore: release/
