@@ -13,6 +13,6 @@ git status
 
 npm run release -- patch --no-git.requireUpstream #--dry-run
 
-echo "//registry.npmjs.com/:_authToken=$NPM_TOKEN" > .npmrc
+# echo "//registry.npmjs.com/:_authToken=$NPM_TOKEN" > .npmrc
 
-npm publish --access public
+# npm publish --access public
