@@ -27,10 +27,10 @@ jobs:
     - name: deploy-code
       script: bash ./.scripts/travis-release-it.sh
       node_js: 12
-      deploy:
-        provider: npm
-        email: $NPM_EMAIL
-        api_key: $NPM_TOKEN
+      # deploy:
+      #   provider: npm
+      #   email: $NPM_EMAIL
+      #   api_key: $NPM_TOKEN
       if: |
         branch = 'master' AND
         NOT commit_message =~ /^chore: release/
