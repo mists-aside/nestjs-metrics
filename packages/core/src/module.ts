@@ -1,5 +1,5 @@
 import {DynamicModule, Module, Provider} from '@nestjs/common';
-import {Config, MetricsModuleOptions, MetricsModuleAsyncOptions, MetricsModuleOptionsFactory} from '@nestjs/./config';
+import {Config, MetricsModuleOptions, MetricsModuleAsyncOptions, MetricsModuleOptionsFactory} from './config';
 
 /**
  * TODO:
@@ -25,7 +25,6 @@ import {Config, MetricsModuleOptions, MetricsModuleAsyncOptions, MetricsModuleOp
  */
 @Module({})
 export class MetricsModule {
-
   /**
    * TODO:
    * Module (sync) register method.
@@ -141,15 +140,7 @@ export class MetricsModule {
 
   private static makeDefaultOptions(options?: MetricsModuleOptions): Required<MetricsModuleOptions> {
     return {
-      // prometheus: {
-      //   route: '/metrics',
-      //   defaultMetrics: {
-      //     enabled: true,
-      //     config: {},
-      //   },
-      //   ...(options.prometheus || {}),
-      // },
-      // statsd: 'dummy',
+      adapters: {},
     };
   }
 }

@@ -3,13 +3,7 @@ import * as request from 'supertest';
 import {Injectable} from '@nestjs/common';
 import {Test} from '@nestjs/testing';
 
-import {
-  MetricsModuleAsyncOptions,
-  MetricsController,
-  MetricsModule,
-  MetricsModuleOptions,
-  MetricsModuleOptionsFactory,
-} from '../../src';
+import {MetricsModuleAsyncOptions, MetricsModule, MetricsModuleOptions, MetricsModuleOptionsFactory} from '../../src';
 import {TestHarness} from './harness';
 
 export const createTestModule = async (
@@ -20,8 +14,8 @@ export const createTestModule = async (
   testOptions = testOptions || {};
 
   const testingModule = await Test.createTestingModule({
-    controllers: [MetricsController, ...(testOptions.controllers || [])],
-    imports: [MetricsModule.register(options || {}), ...(testOptions.imports || [])],
+    controllers: [...(testOptions.controllers || [])],
+    imports: [...(testOptions.imports || [])],
     providers: [...(testOptions.providers || [])],
   }).compile();
 
@@ -41,14 +35,7 @@ export const createTestModule = async (
 export class StatsOptionsService implements MetricsModuleOptionsFactory {
   createStatsOptions(): MetricsModuleOptions {
     return {
-      statsd: 'dummy',
-      prometheus: {
-        route: '/metrics',
-        defaultMetrics: {
-          enabled: true,
-          config: {},
-        },
-      },
+      adapters: {},
     };
   }
 }
@@ -61,7 +48,7 @@ export const createAsyncTestModule = async (
   testOptions = testOptions || {};
 
   const testingModule = await Test.createTestingModule({
-    controllers: [MetricsController, ...(testOptions.controllers || [])],
+    controllers: [...(testOptions.controllers || [])],
     imports: [MetricsModule.registerAsync(options || {}), ...(testOptions.imports || [])],
     providers: [...(testOptions.providers || [])],
   }).compile();

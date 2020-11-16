@@ -1,3 +1,1 @@
-
-
-export interface MetricsAdapter { }
+export interface MetricsAdapter {}

@@ -1,13 +1,13 @@
-import { MetricsAdapter } from './adapter';
+import {MetricsAdapter} from './adapter';
 import {ModuleMetadata} from '@nestjs/common/interfaces';
 import {Type} from '@nestjs/common';
 
 export interface MetricsAdapters {
-  [key: string]: MetricsAdapter
+  [key: string]: MetricsAdapter;
 }
 
 export interface MetricsModuleOptions {
-  adapters: MetricsAdapters
+  adapters: MetricsAdapters;
 }
 
 export interface MetricsModuleOptionsFactory {
@@ -43,7 +43,7 @@ export class Config {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
-  private cAdapters: MetricsAdapters
+  private cAdapters: MetricsAdapters;
 
   get adapters(): MetricsAdapters {
     return this.cAdapters;
@@ -56,5 +56,4 @@ export class Config {
   addAdapters(adapters: MetricsAdapters) {
     this.cAdapters = Object.assign({}, this.cAdapters, adapters);
   }
-
 }
