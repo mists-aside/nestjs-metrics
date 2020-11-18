@@ -43,6 +43,8 @@ scripts:
   - npm run depcruise
   - npm run test
   - npm run build
+after_script:
+  - bash ./.scrips/travis-telegram-report.sh
 notifications:
   email:
     recipients:
