@@ -7,6 +7,7 @@ node_js: # a good example: https://github.com/pillarjs/router/blob/master/.travi
   - "12"
   - "13"
   - "14"
+  - "15"
   - lts/*
   - node
 cache:
