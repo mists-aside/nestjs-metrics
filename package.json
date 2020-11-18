@@ -8,6 +8,7 @@
     "lerna": "^3.22.1"
   },
   "scripts": {
+    "bootstrap": "lerna exec npm install",
     "git-hook:commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
     "git-hook:pre-commit": "lerna run test --scope @mists/nestjs-metrics*",
     "--git-hook:pre-commit": "lerna run git-hook:pre-commit --scope @mists/nestjs-metrics*",
