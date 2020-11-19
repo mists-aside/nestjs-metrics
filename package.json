@@ -9,9 +9,19 @@
   },
   "scripts": {
     "bootstrap": "lerna exec npm install",
+    "build": "lerna run build --scope @mists/nestjs-metrics*",
     "git-hook:commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
     "git-hook:pre-commit": "lerna run test --scope @mists/nestjs-metrics*",
     "--git-hook:pre-commit": "lerna run git-hook:pre-commit --scope @mists/nestjs-metrics*",
+    "depcruise": "lerna run depcruise --scope @mists/nestjs-metrics*",
+    "docs": "lerna run docs --scope @mists/nestjs-metrics*",
+    "jscpd": "lerna run jscpd --scope @mists/nestjs-metrics*",
+    "jscpd:html": "lerna run jscpd:html --scope @mists/nestjs-metrics*",
+    "lint": "lerna run lint --scope @mists/nestjs-metrics*",
+    "lint:write": "lerna run lint:write --scope @mists/nestjs-metrics*",
+    "prettier": "lerna run prettier --scope @mists/nestjs-metrics*",
+    "prettier:check": "lerna run prettier:check --scope @mists/nestjs-metrics*",
+    "prettier:write": "lerna run prettier:write --scope @mists/nestjs-metrics*",
     "test": "lerna run test --scope @mists/nestjs-metrics*"
   },
   "husky": {
