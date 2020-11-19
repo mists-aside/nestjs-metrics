@@ -4,6 +4,7 @@ import {
   Counter as CounterInterface,
   Gauge as GaugeInterface,
   Histogram as HistogramInterface,
+  Summary as SummaryInterface,
   Tags,
   TimerMethod,
 } from '../adapter';
@@ -58,6 +59,17 @@ export class Histogram implements HistogramInterface {
   }
 }
 
-export class Summary extends Histogram {
+export class Summary implements SummaryInterface {
   protected logger: Logger = new Logger('DummySummary');
+
+  observe(value: number, label?: string, tags?: Tags): void {
+    this.logger.debug(`Calling observe(${value}, ${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
+  }
+  reset(label?: string, tags?: Tags): void {
+    this.logger.debug(`Calling reset(${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
+  }
+  startTimer(label?: string, tags?: Tags): TimerMethod {
+    this.logger.debug(`Calling startTimer(${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
+    return startTimer(this.logger, label, tags);
+  }
 }
