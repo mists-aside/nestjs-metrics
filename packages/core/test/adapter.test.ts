@@ -26,55 +26,55 @@ summary.startTimer = sinon.fake();
 
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('src/module', function () {
-  let harness: TestHarness;
+  // let harness: TestHarness;
 
-  // eslint-disable-next-line mocha/no-mocha-arrows
-  afterEach(async () => {
-    if (harness) {
-      await harness.app.close();
-      harness = undefined;
-    }
-  });
+  // // eslint-disable-next-line mocha/no-mocha-arrows
+  // afterEach(async () => {
+  //   if (harness) {
+  //     await harness.app.close();
+  //     harness = undefined;
+  //   }
+  // });
 
-  describe('StatsModule.register()', () => {
-    // eslint-disable-next-line mocha/no-mocha-arrows
-    beforeEach(async () => {
-      harness = await createTestModule({
-        adapters: {
-          'counter': counter,
-          'gauge': new Gauge(),
-          'histogram': new Histogram(),
-          'summary': new Summary(),
-        },
-      });
-    });
+  // describe('StatsModule.register()', () => {
+  //   // eslint-disable-next-line mocha/no-mocha-arrows
+  //   beforeEach(async () => {
+  //     harness = await createTestModule({
+  //       adapters: {
+  //         'counter': counter,
+  //         'gauge': new Gauge(),
+  //         'histogram': new Histogram(),
+  //         'summary': new Summary(),
+  //       },
+  //     });
+  //   });
 
-    it('StatsModule to instantiate properly (without any options)', async () => {
-      expect(true).to.equal(true);
-    });
+  //   it('StatsModule to instantiate properly (without any options)', async () => {
+  //     expect(true).to.equal(true);
+  //   });
 
-    it('StatsModule to instantiate properly (with options)', async () => {
-      expect(true).to.equal(true);
-    });
-  });
+  //   it('StatsModule to instantiate properly (with options)', async () => {
+  //     expect(true).to.equal(true);
+  //   });
+  // });
 
-  describe('StatsModule.registerAsync()', () => {
-    // eslint-disable-next-line mocha/no-mocha-arrows
-    beforeEach(async () => {
-      harness = await createAsyncTestModule({
-        useClass: StatsOptionsService,
-        inject: [StatsOptionsService],
-      });
-    });
+  // describe('StatsModule.registerAsync()', () => {
+  //   // eslint-disable-next-line mocha/no-mocha-arrows
+  //   beforeEach(async () => {
+  //     harness = await createAsyncTestModule({
+  //       useClass: StatsOptionsService,
+  //       inject: [StatsOptionsService],
+  //     });
+  //   });
 
-    it('StatsModule to instantiate properly (without any options)', async () => {
-      expect(true).to.equal(true);
-    });
+  //   it('StatsModule to instantiate properly (without any options)', async () => {
+  //     expect(true).to.equal(true);
+  //   });
 
-    it('StatsModule to instantiate properly (with options)', async () => {
-      expect(true).to.equal(true);
-    });
-  });
+  //   it('StatsModule to instantiate properly (with options)', async () => {
+  //     expect(true).to.equal(true);
+  //   });
+  // });
 
   it('generic', () => {
     expect(true).to.equal(true);
