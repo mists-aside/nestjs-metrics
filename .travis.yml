@@ -7,7 +7,7 @@ node_js: # a good example: https://github.com/pillarjs/router/blob/master/.travi
   - "12"
   - "13"
   - "14"
-  - "15"
+  - "15l"
   - lts/*
   - node
 cache:
@@ -38,12 +38,13 @@ jobs:
 scripts:
   - set -e
   - npm i
+  - npm run bootstrap
   - npm run prettier:write
-  - npm run lint:write
+  # - npm run lint:write
   - npm run jscpd
   - npm run depcruise
   - npm run test
-  - npm run build
+  # - npm run build
 after_script:
   - bash ./.scrips/travis-telegram-report.sh
 notifications:

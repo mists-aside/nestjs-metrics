@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 
-import { Counter as CounterInterface, Tags } from '../adapter';
-import { Metric } from './metric';
+import {Counter as CounterInterface, Tags} from '../adapter';
+import {Metric} from './metric';
 
 @Injectable()
 export class Counter extends Metric implements CounterInterface {

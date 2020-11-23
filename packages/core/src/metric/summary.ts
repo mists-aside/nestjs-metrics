@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 
-import { Summary as SummaryInterface, Tags, TimerMethod } from '../adapter';
-import { Metric } from './metric';
+import {Summary as SummaryInterface, Tags, TimerMethod} from '../adapter';
+import {Metric} from './metric';
 
 @Injectable()
 export class Summary extends Metric implements SummaryInterface {

@@ -1,4 +1,4 @@
-import { Counter, Gauge, Histogram, Summary } from './../src/adapter/dummy';
+import {Counter, Gauge, Histogram, Summary} from './../src/adapter/dummy';
 import {expect} from 'chai';
 import {describe, it} from 'mocha';
 import {TestHarness} from './utils/harness';

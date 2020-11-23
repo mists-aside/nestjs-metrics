@@ -4,6 +4,7 @@
   "devDependencies": {
     "@commitlint/cli": "^9.0.1",
     "@commitlint/config-conventional": "^9.0.1",
+    "eslint-plugin-mocha": "^8.0.0",
     "husky": "^4.3.0",
     "lerna": "^3.22.1"
   },
@@ -11,7 +12,7 @@
     "bootstrap": "lerna exec npm install",
     "build": "lerna run build --scope @mists/nestjs-metrics*",
     "git-hook:commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-    "git-hook:pre-commit": "lerna run test --scope @mists/nestjs-metrics*",
+    "git-hook:pre-commit": "npm run test",
     "--git-hook:pre-commit": "lerna run git-hook:pre-commit --scope @mists/nestjs-metrics*",
     "depcruise": "lerna run depcruise --scope @mists/nestjs-metrics*",
     "docs": "lerna run docs --scope @mists/nestjs-metrics*",

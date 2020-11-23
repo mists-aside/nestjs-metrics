@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 
-import { Gauge as GaugeInterface, Tags, TimerMethod } from '../adapter';
-import { Metric } from './metric';
+import {Gauge as GaugeInterface, Tags, TimerMethod} from '../adapter';
+import {Metric} from './metric';
 
 @Injectable()
 export class Gauge extends Metric implements GaugeInterface {

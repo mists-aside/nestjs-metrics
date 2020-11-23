@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 
-import { Histogram as HistogramInterface, Tags, TimerMethod } from '../adapter';
-import { Metric } from './metric';
+import {Histogram as HistogramInterface, Tags, TimerMethod} from '../adapter';
+import {Metric} from './metric';
 
 @Injectable()
 export class Histogram extends Metric implements HistogramInterface {

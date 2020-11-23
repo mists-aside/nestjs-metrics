@@ -1,9 +1,9 @@
-import {MetricsAdapter} from './adapter';
+// import {MetricsAdapter} from './adapter';
 import {ModuleMetadata} from '@nestjs/common/interfaces';
 import {Type} from '@nestjs/common';
 
 export interface MetricsAdapters {
-  [key: string]: MetricsAdapter;
+  [key: string]: any;
 }
 
 export interface MetricsModuleOptions {
@@ -49,7 +49,7 @@ export class Config {
     return this.cAdapters;
   }
 
-  addAdapter(name: string, adapter: MetricsAdapter) {
+  addAdapter(name: string, adapter: any) {
     this.cAdapters[name] = adapter;
   }
 
