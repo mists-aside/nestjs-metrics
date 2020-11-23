@@ -13,7 +13,7 @@ import {createTestModule} from './utils/module';
 chai.use(sinonChai);
 const expect = chai.expect;
 
-const withValues = (prefix = 'counter'): [number, string?, Tags?] => [1, `${prefix}_label`, {tag: prefix}];
+const withValues = (prefix = 'counter'): [number?, string?, Tags?] => [1, `${prefix}_label`, {tag: prefix}];
 const withValues2 = (prefix = 'counter'): [string?, Tags?] => [`${prefix}_label`, {tag: prefix}];
 const withValues3 = (prefix = 'counter'): [Tags?] => [{tag: prefix}];
 

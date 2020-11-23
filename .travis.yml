@@ -46,7 +46,7 @@ scripts:
   - npm run test
   # - npm run build
 after_script:
-  - bash ./.scrips/travis-telegram-report.sh
+  - bash ./.scripts/travis-telegram-report.sh
 notifications:
   email:
     recipients:

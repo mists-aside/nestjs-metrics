@@ -1,11 +1,15 @@
 import {Injectable} from '@nestjs/common';
 
-import {Counter as CounterInterface, Tags} from '../adapter';
+import {Adapter, Counter as CounterInterface, Tags} from '../adapter';
 import {Metric} from './metric';
 
 @Injectable()
-export class Counter extends Metric implements CounterInterface {
-  inc(delta?: number, label?: string, tags?: Tags): void {
-    throw new Error('Method not implemented.');
+export class Counter extends Metric {
+  inc(delta?: number, label?: string, tags?: Tags, adapter?: string): void {
+    (this.searchAdapters(
+      adapter ? adapter : (value: Adapter): unknown => value.kind === 'counter',
+    ) as CounterInterface[]).forEach((counter) => {
+      counter.inc(delta, label, tags);
+    });
   }
 }

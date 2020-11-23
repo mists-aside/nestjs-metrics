@@ -22,6 +22,7 @@ const startTimer = (logger: Logger, label?: string, tags?: Tags): TimerMethod =>
 };
 
 export class Counter implements CounterInterface {
+  kind: 'counter';
   protected logger: Logger = new Logger('DummyCounter');
 
   inc(delta?: number, label?: string, tags?: Tags): void {
@@ -29,14 +30,18 @@ export class Counter implements CounterInterface {
   }
 }
 
-export class Gauge extends Counter implements GaugeInterface {
+export class Gauge implements GaugeInterface {
+  kind: 'gauge';
   protected logger: Logger = new Logger('DummyGauge');
 
-  set(value: number, label?: string, tags?: Tags): void {
-    this.logger.debug(`Calling set(${value}, ${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
-  }
   dec(delta?: number, label?: string, tags?: Tags): void {
     this.logger.debug(`Calling dec(${delta}, ${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
+  }
+  inc(delta?: number, label?: string, tags?: Tags): void {
+    this.logger.debug(`Calling inc(${delta}, ${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
+  }
+  set(value: number, label?: string, tags?: Tags): void {
+    this.logger.debug(`Calling set(${value}, ${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
   }
   startTimer(label?: string, tags?: Tags): TimerMethod {
     this.logger.debug(`Calling startTimer(${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
@@ -45,6 +50,7 @@ export class Gauge extends Counter implements GaugeInterface {
 }
 
 export class Histogram implements HistogramInterface {
+  kind: 'histogram';
   protected logger: Logger = new Logger('DummyHistogram');
 
   observe(value: number, label?: string, tags?: Tags): void {
@@ -60,6 +66,7 @@ export class Histogram implements HistogramInterface {
 }
 
 export class Summary implements SummaryInterface {
+  kind: 'summary';
   protected logger: Logger = new Logger('DummySummary');
 
   observe(value: number, label?: string, tags?: Tags): void {
