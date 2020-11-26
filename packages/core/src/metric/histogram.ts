@@ -1,17 +1,25 @@
 import {Injectable} from '@nestjs/common';
 
-import {Histogram as HistogramInterface, Tags, TimerMethod} from '../adapter';
+import {Adapter, Histogram as HistogramInterface, Tags, TimerMethod} from '../adapter';
 import {Metric} from './metric';
 
 @Injectable()
 export class Histogram extends Metric {
+  protected histogramAdapters(adapter?: string): HistogramInterface[] {
+    return this.searchAdapters(
+      adapter ? adapter : (value: Adapter): unknown => value.kind === 'histogram',
+    ) as HistogramInterface[];
+  }
+
   observe(value: number, label?: string, tags?: Tags, adapter?: string): void {
-    throw new Error('Method not implemented.');
+    this.histogramAdapters(adapter).forEach((histogram) => histogram.observe(value, label, tags));
   }
+
   reset(label?: string, tags?: Tags, adapter?: string): void {
-    throw new Error('Method not implemented.');
+    this.histogramAdapters(adapter).forEach((histogram) => histogram.reset(label, tags));
   }
-  startTimer(label?: string, tags?: Tags, adapter?: string): TimerMethod {
-    throw new Error('Method not implemented.');
+
+  startTimer(label?: string, tags?: Tags, adapter?: string): TimerMethod[] {
+    return this.histogramAdapters(adapter).map((histogram) => histogram.startTimer(label, tags));
   }
 }

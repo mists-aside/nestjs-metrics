@@ -1,17 +1,25 @@
 import {Injectable} from '@nestjs/common';
 
-import {Summary as SummaryInterface, Tags, TimerMethod} from '../adapter';
+import {Adapter, Summary as SummaryInterface, Tags, TimerMethod} from '../adapter';
 import {Metric} from './metric';
 
 @Injectable()
 export class Summary extends Metric {
+  protected summaryAdapters(adapter?: string): SummaryInterface[] {
+    return this.searchAdapters(
+      adapter ? adapter : (value: Adapter): unknown => value.kind === 'summary',
+    ) as SummaryInterface[];
+  }
+
   observe(value: number, label?: string, tags?: Tags, adapter?: string): void {
-    throw new Error('Method not implemented.');
+    this.summaryAdapters(adapter).forEach((Summary) => Summary.observe(value, label, tags));
   }
+
   reset(label?: string, tags?: Tags, adapter?: string): void {
-    throw new Error('Method not implemented.');
+    this.summaryAdapters(adapter).forEach((Summary) => Summary.reset(label, tags));
   }
-  startTimer(label?: string, tags?: Tags, adapter?: string): TimerMethod {
-    throw new Error('Method not implemented.');
+
+  startTimer(label?: string, tags?: Tags, adapter?: string): TimerMethod[] {
+    return this.summaryAdapters(adapter).map((Summary) => Summary.startTimer(label, tags));
   }
 }

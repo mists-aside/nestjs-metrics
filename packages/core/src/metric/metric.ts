@@ -14,7 +14,7 @@ export class Metric {
 
   protected searchAdapters(filter: string | AdapterFilter): Adapter[] {
     if (typeof filter === 'string') {
-      return [this.config.adapters[filter]];
+      return this.config.adapters[filter] ? [this.config.adapters[filter]] : [];
     }
 
     return this.adapters().filter(filter);

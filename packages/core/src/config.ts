@@ -43,7 +43,7 @@ export class Config {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
-  private cAdapters: MetricsAdapters;
+  private cAdapters: MetricsAdapters = {};
 
   get adapters(): MetricsAdapters {
     return this.cAdapters;
