@@ -48,7 +48,7 @@ export class MetricsModule {
    */
   public static register(options: MetricsModuleOptions): DynamicModule {
     const config = Config.getInstance();
-    config.addAdapters(options.adapters);
+    config.addAdapters(options.adapters || {});
 
     MetricsModule.configureServer(options);
 

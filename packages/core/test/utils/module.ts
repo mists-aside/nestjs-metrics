@@ -15,7 +15,7 @@ export const createTestModule = async (
 
   const testingModule = await Test.createTestingModule({
     controllers: [...(testOptions.controllers || [])],
-    imports: [...(testOptions.imports || [])],
+    imports: [MetricsModule.register(options), ...(testOptions.imports || [])],
     providers: [...(testOptions.providers || [])],
   }).compile();
 

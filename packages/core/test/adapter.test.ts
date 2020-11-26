@@ -22,6 +22,7 @@ const expect = chai.expect;
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('src/adapter', function () {
   let adapters: MetricsAdapters;
+  let controller: InjectableMetricsController
   let harness: TestHarness;
   let sandbox: sinon.SinonSandbox;
 
@@ -45,7 +46,11 @@ describe('src/adapter', function () {
       },
     );
 
+    controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
+
     sandbox = sinon.createSandbox();
+
+    sandbox.spy(adapters.counter, 'inc');
   });
 
   // eslint-disable-next-line mocha/no-mocha-arrows
@@ -54,31 +59,22 @@ describe('src/adapter', function () {
       await harness.app.close();
       harness = undefined;
     }
+
+    sandbox.restore();
   });
 
   describe('Counter', () => {
-    beforeEach(() => {
-      sandbox.spy(adapters.counter, 'inc');
-    });
-
-    afterEach(() => {
-      sandbox.restore();
-    });
-
-    it(`Counter.inc(${JSON.stringify(withValues('counter'))}) should be called with proper values`, async () => {
-      const controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
+    it(`Counter.inc(${JSON.stringify(withValues('counter'))}, 'counter') should be called with proper values`, async () => {
       controller.counterInc();
 
       expect(adapters.counter.inc).to.have.been.called;
       expect(adapters.counter.inc).to.have.been.calledWith(...withValues('counter'));
     });
 
-    it(`Counter.inc(${JSON.stringify(withValues('counter'))}) should be called with proper values`, async () => {
-      const controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
+    it(`Counter.inc() should be called with proper values`, async () => {
       controller.counterIncNoData();
 
       expect(adapters.counter.inc).to.have.been.called;
-      expect(adapters.counter.inc).to.have.been.calledWith(1);
     });
 
     it('generic', () => {
@@ -88,7 +84,6 @@ describe('src/adapter', function () {
 
   describe.skip('Gauge', () => {
     it(`Gauge.dec(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
-      const controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
       controller.gaugeDec();
 
       expect(adapters.gauge.dec).to.have.been.called;
@@ -96,15 +91,12 @@ describe('src/adapter', function () {
     });
 
     it(`Gauge.dec(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
-      const controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
       controller.gaugeDecNoData();
 
       expect(adapters.gauge.dec).to.have.been.called;
-      expect(adapters.gauge.dec).to.have.been.calledWith(1);
     });
 
     it(`Gauge.inc(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
-      const controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
       controller.gaugeInc();
 
       expect(adapters.gauge.inc).to.have.been.called;
@@ -112,7 +104,6 @@ describe('src/adapter', function () {
     });
 
     it(`Gauge.inc(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
-      const controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
       controller.gaugeIncNoData();
 
       expect(adapters.gauge.inc).to.have.been.called;
@@ -120,7 +111,6 @@ describe('src/adapter', function () {
     });
 
     it(`Gauge.set(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
-      const controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
       controller.gaugeSet();
 
       expect(adapters.gauge.set).to.have.been.called;
@@ -128,7 +118,6 @@ describe('src/adapter', function () {
     });
 
     it(`Gauge.startTimer(${JSON.stringify(withValues('gauge'))}) should be called`, async () => {
-      const controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
       const endTimer = await controller.gaugeStartTimer();
 
       expect(adapters.gauge.startTimer).to.have.been.called;
@@ -143,7 +132,6 @@ describe('src/adapter', function () {
     it(`Histogram.observe(${JSON.stringify(
       withValues('histogram'),
     )}) should be called with proper values`, async () => {
-      const controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
       controller.histogramObserve();
 
       expect(adapters.histogram.observe).to.have.been.called;
@@ -151,7 +139,6 @@ describe('src/adapter', function () {
     });
 
     it(`Histogram.reset(${JSON.stringify(withValues('histogram'))}) should be called with proper values`, async () => {
-      const controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
       controller.histogramReset();
 
       expect(adapters.histogram.reset).to.have.been.called;
@@ -161,7 +148,6 @@ describe('src/adapter', function () {
     it(`Histogram.startTimer(${JSON.stringify(
       withValues('histogram'),
     )}) should be called with proper values`, async () => {
-      const controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
       const endTimer = await controller.histogramStartTimer();
 
       // expect(adapters.histogram.startTimer).to.have.been.called;
@@ -177,7 +163,6 @@ describe('src/adapter', function () {
 
   describe.skip('Summary', () => {
     it(`Summary.observe(${JSON.stringify(withValues('summary'))}) should be called with proper values`, async () => {
-      const controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
       controller.summaryObserve();
 
       expect(adapters.summary.observe).to.have.been.called;
@@ -185,7 +170,6 @@ describe('src/adapter', function () {
     });
 
     it(`Summary.reset(${JSON.stringify(withValues('summary'))}) should be called with proper values`, async () => {
-      const controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
       controller.summaryReset();
 
       expect(adapters.summary.reset).to.have.been.called;
@@ -193,7 +177,6 @@ describe('src/adapter', function () {
     });
 
     it(`Summary.startTimer(${JSON.stringify(withValues('summary'))}) should be called with proper values`, async () => {
-      const controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
       const endTimer = await controller.summaryStartTimer();
 
       // expect(adapters.summary.startTimer).to.have.been.called;
