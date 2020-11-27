@@ -7,7 +7,9 @@ import {Metric} from './metric';
 export class Counter extends Metric {
   protected counterAdapters(adapter?: string): CounterInterface[] {
     return this.searchAdapters(
-      adapter ? adapter : (value: Adapter): unknown => value.kind === 'counter',
+      adapter ? adapter : (value: Adapter): unknown => {
+        console.log(value.kind)
+        return value.kind === 'counter'},
     ) as CounterInterface[];
   }
 
