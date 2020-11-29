@@ -3,7 +3,7 @@ import {describe, it} from 'mocha';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
-import {Tags} from '../src/adapter';
+import {Tags} from '../src/adapter/interfaces';
 import {Counter, Gauge, Histogram, Summary} from '../src/metric';
 import {InjectableMetricsController, withValues, withValues2, withValues3} from './utils/controllers';
 import {TestHarness} from './utils/harness';

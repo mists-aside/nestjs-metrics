@@ -1,4 +1,4 @@
-import {Adapter, Counter, Gauge, Histogram, Summary} from '../adapter';
+import {Adapter, Counter, Gauge, Histogram, Summary} from '../adapter/interfaces';
 import {Config} from '../config';
 
 interface AdapterFilter {

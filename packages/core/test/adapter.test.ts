@@ -4,8 +4,8 @@ import {describe, it} from 'mocha';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
-import {Tags} from '../src/adapter';
-import {Counter, Gauge, Histogram, Summary} from '../src/adapter/dummy';
+import {Tags} from '../src/adapter/interfaces';
+import {Counter, Gauge, Histogram, Summary} from '../src/adapter/dummies';
 import {
   Counter as CounterMetric,
   Gauge as GaugeMetric,
@@ -22,7 +22,7 @@ const expect = chai.expect;
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('src/adapter', function () {
   let adapters: MetricsAdapters;
-  let controller: InjectableMetricsController
+  let controller: InjectableMetricsController;
   let harness: TestHarness;
   let sandbox: sinon.SinonSandbox;
 
@@ -64,7 +64,9 @@ describe('src/adapter', function () {
   });
 
   describe('Counter', () => {
-    it(`Counter.inc(${JSON.stringify(withValues('counter'))}, 'counter') should be called with proper values`, async () => {
+    it(`Counter.inc(${JSON.stringify(
+      withValues('counter'),
+    )}, 'counter') should be called with proper values`, async () => {
       controller.counterInc();
 
       expect(adapters.counter.inc).to.have.been.called;

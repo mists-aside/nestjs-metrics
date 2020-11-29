@@ -1,6 +1,6 @@
 import {Injectable} from '@nestjs/common';
 
-import {Adapter, Gauge as GaugeInterface, Tags, TimerMethod} from '../adapter';
+import {Adapter, Gauge as GaugeInterface, Tags, TimerMethod} from '../adapter/interfaces';
 import {Metric} from './metric';
 
 @Injectable()

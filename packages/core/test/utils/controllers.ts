@@ -1,7 +1,7 @@
-import { TimerMethod } from './../../src/adapter';
+import {TimerMethod} from '../../src/adapter/interfaces';
 import {Controller} from '@nestjs/common';
 
-import {Tags} from '../../src/adapter';
+import {Tags} from '../../src/adapter/interfaces';
 import {Counter, Gauge, Histogram, Summary} from '../../src/metric';
 
 export const withValues = (prefix = 'counter'): [number?, string?, Tags?] => [1, `${prefix}_label`, {tag: prefix}];

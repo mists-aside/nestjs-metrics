@@ -1,5 +1,10 @@
 import {Type} from '@nestjs/common';
 
+export type KIND_COUNTER = 'counter';
+export type KIND_GAUGE = 'gauge';
+export type KIND_HISTOGRAM = 'histogram';
+export type KIND_SUMMARY = 'summary';
+
 export interface Tags {
   [key: string]: string | number;
 }
@@ -9,7 +14,7 @@ export interface TimerMethod {
 }
 
 export interface Counter {
-  kind: 'counter';
+  kind: KIND_COUNTER;
   inc(delta?: number, label?: string, tags?: Tags): void;
 }
 
@@ -18,20 +23,20 @@ interface Timer {
 }
 
 export interface Gauge extends Timer {
-  kind: 'gauge';
+  kind: KIND_GAUGE;
   dec(delta?: number, label?: string, tags?: Tags): void;
   inc(delta?: number, label?: string, tags?: Tags): void;
   set(value: number, label?: string, tags?: Tags): void;
 }
 
 export interface Histogram extends Timer {
-  kind: 'histogram';
+  kind: KIND_HISTOGRAM;
   observe(value: number, label?: string, tags?: Tags): void;
   reset(label?: string, tags?: Tags): void;
 }
 
 export interface Summary extends Timer {
-  kind: 'summary';
+  kind: KIND_SUMMARY;
   observe(value: number, label?: string, tags?: Tags): void;
   reset(label?: string, tags?: Tags): void;
 }

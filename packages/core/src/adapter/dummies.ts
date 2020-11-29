@@ -1,16 +1,17 @@
 import {Logger} from '@nestjs/common';
 
 import {
-  Counter as CounterInterface,
-  Gauge as GaugeInterface,
-  Histogram as HistogramInterface,
-  Summary as SummaryInterface,
-  Tags,
-  TimerMethod,
-} from '../adapter';
+  Counter as CounterAbstract,
+  Gauge as GaugeAbstract,
+  Histogram as HistogramAbstract,
+  Summary as SummaryAbstract,
+} from './abstracts';
+
+import {Tags, TimerMethod} from './interfaces';
 
 const startTimer = (logger: Logger, label?: string, tags?: Tags): TimerMethod => {
   const started = new Date();
+  logger.debug(`Calling startTimer(${JSON.stringify(tags)} for ${JSON.stringify(label)}).`);
   return (newTags?: Tags) => {
     const ended = new Date();
     logger.debug(
@@ -21,8 +22,7 @@ const startTimer = (logger: Logger, label?: string, tags?: Tags): TimerMethod =>
   };
 };
 
-export class Counter implements CounterInterface {
-  kind: 'counter';
+export class Counter extends CounterAbstract {
   protected logger: Logger = new Logger('DummyCounter');
 
   inc(delta?: number, label?: string, tags?: Tags): void {
@@ -30,8 +30,7 @@ export class Counter implements CounterInterface {
   }
 }
 
-export class Gauge implements GaugeInterface {
-  kind: 'gauge';
+export class Gauge extends GaugeAbstract {
   protected logger: Logger = new Logger('DummyGauge');
 
   dec(delta?: number, label?: string, tags?: Tags): void {
@@ -49,8 +48,7 @@ export class Gauge implements GaugeInterface {
   }
 }
 
-export class Histogram implements HistogramInterface {
-  kind: 'histogram';
+export class Histogram extends HistogramAbstract {
   protected logger: Logger = new Logger('DummyHistogram');
 
   observe(value: number, label?: string, tags?: Tags): void {
@@ -65,8 +63,7 @@ export class Histogram implements HistogramInterface {
   }
 }
 
-export class Summary implements SummaryInterface {
-  kind: 'summary';
+export class Summary extends SummaryAbstract {
   protected logger: Logger = new Logger('DummySummary');
 
   observe(value: number, label?: string, tags?: Tags): void {
