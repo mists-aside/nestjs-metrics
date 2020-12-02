@@ -1,3 +1,4 @@
+import { TimerMethod } from './../src/adapter/interfaces';
 import {MetricsAdapters} from './../src/config';
 import * as chai from 'chai';
 import {describe, it} from 'mocha';
@@ -25,6 +26,7 @@ describe('src/adapter', function () {
   let controller: InjectableMetricsController;
   let harness: TestHarness;
   let sandbox: sinon.SinonSandbox;
+  const endTimer = sinon.fake()
 
   // eslint-disable-next-line mocha/no-mocha-arrows
   beforeEach(async () => {
@@ -51,6 +53,19 @@ describe('src/adapter', function () {
     sandbox = sinon.createSandbox();
 
     sandbox.spy(adapters.counter, 'inc');
+
+    sandbox.spy(adapters.gauge, 'dec');
+    sandbox.spy(adapters.gauge, 'inc');
+    sandbox.spy(adapters.gauge, 'set');
+    sandbox.spy(adapters.gauge, 'startTimer');
+
+    sandbox.spy(adapters.histogram, 'observe');
+    sandbox.spy(adapters.histogram, 'reset');
+    sandbox.spy(adapters.histogram, 'startTimer');
+
+    sandbox.spy(adapters.summary, 'observe');
+    sandbox.spy(adapters.summary, 'reset');
+    adapters.summary.startTimer = (label?: string, tags?: Tags, adapter?: string): TimerMethod => endTimer as TimerMethod;
   });
 
   // eslint-disable-next-line mocha/no-mocha-arrows
@@ -84,7 +99,7 @@ describe('src/adapter', function () {
     });
   });
 
-  describe.skip('Gauge', () => {
+  describe('Gauge', () => {
     it(`Gauge.dec(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
       controller.gaugeDec();
 
@@ -92,7 +107,7 @@ describe('src/adapter', function () {
       expect(adapters.gauge.dec).to.have.been.calledWith(...withValues('gauge'));
     });
 
-    it(`Gauge.dec(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
+    it(`Gauge.dec() should be called with proper values`, async () => {
       controller.gaugeDecNoData();
 
       expect(adapters.gauge.dec).to.have.been.called;
@@ -105,11 +120,10 @@ describe('src/adapter', function () {
       expect(adapters.gauge.inc).to.have.been.calledWith(...withValues('gauge'));
     });
 
-    it(`Gauge.inc(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
+    it(`Gauge.inc() should be called with proper values`, async () => {
       controller.gaugeIncNoData();
 
       expect(adapters.gauge.inc).to.have.been.called;
-      expect(adapters.gauge.inc).to.have.been.calledWith(1);
     });
 
     it(`Gauge.set(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
@@ -119,10 +133,11 @@ describe('src/adapter', function () {
       expect(adapters.gauge.set).to.have.been.calledWith(...withValues('gauge'));
     });
 
-    it(`Gauge.startTimer(${JSON.stringify(withValues('gauge'))}) should be called`, async () => {
+    it(`Gauge.startTimer(${JSON.stringify(withValues2('gauge'))}) should be called`, async () => {
       const endTimer = await controller.gaugeStartTimer();
 
       expect(adapters.gauge.startTimer).to.have.been.called;
+      expect(adapters.gauge.startTimer).to.have.been.calledWith(...withValues2('gauge'));
     });
 
     it('generic', () => {
@@ -130,7 +145,7 @@ describe('src/adapter', function () {
     });
   });
 
-  describe.skip('Histogram', () => {
+  describe('Histogram', () => {
     it(`Histogram.observe(${JSON.stringify(
       withValues('histogram'),
     )}) should be called with proper values`, async () => {
@@ -152,10 +167,8 @@ describe('src/adapter', function () {
     )}) should be called with proper values`, async () => {
       const endTimer = await controller.histogramStartTimer();
 
-      // expect(adapters.histogram.startTimer).to.have.been.called;
-      // expect(adapters.histogram.startTimer).to.have.been.calledWith(...withValues2('histogram'));
-      expect(endTimer).to.have.been.called;
-      expect(endTimer).to.have.been.calledWith(...withValues3('histogram'));
+      expect(adapters.histogram.startTimer).to.have.been.called;
+      expect(adapters.histogram.startTimer).to.have.been.calledWith(...withValues2('histogram'));
     });
 
     it('generic', () => {
@@ -163,7 +176,7 @@ describe('src/adapter', function () {
     });
   });
 
-  describe.skip('Summary', () => {
+  describe('Summary', () => {
     it(`Summary.observe(${JSON.stringify(withValues('summary'))}) should be called with proper values`, async () => {
       controller.summaryObserve();
 
@@ -178,11 +191,9 @@ describe('src/adapter', function () {
       expect(adapters.summary.reset).to.have.been.calledWith(...withValues2('summary'));
     });
 
-    it(`Summary.startTimer(${JSON.stringify(withValues('summary'))}) should be called with proper values`, async () => {
-      const endTimer = await controller.summaryStartTimer();
+    it(`Summary.startTimer(${JSON.stringify(withValues2('summary'))}) should be called with proper values`, async () => {
+      await controller.summaryStartTimer();
 
-      // expect(adapters.summary.startTimer).to.have.been.called;
-      // expect(adapters.summary.startTimer).to.have.been.calledWith(...withValues2('summary'));
       expect(endTimer).to.have.been.called;
       expect(endTimer).to.have.been.calledWith(...withValues3('summary'));
     });

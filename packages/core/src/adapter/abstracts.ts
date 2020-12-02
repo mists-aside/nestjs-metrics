@@ -1,5 +1,3 @@
-import {Logger} from '@nestjs/common';
-
 import {KIND_COUNTER, KIND_GAUGE, KIND_HISTOGRAM, KIND_SUMMARY} from './interfaces';
 import {
   Counter as CounterInterface,

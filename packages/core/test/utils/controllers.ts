@@ -52,9 +52,9 @@ export class InjectableMetricsController {
     this.histogram.reset(...withValues2('histogram'), 'histogram');
   }
 
-  histogramStartTimer() {
+  histogramStartTimer(): Promise<void> {
     const ends = this.histogram.startTimer(...withValues2('histogram'), 'histogram');
-    new Promise((resolve) =>
+    return new Promise((resolve) =>
       setTimeout(() => {
         ends.forEach((end) => end(...withValues3('histogram')));
         resolve();
@@ -70,13 +70,84 @@ export class InjectableMetricsController {
     this.summary.reset(...withValues2('summary'), 'summary');
   }
 
-  summaryStartTimer() {
+  summaryStartTimer(): Promise<void> {
     const ends = this.summary.startTimer(...withValues2('summary'), 'summary');
-    new Promise((resolve) =>
-      setTimeout(() => {
+    return new Promise((resolve) =>
+    setTimeout(() => {
         ends.forEach((end) => end(...withValues3('summary')));
         resolve();
       }, 200),
     );
   }
+}
+
+export class DecoratedMetricsController {
+
+  // counterInc() {
+  //   this.counter.inc(...withValues('counter'), 'counter');
+  // }
+
+  // counterIncNoData() {
+  //   this.counter.inc();
+  // }
+
+  // gaugeDec() {
+  //   this.gauge.dec(...withValues('gauge'), 'gauge');
+  // }
+
+  // gaugeDecNoData() {
+  //   this.gauge.dec();
+  // }
+
+  // gaugeInc() {
+  //   this.gauge.inc(...withValues('gauge'), 'gauge');
+  // }
+
+  // gaugeIncNoData() {
+  //   this.gauge.inc();
+  // }
+
+  // gaugeSet() {
+  //   this.gauge.set(...withValues('gauge'), 'gauge');
+  // }
+
+  // gaugeStartTimer() {
+  //   this.gauge.startTimer(...withValues2('gauge'), 'gauge');
+  // }
+
+  // histogramObserve() {
+  //   this.histogram.observe(...withValues('histogram'), 'histogram');
+  // }
+
+  // histogramReset() {
+  //   this.histogram.reset(...withValues2('histogram'), 'histogram');
+  // }
+
+  // histogramStartTimer(): Promise<void> {
+  //   const ends = this.histogram.startTimer(...withValues2('histogram'), 'histogram');
+  //   return new Promise((resolve) =>
+  //     setTimeout(() => {
+  //       ends.forEach((end) => end(...withValues3('histogram')));
+  //       resolve();
+  //     }, 200),
+  //   );
+  // }
+
+  // summaryObserve() {
+  //   this.summary.observe(...withValues('summary'), 'summary');
+  // }
+
+  // summaryReset() {
+  //   this.summary.reset(...withValues2('summary'), 'summary');
+  // }
+
+  // summaryStartTimer(): Promise<void> {
+  //   const ends = this.summary.startTimer(...withValues2('summary'), 'summary');
+  //   return new Promise((resolve) =>
+  //   setTimeout(() => {
+  //       ends.forEach((end) => end(...withValues3('summary')));
+  //       resolve();
+  //     }, 200),
+  //   );
+  // }
 }
