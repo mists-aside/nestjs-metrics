@@ -5,10 +5,13 @@ import {Metric} from './metric';
 
 @Injectable()
 export class Histogram extends Metric {
-  protected histogramAdapters(adapter?: string): HistogramInterface[] {
-    return this.searchAdapters(
-      adapter ? adapter : (value: Adapter): unknown => value.kind === 'histogram',
-    ) as HistogramInterface[];
+  protected static instance: Histogram;
+
+  static getInstance() {
+    if (!Histogram.instance) {
+      Histogram.instance = new Histogram();
+    }
+    return Histogram.instance;
   }
 
   observe(value: number, label?: string, tags?: Tags, adapter?: string): void {
@@ -21,5 +24,11 @@ export class Histogram extends Metric {
 
   startTimer(label?: string, tags?: Tags, adapter?: string): TimerMethod[] {
     return this.histogramAdapters(adapter).map((histogram) => histogram.startTimer(label, tags));
+  }
+
+  protected histogramAdapters(adapter?: string): HistogramInterface[] {
+    return this.searchAdapters(
+      adapter ? adapter : (value: Adapter): unknown => value.kind === 'histogram',
+    ) as HistogramInterface[];
   }
 }

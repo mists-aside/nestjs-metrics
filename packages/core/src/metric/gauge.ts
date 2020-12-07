@@ -5,10 +5,13 @@ import {Metric} from './metric';
 
 @Injectable()
 export class Gauge extends Metric {
-  protected gaugeAdapters(adapter?: string): GaugeInterface[] {
-    return this.searchAdapters(
-      adapter ? adapter : (value: Adapter): unknown => value.kind === 'gauge',
-    ) as GaugeInterface[];
+  protected static instance: Gauge;
+
+  static getInstance() {
+    if (!Gauge.instance) {
+      Gauge.instance = new Gauge();
+    }
+    return Gauge.instance;
   }
 
   dec(delta?: number, label?: string, tags?: Tags, adapter?: string): void {
@@ -31,5 +34,11 @@ export class Gauge extends Metric {
 
   startTimer(label?: string, tags?: Tags, adapter?: string): TimerMethod[] {
     return this.gaugeAdapters(adapter).map((gauge) => gauge.startTimer(label, tags));
+  }
+
+  protected gaugeAdapters(adapter?: string): GaugeInterface[] {
+    return this.searchAdapters(
+      adapter ? adapter : (value: Adapter): unknown => value.kind === 'gauge',
+    ) as GaugeInterface[];
   }
 }

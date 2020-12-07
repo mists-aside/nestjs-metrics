@@ -1,7 +1,7 @@
 import {Adapter, Counter, Gauge, Histogram, Summary} from '../adapter/interfaces';
 import {Config} from '../config';
 
-interface AdapterFilter {
+export interface AdapterFilter {
   (value: Adapter, index: number, array: Adapter[]): unknown;
 }
 

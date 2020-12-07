@@ -1,8 +1,8 @@
-import {TimerMethod} from '../../src/adapter/interfaces';
-import {Controller} from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 
-import {Tags} from '../../src/adapter/interfaces';
-import {Counter, Gauge, Histogram, Summary} from '../../src/metric';
+import { Tags } from '../../src/adapter/interfaces';
+import { EventDecrement, EventDuration, EventIncrement } from '../../src/decorators';
+import { Counter, Gauge, Histogram, Summary } from '../../src/metric';
 
 export const withValues = (prefix = 'counter'): [number?, string?, Tags?] => [1, `${prefix}_label`, {tag: prefix}];
 export const withValues2 = (prefix = 'counter'): [string?, Tags?] => [`${prefix}_label`, {tag: prefix}];
@@ -73,7 +73,7 @@ export class InjectableMetricsController {
   summaryStartTimer(): Promise<void> {
     const ends = this.summary.startTimer(...withValues2('summary'), 'summary');
     return new Promise((resolve) =>
-    setTimeout(() => {
+      setTimeout(() => {
         ends.forEach((end) => end(...withValues3('summary')));
         resolve();
       }, 200),
@@ -81,73 +81,44 @@ export class InjectableMetricsController {
   }
 }
 
+@Controller()
 export class DecoratedMetricsController {
+  @EventIncrement(...withValues('counter'), 'counter')
+  triggerCounterIncByAdapterName() {}
 
-  // counterInc() {
-  //   this.counter.inc(...withValues('counter'), 'counter');
-  // }
+  @EventIncrement(...withValues('counter'), null, Counter)
+  triggerCounterIncByCounterMetric() {}
 
-  // counterIncNoData() {
-  //   this.counter.inc();
-  // }
+  @EventIncrement(...withValues('gauge'), null, Gauge)
+  triggerGaugeIncByGaugeMetric() {}
 
-  // gaugeDec() {
-  //   this.gauge.dec(...withValues('gauge'), 'gauge');
-  // }
+  @EventIncrement(...withValues('all_inc'))
+  triggerIncByOnAllIncMetrics() {}
 
-  // gaugeDecNoData() {
-  //   this.gauge.dec();
-  // }
+  @EventDecrement(...withValues('gauge'), 'gauge')
+  triggerGaugeDecByAdapterName() {}
 
-  // gaugeInc() {
-  //   this.gauge.inc(...withValues('gauge'), 'gauge');
-  // }
+  @EventDecrement(...withValues('gauge'))
+  triggerDecOnAllGaugeMetrics() {}
 
-  // gaugeIncNoData() {
-  //   this.gauge.inc();
-  // }
+  //   @EventDuration(...withValues('gauge'), 'gauge')
+  //   triggerGaugeTimerByAdapterName() {}
 
-  // gaugeSet() {
-  //   this.gauge.set(...withValues('gauge'), 'gauge');
-  // }
+  //   @EventDuration(...withValues('gauge'), null, 'gauge')
+  //   triggerGaugeTimerByMetricFilter() {}
 
-  // gaugeStartTimer() {
-  //   this.gauge.startTimer(...withValues2('gauge'), 'gauge');
-  // }
+  //   @EventDuration(...withValues('histogram'), 'histogram')
+  //   triggerHistogramTimerByAdapterName() {}
 
-  // histogramObserve() {
-  //   this.histogram.observe(...withValues('histogram'), 'histogram');
-  // }
+  //   @EventDuration(...withValues('histogram'), null, 'histogram')
+  //   triggerHistogramTimerByMetricFilter() {}
 
-  // histogramReset() {
-  //   this.histogram.reset(...withValues2('histogram'), 'histogram');
-  // }
+  //   @EventDuration(...withValues('summary'), 'summary')
+  //   triggerSummaryTimerByAdapterName() {}
 
-  // histogramStartTimer(): Promise<void> {
-  //   const ends = this.histogram.startTimer(...withValues2('histogram'), 'histogram');
-  //   return new Promise((resolve) =>
-  //     setTimeout(() => {
-  //       ends.forEach((end) => end(...withValues3('histogram')));
-  //       resolve();
-  //     }, 200),
-  //   );
-  // }
+  //   @EventDuration(...withValues('summary'), null, 'summary')
+  //   triggerSummaryTimerByMetricFilter() {}
 
-  // summaryObserve() {
-  //   this.summary.observe(...withValues('summary'), 'summary');
-  // }
-
-  // summaryReset() {
-  //   this.summary.reset(...withValues2('summary'), 'summary');
-  // }
-
-  // summaryStartTimer(): Promise<void> {
-  //   const ends = this.summary.startTimer(...withValues2('summary'), 'summary');
-  //   return new Promise((resolve) =>
-  //   setTimeout(() => {
-  //       ends.forEach((end) => end(...withValues3('summary')));
-  //       resolve();
-  //     }, 200),
-  //   );
-  // }
+  //   @EventDuration(...withValues('summary'), null, ['gauge', 'histogram', 'summary'])
+  //   triggerTimerByMetricFilter() {}
 }

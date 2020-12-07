@@ -5,6 +5,8 @@ export type KIND_GAUGE = 'gauge';
 export type KIND_HISTOGRAM = 'histogram';
 export type KIND_SUMMARY = 'summary';
 
+export type KIND_METRIC = KIND_COUNTER | KIND_GAUGE | KIND_HISTOGRAM | KIND_SUMMARY;
+
 export interface Tags {
   [key: string]: string | number;
 }

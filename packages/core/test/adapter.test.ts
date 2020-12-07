@@ -1,4 +1,4 @@
-import { TimerMethod } from './../src/adapter/interfaces';
+import {TimerMethod} from './../src/adapter/interfaces';
 import {MetricsAdapters} from './../src/config';
 import * as chai from 'chai';
 import {describe, it} from 'mocha';
@@ -26,7 +26,7 @@ describe('src/adapter', function () {
   let controller: InjectableMetricsController;
   let harness: TestHarness;
   let sandbox: sinon.SinonSandbox;
-  const endTimer = sinon.fake()
+  const endTimer = sinon.fake();
 
   // eslint-disable-next-line mocha/no-mocha-arrows
   beforeEach(async () => {
@@ -65,7 +65,8 @@ describe('src/adapter', function () {
 
     sandbox.spy(adapters.summary, 'observe');
     sandbox.spy(adapters.summary, 'reset');
-    adapters.summary.startTimer = (label?: string, tags?: Tags, adapter?: string): TimerMethod => endTimer as TimerMethod;
+    adapters.summary.startTimer = (label?: string, tags?: Tags, adapter?: string): TimerMethod =>
+      endTimer as TimerMethod;
   });
 
   // eslint-disable-next-line mocha/no-mocha-arrows
@@ -191,7 +192,9 @@ describe('src/adapter', function () {
       expect(adapters.summary.reset).to.have.been.calledWith(...withValues2('summary'));
     });
 
-    it(`Summary.startTimer(${JSON.stringify(withValues2('summary'))}) should be called with proper values`, async () => {
+    it(`Summary.startTimer(${JSON.stringify(
+      withValues2('summary'),
+    )}) should be called with proper values`, async () => {
       await controller.summaryStartTimer();
 
       expect(endTimer).to.have.been.called;
