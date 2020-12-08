@@ -101,7 +101,7 @@ describe('src/adapter', function () {
     it(`@EventIncrement(...${JSON.stringify(
       withValues('counter'),
     )}, null, Gauge) should call inc() on all adapters of type Gauge`, async () => {
-      controller.triggerGaugeIncByGaugeMetric()
+      controller.triggerGaugeIncByGaugeMetric();
 
       expect(adapters.gauge.inc).to.have.been.called;
       expect(adapters.gauge.inc).to.have.been.calledWith(...withValues('gauge'));
@@ -110,7 +110,7 @@ describe('src/adapter', function () {
     it(`@EventIncrement(...${JSON.stringify(
       withValues('all_inc'),
     )}) should call inc() on all adapters of type Counter or Gauge`, async () => {
-      controller.triggerIncByOnAllIncMetrics()
+      controller.triggerIncByOnAllIncMetrics();
 
       expect(adapters.counter.inc).to.have.been.called;
       expect(adapters.counter.inc).to.have.been.calledWith(...withValues('all_inc'));
@@ -125,7 +125,7 @@ describe('src/adapter', function () {
   });
 
   describe('@EventDecrement', () => {
-    it(`@EventIncrement(...${JSON.stringify(
+    it(`@EventDecrement(...${JSON.stringify(
       withValues('gauge'),
     )}, 'gauge') should call dec() on 'gauge' adapter`, async () => {
       controller.triggerGaugeDecByAdapterName();
@@ -134,7 +134,7 @@ describe('src/adapter', function () {
       expect(adapters.gauge.dec).to.have.been.calledWith(...withValues('gauge'));
     });
 
-    it(`@EventIncrement(...${JSON.stringify(
+    it(`@EventDecrement(...${JSON.stringify(
       withValues('gauge'),
     )}) should call dec() on all Gauge adapter`, async () => {
       controller.triggerDecOnAllGaugeMetrics();
@@ -148,36 +148,103 @@ describe('src/adapter', function () {
     });
   });
 
-  // describe('@EventDuration', () => {
-  //   it(`Histogram.observe(${JSON.stringify(
-  //     withValues('histogram'),
-  //   )}) should be called with proper values`, async () => {
-  //     controller.histogramObserve();
+  describe('@EventDuration', () => {
+    it(`@EventDuration(...${JSON.stringify(
+      withValues2('gauge'),
+    )}, 'gauge') should call startTimer() on 'gauge' adapter`, async () => {
+      controller.triggerDurationByAdapterName();
 
-  //     expect(adapters.histogram.observe).to.have.been.called;
-  //     expect(adapters.histogram.observe).to.have.been.calledWith(...withValues('histogram'));
-  //   });
+      expect(adapters.gauge.startTimer).to.have.been.called;
+      expect(adapters.gauge.startTimer).to.have.been.calledWith(...withValues2('gauge'));
+    });
 
-  //   it(`Histogram.reset(${JSON.stringify(withValues('histogram'))}) should be called with proper values`, async () => {
-  //     controller.histogramReset();
+    it(`@EventDuration(...${JSON.stringify(
+      withValues2('gauge'),
+    )}, 'gauge') should call startTimer() on 'gauge' adapter (async/then)`, async () => {
+      await controller.asyncTriggerDurationByAdapterName();
 
-  //     expect(adapters.histogram.reset).to.have.been.called;
-  //     expect(adapters.histogram.reset).to.have.been.calledWith(...withValues2('histogram'));
-  //   });
+      expect(adapters.gauge.startTimer).to.have.been.called;
+      expect(adapters.gauge.startTimer).to.have.been.calledWith(...withValues2('gauge'));
+    });
 
-  //   it(`Histogram.startTimer(${JSON.stringify(
-  //     withValues('histogram'),
-  //   )}) should be called with proper values`, async () => {
-  //     const endTimer = await controller.histogramStartTimer();
+    it(`@EventDuration(...${JSON.stringify(
+      withValues2('gauge'),
+    )}, 'gauge') should call startTimer() on 'gauge' adapter (async/catch)`, async () => {
+      try {
+       await controller.asyncFailTriggerDurationByAdapterName();
+      } catch(e) {}
 
-  //     expect(adapters.histogram.startTimer).to.have.been.called;
-  //     expect(adapters.histogram.startTimer).to.have.been.calledWith(...withValues2('histogram'));
-  //   });
+      expect(adapters.gauge.startTimer).to.have.been.called;
+      expect(adapters.gauge.startTimer).to.have.been.calledWith(...withValues2('gauge'));
+    });
 
-  //   it('generic', () => {
-  //     expect(true).to.equal(true);
-  //   });
-  // });
+    it(`@EventDuration(...${JSON.stringify(
+      withValues2('gauge'),
+    )}, null, Gauge) should call startTimer() on all adapters of type Gauge`, async () => {
+      controller.triggerDurationByGaugeMetrics();
+
+      expect(adapters.gauge.startTimer).to.have.been.called;
+      expect(adapters.gauge.startTimer).to.have.been.calledWith(...withValues2('gauge'));
+    });
+
+    it(`@EventDuration(...${JSON.stringify(
+      withValues2('histogram'),
+    )}, null, Histogram) should call startTimer() on all adapters of type Histogram`, async () => {
+      controller.triggerDurationByHistogramMetrics();
+
+      expect(adapters.histogram.startTimer).to.have.been.called;
+      expect(adapters.histogram.startTimer).to.have.been.calledWith(...withValues2('histogram'));
+    });
+
+    it(`@EventDuration(...${JSON.stringify(
+      withValues2('summary'),
+    )}, null, Summary) should call startTimer() on all adapters of type Summary`, async () => {
+      controller.triggerDurationBySummaryMetrics();
+
+      expect(endTimer).to.have.been.called;
+      expect(endTimer).to.have.been.calledWith(withValues2('summary')[1]);
+    });
+
+    it(`@EventDuration(...${JSON.stringify(
+      withValues2('summary'),
+    )}, null, Summary) should call startTimer() on all adapters of type Summary (async)`, async () => {
+      await controller.asyncTriggerDurationBySummaryMetrics();
+
+      expect(endTimer).to.have.been.called;
+      expect(endTimer).to.have.been.calledWith(withValues2('summary')[1]);
+    });
+
+    it(`@EventDuration(...${JSON.stringify(
+      withValues2('multi_duration'),
+    )}, null, [Histogram, Summary]) should call startTimer() on all adapters of type Histogram or Summary`, async () => {
+      controller.triggerDurationByMultipleMetrics();
+
+      expect(adapters.histogram.startTimer).to.have.been.called;
+      expect(adapters.histogram.startTimer).to.have.been.calledWith(...withValues2('multi_duration'));
+
+      expect(endTimer).to.have.been.called;
+      expect(endTimer).to.have.been.calledWith(withValues2('multi_duration')[1]);
+    });
+
+    it(`@EventDuration(...${JSON.stringify(
+      withValues2('all_duration'),
+    )}) should call startTimer() on all adapters`, async () => {
+      controller.triggerDurationByAllMetrics();
+
+      expect(adapters.gauge.startTimer).to.have.been.called;
+      expect(adapters.gauge.startTimer).to.have.been.calledWith(...withValues2('all_duration'));
+
+      expect(adapters.histogram.startTimer).to.have.been.called;
+      expect(adapters.histogram.startTimer).to.have.been.calledWith(...withValues2('all_duration'));
+
+      expect(endTimer).to.have.been.called;
+      expect(endTimer).to.have.been.calledWith(withValues2('all_duration')[1]);
+    });
+
+    it('generic', () => {
+      expect(true).to.equal(true);
+    });
+  });
 
   it('generic', () => {
     expect(true).to.equal(true);

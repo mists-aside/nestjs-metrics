@@ -1,8 +1,8 @@
-import { Controller } from '@nestjs/common';
+import {Controller} from '@nestjs/common';
 
-import { Tags } from '../../src/adapter/interfaces';
-import { EventDecrement, EventDuration, EventIncrement } from '../../src/decorators';
-import { Counter, Gauge, Histogram, Summary } from '../../src/metric';
+import {Tags} from '../../src/adapter/interfaces';
+import {EventDecrement, EventDuration, EventIncrement} from '../../src/decorators';
+import {Counter, Gauge, Histogram, Summary} from '../../src/metric';
 
 export const withValues = (prefix = 'counter'): [number?, string?, Tags?] => [1, `${prefix}_label`, {tag: prefix}];
 export const withValues2 = (prefix = 'counter'): [string?, Tags?] => [`${prefix}_label`, {tag: prefix}];
@@ -101,24 +101,36 @@ export class DecoratedMetricsController {
   @EventDecrement(...withValues('gauge'))
   triggerDecOnAllGaugeMetrics() {}
 
-  //   @EventDuration(...withValues('gauge'), 'gauge')
-  //   triggerGaugeTimerByAdapterName() {}
+  @EventDuration(...withValues2('gauge'), 'gauge')
+  triggerDurationByAdapterName() {}
 
-  //   @EventDuration(...withValues('gauge'), null, 'gauge')
-  //   triggerGaugeTimerByMetricFilter() {}
+  @EventDuration(...withValues2('gauge'), 'gauge')
+  asyncTriggerDurationByAdapterName(): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, 100))
+  }
 
-  //   @EventDuration(...withValues('histogram'), 'histogram')
-  //   triggerHistogramTimerByAdapterName() {}
+  @EventDuration(...withValues2('gauge'), 'gauge')
+  asyncFailTriggerDurationByAdapterName(): Promise<void> {
+    return new Promise((resolve, reject) => setTimeout(() => reject('error'), 100))
+  }
 
-  //   @EventDuration(...withValues('histogram'), null, 'histogram')
-  //   triggerHistogramTimerByMetricFilter() {}
+  @EventDuration(...withValues2('gauge'), null, Gauge)
+  triggerDurationByGaugeMetrics() {}
 
-  //   @EventDuration(...withValues('summary'), 'summary')
-  //   triggerSummaryTimerByAdapterName() {}
+  @EventDuration(...withValues2('histogram'), null, Histogram)
+  triggerDurationByHistogramMetrics() {}
 
-  //   @EventDuration(...withValues('summary'), null, 'summary')
-  //   triggerSummaryTimerByMetricFilter() {}
+  @EventDuration(...withValues2('summary'), null, Summary)
+  triggerDurationBySummaryMetrics() {}
 
-  //   @EventDuration(...withValues('summary'), null, ['gauge', 'histogram', 'summary'])
-  //   triggerTimerByMetricFilter() {}
+  @EventDuration(...withValues2('summary'), null, Summary)
+  asyncTriggerDurationBySummaryMetrics(): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, 100))
+  }
+
+  @EventDuration(...withValues2('multi_duration'), null, [Histogram, Summary])
+  triggerDurationByMultipleMetrics() {}
+
+  @EventDuration(...withValues2('all_duration'))
+  triggerDurationByAllMetrics() {}
 }

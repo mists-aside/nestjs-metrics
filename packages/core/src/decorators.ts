@@ -1,6 +1,6 @@
 import {Counter, Gauge, Histogram, Summary} from './metric';
 import {Metric} from './metric/metric';
-import {Tags} from './adapter/interfaces';
+import {Tags, TimerMethod} from './adapter/interfaces';
 import {Type} from '@nestjs/common';
 
 type IncrementMetric = Type<Counter> | Type<Gauge>;
@@ -28,11 +28,10 @@ export const EventIncrement = (
 
   const oldMethod = descriptor.value;
   descriptor.value = (...args: any[]): any => {
-    const metrics: Metric[] = metric? [(metric as any).getInstance()] : [Counter.getInstance(), Gauge.getInstance()];
+    const metrics: Metric[] = metric ? [(metric as any).getInstance()] : [Counter.getInstance(), Gauge.getInstance()];
 
-    console.log(metrics)
     metrics.forEach((metric) => {
-      (metric as Counter).inc(...incArgs)
+      (metric as Counter).inc(...incArgs);
     });
 
     return oldMethod.call(target, ...args);
@@ -46,23 +45,26 @@ export const EventIncrement = (
  *
  * @returns {MethodDecorator}
  */
-export const EventDecrement = (delta?: number, label?: string, tags?: Tags, adapter?: string): MethodDecorator =>
-  (target: any, propertyKey: string | symbol, descriptor: PropertyDescriptor): PropertyDescriptor => {
-    const decArgs: [number?, string?, Tags?, string?] = [delta, label, tags, adapter];
-    if (!adapter) {
-      decArgs.pop();
-    }
+export const EventDecrement = (delta?: number, label?: string, tags?: Tags, adapter?: string): MethodDecorator => (
+  target: any,
+  propertyKey: string | symbol,
+  descriptor: PropertyDescriptor,
+): PropertyDescriptor => {
+  const decArgs: [number?, string?, Tags?, string?] = [delta, label, tags, adapter];
+  if (!adapter) {
+    decArgs.pop();
+  }
 
-    const oldMethod = descriptor.value;
-    descriptor.value = (...args: any[]): any => {
-      Gauge.getInstance().dec(...decArgs);
-      return oldMethod.call(target, ...args);
-    };
-
-    return descriptor;
+  const oldMethod = descriptor.value;
+  descriptor.value = (...args: any[]): any => {
+    Gauge.getInstance().dec(...decArgs);
+    return oldMethod.call(target, ...args);
   };
 
-type DurationMetric = Type<Gauge> | Type<Histogram> | Type<Summary> | [Type<Gauge>?, Type<Histogram>?, Type<Summary>?];
+  return descriptor;
+};
+
+type DurationMetric = Type<Gauge> | Type<Histogram> | Type<Summary> | (Type<Gauge> | Type<Histogram> | Type<Summary>)[];
 
 /**
  * Comment
@@ -70,12 +72,48 @@ type DurationMetric = Type<Gauge> | Type<Histogram> | Type<Summary> | [Type<Gaug
  * @returns {MethodDecorator}
  */
 export const EventDuration = (
-  value: number,
   label?: string,
   tags?: Tags,
   adapter?: string,
-  metric?: DurationMetric
-): MethodDecorator =>
-  (target: any, propertyKey: string | symbol, descriptor: PropertyDescriptor): PropertyDescriptor => {
-    return null;
+  metric?: DurationMetric,
+): MethodDecorator => (
+  target: any,
+  propertyKey: string | symbol,
+  descriptor: PropertyDescriptor,
+): PropertyDescriptor => {
+  const timerArgs: [string?, Tags?, string?] = [label, tags, adapter];
+  if (!adapter) {
+    timerArgs.pop();
+  }
+
+  const oldMethod = descriptor.value;
+  descriptor.value = (...args: any[]): any => {
+    const metrics: Metric[] = metric
+      ? Array.isArray(metric)
+        ? metric.map((item) => (item as any).getInstance())
+        : [(metric as any).getInstance()]
+      : [Gauge.getInstance(), Histogram.getInstance(), Summary.getInstance()];
+
+    const ends: TimerMethod[] = metrics
+      .map((metric) => (metric as Gauge).startTimer(...timerArgs))
+      .reduce((a, b) => a.concat(b), []);
+    const result = oldMethod.call(target, ...args);
+
+    if (result instanceof Promise) {
+      return result
+        .then((...args: any[]) => {
+          ends.forEach((end) => end(tags));
+          return args;
+        })
+        .catch((error) => {
+          ends.forEach((end) => end(tags));
+          throw error;
+        });
+    }
+
+    ends.forEach((end) => end(tags));
+    return result;
   };
+
+  return descriptor;
+};
