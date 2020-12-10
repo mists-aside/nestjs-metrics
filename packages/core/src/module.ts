@@ -47,9 +47,6 @@ export class MetricsModule {
    * @param options
    */
   public static register(options: MetricsModuleOptions): DynamicModule {
-    const config = Config.getInstance();
-    config.addAdapters(options.adapters || {});
-
     MetricsModule.configureServer(options);
 
     return {
@@ -121,7 +118,7 @@ export class MetricsModule {
     return {
       provide: 'NEST_METRICS_OPTIONS',
       async useFactory(optionsFactory: MetricsModuleOptionsFactory): Promise<MetricsModuleOptions> {
-        const userOptions = await optionsFactory.createStatsOptions();
+        const userOptions = await optionsFactory.createMetricsModuleOptions();
         const opts = MetricsModule.makeDefaultOptions(userOptions);
 
         MetricsModule.configureServer(opts);
@@ -133,6 +130,9 @@ export class MetricsModule {
   }
 
   private static configureServer(options: MetricsModuleOptions): void {
+    const config = Config.getInstance();
+    config.addAdapters(options.adapters);
+
     // if (options.prometheus && options.prometheus.route) {
     //   Reflect.defineMetadata(PATH_METADATA, options.prometheus.route, MetricsController);
     // }
@@ -141,6 +141,7 @@ export class MetricsModule {
   private static makeDefaultOptions(options?: MetricsModuleOptions): Required<MetricsModuleOptions> {
     return {
       adapters: {},
+      ...options,
     };
   }
 }

@@ -7,7 +7,7 @@ import {Metric} from './metric';
 export class Histogram extends Metric {
   protected static instance: Histogram;
 
-  static getInstance() {
+  static getInstance(): Histogram {
     if (!Histogram.instance) {
       Histogram.instance = new Histogram();
     }

@@ -7,7 +7,7 @@ import {Metric} from './metric';
 export class Counter extends Metric {
   protected static instance: Counter;
 
-  static getInstance() {
+  static getInstance(): Counter {
     if (!Counter.instance) {
       Counter.instance = new Counter();
     }

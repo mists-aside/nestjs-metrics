@@ -4,16 +4,19 @@
   "devDependencies": {
     "@commitlint/cli": "^9.0.1",
     "@commitlint/config-conventional": "^9.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.9.1",
+    "@typescript-eslint/parser": "^4.9.1",
+    "eslint": "^7.13.0",
     "eslint-plugin-mocha": "^8.0.0",
     "husky": "^4.3.0",
-    "lerna": "^3.22.1"
+    "lerna": "^3.22.1",
+    "typescript": "^4.1.2"
   },
   "scripts": {
-    "bootstrap": "lerna exec npm install",
+    "bootstrap": "lerna bootstrap; lerna exec npm install",
     "build": "lerna run build --scope @mists/nestjs-metrics*",
     "git-hook:commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-    "git-hook:pre-commit": "npm run test",
-    "--git-hook:pre-commit": "lerna run git-hook:pre-commit --scope @mists/nestjs-metrics*",
+    "git-hook:pre-commit": "npm run prettier:write && npm run lint:write && npm run jscpd && npm run depcruise && npm run test",
     "depcruise": "lerna run depcruise --scope @mists/nestjs-metrics*",
     "docs": "lerna run docs --scope @mists/nestjs-metrics*",
     "jscpd": "lerna run jscpd --scope @mists/nestjs-metrics*",
@@ -28,7 +31,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "npm run git-hook:commit-msg",
-      "pre-commit": "npm run git-hook:pre-commit"
+      "--pre-commit": "npm run git-hook:pre-commit"
     }
   }
 }

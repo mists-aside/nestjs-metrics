@@ -13,20 +13,22 @@ import {
   Histogram as HistogramMetric,
   Summary as SummaryMetric,
 } from '../src/metric';
-import {DecoratedMetricsController, withValues, withValues2, withValues3} from './utils/controllers';
+import {DecoratedMetricsController, withValues, withValues2} from './utils/controllers';
 import {TestHarness} from './utils/harness';
 import {createTestModule} from './utils/module';
+import Sinon = require('sinon');
 
 chai.use(sinonChai);
 const expect = chai.expect;
 
-// eslint-disable-next-line mocha/no-skipped-tests
-describe('src/adapter', function () {
+// eslint-disable-next-line mocha/no-skipped-tests,mocha/no-mocha-arrows
+describe('src/adapter', () => {
   let adapters: MetricsAdapters;
   let controller: DecoratedMetricsController;
   let harness: TestHarness;
   let sandbox: sinon.SinonSandbox;
-  const endTimer = sinon.fake();
+  // eslint-disable-next-line mocha/no-setup-in-describe
+  const endTimer: Sinon.SinonSpy = sinon.fake();
 
   // eslint-disable-next-line mocha/no-mocha-arrows
   beforeEach(async () => {
@@ -65,6 +67,7 @@ describe('src/adapter', function () {
 
     sandbox.spy(adapters.summary, 'observe');
     sandbox.spy(adapters.summary, 'reset');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     adapters.summary.startTimer = (label?: string, tags?: Tags, adapter?: string): TimerMethod =>
       endTimer as TimerMethod;
   });
@@ -171,8 +174,9 @@ describe('src/adapter', function () {
       withValues2('gauge'),
     )}, 'gauge') should call startTimer() on 'gauge' adapter (async/catch)`, async () => {
       try {
-       await controller.asyncFailTriggerDurationByAdapterName();
-      } catch(e) {}
+        await controller.asyncFailTriggerDurationByAdapterName();
+        // eslint-disable-next-line no-empty
+      } catch (e) {}
 
       expect(adapters.gauge.startTimer).to.have.been.called;
       expect(adapters.gauge.startTimer).to.have.been.calledWith(...withValues2('gauge'));

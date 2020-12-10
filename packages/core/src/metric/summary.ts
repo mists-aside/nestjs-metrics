@@ -7,7 +7,7 @@ import {Metric} from './metric';
 export class Summary extends Metric {
   protected static instance: Summary;
 
-  static getInstance() {
+  static getInstance(): Summary {
     if (!Summary.instance) {
       Summary.instance = new Summary();
     }

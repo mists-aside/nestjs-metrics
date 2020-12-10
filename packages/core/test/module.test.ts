@@ -1,9 +1,20 @@
-import {expect} from 'chai';
+import * as chai from 'chai';
+import * as chaiAsPromised from 'chai-as-promised';
 import {describe, it} from 'mocha';
+
+import {Counter} from '../src/adapter/dummies';
+import {Config} from '../src/config';
+import {MetricsModule} from '../src/module';
 import {TestHarness} from './utils/harness';
-import {createTestModule, createAsyncTestModule, StatsOptionsService} from './utils/module';
-import {TestingModule} from '@nestjs/testing';
-import * as PromClient from 'prom-client';
+import {
+  createAsyncTestModule,
+  createTestModule,
+  MetricsModuleOptionsService,
+  MetricsOptionsModule,
+} from './utils/module';
+
+const expect = chai.expect;
+chai.use(chaiAsPromised);
 
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('src/module', function () {
@@ -17,40 +28,64 @@ describe('src/module', function () {
     }
   });
 
-  // describe('StatsModule.register()', () => {
-  //   // eslint-disable-next-line mocha/no-mocha-arrows
-  //   beforeEach(async () => {
-  //     harness = await createTestModule({
-  //       adapters: {},
-  //     });
-  //   });
+  describe('MetricsModule.register()', () => {
+    // eslint-disable-next-line mocha/no-mocha-arrows
+    afterEach(async () => {
+      harness = null;
+      Config.getInstance().clear();
+    });
 
-  //   it('StatsModule to instantiate properly (without any options)', async () => {
-  //     expect(true).to.equal(true);
-  //   });
+    it('MetricsModule not to instantiate properly without adapters option', async () => {
+      await expect(createTestModule()).to.be.rejectedWith(Error);
+    });
 
-  //   it('StatsModule to instantiate properly (with options)', async () => {
-  //     expect(true).to.equal(true);
-  //   });
-  // });
+    it('MetricsModule to instantiate properly (with options)', async () => {
+      harness = await createTestModule({
+        adapters: {
+          counterAdapter: new Counter(),
+        },
+      });
+      const module = harness.app.get<MetricsModule>(MetricsModule);
+      expect(module instanceof MetricsModule).to.equal(true);
 
-  // describe('StatsModule.registerAsync()', () => {
-  //   // eslint-disable-next-line mocha/no-mocha-arrows
-  //   beforeEach(async () => {
-  //     harness = await createAsyncTestModule({
-  //       useClass: StatsOptionsService,
-  //       inject: [StatsOptionsService],
-  //     });
-  //   });
+      expect(Config.getInstance().adapters.counterAdapter instanceof Counter).to.be.true;
+    });
+  });
 
-  //   it('StatsModule to instantiate properly (without any options)', async () => {
-  //     expect(true).to.equal(true);
-  //   });
+  describe('MetricsModule.registerAsync()', () => {
+    // eslint-disable-next-line mocha/no-mocha-arrows
+    afterEach(() => {
+      harness = null;
+      Config.getInstance().clear();
+    });
 
-  //   it('StatsModule to instantiate properly (with options)', async () => {
-  //     expect(true).to.equal(true);
-  //   });
-  // });
+    it('MetricsModule to throw error when no `useExisting` / `useClass` is provided', async () => {
+      await expect(createAsyncTestModule({})).to.be.rejectedWith(Error);
+    });
+
+    it('MetricsModule to instantiate properly (with options) (useExisting)', async () => {
+      harness = await createAsyncTestModule({
+        imports: [MetricsOptionsModule],
+        useExisting: MetricsModuleOptionsService,
+        inject: [MetricsModuleOptionsService],
+      });
+      const module = harness.app.get<MetricsModule>(MetricsModule);
+      expect(module instanceof MetricsModule).to.equal(true);
+
+      expect(Config.getInstance().adapters.counterAdapter instanceof Counter).to.be.true;
+    });
+
+    it('MetricsModule to instantiate properly (with options) (useClass)', async () => {
+      harness = await createAsyncTestModule({
+        useClass: MetricsModuleOptionsService,
+        inject: [MetricsModuleOptionsService],
+      });
+      const module = harness.app.get<MetricsModule>(MetricsModule);
+      expect(module instanceof MetricsModule).to.equal(true);
+
+      expect(Config.getInstance().adapters.counterAdapter instanceof Counter).to.be.true;
+    });
+  });
 
   it('generic', () => {
     expect(true).to.equal(true);

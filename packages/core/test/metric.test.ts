@@ -3,9 +3,8 @@ import {describe, it} from 'mocha';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
-import {Tags} from '../src/adapter/interfaces';
 import {Counter, Gauge, Histogram, Summary} from '../src/metric';
-import {InjectableMetricsController, withValues, withValues2, withValues3} from './utils/controllers';
+import {InjectableMetricsController, withValues, withValues2} from './utils/controllers';
 import {TestHarness} from './utils/harness';
 import {createTestModule} from './utils/module';
 
@@ -61,8 +60,6 @@ describe('src/metric', function () {
   });
 
   describe('Counter', () => {
-    let spy: sinon.SinonSpy;
-
     it(`Counter.inc(${JSON.stringify(
       withValues('counter'),
     )}, 'counter') should be called with proper values`, async () => {
@@ -121,7 +118,7 @@ describe('src/metric', function () {
     });
 
     it(`Gauge.startTimer(${JSON.stringify(withValues2('gauge'))}) should be called`, async () => {
-      const endTimer = await controller.gaugeStartTimer();
+      await controller.gaugeStartTimer();
 
       expect(controller.gauge.startTimer).to.have.been.called;
       expect(controller.gauge.startTimer).to.have.been.calledWith(...withValues2('gauge'), 'gauge');

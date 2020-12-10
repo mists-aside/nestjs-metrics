@@ -1,5 +1,5 @@
 {
-  "name": "@mists/nestjs-metric-statsd",
+  "name": "@mists/nestjs-metrics-statsd",
   "version": "0.0.0",
   "description": "NestJs Metrics Adapter - StatsD",
   "main": "dist/commonjs/index.js",
@@ -45,6 +45,7 @@
   },
   "homepage": "https://github.com/mists-aside/nestjs-metrics#readme",
   "dependencies": {
+    "@mists/nestjs-metrics": "^0.0.2",
     "statsd-client": "^0.4.5"
   },
   "devDependencies": {
@@ -63,13 +64,9 @@
     "@types/statsd-client": "^0.4.0",
     "@types/supertest": "^2.0.10",
     "@types/uuid": "^8.3.0",
-    "@typescript-eslint/eslint-plugin": "^4.8.1",
-    "@typescript-eslint/parser": "^4.8.1",
     "chai": "^4.2.0",
     "cross-env": "^7.0.2",
     "dependency-cruiser": "^9.17.0",
-    "eslint": "^7.13.0",
-    "eslint-plugin-mocha": "^8.0.0",
     "husky": "^4.3.0",
     "jscpd": "^3.3.19",
     "jscpd-badge-reporter": "^1.1.3",

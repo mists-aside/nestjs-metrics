@@ -17,6 +17,7 @@ export const EventIncrement = (
   adapter?: string,
   metric?: IncrementMetric,
 ): MethodDecorator => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   target: any,
   propertyKey: string | symbol,
   descriptor: PropertyDescriptor,
@@ -27,7 +28,9 @@ export const EventIncrement = (
   }
 
   const oldMethod = descriptor.value;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   descriptor.value = (...args: any[]): any => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const metrics: Metric[] = metric ? [(metric as any).getInstance()] : [Counter.getInstance(), Gauge.getInstance()];
 
     metrics.forEach((metric) => {
@@ -46,6 +49,7 @@ export const EventIncrement = (
  * @returns {MethodDecorator}
  */
 export const EventDecrement = (delta?: number, label?: string, tags?: Tags, adapter?: string): MethodDecorator => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   target: any,
   propertyKey: string | symbol,
   descriptor: PropertyDescriptor,
@@ -56,6 +60,7 @@ export const EventDecrement = (delta?: number, label?: string, tags?: Tags, adap
   }
 
   const oldMethod = descriptor.value;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   descriptor.value = (...args: any[]): any => {
     Gauge.getInstance().dec(...decArgs);
     return oldMethod.call(target, ...args);
@@ -77,6 +82,7 @@ export const EventDuration = (
   adapter?: string,
   metric?: DurationMetric,
 ): MethodDecorator => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   target: any,
   propertyKey: string | symbol,
   descriptor: PropertyDescriptor,
@@ -87,11 +93,14 @@ export const EventDuration = (
   }
 
   const oldMethod = descriptor.value;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   descriptor.value = (...args: any[]): any => {
     const metrics: Metric[] = metric
       ? Array.isArray(metric)
-        ? metric.map((item) => (item as any).getInstance())
-        : [(metric as any).getInstance()]
+        ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          metric.map((item) => (item as any).getInstance())
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          [(metric as any).getInstance()]
       : [Gauge.getInstance(), Histogram.getInstance(), Summary.getInstance()];
 
     const ends: TimerMethod[] = metrics
@@ -100,15 +109,18 @@ export const EventDuration = (
     const result = oldMethod.call(target, ...args);
 
     if (result instanceof Promise) {
-      return result
-        .then((...args: any[]) => {
-          ends.forEach((end) => end(tags));
-          return args;
-        })
-        .catch((error) => {
-          ends.forEach((end) => end(tags));
-          throw error;
-        });
+      return (
+        result
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .then((...args: any[]) => {
+            ends.forEach((end) => end(tags));
+            return args;
+          })
+          .catch((error) => {
+            ends.forEach((end) => end(tags));
+            throw error;
+          })
+      );
     }
 
     ends.forEach((end) => end(tags));

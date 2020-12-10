@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import {KIND_COUNTER, KIND_GAUGE, KIND_HISTOGRAM, KIND_SUMMARY} from './interfaces';
 import {
   Counter as CounterInterface,
@@ -69,3 +71,5 @@ export class Summary implements SummaryInterface {
     throw new Error(ERROR_MESSAGE.replace('{method}', 'startTimer'));
   }
 }
+
+/* eslint-enable @typescript-eslint/no-unused-vars */

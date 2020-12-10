@@ -1,6 +1,7 @@
+import {Counter} from './../../src/adapter/dummies';
 import * as request from 'supertest';
 
-import {Injectable} from '@nestjs/common';
+import {Injectable, Module} from '@nestjs/common';
 import {Test} from '@nestjs/testing';
 
 import {MetricsModuleAsyncOptions, MetricsModule, MetricsModuleOptions, MetricsModuleOptionsFactory} from '../../src';
@@ -32,13 +33,21 @@ export const createTestModule = async (
 };
 
 @Injectable()
-export class StatsOptionsService implements MetricsModuleOptionsFactory {
-  createStatsOptions(): MetricsModuleOptions {
+export class MetricsModuleOptionsService implements MetricsModuleOptionsFactory {
+  createMetricsModuleOptions(): MetricsModuleOptions {
     return {
-      adapters: {},
+      adapters: {
+        counterAdapter: new Counter(),
+      },
     };
   }
 }
+
+@Module({
+  providers: [MetricsModuleOptionsService],
+  exports: [MetricsModuleOptionsService],
+})
+export class MetricsOptionsModule {}
 
 export const createAsyncTestModule = async (
   options?: MetricsModuleAsyncOptions,

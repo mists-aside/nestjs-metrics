@@ -1,8 +1,8 @@
-// import {MetricsAdapter} from './adapter';
 import {ModuleMetadata} from '@nestjs/common/interfaces';
 import {Type} from '@nestjs/common';
 
 export interface MetricsAdapters {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
 
@@ -11,7 +11,7 @@ export interface MetricsModuleOptions {
 }
 
 export interface MetricsModuleOptionsFactory {
-  createStatsOptions(): Promise<MetricsModuleOptions> | MetricsModuleOptions;
+  createMetricsModuleOptions(): Promise<MetricsModuleOptions> | MetricsModuleOptions;
 }
 
 export interface MetricsModuleAsyncOptions extends Pick<ModuleMetadata, 'imports'> {
@@ -49,11 +49,16 @@ export class Config {
     return this.cAdapters;
   }
 
-  addAdapter(name: string, adapter: any) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  addAdapter(name: string, adapter: any): void {
     this.cAdapters[name] = adapter;
   }
 
-  addAdapters(adapters: MetricsAdapters) {
+  addAdapters(adapters: MetricsAdapters): void {
     this.cAdapters = Object.assign({}, this.cAdapters, adapters);
+  }
+
+  clear(): void {
+    this.cAdapters = {};
   }
 }

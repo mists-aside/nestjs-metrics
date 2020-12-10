@@ -8,47 +8,49 @@ export const withValues = (prefix = 'counter'): [number?, string?, Tags?] => [1,
 export const withValues2 = (prefix = 'counter'): [string?, Tags?] => [`${prefix}_label`, {tag: prefix}];
 export const withValues3 = (prefix = 'counter'): [Tags?] => [{tag: prefix}];
 
+/* eslint-disable @typescript-eslint/no-empty-function */
+
 @Controller()
 export class InjectableMetricsController {
   constructor(public counter: Counter, public gauge: Gauge, public histogram: Histogram, public summary: Summary) {}
 
-  counterInc() {
+  counterInc(): void {
     this.counter.inc(...withValues('counter'), 'counter');
   }
 
-  counterIncNoData() {
+  counterIncNoData(): void {
     this.counter.inc();
   }
 
-  gaugeDec() {
+  gaugeDec(): void {
     this.gauge.dec(...withValues('gauge'), 'gauge');
   }
 
-  gaugeDecNoData() {
+  gaugeDecNoData(): void {
     this.gauge.dec();
   }
 
-  gaugeInc() {
+  gaugeInc(): void {
     this.gauge.inc(...withValues('gauge'), 'gauge');
   }
 
-  gaugeIncNoData() {
+  gaugeIncNoData(): void {
     this.gauge.inc();
   }
 
-  gaugeSet() {
+  gaugeSet(): void {
     this.gauge.set(...withValues('gauge'), 'gauge');
   }
 
-  gaugeStartTimer() {
+  gaugeStartTimer(): void {
     this.gauge.startTimer(...withValues2('gauge'), 'gauge');
   }
 
-  histogramObserve() {
+  histogramObserve(): void {
     this.histogram.observe(...withValues('histogram'), 'histogram');
   }
 
-  histogramReset() {
+  histogramReset(): void {
     this.histogram.reset(...withValues2('histogram'), 'histogram');
   }
 
@@ -62,11 +64,11 @@ export class InjectableMetricsController {
     );
   }
 
-  summaryObserve() {
+  summaryObserve(): void {
     this.summary.observe(...withValues('summary'), 'summary');
   }
 
-  summaryReset() {
+  summaryReset(): void {
     this.summary.reset(...withValues2('summary'), 'summary');
   }
 
@@ -84,53 +86,55 @@ export class InjectableMetricsController {
 @Controller()
 export class DecoratedMetricsController {
   @EventIncrement(...withValues('counter'), 'counter')
-  triggerCounterIncByAdapterName() {}
+  triggerCounterIncByAdapterName(): void {}
 
   @EventIncrement(...withValues('counter'), null, Counter)
-  triggerCounterIncByCounterMetric() {}
+  triggerCounterIncByCounterMetric(): void {}
 
   @EventIncrement(...withValues('gauge'), null, Gauge)
-  triggerGaugeIncByGaugeMetric() {}
+  triggerGaugeIncByGaugeMetric(): void {}
 
   @EventIncrement(...withValues('all_inc'))
-  triggerIncByOnAllIncMetrics() {}
+  triggerIncByOnAllIncMetrics(): void {}
 
   @EventDecrement(...withValues('gauge'), 'gauge')
-  triggerGaugeDecByAdapterName() {}
+  triggerGaugeDecByAdapterName(): void {}
 
   @EventDecrement(...withValues('gauge'))
-  triggerDecOnAllGaugeMetrics() {}
+  triggerDecOnAllGaugeMetrics(): void {}
 
   @EventDuration(...withValues2('gauge'), 'gauge')
-  triggerDurationByAdapterName() {}
+  triggerDurationByAdapterName(): void {}
 
   @EventDuration(...withValues2('gauge'), 'gauge')
   asyncTriggerDurationByAdapterName(): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, 100))
+    return new Promise((resolve) => setTimeout(resolve, 100));
   }
 
   @EventDuration(...withValues2('gauge'), 'gauge')
   asyncFailTriggerDurationByAdapterName(): Promise<void> {
-    return new Promise((resolve, reject) => setTimeout(() => reject('error'), 100))
+    return new Promise((resolve, reject) => setTimeout(() => reject('error'), 100));
   }
 
   @EventDuration(...withValues2('gauge'), null, Gauge)
-  triggerDurationByGaugeMetrics() {}
+  triggerDurationByGaugeMetrics(): void {}
 
   @EventDuration(...withValues2('histogram'), null, Histogram)
-  triggerDurationByHistogramMetrics() {}
+  triggerDurationByHistogramMetrics(): void {}
 
   @EventDuration(...withValues2('summary'), null, Summary)
-  triggerDurationBySummaryMetrics() {}
+  triggerDurationBySummaryMetrics(): void {}
 
   @EventDuration(...withValues2('summary'), null, Summary)
   asyncTriggerDurationBySummaryMetrics(): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, 100))
+    return new Promise((resolve) => setTimeout(resolve, 100));
   }
 
   @EventDuration(...withValues2('multi_duration'), null, [Histogram, Summary])
-  triggerDurationByMultipleMetrics() {}
+  triggerDurationByMultipleMetrics(): void {}
 
   @EventDuration(...withValues2('all_duration'))
-  triggerDurationByAllMetrics() {}
+  triggerDurationByAllMetrics(): void {}
 }
+
+/* eslint-enable @typescript-eslint/no-empty-function */

@@ -20,12 +20,13 @@ import {createTestModule} from './utils/module';
 chai.use(sinonChai);
 const expect = chai.expect;
 
-// eslint-disable-next-line mocha/no-skipped-tests
+// eslint-disable-next-line mocha/no-skipped-tests,mocha/no-mocha-arrows
 describe('src/adapter', function () {
   let adapters: MetricsAdapters;
   let controller: InjectableMetricsController;
   let harness: TestHarness;
   let sandbox: sinon.SinonSandbox;
+  // eslint-disable-next-line mocha/no-setup-in-describe
   const endTimer = sinon.fake();
 
   // eslint-disable-next-line mocha/no-mocha-arrows
@@ -65,6 +66,7 @@ describe('src/adapter', function () {
 
     sandbox.spy(adapters.summary, 'observe');
     sandbox.spy(adapters.summary, 'reset');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     adapters.summary.startTimer = (label?: string, tags?: Tags, adapter?: string): TimerMethod =>
       endTimer as TimerMethod;
   });
@@ -135,7 +137,7 @@ describe('src/adapter', function () {
     });
 
     it(`Gauge.startTimer(${JSON.stringify(withValues2('gauge'))}) should be called`, async () => {
-      const endTimer = await controller.gaugeStartTimer();
+      await controller.gaugeStartTimer();
 
       expect(adapters.gauge.startTimer).to.have.been.called;
       expect(adapters.gauge.startTimer).to.have.been.calledWith(...withValues2('gauge'));
@@ -166,7 +168,7 @@ describe('src/adapter', function () {
     it(`Histogram.startTimer(${JSON.stringify(
       withValues('histogram'),
     )}) should be called with proper values`, async () => {
-      const endTimer = await controller.histogramStartTimer();
+      await controller.histogramStartTimer();
 
       expect(adapters.histogram.startTimer).to.have.been.called;
       expect(adapters.histogram.startTimer).to.have.been.calledWith(...withValues2('histogram'));

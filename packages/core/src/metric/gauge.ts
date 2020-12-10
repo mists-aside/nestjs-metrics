@@ -7,7 +7,7 @@ import {Metric} from './metric';
 export class Gauge extends Metric {
   protected static instance: Gauge;
 
-  static getInstance() {
+  static getInstance(): Gauge {
     if (!Gauge.instance) {
       Gauge.instance = new Gauge();
     }
