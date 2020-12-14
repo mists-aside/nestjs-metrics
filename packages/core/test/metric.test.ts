@@ -1,12 +1,12 @@
 import * as chai from 'chai';
-import {describe, it} from 'mocha';
+import { describe, it } from 'mocha';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
-import {Counter, Gauge, Histogram, Summary} from '../src/metric';
-import {InjectableMetricsController, withValues, withValues2} from './utils/controllers';
-import {TestHarness} from './utils/harness';
-import {createTestModule} from './utils/module';
+import { Counter, Gauge, Histogram, Summary } from '../src/metric';
+import { InjectableMetricsController, withValues, withValues2 } from './utils/controllers';
+import { TestHarness } from './utils/harness';
+import { createTestModule } from './utils/module';
 
 chai.use(sinonChai);
 const expect = chai.expect;
