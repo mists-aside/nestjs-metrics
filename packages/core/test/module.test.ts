@@ -5,13 +5,13 @@ import {describe, it} from 'mocha';
 import {Counter} from '../src/adapter/dummies';
 import {Config} from '../src/config';
 import {MetricsModule} from '../src/module';
-import {TestHarness} from './utils/harness';
+import {TestHarness} from '../src/test/utils/harness';
 import {
   createAsyncTestModule,
   createTestModule,
   MetricsModuleOptionsService,
   MetricsOptionsModule,
-} from './utils/module';
+} from '../src/test/utils';
 
 const expect = chai.expect;
 chai.use(chaiAsPromised);

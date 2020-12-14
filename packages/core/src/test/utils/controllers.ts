@@ -1,8 +1,8 @@
 import {Controller} from '@nestjs/common';
 
-import {Tags} from '../../src/adapter/interfaces';
-import {EventDecrement, EventDuration, EventIncrement} from '../../src/decorators';
-import {Counter, Gauge, Histogram, Summary} from '../../src/metric';
+import {Tags} from '../../adapter/interfaces';
+import {EventDecrement, EventDuration, EventIncrement} from '../../decorators';
+import {Counter, Gauge, Histogram, Summary} from '../../metric';
 
 export const withValues = (prefix = 'counter'): [number?, string?, Tags?] => [1, `${prefix}_label`, {tag: prefix}];
 export const withValues2 = (prefix = 'counter'): [string?, Tags?] => [`${prefix}_label`, {tag: prefix}];

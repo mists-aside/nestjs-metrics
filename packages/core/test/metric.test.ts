@@ -4,9 +4,8 @@ import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
 import { Counter, Gauge, Histogram, Summary } from '../src/metric';
-import { InjectableMetricsController, withValues, withValues2 } from './utils/controllers';
-import { TestHarness } from './utils/harness';
-import { createTestModule } from './utils/module';
+import { InjectableMetricsController, withValues, withValues2 } from '../src/test/utils/controllers';
+import { TestHarness, createTestModule } from '../src/test/utils';
 
 chai.use(sinonChai);
 const expect = chai.expect;

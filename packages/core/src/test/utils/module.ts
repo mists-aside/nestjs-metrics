@@ -1,11 +1,13 @@
-import {Counter} from './../../src/adapter/dummies';
 import * as request from 'supertest';
 
-import {Injectable, Module} from '@nestjs/common';
-import {Test} from '@nestjs/testing';
+import { Injectable, Module } from '@nestjs/common';
+import { Test } from '@nestjs/testing';
 
-import {MetricsModuleAsyncOptions, MetricsModule, MetricsModuleOptions, MetricsModuleOptionsFactory} from '../../src';
-import {TestHarness} from './harness';
+import {
+    MetricsModule, MetricsModuleAsyncOptions, MetricsModuleOptions, MetricsModuleOptionsFactory
+} from '../..';
+import { Counter } from '../../adapter/dummies';
+import { TestHarness } from './harness';
 
 export const createTestModule = async (
   options?: MetricsModuleOptions,

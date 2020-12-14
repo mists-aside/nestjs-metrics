@@ -10,11 +10,11 @@ import {
     Counter as CounterMetric, Gauge as GaugeMetric, Histogram as HistogramMetric,
     Summary as SummaryMetric
 } from '../src/metric';
+import { createTestModule } from '../src/test/utils';
 import {
     InjectableMetricsController, withValues, withValues2, withValues3
-} from './utils/controllers';
-import { TestHarness } from './utils/harness';
-import { createTestModule } from './utils/module';
+} from '../src/test/utils/controllers';
+import { TestHarness } from '../src/test/utils/harness';
 
 chai.use(sinonChai);
 const expect = chai.expect;

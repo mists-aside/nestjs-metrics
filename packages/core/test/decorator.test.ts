@@ -10,9 +10,9 @@ import {
     Counter as CounterMetric, Gauge as GaugeMetric, Histogram as HistogramMetric,
     Summary as SummaryMetric
 } from '../src/metric';
-import { DecoratedMetricsController, withValues, withValues2 } from './utils/controllers';
-import { TestHarness } from './utils/harness';
-import { createTestModule } from './utils/module';
+import { createTestModule } from '../src/test/utils';
+import { DecoratedMetricsController, withValues, withValues2 } from '../src/test/utils/controllers';
+import { TestHarness } from '../src/test/utils/harness';
 
 import Sinon = require('sinon');
 
