@@ -4,8 +4,10 @@
   "description": "NestJs Metrics Adapter - StatsD",
   "main": "dist/commonjs/index.js",
   "scripts": {
-    "build": "rollup -c --environment NODE_ENV:production",
+    "--build": "rollup -c --environment NODE_ENV:production",
+    "build": "tsc -b",
     "clean": "rimraf coverage dist",
+    "clean:force": "npm run clean; rimraf .nyc_output .rollupcache",
     "depcruise": "depcruise --config .dependency-cruiser.js src",
     "doc:watch": "nodemon --exec 'npm run doc'",
     "docs": "npx typedoc --out docs --json docs.json --readme none --theme minimal --mode file src",
