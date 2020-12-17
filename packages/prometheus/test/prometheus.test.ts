@@ -42,9 +42,9 @@ describe('src/adapter', function () {
     adapters = {
       counter: new Counter(['tag']),
       counter2: new Counter(['tag']),
-      gauge: new Gauge(),
-      histogram: new Histogram(),
-      summary: new Summary(),
+      gauge: new Gauge(['tag']),
+      // histogram: new Histogram(),
+      // summary: new Summary(),
     };
 
     harness = await createTestModule(
@@ -68,10 +68,11 @@ describe('src/adapter', function () {
     [value, label, tags] = withValues('counter');
     sandbox.spy(adapters.counter.getCounter(label), 'inc');
 
-    // sandbox.spy(adapters.gauge, 'dec');
-    // sandbox.spy(adapters.gauge, 'inc');
-    // sandbox.spy(adapters.gauge, 'set');
-    // sandbox.spy(adapters.gauge, 'startTimer');
+    [value, label, tags] = withValues('gauge');
+    sandbox.spy(adapters.gauge.getGauge(label), 'dec');
+    sandbox.spy(adapters.gauge.getGauge(label), 'inc');
+    sandbox.spy(adapters.gauge.getGauge(label), 'set');
+    sandbox.spy(adapters.gauge.getGauge(label), 'startTimer');
 
     // sandbox.spy(adapters.histogram, 'observe');
     // sandbox.spy(adapters.histogram, 'reset');
@@ -108,7 +109,6 @@ describe('src/adapter', function () {
 
     it(`Counter.inc() should be called with proper values`, async () => {
       const errorTrigger = () => controller.counterIncNoData();
-
       expect(errorTrigger).to.throw(ErrorMessages.INVALID_LABEL_ERROR);
 
       const [value, label, tags] = withValues('counter');
@@ -120,51 +120,59 @@ describe('src/adapter', function () {
     });
   });
 
-  // describe('Gauge', () => {
-  //   it(`Gauge.dec(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
-  //     controller.gaugeDec();
+  describe('Gauge', () => {
+    it(`Gauge.dec(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
+      controller.gaugeDec();
+      const [value, label, tags] = withValues('gauge');
 
-  //     expect(adapters.gauge.dec).to.have.been.called;
-  //     expect(adapters.gauge.dec).to.have.been.calledWith(...withValues('gauge'));
-  //   });
+      expect(adapters.gauge.getGauge(label).dec).to.have.been.called;
+      expect(adapters.gauge.getGauge(label).dec).to.have.been.calledWith(tags, value);
+    });
 
-  //   it(`Gauge.dec() should be called with proper values`, async () => {
-  //     controller.gaugeDecNoData();
+    it(`Gauge.dec() should be called with proper values`, async () => {
+      const errorTrigger = () => controller.gaugeDecNoData();
+      expect(errorTrigger).to.throw(ErrorMessages.INVALID_LABEL_ERROR);
 
-  //     expect(adapters.gauge.dec).to.have.been.called;
-  //   });
+      const [value, label, tags] = withValues('gauge');
+      expect(adapters.gauge.getGauge(label).dec).to.have.not.been.called;
+    });
 
-  //   it(`Gauge.inc(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
-  //     controller.gaugeInc();
+    it(`Gauge.inc(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
+      controller.gaugeInc();
+      const [value, label, tags] = withValues('gauge');
 
-  //     expect(adapters.gauge.inc).to.have.been.called;
-  //     expect(adapters.gauge.inc).to.have.been.calledWith(...withValues('gauge'));
-  //   });
+      expect(adapters.gauge.getGauge(label).inc).to.have.been.called;
+      expect(adapters.gauge.getGauge(label).inc).to.have.been.calledWith(tags, value);
+    });
 
-  //   it(`Gauge.inc() should be called with proper values`, async () => {
-  //     controller.gaugeIncNoData();
+    it(`Gauge.inc() should be called with proper values`, async () => {
+      const errorTrigger = () => controller.gaugeIncNoData();
+      expect(errorTrigger).to.throw(ErrorMessages.INVALID_LABEL_ERROR);
 
-  //     expect(adapters.gauge.inc).to.have.been.called;
-  //   });
+      const [value, label, tags] = withValues('gauge');
+      expect(adapters.gauge.getGauge(label).inc).to.have.not.been.called;
+    });
 
-  //   it(`Gauge.set(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
-  //     controller.gaugeSet();
+    it(`Gauge.set(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
+      controller.gaugeSet();
+      const [value, label, tags] = withValues('gauge');
 
-  //     expect(adapters.gauge.set).to.have.been.called;
-  //     expect(adapters.gauge.set).to.have.been.calledWith(...withValues('gauge'));
-  //   });
+      expect(adapters.gauge.getGauge(label).set).to.have.been.called;
+      expect(adapters.gauge.getGauge(label).set).to.have.been.calledWith(tags, value);
+    });
 
-  //   it(`Gauge.startTimer(${JSON.stringify(withValues2('gauge'))}) should be called`, async () => {
-  //     await controller.gaugeStartTimer();
+    it(`Gauge.startTimer(${JSON.stringify(withValues2('gauge'))}) should be called`, async () => {
+      await controller.gaugeStartTimer();
+      const [label, tags] = withValues2('gauge');
 
-  //     expect(adapters.gauge.startTimer).to.have.been.called;
-  //     expect(adapters.gauge.startTimer).to.have.been.calledWith(...withValues2('gauge'));
-  //   });
+      expect(adapters.gauge.getGauge(label).startTimer).to.have.been.called;
+      expect(adapters.gauge.getGauge(label).startTimer).to.have.been.calledWith(tags);
+    });
 
-  //   it('generic', () => {
-  //     expect(true).to.equal(true);
-  //   });
-  // });
+    it('generic', () => {
+      expect(true).to.equal(true);
+    });
+  });
 
   // describe('Histogram', () => {
   //   it(`Histogram.observe(${JSON.stringify(
