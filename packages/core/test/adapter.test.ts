@@ -1,3 +1,4 @@
+import { withValuesNoTags } from './../src/test/utils/controllers';
 import * as chai from 'chai';
 import { describe, it } from 'mocha';
 import * as sinon from 'sinon';
@@ -95,6 +96,16 @@ describe('src/adapter', function () {
 
       expect(adapters.counter.inc).to.have.been.called;
     });
+
+    it(`Counter.inc(${JSON.stringify(
+      withValuesNoTags('counter'),
+    )}) should be called with proper values`, async () => {
+      controller.counterIncNoTags();
+
+      expect(adapters.counter.inc).to.have.been.called;
+      expect(adapters.counter.inc).to.have.been.calledWith(...withValuesNoTags('counter'), undefined);
+    });
+
 
     it('generic', () => {
       expect(true).to.equal(true);

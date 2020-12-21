@@ -26,6 +26,8 @@ export class Counter extends CounterAbstract {
   getCounter(label: string): prometheus.Counter<string> {
     const localLabel = this.formLabel(label);
 
+    console.log(prometheus.register.metrics(), this.counters);
+
     if (!this.counters[localLabel]) {
       this.counters[localLabel] = this.factory
         ? this.factory(localLabel, this.availableTagKeys)

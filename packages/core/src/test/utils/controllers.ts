@@ -5,6 +5,7 @@ import {EventDecrement, EventDuration, EventIncrement} from '../../decorators';
 import {Counter, Gauge, Histogram, Summary} from '../../metric';
 
 export const withValues = (prefix = 'counter'): [number?, string?, Tags?] => [1, `${prefix}_label`, {tag: prefix}];
+export const withValuesNoTags = (prefix = 'counter'): [number?, string?] => [1, `${prefix}_label`];
 export const withValues2 = (prefix = 'counter'): [string?, Tags?] => [`${prefix}_label`, {tag: prefix}];
 export const withValues3 = (prefix = 'counter'): [Tags?] => [{tag: prefix}];
 
@@ -20,6 +21,10 @@ export class InjectableMetricsController {
 
   counterIncNoData(): void {
     this.counter.inc();
+  }
+
+  counterIncNoTags(): void {
+    this.counter.inc(...withValuesNoTags('counter'));
   }
 
   gaugeDec(): void {

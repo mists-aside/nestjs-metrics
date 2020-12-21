@@ -21,6 +21,7 @@ import {
   withValues,
   withValues2,
   withValues3,
+  withValuesNoTags,
 } from '@mists/nestjs-metrics/dist/commonjs/test/utils';
 
 import {Counter, Gauge, Histogram, Summary} from '../src';
@@ -97,12 +98,24 @@ describe('src/adapter', function () {
   });
 
   describe('Counter', () => {
+    it(`adapters.counter.getCounter to be an object`, async () => {
+
+      const [, label,] = withValues('counter');
+      expect(adapters.counter.getCounter(label)).to.be.an('object');
+    });
+
+    it(`adapters.counter.getCounter to be an object (repeated)`, async () => {
+
+      const [, label,] = withValues('counter');
+      expect(adapters.counter.getCounter(label)).to.be.an('object');
+    });
+
     it(`Counter.inc(${JSON.stringify(
       withValues('counter'),
     )}, 'counter') should be called with proper values`, async () => {
       controller.counterInc();
-      const [value, label, tags] = withValues('counter');
 
+      const [value, label, tags] = withValues('counter');
       expect(adapters.counter.getCounter(label).inc).to.have.been.called;
       expect(adapters.counter.getCounter(label).inc).to.have.been.calledWith(tags, value);
     });
@@ -114,6 +127,17 @@ describe('src/adapter', function () {
       const [value, label, tags] = withValues('counter');
       expect(adapters.counter.getCounter(label).inc).to.not.have.been.called;
     });
+
+    it.only(`Counter.inc(...${JSON.stringify(
+      withValuesNoTags('counter'),
+    )}) should be called with proper values`, async () => {
+      controller.counterIncNoTags();
+
+      const [value, label] = withValuesNoTags('counter');
+      expect(adapters.counter.getCounter(label).inc).to.have.been.called;
+      expect(adapters.counter.getCounter(label).inc).to.have.been.calledWith(undefined, value);
+    });
+
 
     it('generic', () => {
       expect(true).to.equal(true);
