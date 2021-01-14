@@ -1,12 +1,12 @@
-import { SummaryAbstract, Tags, TimerMethod } from "@mists/nestjs-metrics";
+import {SummaryAbstract, Tags, TimerMethod} from '@mists/nestjs-metrics';
 import * as prometheus from 'prom-client';
 
 export interface SummaryFactory {
-  (label: string): prometheus.Summary<string>
+  (label: string): prometheus.Summary<string>;
 }
 
 export class Summary extends SummaryAbstract {
-  protected summaries: { [key: string]: prometheus.Summary<string> };
+  protected summaries: {[key: string]: prometheus.Summary<string>};
 
   protected factory: SummaryFactory;
 
@@ -17,10 +17,12 @@ export class Summary extends SummaryAbstract {
 
   getSummary(label: string): prometheus.Summary<string> {
     if (!this.summaries[label]) {
-      this.summaries[label] = !this.factory ? new prometheus.Summary<string>({
-        name: label,
-        help: label
-      }) : this.factory(label)
+      this.summaries[label] = !this.factory
+        ? new prometheus.Summary<string>({
+            name: label,
+            help: label,
+          })
+        : this.factory(label);
     }
     return this.summaries[label];
   }
@@ -36,5 +38,4 @@ export class Summary extends SummaryAbstract {
   startTimer(label?: string, tags?: Tags): TimerMethod {
     return this.getSummary(label).startTimer(tags);
   }
-
 }

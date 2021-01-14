@@ -21,7 +21,7 @@
     "prebuild": "npm run clean",
     "predocs": "rimraf docs",
     "prerelease": "npm run build",
-    "pretest": "npm run clean",
+    "--pretest": "npm run clean",
     "prettier": "prettier ./{src,test}/**/*.ts",
     "prettier:check": "npm run prettier -- --list-different",
     "prettier:write": "npm run prettier -- --write",

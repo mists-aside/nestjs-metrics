@@ -1,4 +1,4 @@
-import { ErrorMessages } from './../src/errors';
+import {ErrorMessages} from './../src/errors';
 import * as chai from 'chai';
 import {describe, it} from 'mocha';
 import * as sinon from 'sinon';
@@ -44,8 +44,8 @@ describe('src/adapter', function () {
       counter: new Counter(['tag']),
       counter2: new Counter(['tag']),
       gauge: new Gauge(['tag']),
-      // histogram: new Histogram(),
-      // summary: new Summary(),
+      // histogram: new Histogram(['tag']),
+      // summary: new Summary(['tag']),
     };
 
     harness = await createTestModule(
@@ -99,18 +99,16 @@ describe('src/adapter', function () {
 
   describe('Counter', () => {
     it(`adapters.counter.getCounter to be an object`, async () => {
-
-      const [, label,] = withValues('counter');
+      const [, label] = withValues('counter');
       expect(adapters.counter.getCounter(label)).to.be.an('object');
     });
 
     it(`adapters.counter.getCounter to be an object (repeated)`, async () => {
-
-      const [, label,] = withValues('counter');
+      const [, label] = withValues('counter');
       expect(adapters.counter.getCounter(label)).to.be.an('object');
     });
 
-    it(`Counter.inc(${JSON.stringify(
+    it(`Counter.inc(...${JSON.stringify(
       withValues('counter'),
     )}, 'counter') should be called with proper values`, async () => {
       controller.counterInc();
@@ -128,7 +126,7 @@ describe('src/adapter', function () {
       expect(adapters.counter.getCounter(label).inc).to.not.have.been.called;
     });
 
-    it.only(`Counter.inc(...${JSON.stringify(
+    it(`Counter.inc(...${JSON.stringify(
       withValuesNoTags('counter'),
     )}) should be called with proper values`, async () => {
       controller.counterIncNoTags();
@@ -137,7 +135,6 @@ describe('src/adapter', function () {
       expect(adapters.counter.getCounter(label).inc).to.have.been.called;
       expect(adapters.counter.getCounter(label).inc).to.have.been.calledWith(undefined, value);
     });
-
 
     it('generic', () => {
       expect(true).to.equal(true);
@@ -161,7 +158,7 @@ describe('src/adapter', function () {
       expect(adapters.gauge.getGauge(label).dec).to.have.not.been.called;
     });
 
-    it(`Gauge.inc(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
+    it(`Gauge.inc(...${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
       controller.gaugeInc();
       const [value, label, tags] = withValues('gauge');
 
@@ -177,7 +174,7 @@ describe('src/adapter', function () {
       expect(adapters.gauge.getGauge(label).inc).to.have.not.been.called;
     });
 
-    it(`Gauge.set(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
+    it(`Gauge.set(...${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
       controller.gaugeSet();
       const [value, label, tags] = withValues('gauge');
 

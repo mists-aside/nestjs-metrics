@@ -1,12 +1,12 @@
-import { HistogramAbstract, Tags, TimerMethod } from "@mists/nestjs-metrics";
+import {HistogramAbstract, Tags, TimerMethod} from '@mists/nestjs-metrics';
 import * as prometheus from 'prom-client';
 
 export interface HistogramFactory {
-  (label: string): prometheus.Histogram<string>
+  (label: string): prometheus.Histogram<string>;
 }
 
 export class Histogram extends HistogramAbstract {
-  protected histograms: { [key: string]: prometheus.Histogram<string> };
+  protected histograms: {[key: string]: prometheus.Histogram<string>};
 
   protected factory: HistogramFactory;
 
@@ -17,10 +17,12 @@ export class Histogram extends HistogramAbstract {
 
   getHistogram(label: string): prometheus.Histogram<string> {
     if (!this.histograms[label]) {
-      this.histograms[label] = !this.factory ? new prometheus.Histogram<string>({
-        name: label,
-        help: label
-      }) : this.factory(label)
+      this.histograms[label] = !this.factory
+        ? new prometheus.Histogram<string>({
+            name: label,
+            help: label,
+          })
+        : this.factory(label);
     }
     return this.histograms[label];
   }
@@ -36,5 +38,4 @@ export class Histogram extends HistogramAbstract {
   startTimer(label?: string, tags?: Tags): TimerMethod {
     return this.getHistogram(label).startTimer(tags);
   }
-
 }

@@ -43,6 +43,10 @@ export class InjectableMetricsController {
     this.gauge.inc();
   }
 
+  gaugeIncNoTags(): void {
+    this.gauge.inc(...withValuesNoTags('gauge'));
+  }
+
   gaugeSet(): void {
     this.gauge.set(...withValues('gauge'), 'gauge');
   }

@@ -1,6 +1,5 @@
-
 export class ErrorMessages {
-  static INVALID_LABEL_ERROR = 'Prometheus metrics cannot function without label value.'
+  static INVALID_LABEL_ERROR = 'Prometheus metrics cannot function without label value.';
 }
 
 export class PrometheusInvalidLabelError extends Error {
