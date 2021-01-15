@@ -11,5 +11,5 @@ export {
   Counter as CounterAbstract,
   Gauge as GaugeAbstract,
   Histogram as HistogramAbstract,
-  Summary as SummaryAbstract
+  Summary as SummaryAbstract,
 } from './abstracts';

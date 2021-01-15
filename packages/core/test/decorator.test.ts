@@ -1,18 +1,20 @@
 import * as chai from 'chai';
-import { describe, it } from 'mocha';
+import {describe, it} from 'mocha';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
-import { Counter, Gauge, Histogram, Summary } from '../src/adapter/dummies';
-import { Tags, TimerMethod } from '../src/adapter/interfaces';
-import { MetricsAdapters } from '../src/config';
+import {Counter, Gauge, Histogram, Summary} from '../src/adapter/dummies';
+import {Tags, TimerMethod} from '../src/adapter/interfaces';
+import {MetricsAdapters} from '../src/config';
 import {
-    Counter as CounterMetric, Gauge as GaugeMetric, Histogram as HistogramMetric,
-    Summary as SummaryMetric
+  Counter as CounterMetric,
+  Gauge as GaugeMetric,
+  Histogram as HistogramMetric,
+  Summary as SummaryMetric,
 } from '../src/metric';
-import { createTestModule } from '../src/test/utils';
-import { DecoratedMetricsController, withValues, withValues2 } from '../src/test/utils/controllers';
-import { TestHarness } from '../src/test/utils/harness';
+import {createTestModule} from '../src/test/utils';
+import {DecoratedMetricsController, withValues, withValues2} from '../src/test/utils/controllers';
+import {TestHarness} from '../src/test/utils/harness';
 
 import Sinon = require('sinon');
 

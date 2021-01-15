@@ -4,10 +4,66 @@ import {Tags} from '../../adapter/interfaces';
 import {EventDecrement, EventDuration, EventIncrement} from '../../decorators';
 import {Counter, Gauge, Histogram, Summary} from '../../metric';
 
+export type DataValueLabelTagsAdapter = [number?, string?, Tags?, string?];
+type DataValue = [number?];
+type DataTags = [Tags?];
+
+export type DataLabelTagsAdapter = [string?, Tags?, string?];
+
 export const withValues = (prefix = 'counter'): [number?, string?, Tags?] => [1, `${prefix}_label`, {tag: prefix}];
-export const withValuesNoTags = (prefix = 'counter'): [number?, string?] => [1, `${prefix}_label`];
+
 export const withValues2 = (prefix = 'counter'): [string?, Tags?] => [`${prefix}_label`, {tag: prefix}];
+
 export const withValues3 = (prefix = 'counter'): [Tags?] => [{tag: prefix}];
+
+export const withIncValues = (prefix: string, adapter: string): DataValueLabelTagsAdapter => [
+  ...withValues(prefix),
+  adapter,
+];
+
+export const withIncNoAdapterValues = (prefix: string): DataValueLabelTagsAdapter => [
+  ...withIncValues(prefix, undefined),
+];
+
+export const withIncNoTagsValues = (prefix: string, adapter: string): DataValueLabelTagsAdapter => {
+  const values = withIncValues(prefix, adapter);
+  values[2] = undefined;
+  return values;
+};
+
+export const withIncNoTagsNoLabelValues = (prefix: string, adapter: string): DataValueLabelTagsAdapter => [
+  ...(withIncValues(adapter, prefix).slice(0, 1) as DataValue),
+  undefined,
+  undefined,
+  prefix,
+];
+
+export const withDecValues = (prefix: string, adapter: string): DataValueLabelTagsAdapter => [
+  ...withValues(prefix),
+  adapter,
+];
+
+export const withSetValues = (prefix: string, adapter: string): DataValueLabelTagsAdapter => [
+  ...withValues(prefix),
+  adapter,
+];
+
+export const withStartTimerValues = (prefix: string, adapter: string): DataLabelTagsAdapter => [
+  ...withValues2(prefix),
+  adapter,
+];
+
+export const withEndTimerValues = (prefix: string): DataTags => [...withValues3(prefix)];
+
+export const withObserveValues = (prefix: string, adapter: string): DataValueLabelTagsAdapter => [
+  ...withValues(prefix),
+  adapter,
+];
+
+export const withResetValues = (prefix: string, adapter: string): DataLabelTagsAdapter => [
+  ...withValues2(prefix),
+  adapter,
+];
 
 /* eslint-disable @typescript-eslint/no-empty-function */
 
@@ -16,19 +72,27 @@ export class InjectableMetricsController {
   constructor(public counter: Counter, public gauge: Gauge, public histogram: Histogram, public summary: Summary) {}
 
   counterInc(): void {
-    this.counter.inc(...withValues('counter'), 'counter');
+    this.counter.inc(...withIncValues('counter', 'counter'));
+  }
+
+  counterIncNoAdapter(): void {
+    this.counter.inc(...withIncNoAdapterValues('counter'));
+  }
+
+  counterIncNoTags(): void {
+    this.counter.inc(...withIncNoTagsValues('counter', 'counter'));
+  }
+
+  counterIncNoTagsAndLabel(): void {
+    this.counter.inc(...withIncNoTagsNoLabelValues('counter', 'counter'));
   }
 
   counterIncNoData(): void {
     this.counter.inc();
   }
 
-  counterIncNoTags(): void {
-    this.counter.inc(...withValuesNoTags('counter'));
-  }
-
   gaugeDec(): void {
-    this.gauge.dec(...withValues('gauge'), 'gauge');
+    this.gauge.dec(...withDecValues('gauge', 'gauge'));
   }
 
   gaugeDecNoData(): void {
@@ -36,56 +100,64 @@ export class InjectableMetricsController {
   }
 
   gaugeInc(): void {
-    this.gauge.inc(...withValues('gauge'), 'gauge');
+    this.gauge.inc(...withIncValues('gauge', 'gauge'));
+  }
+
+  gaugeIncNoAdapter(): void {
+    this.counter.inc(...withIncNoAdapterValues('gauge'));
+  }
+
+  gaugeIncNoTags(): void {
+    this.gauge.inc(...withIncNoTagsValues('gauge', 'gauge'));
+  }
+
+  gaugeIncNoTagsAndLabel(): void {
+    this.gauge.inc(...withIncNoTagsNoLabelValues('gauge', 'gauge'));
   }
 
   gaugeIncNoData(): void {
     this.gauge.inc();
   }
 
-  gaugeIncNoTags(): void {
-    this.gauge.inc(...withValuesNoTags('gauge'));
-  }
-
   gaugeSet(): void {
-    this.gauge.set(...withValues('gauge'), 'gauge');
+    this.gauge.set(...withSetValues('gauge', 'gauge'));
   }
 
   gaugeStartTimer(): void {
-    this.gauge.startTimer(...withValues2('gauge'), 'gauge');
+    this.gauge.startTimer(...withStartTimerValues('gauge', 'gauge'));
   }
 
   histogramObserve(): void {
-    this.histogram.observe(...withValues('histogram'), 'histogram');
+    this.histogram.observe(...withObserveValues('histogram', 'histogram'));
   }
 
   histogramReset(): void {
-    this.histogram.reset(...withValues2('histogram'), 'histogram');
+    this.histogram.reset(...withResetValues('histogram', 'histogram'));
   }
 
   histogramStartTimer(): Promise<void> {
-    const ends = this.histogram.startTimer(...withValues2('histogram'), 'histogram');
+    const ends = this.histogram.startTimer(...withStartTimerValues('histogram', 'histogram'));
     return new Promise((resolve) =>
       setTimeout(() => {
-        ends.forEach((end) => end(...withValues3('histogram')));
+        ends.forEach((end) => end(...withEndTimerValues('histogram')));
         resolve();
       }, 200),
     );
   }
 
   summaryObserve(): void {
-    this.summary.observe(...withValues('summary'), 'summary');
+    this.summary.observe(...withObserveValues('summary', 'summary'));
   }
 
   summaryReset(): void {
-    this.summary.reset(...withValues2('summary'), 'summary');
+    this.summary.reset(...withResetValues('summary', 'summary'));
   }
 
   summaryStartTimer(): Promise<void> {
-    const ends = this.summary.startTimer(...withValues2('summary'), 'summary');
+    const ends = this.summary.startTimer(...withStartTimerValues('summary', 'summary'));
     return new Promise((resolve) =>
       setTimeout(() => {
-        ends.forEach((end) => end(...withValues3('summary')));
+        ends.forEach((end) => end(...withEndTimerValues('summary')));
         resolve();
       }, 200),
     );

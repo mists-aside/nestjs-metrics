@@ -16,6 +16,7 @@ export class Counter extends Metric {
 
   inc(delta?: number, label?: string, tags?: Tags, adapter?: string): void {
     this.counterAdapters(adapter).forEach((counter) => {
+      console.log(delta, label, tags);
       counter.inc(delta, label, tags);
     });
   }
