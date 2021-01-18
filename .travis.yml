@@ -42,7 +42,7 @@ scripts:
   - npm run prettier:write
   # - npm run lint:write
   - npm run jscpd
-  - npm run depcruise
+  # - npm run depcruise
   - npm run test
   # - npm run build
 after_script:
