@@ -78,21 +78,21 @@ pipeline {
     //   }
     // }
   }
-  post {
-    always {
-      cleanWs()
-    }
-    // // https://www.jenkins.io/doc/pipeline/tour/post/
-    // // https://plugins.jenkins.io/telegram-notifications/
-    // failure {
-    //   script {
-    //     telegram.sendStatusFail('jk_pipeline_report_to_telegram_token','jk_pipeline_report_to_telegram_chatId')
-    //   }
-    // }
-    // success {
-    //   script {
-    //     telegram.sendStatusOk('jk_pipeline_report_to_telegram_token','jk_pipeline_report_to_telegram_chatId')
-    //   }
-    // }
-  }
+  // post {
+  //   always {
+  //     cleanWs()
+  //   }
+  //   // // https://www.jenkins.io/doc/pipeline/tour/post/
+  //   // // https://plugins.jenkins.io/telegram-notifications/
+  //   // failure {
+  //   //   script {
+  //   //     telegram.sendStatusFail('jk_pipeline_report_to_telegram_token','jk_pipeline_report_to_telegram_chatId')
+  //   //   }
+  //   // }
+  //   // success {
+  //   //   script {
+  //   //     telegram.sendStatusOk('jk_pipeline_report_to_telegram_token','jk_pipeline_report_to_telegram_chatId')
+  //   //   }
+  //   // }
+  // }
 }
