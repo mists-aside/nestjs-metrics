@@ -69,11 +69,13 @@ pipeline {
         branch 'master';
       }
       steps {
-        node.npmRelease([
-          gitCredentialsId: '83811fdb-744b-45ab-acdb-54ab3baf50b5',
-          npmTokenCredentialId: '52e756f6-5625-41fb-bde9-ead983f84629',
-          preCommand: env.NVM_LOAD
-        ])
+        script {
+          node.npmRelease([
+            gitCredentialsId: '83811fdb-744b-45ab-acdb-54ab3baf50b5',
+            npmTokenCredentialId: '52e756f6-5625-41fb-bde9-ead983f84629',
+            preCommand: env.NVM_LOAD
+          ])
+        }
       }
     }
   }
