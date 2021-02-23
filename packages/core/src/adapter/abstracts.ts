@@ -1,12 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import {KIND_COUNTER, KIND_GAUGE, KIND_HISTOGRAM, KIND_SUMMARY} from './interfaces';
 import {
+  AdapterDecOptions,
+  AdapterIncOptions,
+  AdapterObserveOptions,
+  AdapterResetOptions,
+  AdapterStartTimerOptions,
   Counter as CounterInterface,
   Gauge as GaugeInterface,
   Histogram as HistogramInterface,
+  KIND_COUNTER,
+  KIND_GAUGE,
+  KIND_HISTOGRAM,
+  KIND_SUMMARY,
   Summary as SummaryInterface,
-  Tags,
   TimerMethod,
 } from './interfaces';
 
@@ -15,7 +22,7 @@ const ERROR_MESSAGE = 'Method {method} was not implemented yet.';
 export class Counter implements CounterInterface {
   public kind = 'counter' as KIND_COUNTER;
 
-  inc(delta?: number, label?: string, tags?: Tags): void {
+  inc(options?: AdapterIncOptions): void {
     throw new Error(ERROR_MESSAGE.replace('{method}', 'inc'));
   }
 }
@@ -23,19 +30,19 @@ export class Counter implements CounterInterface {
 export class Gauge implements GaugeInterface {
   kind = 'gauge' as KIND_GAUGE;
 
-  dec(delta?: number, label?: string, tags?: Tags): void {
+  dec(options?: AdapterDecOptions): void {
     throw new Error(ERROR_MESSAGE.replace('{method}', 'dec'));
   }
 
-  inc(delta?: number, label?: string, tags?: Tags): void {
+  inc(options?: AdapterIncOptions): void {
     throw new Error(ERROR_MESSAGE.replace('{method}', 'inc'));
   }
 
-  set(value: number, label?: string, tags?: Tags): void {
+  set(options?: AdapterResetOptions): void {
     throw new Error(ERROR_MESSAGE.replace('{method}', 'set'));
   }
 
-  startTimer(label?: string, tags?: Tags): TimerMethod {
+  startTimer(options?: AdapterStartTimerOptions): TimerMethod {
     throw new Error(ERROR_MESSAGE.replace('{method}', 'startTimer'));
   }
 }
@@ -43,15 +50,15 @@ export class Gauge implements GaugeInterface {
 export class Histogram implements HistogramInterface {
   kind = 'histogram' as KIND_HISTOGRAM;
 
-  observe(value: number, label?: string, tags?: Tags): void {
+  observe(voptions?: AdapterObserveOptions): void {
     throw new Error(ERROR_MESSAGE.replace('{method}', 'observe'));
   }
 
-  reset(label?: string, tags?: Tags): void {
+  reset(options?: AdapterResetOptions): void {
     throw new Error(ERROR_MESSAGE.replace('{method}', 'reset'));
   }
 
-  startTimer(label?: string, tags?: Tags): TimerMethod {
+  startTimer(options?: AdapterStartTimerOptions): TimerMethod {
     throw new Error(ERROR_MESSAGE.replace('{method}', 'startTimer'));
   }
 }
@@ -59,15 +66,15 @@ export class Histogram implements HistogramInterface {
 export class Summary implements SummaryInterface {
   kind = 'summary' as KIND_SUMMARY;
 
-  observe(value: number, label?: string, tags?: Tags): void {
+  observe(voptions?: AdapterObserveOptions): void {
     throw new Error(ERROR_MESSAGE.replace('{method}', 'observe'));
   }
 
-  reset(label?: string, tags?: Tags): void {
+  reset(options?: AdapterResetOptions): void {
     throw new Error(ERROR_MESSAGE.replace('{method}', 'reset'));
   }
 
-  startTimer(label?: string, tags?: Tags): TimerMethod {
+  startTimer(options?: AdapterStartTimerOptions): TimerMethod {
     throw new Error(ERROR_MESSAGE.replace('{method}', 'startTimer'));
   }
 }

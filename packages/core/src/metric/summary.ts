@@ -1,6 +1,8 @@
 import {Injectable} from '@nestjs/common';
 
 import {Adapter, Summary as SummaryInterface, Tags, TimerMethod} from '../adapter/interfaces';
+import {StartTimerOptions} from './gauge';
+import {ObserveOptions, ResetOptions} from './histogram';
 import {Metric} from './metric';
 
 @Injectable()
@@ -14,16 +16,24 @@ export class Summary extends Metric {
     return Summary.instance;
   }
 
-  observe(value: number, label?: string, tags?: Tags, adapter?: string): void {
-    this.summaryAdapters(adapter).forEach((Summary) => Summary.observe(value, label, tags));
+  observe(options?: ObserveOptions): void {
+    const {adapter, label, tags, value} = Object.assign(
+      {
+        value: 1,
+      },
+      options || {},
+    );
+    this.summaryAdapters(adapter).forEach((histogram) => histogram.observe({label, tags, value}));
   }
 
-  reset(label?: string, tags?: Tags, adapter?: string): void {
-    this.summaryAdapters(adapter).forEach((Summary) => Summary.reset(label, tags));
+  reset(options?: ResetOptions): void {
+    const {adapter, label, tags} = Object.assign({}, options || {});
+    this.summaryAdapters(adapter).forEach((histogram) => histogram.reset({label, tags}));
   }
 
-  startTimer(label?: string, tags?: Tags, adapter?: string): TimerMethod[] {
-    return this.summaryAdapters(adapter).map((Summary) => Summary.startTimer(label, tags));
+  startTimer(options?: StartTimerOptions): TimerMethod[] {
+    const {adapter, label, tags} = Object.assign({}, options || {});
+    return this.summaryAdapters(adapter).map((gauge) => gauge.startTimer({label, tags}));
   }
 
   protected summaryAdapters(adapter?: string): SummaryInterface[] {

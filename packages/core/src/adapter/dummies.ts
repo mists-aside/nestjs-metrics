@@ -1,4 +1,5 @@
 import {Logger} from '@nestjs/common';
+import { DecOptions, IncOptions, ObserveOptions, ResetOptions, SetOptions, StartTimerOptions } from 'src/metric';
 
 import {
   Counter as CounterAbstract,
@@ -9,13 +10,13 @@ import {
 
 import {Tags, TimerMethod} from './interfaces';
 
-const startTimer = (logger: Logger, label?: string, tags?: Tags): TimerMethod => {
+const startTimer = (logger: Logger, options?: StartTimerOptions): TimerMethod => {
   const started = new Date();
-  logger.debug(`Calling startTimer(${JSON.stringify(tags)} for ${JSON.stringify(label)}).`);
+  logger.debug(`Calling startTimer(${JSON.stringify(options.tags)} for ${JSON.stringify(options.label)}).`);
   return (newTags?: Tags) => {
     const ended = new Date();
     logger.debug(
-      `Calling endTimer(${JSON.stringify(newTags)} for ${JSON.stringify(label)} after ${Math.trunc(
+      `Calling endTimer(${JSON.stringify(newTags)} for ${JSON.stringify(options.label)} after ${Math.trunc(
         (started.getTime() - ended.getTime()) / 1000,
       )}ms`,
     );
@@ -25,55 +26,55 @@ const startTimer = (logger: Logger, label?: string, tags?: Tags): TimerMethod =>
 export class Counter extends CounterAbstract {
   protected logger: Logger = new Logger('DummyCounter');
 
-  inc(delta?: number, label?: string, tags?: Tags): void {
-    this.logger.debug(`Calling inc(${delta}, ${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
+  inc(options?: IncOptions): void {
+    this.logger.debug(`Calling inc(${options.delta}, ${JSON.stringify(options.label)}, ${JSON.stringify(options.tags)}`);
   }
 }
 
 export class Gauge extends GaugeAbstract {
   protected logger: Logger = new Logger('DummyGauge');
 
-  dec(delta?: number, label?: string, tags?: Tags): void {
-    this.logger.debug(`Calling dec(${delta}, ${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
+  dec(options?: DecOptions): void {
+    this.logger.debug(`Calling dec(${options.delta}, ${JSON.stringify(options.label)}, ${JSON.stringify(options.tags)}`);
   }
-  inc(delta?: number, label?: string, tags?: Tags): void {
-    this.logger.debug(`Calling inc(${delta}, ${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
+  inc(options?: IncOptions): void {
+    this.logger.debug(`Calling inc(${options.delta}, ${JSON.stringify(options.label)}, ${JSON.stringify(options.tags)}`);
   }
-  set(value: number, label?: string, tags?: Tags): void {
-    this.logger.debug(`Calling set(${value}, ${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
+  set(options?: SetOptions): void {
+    this.logger.debug(`Calling set(${options.value}, ${JSON.stringify(options.label)}, ${JSON.stringify(options.tags)}`);
   }
-  startTimer(label?: string, tags?: Tags): TimerMethod {
-    this.logger.debug(`Calling startTimer(${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
-    return startTimer(this.logger, label, tags);
+  startTimer(options?: StartTimerOptions): TimerMethod {
+    this.logger.debug(`Calling startTimer(${JSON.stringify(options.label)}, ${JSON.stringify(options.tags)}`);
+    return startTimer(this.logger, {label: options.label, tags: options.tags});
   }
 }
 
 export class Histogram extends HistogramAbstract {
   protected logger: Logger = new Logger('DummyHistogram');
 
-  observe(value: number, label?: string, tags?: Tags): void {
-    this.logger.debug(`Calling observe(${value}, ${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
+  observe(options?: ObserveOptions): void {
+    this.logger.debug(`Calling observe(${options.value}, ${JSON.stringify(options.label)}, ${JSON.stringify(options.tags)}`);
   }
-  reset(label?: string, tags?: Tags): void {
-    this.logger.debug(`Calling reset(${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
+  reset(options?: ResetOptions): void {
+    this.logger.debug(`Calling reset(${JSON.stringify(options.label)}, ${JSON.stringify(options.tags)}`);
   }
-  startTimer(label?: string, tags?: Tags): TimerMethod {
-    this.logger.debug(`Calling startTimer(${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
-    return startTimer(this.logger, label, tags);
+  startTimer(options?: StartTimerOptions): TimerMethod {
+    this.logger.debug(`Calling startTimer(${JSON.stringify(options.label)}, ${JSON.stringify(options.tags)}`);
+    return startTimer(this.logger, {label: options.label, tags: options.tags});
   }
 }
 
 export class Summary extends SummaryAbstract {
   protected logger: Logger = new Logger('DummySummary');
 
-  observe(value: number, label?: string, tags?: Tags): void {
-    this.logger.debug(`Calling observe(${value}, ${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
+  observe(options?: ObserveOptions): void {
+    this.logger.debug(`Calling observe(${options.value}, ${JSON.stringify(options.label)}, ${JSON.stringify(options.tags)}`);
   }
-  reset(label?: string, tags?: Tags): void {
-    this.logger.debug(`Calling reset(${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
+  reset(options?: ResetOptions): void {
+    this.logger.debug(`Calling reset(${JSON.stringify(options.label)}, ${JSON.stringify(options.tags)}`);
   }
-  startTimer(label?: string, tags?: Tags): TimerMethod {
-    this.logger.debug(`Calling startTimer(${JSON.stringify(label)}, ${JSON.stringify(tags)}`);
-    return startTimer(this.logger, label, tags);
+  startTimer(options?: StartTimerOptions): TimerMethod {
+    this.logger.debug(`Calling startTimer(${JSON.stringify(options.label)}, ${JSON.stringify(options.tags)}`);
+    return startTimer(this.logger, {label: options.label, tags: options.tags});
   }
 }

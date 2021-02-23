@@ -1,7 +1,11 @@
 import {Injectable} from '@nestjs/common';
 
-import {Adapter, Counter as CounterInterface, Tags} from '../adapter/interfaces';
+import {Adapter, AdapterIncOptions, Counter as CounterInterface, Tags} from '../adapter/interfaces';
 import {Metric} from './metric';
+
+export interface IncOptions extends AdapterIncOptions {
+  adapter?: string;
+}
 
 @Injectable()
 export class Counter extends Metric {
@@ -14,10 +18,15 @@ export class Counter extends Metric {
     return Counter.instance;
   }
 
-  inc(delta?: number, label?: string, tags?: Tags, adapter?: string): void {
+  inc(options?: IncOptions): void {
+    const {adapter, delta, label, tags} = Object.assign(
+      {
+        delta: 1,
+      },
+      options || {},
+    );
     this.counterAdapters(adapter).forEach((counter) => {
-      console.log(delta, label, tags);
-      counter.inc(delta, label, tags);
+      counter.inc({delta, label, tags});
     });
   }
 

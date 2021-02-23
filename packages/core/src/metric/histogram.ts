@@ -1,7 +1,17 @@
+import {AdapterObserveOptions, AdapterResetOptions} from './../adapter/interfaces';
 import {Injectable} from '@nestjs/common';
 
 import {Adapter, Histogram as HistogramInterface, Tags, TimerMethod} from '../adapter/interfaces';
 import {Metric} from './metric';
+import {StartTimerOptions} from './gauge';
+
+export interface ObserveOptions extends AdapterObserveOptions {
+  adapter?: string;
+}
+
+export interface ResetOptions extends AdapterResetOptions {
+  adapter?: string;
+}
 
 @Injectable()
 export class Histogram extends Metric {
@@ -14,16 +24,24 @@ export class Histogram extends Metric {
     return Histogram.instance;
   }
 
-  observe(value: number, label?: string, tags?: Tags, adapter?: string): void {
-    this.histogramAdapters(adapter).forEach((histogram) => histogram.observe(value, label, tags));
+  observe(options?: ObserveOptions): void {
+    const {adapter, label, tags, value} = Object.assign(
+      {
+        value: 1,
+      },
+      options || {},
+    );
+    this.histogramAdapters(adapter).forEach((histogram) => histogram.observe({label, tags, value}));
   }
 
-  reset(label?: string, tags?: Tags, adapter?: string): void {
-    this.histogramAdapters(adapter).forEach((histogram) => histogram.reset(label, tags));
+  reset(options?: ResetOptions): void {
+    const {adapter, label, tags} = Object.assign({}, options || {});
+    this.histogramAdapters(adapter).forEach((histogram) => histogram.reset({label, tags}));
   }
 
-  startTimer(label?: string, tags?: Tags, adapter?: string): TimerMethod[] {
-    return this.histogramAdapters(adapter).map((histogram) => histogram.startTimer(label, tags));
+  startTimer(options?: StartTimerOptions): TimerMethod[] {
+    const {adapter, label, tags} = Object.assign({}, options || {});
+    return this.histogramAdapters(adapter).map((gauge) => gauge.startTimer({label, tags}));
   }
 
   protected histogramAdapters(adapter?: string): HistogramInterface[] {

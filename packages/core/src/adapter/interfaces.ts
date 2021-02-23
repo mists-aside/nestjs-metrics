@@ -15,32 +15,50 @@ export interface TimerMethod {
   (tags?: Tags): void;
 }
 
-export interface Counter {
-  kind: KIND_COUNTER;
-  inc(delta?: number, label?: string, tags?: Tags): void;
+export interface AdapterIncOptions {
+  delta?: number;
+  label?: string;
+  tags?: Tags;
 }
 
+export interface Counter {
+  kind: KIND_COUNTER;
+  inc(options?: AdapterIncOptions): void;
+}
+
+export interface AdapterStartTimerOptions extends Omit<AdapterIncOptions, 'value'> {}
+
 interface Timer {
-  startTimer(label?: string, tags?: Tags): TimerMethod;
+  startTimer(options?: AdapterStartTimerOptions): TimerMethod;
+}
+
+export interface AdapterDecOptions extends AdapterIncOptions {}
+
+export interface AdapterSetOptions extends Omit<AdapterIncOptions, 'delta'> {
+  value?: number;
 }
 
 export interface Gauge extends Timer {
   kind: KIND_GAUGE;
-  dec(delta?: number, label?: string, tags?: Tags): void;
-  inc(delta?: number, label?: string, tags?: Tags): void;
-  set(value: number, label?: string, tags?: Tags): void;
+  dec(options?: AdapterDecOptions): void;
+  inc(options?: AdapterIncOptions): void;
+  set(options?: AdapterSetOptions): void;
 }
+
+export interface AdapterObserveOptions extends AdapterSetOptions {}
+
+export interface AdapterResetOptions extends Omit<AdapterIncOptions, 'delta'> {}
 
 export interface Histogram extends Timer {
   kind: KIND_HISTOGRAM;
-  observe(value: number, label?: string, tags?: Tags): void;
-  reset(label?: string, tags?: Tags): void;
+  observe(options?: AdapterObserveOptions): void;
+  reset(options?: AdapterResetOptions): void;
 }
 
 export interface Summary extends Timer {
   kind: KIND_SUMMARY;
-  observe(value: number, label?: string, tags?: Tags): void;
-  reset(label?: string, tags?: Tags): void;
+  observe(options?: AdapterObserveOptions): void;
+  reset(options?: AdapterResetOptions): void;
 }
 
 export type AdapterType = Type<Counter | Gauge | Histogram | Summary>;
