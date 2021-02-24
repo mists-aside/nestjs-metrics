@@ -1,13 +1,9 @@
 import {ModuleMetadata} from '@nestjs/common/interfaces';
 import {Type} from '@nestjs/common';
-
-export interface MetricsAdapters {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
-}
+import { Adapter, AdapterMap } from './adapters';
 
 export interface MetricsModuleOptions {
-  adapters: MetricsAdapters;
+  adapters: AdapterMap;
 }
 
 export interface MetricsModuleOptionsFactory {
@@ -43,19 +39,22 @@ export class Config {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
-  private cAdapters: MetricsAdapters = {};
+  private cAdapters: AdapterMap = {};
 
-  get adapters(): MetricsAdapters {
+  get adapters(): AdapterMap {
     return this.cAdapters;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  addAdapter(name: string, adapter: any): void {
+  addAdapter(name: string, adapter: Adapter): void {
     this.cAdapters[name] = adapter;
   }
 
-  addAdapters(adapters: MetricsAdapters): void {
-    this.cAdapters = Object.assign({}, this.cAdapters, adapters);
+  addAdapters(adapters: AdapterMap): void {
+    this.cAdapters = {
+      ...this.cAdapters,
+      ...adapters
+    };
   }
 
   clear(): void {

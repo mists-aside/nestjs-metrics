@@ -1,6 +1,6 @@
-export enum Metrics {
-  Counter,
-  Gauge,
-  Histogram,
-  Summary,
-}
+// export enum Metrics {
+//   Counter,
+//   Gauge,
+//   Histogram,
+//   Summary,
+// }

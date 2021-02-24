@@ -1,187 +1,246 @@
-import { incValues, incValuesDelta, decValuesDelta } from './../src/test/utils/controllers';
+/* eslint-disable mocha/no-mocha-arrows */
+// import { incValues, incValuesDelta, decValuesDelta } from './../src/test/utils/controllers';
 import * as chai from 'chai';
-import {describe, it} from 'mocha';
+import { describe, it } from 'mocha';
+import { nanoid } from 'nanoid';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
-import {Counter, Gauge, Histogram, Summary} from '../src/metric';
-import {InjectableMetricsController} from '../src/test/utils/controllers';
-import {TestHarness, createTestModule} from '../src/test/utils';
+import { Adapter } from '../src/adapters';
+import { CounterAdapter } from '../src/adapters';
+import { Config } from '../src/config';
+import { Metric } from '../src/metrics/metric';
+
+// import {Counter, Gauge, Histogram, Summary} from '../src/metrics';
+// import {InjectableMetricsController} from '../src/test/utils/controllers';
+// import {TestHarness, createTestModule} from '../src/test/utils';
 
 chai.use(sinonChai);
 const expect = chai.expect;
 
+class Counter1 extends CounterAdapter {}
+class Counter2 extends CounterAdapter {}
+class Counter3 extends CounterAdapter {}
+
+const counter1 = nanoid()
+const counter2 = nanoid()
+const counter3 = nanoid()
+
+const counterAdapters = {}
+counterAdapters[counter1] = new Counter1()
+counterAdapters[counter2] = new Counter2()
+counterAdapters[counter3] = new Counter3()
+
+Config.getInstance().addAdapters(counterAdapters)
+
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('src/metric', function () {
-  let harness: TestHarness;
-  let controller: InjectableMetricsController;
-  let sandbox: sinon.SinonSandbox;
 
-  // eslint-disable-next-line mocha/no-mocha-arrows
-  beforeEach(async () => {
-    harness = await createTestModule(
-      {
-        adapters: {},
-      },
-      {
-        controllers: [InjectableMetricsController],
-        providers: [Counter, Gauge, Histogram, Summary],
-      },
-    );
+  describe('Metric', () => {
+    let metric: Metric | undefined;
 
-    controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
+    beforeEach(() => {
+      metric = new Metric()
+    })
 
-    sandbox = sinon.createSandbox();
+    afterEach(() => {
+      metric = undefined
+    })
 
-    sandbox.spy(controller.counter, 'inc');
+    it('::constructor() should create a valid object', () => {
+      expect(metric).to.be.an('object')
+    })
 
-    sandbox.spy(controller.gauge, 'dec');
-    sandbox.spy(controller.gauge, 'inc');
-    sandbox.spy(controller.gauge, 'set');
-    sandbox.spy(controller.gauge, 'startTimer');
+    it('::searchAdapters("name") to return a specific adapter (as an array)', () => {
+      expect(metric.searchAdapters(counter1)).to.be.an('array')
+      expect(metric.searchAdapters(counter1).length).to.equal(1)
+      expect(metric.searchAdapters(counter1)[0] instanceof Counter1).to.be.true
+    })
 
-    sandbox.spy(controller.histogram, 'observe');
-    sandbox.spy(controller.histogram, 'reset');
-    sandbox.spy(controller.histogram, 'startTimer');
+    it('::searchAdapters(CounterAdapter) to return a specific adapter (as an array)', () => {
+      expect(metric.searchAdapters(CounterAdapter)).to.be.an('array')
+      expect(metric.searchAdapters(CounterAdapter).length).to.equal(3)
+      expect(metric.searchAdapters(CounterAdapter)[0] instanceof CounterAdapter).to.be.true
+    })
 
-    sandbox.spy(controller.summary, 'observe');
-    sandbox.spy(controller.summary, 'reset');
-    sandbox.spy(controller.summary, 'startTimer');
-  });
+    it('::searchAdapters(() => {}) to return a specific adapter (as an array)', () => {
+      const method = (adapter: Adapter): boolean => adapter instanceof CounterAdapter;
+      expect(metric.searchAdapters(method)).to.be.an('array')
+      expect(metric.searchAdapters(method).length).to.equal(3)
+      expect(metric.searchAdapters(method)[0] instanceof CounterAdapter).to.be.true
+    })
+  })
 
-  // eslint-disable-next-line mocha/no-mocha-arrows
-  afterEach(async () => {
-    if (harness) {
-      await harness.app.close();
-      harness = undefined;
-    }
 
-    sandbox.restore();
-  });
+  // let harness: TestHarness;
+  // let controller: InjectableMetricsController;
+  // let sandbox: sinon.SinonSandbox;
 
-  describe('Counter', () => {
-    it(`Counter.inc() should be called`, async () => {
-      controller.counterInc();
-      expect(controller.counter.inc).to.have.been.called;
-      expect(controller.counter.inc).to.have.been.calledWith();
-    });
+  // // eslint-disable-next-line mocha/no-mocha-arrows
+  // beforeEach(async () => {
+  //   harness = await createTestModule(
+  //     {
+  //       adapters: {},
+  //     },
+  //     {
+  //       controllers: [InjectableMetricsController],
+  //       providers: [Counter, Gauge, Histogram, Summary],
+  //     },
+  //   );
 
-    it(`Counter.inc(${JSON.stringify(incValuesDelta)} should be called with proper values`, async () => {
-      controller.counterIncDelta();
-      expect(controller.counter.inc).to.have.been.called;
-      expect(controller.counter.inc).to.have.been.calledWith(incValuesDelta);
-    });
+  //   controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
 
-    it('generic', () => {
-      expect(true).to.equal(true);
-    });
-  });
+  //   sandbox = sinon.createSandbox();
 
-  describe('Gauge', () => {
-    it(`Gauge.dec() should be called`, async () => {
-      controller.gaugeDec();
+  //   sandbox.spy(controller.counter, 'inc');
 
-      expect(controller.gauge.dec).to.have.been.called;
-      expect(controller.gauge.dec).to.have.been.calledWith();
-    });
+  //   sandbox.spy(controller.gauge, 'dec');
+  //   sandbox.spy(controller.gauge, 'inc');
+  //   sandbox.spy(controller.gauge, 'set');
+  //   sandbox.spy(controller.gauge, 'startTimer');
 
-    it(`Gauge.dec(${JSON.stringify(decValuesDelta)}) should be called with proper values`, async () => {
-      controller.gaugeDec();
+  //   sandbox.spy(controller.histogram, 'observe');
+  //   sandbox.spy(controller.histogram, 'reset');
+  //   sandbox.spy(controller.histogram, 'startTimer');
 
-      expect(controller.gauge.dec).to.have.been.called;
-      expect(controller.gauge.dec).to.have.been.calledWith(decValuesDelta);
-    });
+  //   sandbox.spy(controller.summary, 'observe');
+  //   sandbox.spy(controller.summary, 'reset');
+  //   sandbox.spy(controller.summary, 'startTimer');
+  // });
 
-    // it(`Gauge.inc(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
-    //   controller.gaugeInc();
+  // // eslint-disable-next-line mocha/no-mocha-arrows
+  // afterEach(async () => {
+  //   if (harness) {
+  //     await harness.app.close();
+  //     harness = undefined;
+  //   }
 
-    //   expect(controller.gauge.inc).to.have.been.called;
-    //   expect(controller.gauge.inc).to.have.been.calledWith(...withValues('gauge'), 'gauge');
-    // });
+  //   sandbox.restore();
+  // });
 
-    // it(`Gauge.inc(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
-    //   controller.gaugeIncNoData();
+  // describe('Counter', () => {
+  //   it(`Counter.inc() should be called`, async () => {
+  //     controller.counterInc();
+  //     expect(controller.counter.inc).to.have.been.called;
+  //     expect(controller.counter.inc).to.have.been.calledWith();
+  //   });
 
-    //   expect(controller.gauge.inc).to.have.been.called;
-    //   expect(controller.gauge.inc).to.have.been.calledWith();
-    // });
+  //   it(`Counter.inc(${JSON.stringify(incValuesDelta)} should be called with proper values`, async () => {
+  //     controller.counterIncDelta();
+  //     expect(controller.counter.inc).to.have.been.called;
+  //     expect(controller.counter.inc).to.have.been.calledWith(incValuesDelta);
+  //   });
 
-    // it(`Gauge.set(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
-    //   controller.gaugeSet();
+  //   it('generic', () => {
+  //     expect(true).to.equal(true);
+  //   });
+  // });
 
-    //   expect(controller.gauge.set).to.have.been.called;
-    //   expect(controller.gauge.set).to.have.been.calledWith(...withValues('gauge'), 'gauge');
-    // });
+  // describe('Gauge', () => {
+  //   it(`Gauge.dec() should be called`, async () => {
+  //     controller.gaugeDec();
 
-    // it(`Gauge.startTimer(${JSON.stringify(withValues2('gauge'))}) should be called`, async () => {
-    //   await controller.gaugeStartTimer();
+  //     expect(controller.gauge.dec).to.have.been.called;
+  //     expect(controller.gauge.dec).to.have.been.calledWith();
+  //   });
 
-    //   expect(controller.gauge.startTimer).to.have.been.called;
-    //   expect(controller.gauge.startTimer).to.have.been.calledWith(...withValues2('gauge'), 'gauge');
-    // });
+  //   it(`Gauge.dec(${JSON.stringify(decValuesDelta)}) should be called with proper values`, async () => {
+  //     controller.gaugeDec();
 
-    it('generic', () => {
-      expect(true).to.equal(true);
-    });
-  });
+  //     expect(controller.gauge.dec).to.have.been.called;
+  //     expect(controller.gauge.dec).to.have.been.calledWith(decValuesDelta);
+  //   });
 
-  describe('Histogram', () => {
-    // it(`Histogram.observe(${JSON.stringify(
-    //   withValues('histogram'),
-    // )}) should be called with proper values`, async () => {
-    //   controller.histogramObserve();
+  //   // it(`Gauge.inc(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
+  //   //   controller.gaugeInc();
 
-    //   expect(controller.histogram.observe).to.have.been.called;
-    //   expect(controller.histogram.observe).to.have.been.calledWith(...withValues('histogram'));
-    // });
+  //   //   expect(controller.gauge.inc).to.have.been.called;
+  //   //   expect(controller.gauge.inc).to.have.been.calledWith(...withValues('gauge'), 'gauge');
+  //   // });
 
-    // it(`Histogram.reset(${JSON.stringify(withValues('histogram'))}) should be called with proper values`, async () => {
-    //   controller.histogramReset();
+  //   // it(`Gauge.inc(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
+  //   //   controller.gaugeIncNoData();
 
-    //   expect(controller.histogram.reset).to.have.been.called;
-    //   expect(controller.histogram.reset).to.have.been.calledWith(...withValues2('histogram'));
-    // });
+  //   //   expect(controller.gauge.inc).to.have.been.called;
+  //   //   expect(controller.gauge.inc).to.have.been.calledWith();
+  //   // });
 
-    // it(`Histogram.startTimer(${JSON.stringify(
-    //   withValues('histogram'),
-    // )}) should be called with proper values`, async () => {
-    //   controller.histogramStartTimer();
+  //   // it(`Gauge.set(${JSON.stringify(withValues('gauge'))}) should be called with proper values`, async () => {
+  //   //   controller.gaugeSet();
 
-    //   expect(controller.histogram.startTimer).to.have.been.called;
-    //   expect(controller.histogram.startTimer).to.have.been.calledWith(...withValues2('histogram'), 'histogram');
-    // });
+  //   //   expect(controller.gauge.set).to.have.been.called;
+  //   //   expect(controller.gauge.set).to.have.been.calledWith(...withValues('gauge'), 'gauge');
+  //   // });
 
-    it('generic', () => {
-      expect(true).to.equal(true);
-    });
-  });
+  //   // it(`Gauge.startTimer(${JSON.stringify(withValues2('gauge'))}) should be called`, async () => {
+  //   //   await controller.gaugeStartTimer();
 
-  describe('Summary', () => {
-    // it(`Summary.observe(${JSON.stringify(withValues('summary'))}) should be called with proper values`, async () => {
-    //   controller.summaryObserve();
+  //   //   expect(controller.gauge.startTimer).to.have.been.called;
+  //   //   expect(controller.gauge.startTimer).to.have.been.calledWith(...withValues2('gauge'), 'gauge');
+  //   // });
 
-    //   expect(controller.summary.observe).to.have.been.called;
-    //   expect(controller.summary.observe).to.have.been.calledWith(...withValues('summary'));
-    // });
+  //   it('generic', () => {
+  //     expect(true).to.equal(true);
+  //   });
+  // });
 
-    // it(`Summary.reset(${JSON.stringify(withValues('summary'))}) should be called with proper values`, async () => {
-    //   controller.summaryReset();
+  // describe('Histogram', () => {
+  //   // it(`Histogram.observe(${JSON.stringify(
+  //   //   withValues('histogram'),
+  //   // )}) should be called with proper values`, async () => {
+  //   //   controller.histogramObserve();
 
-    //   expect(controller.summary.reset).to.have.been.called;
-    //   expect(controller.summary.reset).to.have.been.calledWith(...withValues2('summary'));
-    // });
+  //   //   expect(controller.histogram.observe).to.have.been.called;
+  //   //   expect(controller.histogram.observe).to.have.been.calledWith(...withValues('histogram'));
+  //   // });
 
-    // it(`Summary.startTimer(${JSON.stringify(withValues('summary'))}) should be called with proper values`, async () => {
-    //   controller.summaryStartTimer();
+  //   // it(`Histogram.reset(${JSON.stringify(withValues('histogram'))}) should be called with proper values`, async () => {
+  //   //   controller.histogramReset();
 
-    //   expect(controller.summary.startTimer).to.have.been.called;
-    //   expect(controller.summary.startTimer).to.have.been.calledWith(...withValues2('summary'), 'summary');
-    // });
+  //   //   expect(controller.histogram.reset).to.have.been.called;
+  //   //   expect(controller.histogram.reset).to.have.been.calledWith(...withValues2('histogram'));
+  //   // });
 
-    it('generic', () => {
-      expect(true).to.equal(true);
-    });
-  });
+  //   // it(`Histogram.startTimer(${JSON.stringify(
+  //   //   withValues('histogram'),
+  //   // )}) should be called with proper values`, async () => {
+  //   //   controller.histogramStartTimer();
+
+  //   //   expect(controller.histogram.startTimer).to.have.been.called;
+  //   //   expect(controller.histogram.startTimer).to.have.been.calledWith(...withValues2('histogram'), 'histogram');
+  //   // });
+
+  //   it('generic', () => {
+  //     expect(true).to.equal(true);
+  //   });
+  // });
+
+  // describe('Summary', () => {
+  //   // it(`Summary.observe(${JSON.stringify(withValues('summary'))}) should be called with proper values`, async () => {
+  //   //   controller.summaryObserve();
+
+  //   //   expect(controller.summary.observe).to.have.been.called;
+  //   //   expect(controller.summary.observe).to.have.been.calledWith(...withValues('summary'));
+  //   // });
+
+  //   // it(`Summary.reset(${JSON.stringify(withValues('summary'))}) should be called with proper values`, async () => {
+  //   //   controller.summaryReset();
+
+  //   //   expect(controller.summary.reset).to.have.been.called;
+  //   //   expect(controller.summary.reset).to.have.been.calledWith(...withValues2('summary'));
+  //   // });
+
+  //   // it(`Summary.startTimer(${JSON.stringify(withValues('summary'))}) should be called with proper values`, async () => {
+  //   //   controller.summaryStartTimer();
+
+  //   //   expect(controller.summary.startTimer).to.have.been.called;
+  //   //   expect(controller.summary.startTimer).to.have.been.calledWith(...withValues2('summary'), 'summary');
+  //   // });
+
+  //   it('generic', () => {
+  //     expect(true).to.equal(true);
+  //   });
+  // });
 
   it('generic', () => {
     expect(true).to.equal(true);
