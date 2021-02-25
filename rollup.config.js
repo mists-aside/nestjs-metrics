@@ -78,7 +78,7 @@ export default [
             // { file: `dist/umd/${entryName}.js`, format: "umd", name: name },
             // { file: `dist/system/${entryName}.js`, format: "system" },
           ],
-          plugins: [ts("es5")],
+          plugins: [ts("es6")],
         },
       ]
 );

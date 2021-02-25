@@ -1,26 +1,8 @@
-import {ModuleMetadata} from '@nestjs/common/interfaces';
-import {Type} from '@nestjs/common';
-import { Adapter, AdapterMap } from './adapters';
+import {Adapter} from './interfaces';
 
-export interface MetricsModuleOptions {
-  adapters: AdapterMap;
-}
-
-export interface MetricsModuleOptionsFactory {
-  createMetricsModuleOptions(): Promise<MetricsModuleOptions> | MetricsModuleOptions;
-}
-
-export interface MetricsModuleAsyncOptions extends Pick<ModuleMetadata, 'imports'> {
-  useExisting?: Type<MetricsModuleOptionsFactory>;
-  useClass?: Type<MetricsModuleOptionsFactory>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  inject?: any[];
-  /**
-   * Not currently supported since there doesn't seem to be a way to get
-   * the result of the function during configuration.
-   */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // useFactory?(...args: any[]): Promise<StatsOptions> | StatsOptions;
+export interface AdapterItem {
+  metric: string;
+  adapter: Adapter;
 }
 
 /**
@@ -39,9 +21,9 @@ export class Config {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   private constructor() {}
 
-  private cAdapters: AdapterMap = {};
+  private cAdapters: AdapterItem[] = [];
 
-  get adapters(): AdapterMap {
+  get adapters(): AdapterItem[] {
     return this.cAdapters;
   }
 
@@ -50,14 +32,11 @@ export class Config {
     this.cAdapters[name] = adapter;
   }
 
-  addAdapters(adapters: AdapterMap): void {
-    this.cAdapters = {
-      ...this.cAdapters,
-      ...adapters
-    };
+  addAdapters(adapters: AdapterItem[]): void {
+    this.cAdapters = [...this.cAdapters, ...adapters];
   }
 
   clear(): void {
-    this.cAdapters = {};
+    this.cAdapters = [];
   }
 }

@@ -1,4 +1,47 @@
-// import {Controller} from '@nestjs/common';
+import {Controller} from '@nestjs/common';
+import { AdapterKinds } from 'src/interfaces';
+import {CounterMetric} from '../../metrics';
+
+@Controller()
+export class CounterMetricInjectedController {
+  constructor(protected counter: CounterMetric) {}
+
+  /** will increment all adapters */
+  public incAllAdapters(): void {
+    this.counter.inc();
+  }
+
+  /** will increment only prometheus adapters */
+  public incByAdapter(adapter: AdapterKinds): void {
+    this.counter.inc({
+      adapter,
+    });
+  }
+
+  /** will increment only adapters with a specific label  */
+  public incByMetricLabel(metric: string): void {
+    this.counter.inc({
+      metric,
+    });
+  }
+
+  // /** will increment using different delta */
+  // public incWithDelta(): void {
+  //   this.counter.inc({
+  //     delta: 2,
+  //     metric: 'counter1',
+  //   });
+  // }
+
+  // /** will increment using tags */
+  // public incWithDeltaAndTags(): void {
+  //   this.counter.inc({
+  //     tags: {tag: 'counter'},
+  //   });
+  // }
+}
+
+// import { Controller, Inject } from '@nestjs/common';
 
 // import {Tags} from '../../interfaces';
 // import {EventDecrement, EventDuration, EventIncrement} from '../../decorators';

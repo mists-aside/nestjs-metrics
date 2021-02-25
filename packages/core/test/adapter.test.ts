@@ -1,11 +1,11 @@
 /* eslint-disable mocha/no-mocha-arrows */
 import * as chai from 'chai';
-import { describe, it } from 'mocha';
+import {describe, it} from 'mocha';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
-import { CounterAdapter } from '../src/adapters';
-import { Errors } from '../src/errors';
+import {CounterAdapter} from '../src/adapters';
+import {Errors} from '../src/errors';
 
 // import {Counter, Gauge, Histogram, Summary} from '../src/adapter/dummies';
 // import {Tags, TimerMethod} from '../src/adapter/interfaces';
@@ -25,28 +25,27 @@ const expect = chai.expect;
 
 // eslint-disable-next-line mocha/no-skipped-tests,mocha/no-mocha-arrows
 describe('src/adapter', () => {
-
   describe('CounterAdapter', () => {
     let adapter: CounterAdapter | undefined;
 
     beforeEach(() => {
-      adapter = new CounterAdapter()
-    })
+      adapter = new CounterAdapter();
+    });
 
     afterEach(() => {
       adapter = undefined;
-    })
+    });
 
     it('::constructor() should create a valid object', () => {
       expect(adapter).to.be.an('object');
-    })
+    });
 
     it('::inc() should throw an Error', () => {
-      expect(() => { adapter.inc() }).to.throw(Errors.MethodNotImplemented('inc'));
-    })
-
-  })
-
+      expect(() => {
+        adapter.inc();
+      }).to.throw(Errors.MethodNotImplemented('inc'));
+    });
+  });
 
   // let adapters: MetricsAdapters;
   // let controller: InjectableMetricsController;

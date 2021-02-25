@@ -1,76 +1,187 @@
+import {AdapterItem} from './../src/config';
 /* eslint-disable mocha/no-mocha-arrows */
 // import { incValues, incValuesDelta, decValuesDelta } from './../src/test/utils/controllers';
 import * as chai from 'chai';
-import { describe, it } from 'mocha';
-import { nanoid } from 'nanoid';
+import {describe, it} from 'mocha';
+import {nanoid} from 'nanoid';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
-import { Adapter } from '../src/adapters';
-import { CounterAdapter } from '../src/adapters';
-import { Config } from '../src/config';
-import { Metric } from '../src/metrics/metric';
-
-// import {Counter, Gauge, Histogram, Summary} from '../src/metrics';
-// import {InjectableMetricsController} from '../src/test/utils/controllers';
-// import {TestHarness, createTestModule} from '../src/test/utils';
+import {CounterAdapter} from '../src/adapters';
+import {Config} from '../src/config';
+import {Adapter, AdapterKinds} from '../src/interfaces';
+import {CounterMetric, CounterMetricOptions} from '../src/metrics';
+import {Metric} from '../src/metrics/metric';
+import {createTestModule, TestHarness} from '../src/test/utils';
+import {CounterMetricInjectedController} from '../src/test/utils/controllers';
 
 chai.use(sinonChai);
 const expect = chai.expect;
 
-class Counter1 extends CounterAdapter {}
-class Counter2 extends CounterAdapter {}
-class Counter3 extends CounterAdapter {}
+class Counter1 extends CounterAdapter {
+  readonly adapterKind: AdapterKinds = 'prometheus';
 
-const counter1 = nanoid()
-const counter2 = nanoid()
-const counter3 = nanoid()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  inc(options?: CounterMetricOptions): void {
+    return;
+  }
+}
+class Counter2Prom extends CounterAdapter {
+  readonly adapterKind: AdapterKinds = 'prometheus';
 
-const counterAdapters = {}
-counterAdapters[counter1] = new Counter1()
-counterAdapters[counter2] = new Counter2()
-counterAdapters[counter3] = new Counter3()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  inc(options?: CounterMetricOptions): void {
+    return;
+  }
+}
+class Counter2Statsd extends CounterAdapter {
+  readonly adapterKind: AdapterKinds = 'statsd';
 
-Config.getInstance().addAdapters(counterAdapters)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  inc(options?: CounterMetricOptions): void {
+    return;
+  }
+}
+
+const counter1 = nanoid();
+const counter2 = nanoid();
+
+const counter1AdapterProm = new Counter1()
+const counter2AdapterProm = new Counter2Prom()
+const counter2AdapterStatsd = new Counter2Statsd()
+
+const metricAdapters = [
+  {
+    adapter: counter1AdapterProm,
+    metric: counter1,
+  },
+  {
+    adapter: counter2AdapterProm,
+    metric: counter2,
+  },
+  {
+    adapter: counter2AdapterStatsd,
+    metric: counter2,
+  },
+];
+
+Config.getInstance().addAdapters(metricAdapters);
 
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('src/metric', function () {
-
   describe('Metric', () => {
     let metric: Metric | undefined;
 
     beforeEach(() => {
-      metric = new Metric()
-    })
+      metric = new Metric();
+    });
 
     afterEach(() => {
-      metric = undefined
-    })
+      metric = undefined;
+    });
 
     it('::constructor() should create a valid object', () => {
-      expect(metric).to.be.an('object')
-    })
+      expect(metric).to.be.an('object');
+    });
 
     it('::searchAdapters("name") to return a specific adapter (as an array)', () => {
-      expect(metric.searchAdapters(counter1)).to.be.an('array')
-      expect(metric.searchAdapters(counter1).length).to.equal(1)
-      expect(metric.searchAdapters(counter1)[0] instanceof Counter1).to.be.true
-    })
+      expect(metric.searchAdapters(counter1)).to.be.an('array');
+      expect(metric.searchAdapters(counter1).length).to.equal(1);
+      expect(metric.searchAdapters(counter1)[0].adapter instanceof Counter1).to.be.true;
+    });
 
     it('::searchAdapters(CounterAdapter) to return a specific adapter (as an array)', () => {
-      expect(metric.searchAdapters(CounterAdapter)).to.be.an('array')
-      expect(metric.searchAdapters(CounterAdapter).length).to.equal(3)
-      expect(metric.searchAdapters(CounterAdapter)[0] instanceof CounterAdapter).to.be.true
-    })
+      expect(metric.searchAdapters({metricKind: 'counter'})).to.be.an('array');
+      expect(metric.searchAdapters({metricKind: 'counter'}).length).to.equal(3);
+      expect(metric.searchAdapters({metricKind: 'counter'})[0].adapter instanceof CounterAdapter).to.be.true;
+    });
 
     it('::searchAdapters(() => {}) to return a specific adapter (as an array)', () => {
-      const method = (adapter: Adapter): boolean => adapter instanceof CounterAdapter;
-      expect(metric.searchAdapters(method)).to.be.an('array')
-      expect(metric.searchAdapters(method).length).to.equal(3)
-      expect(metric.searchAdapters(method)[0] instanceof CounterAdapter).to.be.true
-    })
-  })
+      const method = (item: AdapterItem): boolean => item.adapter instanceof CounterAdapter;
+      expect(metric.searchAdapters(method)).to.be.an('array');
+      expect(metric.searchAdapters(method).length).to.equal(3);
+      expect(metric.searchAdapters(method)[0].adapter instanceof CounterAdapter).to.be.true;
+    });
 
+    it('generic', () => {
+      expect(true).to.equal(true);
+    });
+  });
+
+  describe('Controller(Metric::CounterMetric)', () => {
+    let harness: TestHarness;
+    let controller: CounterMetricInjectedController;
+    let sandbox: sinon.SinonSandbox;
+
+    beforeEach(async () => {
+      harness = await createTestModule(
+        {
+          adapters: [],
+        },
+        {
+          controllers: [CounterMetricInjectedController],
+          providers: [CounterMetric],
+        },
+      );
+
+      controller = harness.app.get<CounterMetricInjectedController>(CounterMetricInjectedController);
+
+      sandbox = sinon.createSandbox();
+      metricAdapters.forEach((item) => {
+        sandbox.spy(item.adapter, 'inc');
+      });
+    });
+
+    afterEach(() => {
+      harness = undefined;
+      controller = undefined;
+
+      sandbox.restore();
+    });
+
+    it('CounterMetricInjectedController.incByAdapter() should trigger inc() function on all counter adapters', () => {
+      controller.incAllAdapters();
+      expect(counter1AdapterProm.inc).to.have.been.called;
+      expect(counter2AdapterProm.inc).to.have.been.called;
+      expect(counter2AdapterStatsd.inc).to.have.been.called;
+
+      metricAdapters
+        .filter((item) => item.adapter.metricKind !== 'counter')
+        .forEach((item) => {
+          expect(item.adapter.inc).to.not.have.been.called;
+        });
+    });
+
+    it('CounterMetricInjectedController.incByAdapter() should trigger inc() function on all `prometheus` counter adapters', () => {
+      controller.incByAdapter('prometheus');
+      expect(counter1AdapterProm.inc).to.have.been.called;
+      expect(counter2AdapterProm.inc).to.have.been.called;
+      expect(counter2AdapterStatsd.inc).to.not.have.been.called;
+
+      metricAdapters
+        .filter((item) => item.adapter.metricKind !== 'counter')
+        .forEach((item) => {
+          expect(item.adapter.inc).to.not.have.been.called;
+        });
+    });
+
+    it('CounterMetricInjectedController.incByMetricLabel() should trigger inc() function on all `counter1` counter adapters', () => {
+      controller.incByMetricLabel(counter1);
+      expect(counter1AdapterProm.inc).to.have.been.called;
+      expect(counter2AdapterProm.inc).to.not.have.been.called;
+      expect(counter2AdapterStatsd.inc).to.not.have.been.called;
+
+      metricAdapters
+        .filter((item) => item.metric !== counter1)
+        .forEach((item) => {
+          expect(item.adapter.inc).to.not.have.been.called;
+        });
+    });
+
+    it('generic', () => {
+      expect(true).to.equal(true);
+    });
+  });
 
   // let harness: TestHarness;
   // let controller: InjectableMetricsController;
@@ -78,17 +189,17 @@ describe('src/metric', function () {
 
   // // eslint-disable-next-line mocha/no-mocha-arrows
   // beforeEach(async () => {
-  //   harness = await createTestModule(
-  //     {
-  //       adapters: {},
-  //     },
-  //     {
-  //       controllers: [InjectableMetricsController],
-  //       providers: [Counter, Gauge, Histogram, Summary],
-  //     },
-  //   );
+  // harness = await createTestModule(
+  //   {
+  //     adapters: {},
+  //   },
+  //   {
+  //     controllers: [InjectableMetricsController],
+  //     providers: [Counter, Gauge, Histogram, Summary],
+  //   },
+  // );
 
-  //   controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
+  // controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
 
   //   sandbox = sinon.createSandbox();
 
