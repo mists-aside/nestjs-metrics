@@ -1,3 +1,28 @@
+import { AdapterKinds, CounterAdapter, CounterOptions } from '@mists/nestjs-metrics';
+import { Counter, CounterConfiguration } from 'prom-client';
+
+
+export class PrometheusCounterAdapter extends CounterAdapter {
+
+  readonly adapterKind: 'prometheus': 'prometheus';
+
+  readonly metricKind: 'counter' = 'counter';
+
+  protected promCounter: Counter<string>;
+
+  constructor(configuration: CounterConfiguration) {
+    this.promCounter = new Counter(configuration)
+  }
+
+  /**
+   * @see Counter.inc()
+   * @param options
+   */
+  inc(options?: CounterOptions): void {
+
+  }
+}
+
 // import {CounterAbstract, Tags} from '@mists/nestjs-metrics';
 // import * as prometheus from 'prom-client';
 
