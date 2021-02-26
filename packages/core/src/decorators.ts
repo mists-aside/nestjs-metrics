@@ -1,3 +1,39 @@
+import {MetricKind} from './interfaces';
+import {CounterMetric, CounterMetricOptions} from './metrics/counter';
+
+/**
+ * Comment
+ *
+ * @returns {MethodDecorator}
+ */
+export const EventIncrement = (
+  options?: CounterMetricOptions,
+  metric: MetricKind<CounterMetric> /*| MetricKind<GaugeMetric> */ = {metricKind: 'counter'},
+): MethodDecorator => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  target: any,
+  propertyKey: string | symbol,
+  descriptor: PropertyDescriptor,
+): PropertyDescriptor => {
+  const oldMethod = descriptor.value;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  descriptor.value = (...args: any[]): any => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let metricInstance: CounterMetric /* | GaugeMetric */;
+    switch (metric.metricKind) {
+      // case 'gauge':
+      // TODO:
+      default:
+        metricInstance = CounterMetric.getInstance();
+    }
+    metricInstance.inc(options);
+
+    return oldMethod.call(target, ...args);
+  };
+
+  return descriptor;
+};
+
 // import {Counter, DecOptions, Gauge, Histogram, IncOptions, StartTimerOptions, Summary} from './metrics';
 // import {Metric} from './metrics/metric';
 // import {TimerMethod} from './interfaces';

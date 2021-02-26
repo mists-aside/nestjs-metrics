@@ -32,6 +32,18 @@ pipeline {
           sh """
             ${NVM_LOAD}
             npm install;
+            npm run bootstrap;
+          """
+        }
+      }
+    }
+
+    stage('prettier') {
+      steps {
+        script {
+          sh """
+            ${NVM_LOAD}
+            npm run prettier:write;
           """
         }
       }
@@ -42,6 +54,9 @@ pipeline {
         script {
           sh """
             ${NVM_LOAD}
+            # npm run lint:write;
+            npm run jscpd;
+            # npm run depcruise;
             npm run test;
           """
         }

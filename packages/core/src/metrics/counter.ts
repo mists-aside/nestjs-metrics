@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {Injectable, Provider} from '@nestjs/common';
 import {AdapterItem} from 'src/config';
 import {CounterAdapter} from '../adapters';
 
@@ -10,18 +10,25 @@ export interface CounterMetricOptions extends CounterOptions {
   metric?: string;
 }
 
-@Injectable()
+// @Injectable()
 export class CounterMetric extends Metric implements Counter {
   metricKind: 'counter' = 'counter';
 
-  // protected static instance: CounterMetric;
+  protected static instance: CounterMetric;
 
-  // static getInstance(): CounterMetric {
-  //   if (!CounterMetric.instance) {
-  //     CounterMetric.instance = new CounterMetric();
-  //   }
-  //   return CounterMetric.instance;
-  // }
+  static getInstance(): CounterMetric {
+    if (!CounterMetric.instance) {
+      CounterMetric.instance = new CounterMetric();
+    }
+    return CounterMetric.instance;
+  }
+
+  static getProvider(): Provider<CounterMetric> {
+    return {
+      provide: CounterMetric,
+      useValue: CounterMetric.getInstance(),
+    };
+  }
 
   inc(options?: CounterMetricOptions): void {
     const {adapter, delta, metric, tags} = {

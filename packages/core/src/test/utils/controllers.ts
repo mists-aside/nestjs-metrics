@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import {Controller} from '@nestjs/common';
-import { AdapterKinds } from 'src/interfaces';
+
+import {EventIncrement} from '../../decorators';
+import {AdapterKinds} from '../../interfaces';
 import {CounterMetric} from '../../metrics';
 
 @Controller()
@@ -25,20 +28,25 @@ export class CounterMetricInjectedController {
     });
   }
 
-  // /** will increment using different delta */
-  // public incWithDelta(): void {
-  //   this.counter.inc({
-  //     delta: 2,
-  //     metric: 'counter1',
-  //   });
-  // }
+  /** will increment using different delta */
+  public incWithDelta(): void {
+    this.counter.inc({
+      delta: 2,
+    });
+  }
 
-  // /** will increment using tags */
-  // public incWithDeltaAndTags(): void {
-  //   this.counter.inc({
-  //     tags: {tag: 'counter'},
-  //   });
-  // }
+  /** will increment using tags */
+  public incWithDeltaAndTags(): void {
+    this.counter.inc({
+      tags: {tag: 'counter'},
+    });
+  }
+
+  /** will increment using decorator */
+  @EventIncrement()
+  public async incWithDecorator(): Promise<void> {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
 }
 
 // import { Controller, Inject } from '@nestjs/common';

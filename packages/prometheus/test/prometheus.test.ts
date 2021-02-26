@@ -1,121 +1,121 @@
-import {ErrorMessages} from './../src/errors';
+// import {ErrorMessages} from './../src/errors';
 import * as chai from 'chai';
 import {describe, it} from 'mocha';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 import * as prometheus from 'prom-client';
 
-import {
-  Counter as CounterMetric,
-  Gauge as GaugeMetric,
-  Histogram as HistogramMetric,
-  MetricsAdapters,
-  Summary as SummaryMetric,
-  Tags,
-  TimerMethod,
-} from '@mists/nestjs-metrics';
-import {
-  createTestModule,
-  InjectableMetricsController,
-  TestHarness,
-  withValues,
-  withValues2,
-  withValues3,
-  withValuesNoTags,
-} from '@mists/nestjs-metrics/dist/commonjs/test/utils';
+// import {
+//   Counter as CounterMetric,
+//   Gauge as GaugeMetric,
+//   Histogram as HistogramMetric,
+//   MetricsAdapters,
+//   Summary as SummaryMetric,
+//   Tags,
+//   TimerMethod,
+// } from '@mists/nestjs-metrics';
+// import {
+//   createTestModule,
+//   InjectableMetricsController,
+//   TestHarness,
+//   withValues,
+//   withValues2,
+//   withValues3,
+//   withValuesNoTags,
+// } from '@mists/nestjs-metrics/dist/commonjs/test/utils';
 
-import {Counter, Gauge, Histogram, Summary} from '../src';
+// import {Counter, Gauge, Histogram, Summary} from '../src';
 
 chai.use(sinonChai);
 const expect = chai.expect;
 
 // eslint-disable-next-line mocha/no-skipped-tests,mocha/no-mocha-arrows
 describe('src/adapter', function () {
-  let adapters: MetricsAdapters;
-  let controller: InjectableMetricsController;
-  let harness: TestHarness;
-  let sandbox: sinon.SinonSandbox;
-  // eslint-disable-next-line mocha/no-setup-in-describe
-  const endTimer = sinon.fake();
+  // let adapters: MetricsAdapters;
+  // let controller: InjectableMetricsController;
+  // let harness: TestHarness;
+  // let sandbox: sinon.SinonSandbox;
+  // // eslint-disable-next-line mocha/no-setup-in-describe
+  // const endTimer = sinon.fake();
 
-  // eslint-disable-next-line mocha/no-mocha-arrows
-  beforeEach(async () => {
-    adapters = {
-      counter: new Counter(['tag']),
-      counter2: new Counter(['tag']),
-      gauge: new Gauge(['tag']),
-      histogram: new Histogram(['tag']),
-      summary: new Summary(['tag']),
-    };
+  // // eslint-disable-next-line mocha/no-mocha-arrows
+  // beforeEach(async () => {
+  //   adapters = {
+  //     counter: new Counter(['tag']),
+  //     counter2: new Counter(['tag']),
+  //     gauge: new Gauge(['tag']),
+  //     histogram: new Histogram(['tag']),
+  //     summary: new Summary(['tag']),
+  //   };
 
-    harness = await createTestModule(
-      {
-        adapters,
-      },
-      {
-        controllers: [InjectableMetricsController],
-        providers: [CounterMetric, GaugeMetric, HistogramMetric, SummaryMetric],
-      },
-    );
+  //   harness = await createTestModule(
+  //     {
+  //       adapters,
+  //     },
+  //     {
+  //       controllers: [InjectableMetricsController],
+  //       providers: [CounterMetric, GaugeMetric, HistogramMetric, SummaryMetric],
+  //     },
+  //   );
 
-    controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
+  //   controller = harness.app.get<InjectableMetricsController>(InjectableMetricsController);
 
-    sandbox = sinon.createSandbox();
+  //   sandbox = sinon.createSandbox();
 
-    let value: number;
-    let label: string;
-    let tags: Tags;
+  //   let value: number;
+  //   let label: string;
+  //   let tags: Tags;
 
-    [value, label, tags] = withValues('counter');
-    sandbox.spy(adapters.counter.getCounter(label), 'inc');
+  //   [value, label, tags] = withValues('counter');
+  //   sandbox.spy(adapters.counter.getCounter(label), 'inc');
 
-    [value, label, tags] = withValues('gauge');
-    sandbox.spy(adapters.gauge.getGauge(label), 'dec');
-    sandbox.spy(adapters.gauge.getGauge(label), 'inc');
-    sandbox.spy(adapters.gauge.getGauge(label), 'set');
-    sandbox.spy(adapters.gauge.getGauge(label), 'startTimer');
+  //   [value, label, tags] = withValues('gauge');
+  //   sandbox.spy(adapters.gauge.getGauge(label), 'dec');
+  //   sandbox.spy(adapters.gauge.getGauge(label), 'inc');
+  //   sandbox.spy(adapters.gauge.getGauge(label), 'set');
+  //   sandbox.spy(adapters.gauge.getGauge(label), 'startTimer');
 
-    [value, label, tags] = withValues('histogram');
-    sandbox.spy(adapters.histogram.getHistogram(label), 'observe');
-    sandbox.spy(adapters.histogram.getHistogram(label), 'reset');
-    sandbox.spy(adapters.histogram.getHistogram(label), 'startTimer');
+  //   [value, label, tags] = withValues('histogram');
+  //   sandbox.spy(adapters.histogram.getHistogram(label), 'observe');
+  //   sandbox.spy(adapters.histogram.getHistogram(label), 'reset');
+  //   sandbox.spy(adapters.histogram.getHistogram(label), 'startTimer');
 
-    [value, label, tags] = withValues('summary');
-    sandbox.spy(adapters.summary.getSummary(label), 'observe');
-    sandbox.spy(adapters.summary.getSummary(label), 'reset');
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    adapters.summary.getSummary(label).startTimer = (tags?: Tags): TimerMethod => endTimer as TimerMethod;
-  });
+  //   [value, label, tags] = withValues('summary');
+  //   sandbox.spy(adapters.summary.getSummary(label), 'observe');
+  //   sandbox.spy(adapters.summary.getSummary(label), 'reset');
+  //   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  //   adapters.summary.getSummary(label).startTimer = (tags?: Tags): TimerMethod => endTimer as TimerMethod;
+  // });
 
-  // eslint-disable-next-line mocha/no-mocha-arrows
-  afterEach(async () => {
-    if (harness) {
-      await harness.app.close();
-      harness = undefined;
-    }
+  // // eslint-disable-next-line mocha/no-mocha-arrows
+  // afterEach(async () => {
+  //   if (harness) {
+  //     await harness.app.close();
+  //     harness = undefined;
+  //   }
 
-    sandbox.restore();
-    prometheus.register.clear();
-  });
+  //   sandbox.restore();
+  //   prometheus.register.clear();
+  // });
 
   describe('Counter', () => {
-    it(`adapters.counter.getCounter to be an object`, async () => {
-      const [, label] = withValues('counter');
-      expect(adapters.counter.getCounter(label)).to.be.an('object');
-    });
+    // it(`adapters.counter.getCounter to be an object`, async () => {
+    //   const [, label] = withValues('counter');
+    //   expect(adapters.counter.getCounter(label)).to.be.an('object');
+    // });
 
-    it(`adapters.counter.getCounter to be an object (repeated)`, async () => {
-      const [, label] = withValues('counter');
-      expect(adapters.counter.getCounter(label)).to.be.an('object');
-    });
+    // it(`adapters.counter.getCounter to be an object (repeated)`, async () => {
+    //   const [, label] = withValues('counter');
+    //   expect(adapters.counter.getCounter(label)).to.be.an('object');
+    // });
 
-    it(`Counter.inc(...${JSON.stringify()}, 'counter') should be called with proper values`, async () => {
-      controller.counterInc();
+    // it(`Counter.inc(...${JSON.stringify()}, 'counter') should be called with proper values`, async () => {
+    //   controller.counterInc();
 
-      const [value, label, tags] = withValues('counter');
-      expect(adapters.counter.getCounter(label).inc).to.have.been.called;
-      expect(adapters.counter.getCounter(label).inc).to.have.been.calledWith(tags, value);
-    });
+    //   const [value, label, tags] = withValues('counter');
+    //   expect(adapters.counter.getCounter(label).inc).to.have.been.called;
+    //   expect(adapters.counter.getCounter(label).inc).to.have.been.calledWith(tags, value);
+    // });
 
     // it(`Counter.inc(...${JSON.stringify(
     //   withValuesNoTags('counter'),

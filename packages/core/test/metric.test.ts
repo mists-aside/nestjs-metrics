@@ -1,4 +1,3 @@
-import {AdapterItem} from './../src/config';
 /* eslint-disable mocha/no-mocha-arrows */
 // import { incValues, incValuesDelta, decValuesDelta } from './../src/test/utils/controllers';
 import * as chai from 'chai';
@@ -8,7 +7,7 @@ import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
 import {CounterAdapter} from '../src/adapters';
-import {Config} from '../src/config';
+import {AdapterItem, Config} from '../src/config';
 import {Adapter, AdapterKinds} from '../src/interfaces';
 import {CounterMetric, CounterMetricOptions} from '../src/metrics';
 import {Metric} from '../src/metrics/metric';
@@ -46,9 +45,9 @@ class Counter2Statsd extends CounterAdapter {
 const counter1 = nanoid();
 const counter2 = nanoid();
 
-const counter1AdapterProm = new Counter1()
-const counter2AdapterProm = new Counter2Prom()
-const counter2AdapterStatsd = new Counter2Statsd()
+const counter1AdapterProm = new Counter1();
+const counter2AdapterProm = new Counter2Prom();
+const counter2AdapterStatsd = new Counter2Statsd();
 
 const metricAdapters = [
   {
@@ -114,29 +113,32 @@ describe('src/metric', function () {
     let sandbox: sinon.SinonSandbox;
 
     beforeEach(async () => {
+      sandbox = sinon.createSandbox();
+      sandbox.spy(counter1AdapterProm, 'inc');
+      sandbox.spy(counter2AdapterProm, 'inc');
+      sandbox.spy(counter2AdapterStatsd, 'inc');
+
       harness = await createTestModule(
         {
           adapters: [],
         },
         {
           controllers: [CounterMetricInjectedController],
-          providers: [CounterMetric],
+          providers: [CounterMetric.getProvider()],
         },
       );
 
       controller = harness.app.get<CounterMetricInjectedController>(CounterMetricInjectedController);
-
-      sandbox = sinon.createSandbox();
-      metricAdapters.forEach((item) => {
-        sandbox.spy(item.adapter, 'inc');
-      });
     });
 
-    afterEach(() => {
+    afterEach(async () => {
+      await harness.app.close();
+
       harness = undefined;
       controller = undefined;
 
       sandbox.restore();
+      sandbox = undefined;
     });
 
     it('CounterMetricInjectedController.incByAdapter() should trigger inc() function on all counter adapters', () => {
@@ -176,6 +178,24 @@ describe('src/metric', function () {
         .forEach((item) => {
           expect(item.adapter.inc).to.not.have.been.called;
         });
+    });
+
+    it('CounterMetricInjectedController.incWithDelta() should trigger inc() function using {delta: 2}', () => {
+      controller.incWithDelta();
+      expect(counter1AdapterProm.inc).to.have.been.calledWith({delta: 2, tags: undefined});
+    });
+
+    it('CounterMetricInjectedController.incWithDeltaAndTags() should trigger inc() function using {tag: `counter`}', () => {
+      controller.incWithDeltaAndTags();
+      expect(counter1AdapterProm.inc).to.have.been.calledWith({delta: 1, tags: {tag: 'counter'}});
+    });
+
+    it.skip('CounterMetricInjectedController.incWithDecorator() should trigger inc() function using a decorator', async () => {
+      await controller.incWithDecorator();
+
+      expect(counter1AdapterProm.inc).to.have.been.called;
+      expect(counter2AdapterProm.inc).to.not.have.been.called;
+      expect(counter2AdapterStatsd.inc).to.not.have.been.called;
     });
 
     it('generic', () => {
