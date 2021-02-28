@@ -8,11 +8,11 @@ import * as sinonChai from 'sinon-chai';
 
 import {CounterAdapter} from '../src/adapters';
 import {AdapterItem, Config} from '../src/config';
-import {Adapter, AdapterKinds} from '../src/interfaces';
+import {AdapterKinds} from '../src/interfaces';
 import {CounterMetric, CounterMetricOptions} from '../src/metrics';
 import {Metric} from '../src/metrics/metric';
-import {createTestModule, TestHarness} from '../src/test/utils';
-import {CounterMetricInjectedController} from '../src/test/utils/controllers';
+import {TestHarness, createTestModule} from '../src/test/utils';
+import {CounterMetricController} from '../src/test/utils/controllers';
 
 chai.use(sinonChai);
 const expect = chai.expect;
@@ -109,7 +109,7 @@ describe('src/metric', function () {
 
   describe('Controller(Metric::CounterMetric)', () => {
     let harness: TestHarness;
-    let controller: CounterMetricInjectedController;
+    let controller: CounterMetricController;
     let sandbox: sinon.SinonSandbox;
 
     beforeEach(async () => {
@@ -123,12 +123,12 @@ describe('src/metric', function () {
           adapters: [],
         },
         {
-          controllers: [CounterMetricInjectedController],
+          controllers: [CounterMetricController],
           providers: [CounterMetric.getProvider()],
         },
       );
 
-      controller = harness.app.get<CounterMetricInjectedController>(CounterMetricInjectedController);
+      controller = harness.app.get<CounterMetricController>(CounterMetricController);
     });
 
     afterEach(async () => {
@@ -141,7 +141,7 @@ describe('src/metric', function () {
       sandbox = undefined;
     });
 
-    it('CounterMetricInjectedController.incByAdapter() should trigger inc() function on all counter adapters', () => {
+    it('CounterMetricController.incByAdapter() should trigger inc() function on all counter adapters', () => {
       controller.incAllAdapters();
       expect(counter1AdapterProm.inc).to.have.been.called;
       expect(counter2AdapterProm.inc).to.have.been.called;
@@ -154,7 +154,7 @@ describe('src/metric', function () {
         });
     });
 
-    it('CounterMetricInjectedController.incByAdapter() should trigger inc() function on all `prometheus` counter adapters', () => {
+    it('CounterMetricController.incByAdapter() should trigger inc() function on all `prometheus` counter adapters', () => {
       controller.incByAdapter('prometheus');
       expect(counter1AdapterProm.inc).to.have.been.called;
       expect(counter2AdapterProm.inc).to.have.been.called;
@@ -167,7 +167,7 @@ describe('src/metric', function () {
         });
     });
 
-    it('CounterMetricInjectedController.incByMetricLabel() should trigger inc() function on all `counter1` counter adapters', () => {
+    it('CounterMetricController.incByMetricLabel() should trigger inc() function on all `counter1` counter adapters', () => {
       controller.incByMetricLabel(counter1);
       expect(counter1AdapterProm.inc).to.have.been.called;
       expect(counter2AdapterProm.inc).to.not.have.been.called;
@@ -180,17 +180,17 @@ describe('src/metric', function () {
         });
     });
 
-    it('CounterMetricInjectedController.incWithDelta() should trigger inc() function using {delta: 2}', () => {
+    it('CounterMetricController.incWithDelta() should trigger inc() function using {delta: 2}', () => {
       controller.incWithDelta();
       expect(counter1AdapterProm.inc).to.have.been.calledWith({delta: 2, tags: undefined});
     });
 
-    it('CounterMetricInjectedController.incWithDeltaAndTags() should trigger inc() function using {tag: `counter`}', () => {
+    it('CounterMetricController.incWithDeltaAndTags() should trigger inc() function using {tag: `counter`}', () => {
       controller.incWithDeltaAndTags();
       expect(counter1AdapterProm.inc).to.have.been.calledWith({delta: 1, tags: {tag: 'counter'}});
     });
 
-    it.skip('CounterMetricInjectedController.incWithDecorator() should trigger inc() function using a decorator', async () => {
+    it.skip('CounterMetricController.incWithDecorator() should trigger inc() function using a decorator', async () => {
       await controller.incWithDecorator();
 
       expect(counter1AdapterProm.inc).to.have.been.called;

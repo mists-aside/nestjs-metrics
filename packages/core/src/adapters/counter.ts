@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import {Errors} from '../errors';
-import {Adapter, AdapterKinds, CounterOptions, Counter} from '../interfaces';
+import {Adapter, AdapterKinds, Counter, CounterOptions} from '../interfaces';
 
 export class CounterAdapter implements Counter, Adapter {
   adapterKind: AdapterKinds;

@@ -1,7 +1,6 @@
-import * as request from 'supertest';
-
 import {Injectable, Module} from '@nestjs/common';
 import {Test} from '@nestjs/testing';
+import * as request from 'supertest';
 
 import {MetricsModule, MetricsModuleOptions, MetricsModuleOptionsFactory} from '../../module';
 import {TestHarness} from './harness';

@@ -1,7 +1,7 @@
-import {Injectable, Provider} from '@nestjs/common';
-import {AdapterItem} from 'src/config';
-import {CounterAdapter} from '../adapters';
+import {Provider} from '@nestjs/common';
 
+import {CounterAdapter} from '../adapters';
+import {AdapterItem} from '../config';
 import {AdapterKinds, Counter, CounterOptions} from '../interfaces';
 import {Metric} from './metric';
 

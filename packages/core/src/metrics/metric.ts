@@ -1,6 +1,6 @@
-import {MetricKind} from '../interfaces';
 import {CounterAdapter} from '../adapters';
-import {Config, AdapterItem} from '../config';
+import {AdapterItem, Config} from '../config';
+import {MetricKind} from '../interfaces';
 
 export interface AdapterItemFilter {
   (value: AdapterItem, index: number, array: AdapterItem[]): unknown;

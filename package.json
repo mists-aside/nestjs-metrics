@@ -13,7 +13,7 @@
     "typescript": "^4.1.2"
   },
   "scripts": {
-    "bootstrap": "lerna exec npm install; lerna bootstrap",
+    "bootstrap": "lerna bootstrap",
     "build": "lerna run build --scope @mists/nestjs-metrics*",
     "clean": "lerna run clean --scope @mists/nestjs-metrics*",
     "git-hook:commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
@@ -24,7 +24,8 @@
     "jscpd:html": "lerna run jscpd:html --scope @mists/nestjs-metrics*",
     "lint": "lerna run lint --scope @mists/nestjs-metrics*",
     "lint:write": "lerna run lint:write --scope @mists/nestjs-metrics*",
-    "prebuild": "lerna bootstrap; npm run clean",
+    "prebootstrap": "lerna exec npm install",
+    "prebuild": "lerna bootstrap",
     "pretest": "npm run build",
     "prettier": "lerna run prettier --scope @mists/nestjs-metrics*",
     "prettier:check": "lerna run prettier:check --scope @mists/nestjs-metrics*",

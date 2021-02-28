@@ -6,7 +6,7 @@ import {AdapterKinds} from '../../interfaces';
 import {CounterMetric} from '../../metrics';
 
 @Controller()
-export class CounterMetricInjectedController {
+export class CounterMetricController {
   constructor(protected counter: CounterMetric) {}
 
   /** will increment all adapters */
