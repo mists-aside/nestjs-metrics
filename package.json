@@ -30,7 +30,9 @@
     "prettier": "lerna run prettier --scope @mists/nestjs-metrics*",
     "prettier:check": "lerna run prettier:check --scope @mists/nestjs-metrics*",
     "prettier:write": "lerna run prettier:write --scope @mists/nestjs-metrics*",
-    "test": "lerna run test --scope @mists/nestjs-metrics*"
+    "test": "lerna run test --scope @mists/nestjs-metrics*",
+    "start": "lerna run start --scope @mists/nestjs-metrics-demo",
+    "start:dev": "lerna run start:dev --scope @mists/nestjs-metrics-demo"
   },
   "husky": {
     "hooks": {

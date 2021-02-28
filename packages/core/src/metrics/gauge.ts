@@ -1,84 +1,100 @@
-// import {Injectable} from '@nestjs/common';
+import {Provider} from '@nestjs/common';
 
-// import {
-//   Adapter,
-//   AdapterDecOptions,
-//   AdapterSetOptions,
-//   AdapterStartTimerOptions,
-//   Gauge as GaugeInterface,
-//   Tags,
-//   TimerMethod,
-// } from '../interfaces';
-// import {IncOptions} from './counter';
-// import {Metric} from './metric';
+import {GaugeAdapter} from '../adapters';
+import {AdapterKinds, EndTimerMethod, Gauge, TimerOptions} from '../interfaces';
+import {GaugeIncDecOptions} from './counter';
+import {Metric} from './metric';
 
-// export interface DecOptions extends AdapterDecOptions {
-//   adapter?: string;
-// }
 
-// export interface SetOptions extends AdapterSetOptions {
-//   adapter?: string;
-// }
-
-// export interface StartTimerOptions extends AdapterStartTimerOptions {
-//   adapter?: string;
-// }
+export interface GaugeSetOptions extends GaugeIncDecOptions {
+  delta: number;
+}
+export interface GaugeTimerOptions extends TimerOptions {
+  adapter?: AdapterKinds;
+  metric?: string;
+}
 
 // @Injectable()
-// export class Gauge extends Metric {
-//   protected static instance: Gauge;
+export class GaugeMetric extends Metric implements Gauge {
+  metricKind: 'gauge' = 'gauge';
 
-//   static getInstance(): Gauge {
-//     if (!Gauge.instance) {
-//       Gauge.instance = new Gauge();
-//     }
-//     return Gauge.instance;
-//   }
+  protected static instance: GaugeMetric;
 
-//   dec(options?: DecOptions): void {
-//     const {adapter, delta, label, tags} = Object.assign(
-//       {
-//         delta: 1,
-//       },
-//       options || {},
-//     );
-//     this.gaugeAdapters(adapter).forEach((gauge) => {
-//       gauge.dec({delta, label, tags});
-//     });
-//   }
+  static getInstance(): GaugeMetric {
+    if (!GaugeMetric.instance) {
+      GaugeMetric.instance = new GaugeMetric();
+    }
+    return GaugeMetric.instance;
+  }
 
-//   inc(options?: IncOptions): void {
-//     const {adapter, delta, label, tags} = Object.assign(
-//       {
-//         delta: 1,
-//       },
-//       options || {},
-//     );
-//     this.gaugeAdapters(adapter).forEach((gauge) => {
-//       gauge.inc({delta, label, tags});
-//     });
-//   }
+  static getProvider(): Provider<GaugeMetric> {
+    return {
+      provide: GaugeMetric,
+      useValue: GaugeMetric.getInstance(),
+    };
+  }
 
-//   set(options?: SetOptions): void {
-//     const {adapter, label, tags, value} = Object.assign(
-//       {
-//         value: 1,
-//       },
-//       options || {},
-//     );
-//     this.gaugeAdapters(adapter).forEach((gauge) => {
-//       gauge.set({value, label, tags});
-//     });
-//   }
+  dec(options?: GaugeIncDecOptions): void {
+    const {adapter, delta, metric, tags} = {
+      ...{
+        delta: 1,
+      },
+      ...(options || {}),
+    } as GaugeIncDecOptions;
 
-//   startTimer(options?: StartTimerOptions): TimerMethod[] {
-//     const {adapter, label, tags} = Object.assign({}, options || {});
-//     return this.gaugeAdapters(adapter).map((gauge) => gauge.startTimer({label, tags}));
-//   }
+    const adapters = this.gaugeAdapters(adapter, metric);
 
-//   protected gaugeAdapters(adapter?: string): GaugeInterface[] {
-//     return this.searchAdapters(
-//       adapter ? adapter : (value: Adapter): unknown => value.kind === 'gauge',
-//     ) as GaugeInterface[];
-//   }
-// }
+    adapters.forEach((gauge) => {
+      gauge.dec({delta, tags});
+    });
+  }
+
+  inc(options?: GaugeIncDecOptions): void {
+    const {adapter, delta, metric, tags} = {
+      ...{
+        delta: 1,
+      },
+      ...(options || {}),
+    } as GaugeIncDecOptions;
+
+    const adapters = this.gaugeAdapters(adapter, metric);
+
+    adapters.forEach((gauge) => {
+      gauge.inc({delta, tags});
+    });
+  }
+
+  set(options: GaugeSetOptions): void {
+    const {adapter, delta, metric, tags} = options;
+
+    const adapters = this.gaugeAdapters(adapter, metric);
+
+    adapters.forEach((gauge) => {
+      gauge.set({delta, tags});
+    });
+  }
+
+  startTimer(options?: GaugeTimerOptions): EndTimerMethod {
+    const {adapter, metric, tags} = {
+      ...{
+        delta: 1,
+      },
+      ...(options || {}),
+    } as GaugeIncDecOptions;
+
+    const adapters = this.gaugeAdapters(adapter, metric);
+
+    const endTimers = adapters.map((gauge) => gauge.startTimer({tags}));
+
+    return (options?: TimerOptions) => {
+      endTimers.forEach((end) => end(options));
+    };
+  }
+
+  protected gaugeAdapters(adapter?: AdapterKinds, metric?: string): GaugeAdapter[] {
+    return this.searchAdapters({metricKind: 'gauge'})
+      .filter((item) => (adapter ? item.adapter.adapterKind === adapter : true))
+      .filter((item) => (metric ? item.metric === metric : true))
+      .map((item) => item.adapter as GaugeAdapter);
+  }
+}

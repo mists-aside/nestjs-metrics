@@ -1,5 +1,5 @@
 import {MetricKind} from './interfaces';
-import {CounterMetric, CounterMetricOptions} from './metrics/counter';
+import {CounterMetric, GaugeIncDecOptions} from './metrics/counter';
 
 /**
  * Comment
@@ -7,7 +7,7 @@ import {CounterMetric, CounterMetricOptions} from './metrics/counter';
  * @returns {MethodDecorator}
  */
 export const EventIncrement = (
-  options?: CounterMetricOptions,
+  options?: GaugeIncDecOptions,
   metric: MetricKind<CounterMetric> /*| MetricKind<GaugeMetric> */ = {metricKind: 'counter'},
 ): MethodDecorator => (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

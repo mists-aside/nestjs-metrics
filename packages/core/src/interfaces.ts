@@ -57,6 +57,42 @@ export interface Counter extends Metric {
   inc(options?: CounterOptions): void;
 }
 
+/***************************************************************************
+ * Gauge
+ */
+
+/**
+ * @see StatsdClient.increment(metric: string, delta?: number, tags?: StatsdClient.Tags);
+ * @see MetricConfiguration<T>
+ */
+export interface TimerOptions {
+  tags?: Tags;
+}
+
+export interface EndTimerMethod {
+  (options?: TimerOptions): void;
+}
+
+/**
+ * @link https://github.com/siimon/prom-client#gauge
+ * @see ../node_modules/prom-client/index.d.ts
+ * @link https://github.com/msiebuhr/node-statsd-client#counting-stuff
+ * @see ../node_modules/@types/statsd-client/index.d.ts
+ *
+ * @param options
+ */
+export interface Gauge extends Metric {
+  metricKind: 'gauge';
+
+  inc(options?: CounterOptions): void;
+
+  dec(options?: CounterOptions): void;
+
+  set(options?: CounterOptions): void;
+
+  startTimer(options?: TimerOptions): EndTimerMethod;
+}
+
 // export type KIND_COUNTER = 'counter';
 // export type KIND_GAUGE = 'gauge';
 // export type KIND_HISTOGRAM = 'histogram';

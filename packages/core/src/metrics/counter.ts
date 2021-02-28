@@ -1,11 +1,10 @@
-import {Provider} from '@nestjs/common';
+import { Provider } from '@nestjs/common';
 
-import {CounterAdapter} from '../adapters';
-import {AdapterItem} from '../config';
-import {AdapterKinds, Counter, CounterOptions} from '../interfaces';
-import {Metric} from './metric';
+import { CounterAdapter } from '../adapters';
+import { AdapterKinds, Counter, CounterOptions } from '../interfaces';
+import { Metric } from './metric';
 
-export interface CounterMetricOptions extends CounterOptions {
+export interface GaugeIncDecOptions extends CounterOptions {
   adapter?: AdapterKinds;
   metric?: string;
 }
@@ -30,23 +29,24 @@ export class CounterMetric extends Metric implements Counter {
     };
   }
 
-  inc(options?: CounterMetricOptions): void {
+  inc(options?: GaugeIncDecOptions): void {
     const {adapter, delta, metric, tags} = {
       ...{
         delta: 1,
       },
       ...(options || {}),
-    } as CounterMetricOptions;
-    this.counterAdapters()
-      .filter((item) => (adapter ? item.adapter.adapterKind === adapter : true))
-      .filter((item) => (metric ? item.metric === metric : true))
-      .map((item) => item.adapter as CounterAdapter)
-      .forEach((counter) => {
-        counter.inc({delta, tags});
-      });
+    } as GaugeIncDecOptions;
+
+    const adapters = this.counterAdapters(adapter, metric);
+    adapters.forEach((counter) => {
+      counter.inc({delta, tags});
+    });
   }
 
-  protected counterAdapters(): AdapterItem[] {
-    return this.searchAdapters({metricKind: 'counter'}) as AdapterItem[];
+  protected counterAdapters(adapter?: AdapterKinds, metric?: string): CounterAdapter[] {
+    return this.searchAdapters({metricKind: 'counter'})
+      .filter((item) => (adapter ? item.adapter.adapterKind === adapter : true))
+      .filter((item) => (metric ? item.metric === metric : true))
+      .map((item) => item.adapter as CounterAdapter);
   }
 }
