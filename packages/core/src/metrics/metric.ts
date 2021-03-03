@@ -9,7 +9,9 @@ export interface AdapterItemFilter {
 export class Metric {
   protected config = Config.getInstance();
 
-  public searchAdapters(filter: string | MetricKind<CounterAdapter> | MetricKind<GaugeAdapter> | AdapterItemFilter): AdapterItem[] {
+  public searchAdapters(
+    filter: string | MetricKind<CounterAdapter> | MetricKind<GaugeAdapter> | AdapterItemFilter,
+  ): AdapterItem[] {
     if (typeof filter === 'function') {
       return this.config.adapters.filter(filter as AdapterItemFilter);
     }

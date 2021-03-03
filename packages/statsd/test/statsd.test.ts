@@ -1,7 +1,6 @@
 /* eslint-disable mocha/no-mocha-arrows */
 import * as chai from 'chai';
 import {describe, it} from 'mocha';
-import * as prometheus from 'prom-client';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 import * as StatsdClient from 'statsd-client';

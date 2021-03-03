@@ -1,8 +1,8 @@
-import { Provider } from '@nestjs/common';
+import {Provider} from '@nestjs/common';
 
-import { CounterAdapter } from '../adapters';
-import { AdapterKinds, Counter, CounterOptions } from '../interfaces';
-import { Metric } from './metric';
+import {CounterAdapter} from '../adapters';
+import {AdapterKinds, Counter, CounterOptions} from '../interfaces';
+import {Metric} from './metric';
 
 export interface GaugeIncDecOptions extends CounterOptions {
   adapter?: AdapterKinds;

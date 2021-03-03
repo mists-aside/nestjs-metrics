@@ -5,7 +5,6 @@ import {AdapterKinds, EndTimerMethod, Gauge, TimerOptions} from '../interfaces';
 import {GaugeIncDecOptions} from './counter';
 import {Metric} from './metric';
 
-
 export interface GaugeSetOptions extends GaugeIncDecOptions {
   delta: number;
 }

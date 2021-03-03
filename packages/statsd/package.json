@@ -88,6 +88,8 @@
     "rollup": "^2.33.3",
     "rollup-plugin-dts": "^1.4.14",
     "rollup-plugin-typescript2": "^0.29.0",
+    "sinon": "^9.2.4",
+    "sinon-chai": "^3.5.0",
     "supertest": "^6.0.1",
     "ts-node": "^9.0.0",
     "typedoc": "^0.19.2",

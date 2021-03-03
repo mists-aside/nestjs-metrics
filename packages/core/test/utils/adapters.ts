@@ -1,7 +1,8 @@
+import * as sinon from 'sinon';
+
 import {CounterAdapter, GaugeAdapter} from '../../src/adapters';
 import {AdapterKinds, EndTimerMethod, TimerOptions} from '../../src/interfaces';
 import {GaugeIncDecOptions} from '../../src/metrics';
-import * as sinon from 'sinon';
 
 export class CounterPrometheus extends CounterAdapter {
   readonly adapterKind: AdapterKinds = 'prometheus';
@@ -12,7 +13,7 @@ export class CounterPrometheus extends CounterAdapter {
   }
 }
 
-export const endTimer = sinon.fake()
+export const endTimer = sinon.fake();
 
 export class CounterStatsd extends CounterAdapter {
   readonly adapterKind: AdapterKinds = 'statsd';

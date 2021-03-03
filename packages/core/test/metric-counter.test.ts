@@ -45,10 +45,13 @@ const metricAdapters = [
   },
 ];
 
-Config.getInstance().addAdapters(metricAdapters);
-
 // eslint-disable-next-line mocha/no-skipped-tests
 describe('src/metric', function () {
+  before(() => {
+    Config.getInstance().clear();
+    Config.getInstance().addAdapters(metricAdapters);
+  });
+
   describe('Controller(CounterMetric)', () => {
     let harness: TestHarness;
     let controller: CounterMetricController;
