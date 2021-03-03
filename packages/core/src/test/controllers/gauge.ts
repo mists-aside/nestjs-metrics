@@ -103,15 +103,8 @@ export class GaugeMetricController {
     });
   }
 
-  /** will set using different delta */
-  public setWithDelta(): void {
-    this.gauge.set({
-      delta: 2,
-    });
-  }
-
   /** will set using tags */
-  public setWithDeltaAndTags(): void {
+  public setWithTags(): void {
     this.gauge.set({
       delta: 1,
       tags: {tag: 'gauge'},

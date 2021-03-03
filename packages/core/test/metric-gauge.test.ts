@@ -10,6 +10,7 @@ import {GaugeMetric} from '../src';
 import {Config} from '../src/config';
 import {GaugeMetricController} from '../src/test';
 import {GaugePrometheus, GaugeStatsd, TestHarness, createTestModule} from './utils';
+import {endTimer} from './utils/adapters';
 
 chai.use(sinonChai);
 const expect = chai.expect;
@@ -149,6 +150,65 @@ describe('src/metric', function () {
       expect(gaugePrometheus.inc).to.have.been.called;
       expect(gaugeStatsd.inc).to.not.have.been.called;
     });
+
+    // set
+
+    it('GaugeMetricController.setByAdapter() should trigger set() function on all `prometheus` gauge adapters', () => {
+      controller.setByAdapter('prometheus');
+      expect(gaugePrometheus.set).to.have.been.calledWith({delta: 1, tags: undefined});
+      expect(gaugeStatsd.set).to.not.have.been.called;
+    });
+
+    it('GaugeMetricController.setByMetricLabel() should trigger set() function on all `gauge` gauge adapters', () => {
+      controller.setByMetricLabel(gauge);
+      expect(gaugePrometheus.set).to.have.been.calledWith({delta: 1, tags: undefined});
+      expect(gaugeStatsd.set).to.have.been.called;
+    });
+
+    it('GaugeMetricController.setWithTags() should trigger set() function using {tag: `gauge`}', () => {
+      controller.setWithTags();
+      expect(gaugePrometheus.set).to.have.been.calledWith({delta: 1, tags: {tag: 'gauge'}});
+    });
+
+    // // TODO: Determine why this isn't working (manual test does)
+    // it.skip('GaugeMetricController.incWithDecorator() should trigger inc() function using a decorator', async () => {
+    //   await controller.incWithDecorator();
+
+    //   expect(gaugePrometheus.inc).to.have.been.called;
+    //   expect(gaugeStatsd.inc).to.not.have.been.called;
+    // });
+
+    // startTimer
+
+    it('GaugeMetricController.timeByAdapter() should trigger startTimer() function on all `prometheus` gauge adapters', async () => {
+      await controller.timeByAdapter('prometheus');
+      expect(gaugePrometheus.startTimer).to.have.been.calledWith({tags: undefined});
+      expect(gaugeStatsd.startTimer).to.not.have.been.called;
+    });
+
+    it('GaugeMetricController.timeByMetricLabel() should trigger startTimer() function on all `gauge` gauge adapters', async () => {
+      await controller.timeByMetricLabel(gauge);
+      expect(gaugePrometheus.startTimer).to.have.been.calledWith({tags: undefined});
+      expect(gaugeStatsd.startTimer).to.have.been.called;
+    });
+
+    it('GaugeMetricController.timeWithTags() should trigger startTimer() function using {tag: `gauge`}', async () => {
+      await controller.timeWithTags();
+      expect(gaugePrometheus.startTimer).to.have.been.calledWith({tags: {tag: 'gauge'}});
+    });
+
+    it('GaugeMetricController.timeWithEndTags() should trigger startTimer() function using {tag: `gauge`}', async () => {
+      await controller.timeWithEndTags();
+      expect(endTimer).to.have.been.calledWith({tags: {tag: 'gauge'}});
+    });
+
+    // // TODO: Determine why this isn't working (manual test does)
+    // it.skip('GaugeMetricController.incWithDecorator() should trigger inc() function using a decorator', async () => {
+    //   await controller.incWithDecorator();
+
+    //   expect(gaugePrometheus.inc).to.have.been.called;
+    //   expect(gaugeStatsd.inc).to.not.have.been.called;
+    // });
 
     it('generic', () => {
       expect(true).to.equal(true);

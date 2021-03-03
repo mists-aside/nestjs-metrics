@@ -1,6 +1,7 @@
 import {CounterAdapter, GaugeAdapter} from '../../src/adapters';
 import {AdapterKinds, EndTimerMethod, TimerOptions} from '../../src/interfaces';
 import {GaugeIncDecOptions} from '../../src/metrics';
+import * as sinon from 'sinon';
 
 export class CounterPrometheus extends CounterAdapter {
   readonly adapterKind: AdapterKinds = 'prometheus';
@@ -10,6 +11,8 @@ export class CounterPrometheus extends CounterAdapter {
     return;
   }
 }
+
+export const endTimer = sinon.fake()
 
 export class CounterStatsd extends CounterAdapter {
   readonly adapterKind: AdapterKinds = 'statsd';
@@ -40,7 +43,7 @@ export class GaugePrometheus extends GaugeAdapter {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   startTimer(options?: TimerOptions): EndTimerMethod {
-    return;
+    return endTimer;
   }
 }
 
@@ -64,6 +67,6 @@ export class GaugeStatsd extends GaugeAdapter {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   startTimer(options?: TimerOptions): EndTimerMethod {
-    return;
+    return endTimer;
   }
 }
