@@ -73,6 +73,8 @@ describe('src/metric', function () {
       sandbox = undefined;
     });
 
+    // inc
+
     it('CounterMetricController.incByAdapter() should trigger inc() function on all counter adapters', () => {
       controller.incAllAdapters();
       expect(counterPrometheus.inc).to.have.been.called;
@@ -107,6 +109,34 @@ describe('src/metric', function () {
 
     //   expect(counterPrometheus.inc).to.have.been.called;
     //   expect(counterStatsd.inc).to.not.have.been.called;
+    // });
+
+    // reset
+
+    it('CounterMetricController.resetByAdapter() should trigger reset() function on all counter adapters', () => {
+      controller.resetAllAdapters();
+      expect(counterPrometheus.reset).to.have.been.called;
+      expect(counterStatsd.reset).to.have.been.called;
+    });
+
+    it(`CounterMetricController.resetByAdapter('prometheus') should trigger reset() function on all 'prometheus' counter adapters`, () => {
+      controller.resetByAdapter('prometheus');
+      expect(counterPrometheus.reset).to.have.been.called;
+      expect(counterStatsd.reset).to.not.have.been.called;
+    });
+
+    it(`CounterMetricController.resetByMetricName('${metricName}') should trigger reset() function on all counter adapters`, () => {
+      controller.resetByMetricName(metricName);
+      expect(counterPrometheus.reset).to.have.been.called;
+      expect(counterStatsd.reset).to.have.been.called;
+    });
+
+    // // TODO: investigate why decorators can't be tested
+    // it.skip('CounterMetricController.resetWithDecorator() should trigger reset() function using a decorator', async () => {
+    //   await controller.resetWithDecorator();
+
+    //   expect(counterPrometheus.reset).to.have.been.called;
+    //   expect(counterStatsd.reset).to.not.have.been.called;
     // });
 
     it('generic', () => {

@@ -27,8 +27,9 @@ const renderCounterMetricController = async () => {
     metricMethod: 'inc',
     metricType: 'counter',
   };
-  const incMethods = await twig('./.scripts/twig/src/test/controller/countable.methods.ts.twig', counter);
-  const countableController = await twig('./.scripts/twig/src/test/controller/partial/controller.ts.twig', {...counter, incMethods});
+  const incMethods = await twig('./.scripts/twig/src/test/controller/partials/countable.methods.ts.twig', counter);
+  const resetMethods = await twig('./.scripts/twig/src/test/controller/partials/reset.methods.ts.twig', counter);
+  const countableController = await twig('./.scripts/twig/src/test/controller/controller.ts.twig', {...counter, incMethods, resetMethods});
   await fs.promises.writeFile('./src/test/controllers/counter.ts', beautify(countableController));
 }
 
@@ -39,7 +40,8 @@ const renderMetricCounterTests = async () => {
     controllerClass: 'CounterMetricController',
   };
   const incTests = await twig('./.scripts/twig/test/partials/countable.tests.ts.twig', counter);
-  const countableTests = await twig('./.scripts/twig/test/metric-counter.test.ts.twig', {...counter, incTests});
+  const resetTests = await twig('./.scripts/twig/test/partials/reset.tests.ts.twig', counter);
+  const countableTests = await twig('./.scripts/twig/test/metric-counter.test.ts.twig', {...counter, incTests, resetTests});
   await fs.promises.writeFile('./test/metric-counter.test.ts', beautify(countableTests));
 }
 

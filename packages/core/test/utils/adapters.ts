@@ -11,6 +11,10 @@ export class CounterPrometheus extends CounterAdapter {
   inc(options?: CountableMetricOptions): void {
     return;
   }
+
+  reset(): void {
+    return;
+  }
 }
 
 export const endTimer = sinon.fake();
@@ -20,6 +24,10 @@ export class CounterStatsd extends CounterAdapter {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   inc(options?: CountableMetricOptions): void {
+    return;
+  }
+
+  reset(): void {
     return;
   }
 }
@@ -46,6 +54,10 @@ export class GaugePrometheus extends GaugeAdapter {
   startTimer(options?: TimerOptions): EndTimerMethod {
     return endTimer;
   }
+
+  reset(): void {
+    return;
+  }
 }
 
 export class GaugeStatsd extends GaugeAdapter {
@@ -69,5 +81,9 @@ export class GaugeStatsd extends GaugeAdapter {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   startTimer(options?: TimerOptions): EndTimerMethod {
     return endTimer;
+  }
+
+  reset(): void {
+    return;
   }
 }

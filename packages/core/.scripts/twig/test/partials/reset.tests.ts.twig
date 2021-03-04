@@ -1,0 +1,27 @@
+// reset
+
+it('{{controllerClass}}.resetByAdapter() should trigger reset() function on all {{metricType}} adapters', () => {
+  controller.resetAllAdapters();
+  expect({{metricType}}Prometheus.reset).to.have.been.called;
+  expect({{metricType}}Statsd.reset).to.have.been.called;
+});
+
+it(`{{controllerClass}}.resetByAdapter('prometheus') should trigger reset() function on all 'prometheus' {{metricType}} adapters`, () => {
+  controller.resetByAdapter('prometheus');
+  expect({{metricType}}Prometheus.reset).to.have.been.called;
+  expect({{metricType}}Statsd.reset).to.not.have.been.called;
+});
+
+it(`{{controllerClass}}.resetByMetricName('${metricName}') should trigger reset() function on all {{metricType}} adapters`, () => {
+  controller.resetByMetricName(metricName);
+  expect({{metricType}}Prometheus.reset).to.have.been.called;
+  expect({{metricType}}Statsd.reset).to.have.been.called;
+});
+
+// // TODO: investigate why decorators can't be tested
+// it.skip('{{controllerClass}}.resetWithDecorator() should trigger reset() function using a decorator', async () => {
+//   await controller.resetWithDecorator();
+
+//   expect({{metricType}}Prometheus.reset).to.have.been.called;
+//   expect({{metricType}}Statsd.reset).to.not.have.been.called;
+// });
