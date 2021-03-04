@@ -1,0 +1,86 @@
+/* eslint-disable mocha/no-mocha-arrows */
+// import { incValues, incValuesDelta, decValuesDelta } from './../src/test/utils/controllers';
+import * as chai from 'chai';
+import {describe, it} from 'mocha';
+import {nanoid} from 'nanoid';
+import * as sinon from 'sinon';
+import * as sinonChai from 'sinon-chai';
+
+import {Config} from '../src/config';
+import {CounterMetric} from '../src/metrics';
+import {{'{'}}{{controllerClass}}{{'}'}} from '../src/test';
+import {TestHarness, createTestModule} from './utils';
+import {CounterPrometheus, CounterStatsd, GaugePrometheus} from './utils/adapters';
+
+chai.use(sinonChai);
+const expect = chai.expect;
+
+const metricName = nanoid();
+
+const {{adapterType}}Prometheus = new CounterPrometheus();
+const {{adapterType}}Statsd = new CounterStatsd();
+
+const metricAdapters = [
+  {
+    adapter: {{adapterType}}Prometheus,
+    metric: metricName,
+  },
+  {
+    adapter: {{adapterType}}Statsd,
+    metric: metricName,
+  },
+];
+
+// eslint-disable-next-line mocha/no-skipped-tests
+describe('src/metric', function () {
+  before(() => {
+    Config.getInstance().clear();
+    Config.getInstance().addAdapters(metricAdapters);
+  });
+
+  describe('Controller(CounterMetric)', () => {
+    let harness: TestHarness;
+    let controller: {{controllerClass}};
+    let sandbox: sinon.SinonSandbox;
+
+    beforeEach(async () => {
+      sandbox = sinon.createSandbox();
+      sandbox.spy({{adapterType}}Prometheus, 'inc');
+      sandbox.spy({{adapterType}}Prometheus, 'reset');
+      sandbox.spy({{adapterType}}Statsd, 'inc');
+      sandbox.spy({{adapterType}}Statsd, 'reset');
+
+      harness = await createTestModule(
+        {
+          adapters: [],
+        },
+        {
+          controllers: [{{controllerClass}}],
+          providers: [CounterMetric.getProvider()],
+        },
+      );
+
+      controller = harness.app.get{{'<'}}{{controllerClass}}{{'>('}}{{controllerClass}}{{')'}};
+    });
+
+    afterEach(async () => {
+      await harness.app.close();
+
+      harness = undefined;
+      controller = undefined;
+
+      sandbox.restore();
+      sandbox = undefined;
+    });
+
+    {{incTests}}
+
+    it('generic', () => {
+      expect(true).to.equal(true);
+    });
+  });
+
+  it('generic', () => {
+    expect(true).to.equal(true);
+  });
+});

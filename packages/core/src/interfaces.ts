@@ -30,41 +30,15 @@ export interface Tags {
   [key: string]: string | number;
 }
 
-/***************************************************************************
- * Counter
- */
-
-/**
- * @see StatsdClient.increment(metric: string, delta?: number, tags?: StatsdClient.Tags);
- * @see MetricConfiguration<T>
- */
-export interface CounterOptions {
-  delta?: number;
+export interface ObservableOptions {
+  delta: number;
   tags?: Tags;
 }
 
-export interface Counter extends Metric {
-  metricKind: 'counter';
-
-  /**
-   * @link https://github.com/siimon/prom-client#counter
-   * @see ../node_modules/prom-client/index.d.ts
-   * @link https://github.com/msiebuhr/node-statsd-client#counting-stuff
-   * @see ../node_modules/@types/statsd-client/index.d.ts
-   *
-   * @param options
-   */
-  inc(options?: CounterOptions): void;
+export interface CountableOptions extends Omit<ObservableOptions, 'delta'> {
+  delta?: number;
 }
 
-/***************************************************************************
- * Gauge
- */
-
-/**
- * @see StatsdClient.increment(metric: string, delta?: number, tags?: StatsdClient.Tags);
- * @see MetricConfiguration<T>
- */
 export interface TimerOptions {
   tags?: Tags;
 }
@@ -73,77 +47,150 @@ export interface EndTimerMethod {
   (options?: TimerOptions): void;
 }
 
+/***************************************************************************
+ * Counter
+ */
+
 /**
- * @link https://github.com/siimon/prom-client#gauge
- * @see ../node_modules/prom-client/index.d.ts
+ * Counter
+ *
+ * As Prometheus and StatsD describe:
+ * A counter is a cumulative metric that represents a single monotonically increasing counter whose value can only
+ * increase or be reset to zero on restart. For example, you can use a counter to represent the number of requests
+ * served, tasks completed, or errors.
+ *
+ * Also, according Prometheus recommendation:
+ * A counter will not expose a value that can decrease. For example, do not use a counter for the number of
+ * currently running processes; instead use a gauge.
+ *
+ * @link https://github.com/siimon/prom-client#counter
+ * @link https://prometheus.io/docs/concepts/metric_types/#counter
  * @link https://github.com/msiebuhr/node-statsd-client#counting-stuff
- * @see ../node_modules/@types/statsd-client/index.d.ts
+ * @link https://github.com/statsd/statsd/blob/master/docs/metric_types.md#counting
+ */
+export interface Counter extends Metric {
+  metricKind: 'counter';
+
+  /**
+   * Increment
+   * @param options
+   */
+  inc(options?: CountableOptions): void;
+
+	/**
+	 * Reset counter values
+	 */
+	reset(): void;
+}
+
+/***************************************************************************
+ * Gauge
+ */
+
+/**
+ * A gauge is a metric that represents a single numerical value that can arbitrarily go up and down.
+ *
+ * Gauges are typically used for measured values like temperatures or current memory usage, but also "counts" that
+ * can go up and down, like the number of concurrent requests.
+ *
+ * According to StatsD, a gauge will take on the arbitrary value assigned to it, and will maintain its value until
+ * it is next set.
+ *
+ * @link https://github.com/siimon/prom-client#gauge
+ * @link https://prometheus.io/docs/concepts/metric_types/#gauge
+ * @link https://github.com/msiebuhr/node-statsd-client#gauges
+ * @link https://github.com/statsd/statsd/blob/master/docs/metric_types.md#gauges
  *
  * @param options
  */
 export interface Gauge extends Metric {
   metricKind: 'gauge';
 
-  inc(options?: CounterOptions): void;
+  /**
+   * Increment gauge
+   * @param options
+   */
+  inc(options?: CountableOptions): void;
 
-  dec(options?: CounterOptions): void;
+  /**
+   * Decrement gauge
+   * @param options
+   */
+  dec(options?: CountableOptions): void;
 
-  set(options?: CounterOptions): void;
+  /**
+   * Set gauge value
+   * @param options
+   */
+  set(options: ObservableOptions): void;
 
+  /**
+   * Start a timer where the gauges value will be the duration in seconds
+   * @param options
+   */
   startTimer(options?: TimerOptions): EndTimerMethod;
 }
 
-// export type KIND_COUNTER = 'counter';
-// export type KIND_GAUGE = 'gauge';
-// export type KIND_HISTOGRAM = 'histogram';
-// export type KIND_SUMMARY = 'summary';
+/***************************************************************************
+ * Histogram
+ */
 
-// export type KIND_METRIC = KIND_COUNTER | KIND_GAUGE | KIND_HISTOGRAM | KIND_SUMMARY;
+/**
+ * Histogram
+ *
+ * A histogram samples observations (usually things like request durations or response sizes) and counts them in
+ * configurable buckets. It also provides a sum of all observed values.
+ *
+ * Please note that Histogram/Summary notions tend to differ between Prometheus and StatsD, so please read
+ * the documentation for configuring both servers towards to the desired results.
+ *
+ * @link https://github.com/siimon/prom-client#histogram
+ * @link https://github.com/siimon/prom-client#histogram
+ * @link https://github.com/msiebuhr/node-statsd-client#histogram
+ * @link https://github.com/statsd/statsd/blob/master/docs/metric_types.md#timing
+ *
+ * @param options
+ */
+export interface Histogram extends Metric {
+  metricKind: 'histogram';
 
-// export interface TimerMethod {
-//   (tags?: Tags): void;
-// }
+	/**
+	 * Observe value for given labels
+	 */
+	observe(options: ObservableOptions): void;
 
-// export interface Counter {
-//   kind: KIND_COUNTER;
-//   inc(options?: AdapterIncOptions): void;
-// }
+	/**
+	 * Start a timer where the value in seconds will observed
+	 */
+	startTimer(options?: TimerOptions): EndTimerMethod;
 
-// export interface AdapterStartTimerOptions extends Omit<AdapterIncOptions, 'value'> {}
+	/**
+	 * Reset histogram values
+	 */
+	reset(): void;
+}
 
-// interface Timer {
-//   startTimer(options?: AdapterStartTimerOptions): TimerMethod;
-// }
+/***************************************************************************
+ * Summary
+ */
 
-// export interface AdapterDecOptions extends AdapterIncOptions {}
-
-// export interface AdapterSetOptions extends Omit<AdapterIncOptions, 'delta'> {
-//   value?: number;
-// }
-
-// export interface Gauge extends Timer {
-//   kind: KIND_GAUGE;
-//   dec(options?: AdapterDecOptions): void;
-//   inc(options?: AdapterIncOptions): void;
-//   set(options?: AdapterSetOptions): void;
-// }
-
-// export interface AdapterObserveOptions extends AdapterSetOptions {}
-
-// export interface AdapterResetOptions extends Omit<AdapterIncOptions, 'delta'> {}
-
-// export interface Histogram extends Timer {
-//   kind: KIND_HISTOGRAM;
-//   observe(options?: AdapterObserveOptions): void;
-//   reset(options?: AdapterResetOptions): void;
-// }
-
-// export interface Summary extends Timer {
-//   kind: KIND_SUMMARY;
-//   observe(options?: AdapterObserveOptions): void;
-//   reset(options?: AdapterResetOptions): void;
-// }
-
-// export type AdapterType = Type<Counter | Gauge | Histogram | Summary>;
-
-// export type Adapter = Counter | Gauge | Histogram | Summary;
+/**
+ * Summary
+ *
+ * Similar to a histogram, a summary samples observations (usually things like request durations and response sizes).
+ * While it also provides a total count of observations and a sum of all observed values, it calculates configurable
+ * quantiles over a sliding time window.
+ *
+ * When we're talking of Histogram and Summary, from StasD's point of view, our implementation is pretty much the same
+ * thing and it matters a lot how you configure the metric server side.
+ *
+ * @link https://github.com/siimon/prom-client#summary
+ * @link https://prometheus.io/docs/concepts/metric_types/#summary
+ * @link https://github.com/msiebuhr/node-statsd-client#histogram
+ * @link https://github.com/statsd/statsd/blob/master/docs/metric_types.md#timing
+ *
+ * @param options
+ */
+export interface Summary extends Omit<Metric, 'metricKind'> {
+  metricKind: 'summary';
+}

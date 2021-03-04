@@ -1,0 +1,24 @@
+it('{{controllerClass}}.{{adapterMethod}}ByAdapter() should trigger {{adapterMethod}}() function on all `prometheus` {{adapterType}} adapters', () => {
+  controller.{{adapterMethod}}ByAdapter('prometheus');
+  expect({{adapterType}}Prometheus.{{adapterMethod}}).to.have.been.calledWith({delta: 1, tags: undefined});
+  expect({{adapterType}}Statsd.{{adapterMethod}}).to.not.have.been.called;
+});
+
+it('{{controllerClass}}.{{adapterMethod}}ByMetricLabel() should trigger {{adapterMethod}}() function on all `{{adapterType}}` {{adapterType}} adapters', () => {
+  controller.{{adapterMethod}}ByMetricLabel(metricName);
+  expect({{adapterType}}Prometheus.{{adapterMethod}}).to.have.been.calledWith({delta: 1, tags: undefined});
+  expect({{adapterType}}Statsd.{{adapterMethod}}).to.have.been.called;
+});
+
+it('{{controllerClass}}.{{adapterMethod}}WithTags() should trigger {{adapterMethod}}() function using {tag: `{{adapterType}}`}', () => {
+  controller.{{adapterMethod}}WithTags();
+  expect({{adapterType}}Prometheus.{{adapterMethod}}).to.have.been.calledWith({delta: 1, tags: {tag: '{{adapterType}}'}});
+});
+
+// // TODO: Determine why this isn't working (manual test does)
+// it.skip('{{controllerClass}}.incWithDecorator() should trigger inc() function using a decorator', async () => {
+//   await controller.incWithDecorator();
+
+//   expect({{adapterType}}Prometheus.inc).to.have.been.called;
+//   expect({{adapterType}}Statsd.inc).to.not.have.been.called;
+// });

@@ -1,0 +1,35 @@
+it('{{controllerClass}}.{{adapterMethod}}ByAdapter() should trigger {{adapterMethod}}() function on all {{adapterType}} adapters', () => {
+  controller.{{adapterMethod}}AllAdapters();
+  expect({{adapterType}}Prometheus.{{adapterMethod}}).to.have.been.called;
+  expect({{adapterType}}Statsd.{{adapterMethod}}).to.have.been.called;
+});
+
+it('{{controllerClass}}.{{adapterMethod}}ByAdapter() should trigger {{adapterMethod}}() function on all `prometheus` {{adapterType}} adapters', () => {
+  controller.{{adapterMethod}}ByAdapter('prometheus');
+  expect({{adapterType}}Prometheus.{{adapterMethod}}).to.have.been.called;
+  expect({{adapterType}}Statsd.{{adapterMethod}}).to.not.have.been.called;
+});
+
+it('{{controllerClass}}.{{adapterMethod}}ByMetricLabel() should trigger {{adapterMethod}}() function on all `{{adapterType}}` {{adapterType}} adapters', () => {
+  controller.{{adapterMethod}}ByMetricLabel(metricName);
+  expect({{adapterType}}Prometheus.{{adapterMethod}}).to.have.been.called;
+  expect({{adapterType}}Statsd.{{adapterMethod}}).to.not.have.been.called;
+});
+
+it('{{controllerClass}}.{{adapterMethod}}WithDelta() should trigger {{adapterMethod}}() function using {delta: 2}', () => {
+  controller.{{adapterMethod}}WithDelta();
+  expect({{adapterType}}Prometheus.{{adapterMethod}}).to.have.been.calledWith({delta: 2, tags: undefined});
+});
+
+it('{{controllerClass}}.{{adapterMethod}}WithDeltaAndTags() should trigger {{adapterMethod}}() function using {tag: `{{adapterType}}`}', () => {
+  controller.{{adapterMethod}}WithDeltaAndTags();
+  expect({{adapterType}}Prometheus.{{adapterMethod}}).to.have.been.calledWith({delta: 1, tags: {tag: '{{adapterType}}'}});
+});
+
+// // TODO: investigate why decorators can't be tested
+// it.skip('{{controllerClass}}.{{adapterMethod}}WithDecorator() should trigger {{adapterMethod}}() function using a decorator', async () => {
+//   await controller.{{adapterMethod}}WithDecorator();
+
+//   expect({{adapterType}}Prometheus.{{adapterMethod}}).to.have.been.called;
+//   expect({{adapterType}}Statsd.{{adapterMethod}}).to.not.have.been.called;
+// });

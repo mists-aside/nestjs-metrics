@@ -1,13 +1,18 @@
+import { ObservableOptions } from './../interfaces';
 import {Provider} from '@nestjs/common';
 
 import {CounterAdapter} from '../adapters';
-import {AdapterKinds, Counter, CounterOptions} from '../interfaces';
+import {AdapterKinds, Counter, CountableOptions} from '../interfaces';
 import {Metric} from './metric';
 
-export interface GaugeIncDecOptions extends CounterOptions {
+export interface MetricOptions {
   adapter?: AdapterKinds;
   metric?: string;
 }
+
+export type CountableMetricOptions = CountableOptions & MetricOptions;
+
+export type ObservableMetricOptions = ObservableOptions & MetricOptions;
 
 // @Injectable()
 export class CounterMetric extends Metric implements Counter {
@@ -29,17 +34,24 @@ export class CounterMetric extends Metric implements Counter {
     };
   }
 
-  inc(options?: GaugeIncDecOptions): void {
+  inc(options?: CountableMetricOptions): void {
     const {adapter, delta, metric, tags} = {
       ...{
         delta: 1,
       },
       ...(options || {}),
-    } as GaugeIncDecOptions;
+    } as CountableMetricOptions;
 
     const adapters = this.counterAdapters(adapter, metric);
     adapters.forEach((counter) => {
       counter.inc({delta, tags});
+    });
+  }
+
+  reset(options?: MetricOptions): void {
+    const {adapter, metric} = {...(options || {})}
+    this.counterAdapters(adapter, metric).forEach((counter) => {
+      counter.reset();
     });
   }
 

@@ -38,6 +38,7 @@ export class CounterMetricController {
   /** will increment using tags */
   public incWithDeltaAndTags(): void {
     this.counter.inc({
+      delta: 2,
       tags: {tag: 'counter'},
     });
   }

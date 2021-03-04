@@ -2,13 +2,13 @@ import * as sinon from 'sinon';
 
 import {CounterAdapter, GaugeAdapter} from '../../src/adapters';
 import {AdapterKinds, EndTimerMethod, TimerOptions} from '../../src/interfaces';
-import {GaugeIncDecOptions} from '../../src/metrics';
+import {CountableMetricOptions} from '../../src/metrics';
 
 export class CounterPrometheus extends CounterAdapter {
   readonly adapterKind: AdapterKinds = 'prometheus';
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  inc(options?: GaugeIncDecOptions): void {
+  inc(options?: CountableMetricOptions): void {
     return;
   }
 }
@@ -19,7 +19,7 @@ export class CounterStatsd extends CounterAdapter {
   readonly adapterKind: AdapterKinds = 'statsd';
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  inc(options?: GaugeIncDecOptions): void {
+  inc(options?: CountableMetricOptions): void {
     return;
   }
 }
@@ -28,17 +28,17 @@ export class GaugePrometheus extends GaugeAdapter {
   readonly adapterKind: AdapterKinds = 'prometheus';
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  dec(options?: GaugeIncDecOptions): void {
+  dec(options?: CountableMetricOptions): void {
     return;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  inc(options?: GaugeIncDecOptions): void {
+  inc(options?: CountableMetricOptions): void {
     return;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  set(options?: GaugeIncDecOptions): void {
+  set(options?: CountableMetricOptions): void {
     return;
   }
 
@@ -52,17 +52,17 @@ export class GaugeStatsd extends GaugeAdapter {
   readonly adapterKind: AdapterKinds = 'statsd';
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  dec(options?: GaugeIncDecOptions): void {
+  dec(options?: CountableMetricOptions): void {
     return;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  inc(options?: GaugeIncDecOptions): void {
+  inc(options?: CountableMetricOptions): void {
     return;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  set(options?: GaugeIncDecOptions): void {
+  set(options?: CountableMetricOptions): void {
     return;
   }
 
