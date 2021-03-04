@@ -1,32 +1,32 @@
-/** will {{adapterMethod}}rement all adapters */
-public {{adapterMethod}}AllAdapters(): void {
-  this.counter.{{adapterMethod}}();
+/** will {{metricMethod}}rement all adapters */
+public {{metricMethod}}AllAdapters(): void {
+  this.counter.{{metricMethod}}();
 }
 
-/** will {{adapterMethod}}rement only prometheus adapters */
-public {{adapterMethod}}ByAdapter(adapter: AdapterKinds): void {
-  this.counter.{{adapterMethod}}({
+/** will {{metricMethod}}rement only prometheus adapters */
+public {{metricMethod}}ByAdapter(adapter: AdapterKinds): void {
+  this.counter.{{metricMethod}}({
     adapter,
   });
 }
 
-/** will {{adapterMethod}}rement only adapters with a specific label  */
-public {{adapterMethod}}ByMetricLabel(metric: string): void {
-  this.counter.{{adapterMethod}}({
+/** will {{metricMethod}}rement only adapters with a specific label  */
+public {{metricMethod}}ByMetricName(metric: string): void {
+  this.counter.{{metricMethod}}({
     metric,
   });
 }
 
-/** will {{adapterMethod}}rement using different delta */
-public {{adapterMethod}}WithDelta(): void {
-  this.counter.{{adapterMethod}}({
+/** will {{metricMethod}}rement using different delta */
+public {{metricMethod}}WithDelta(): void {
+  this.counter.{{metricMethod}}({
     delta: 2,
   });
 }
 
-/** will {{adapterMethod}}rement using tags */
-public {{adapterMethod}}WithDeltaAndTags(): void {
-  this.counter.{{adapterMethod}}({
+/** will {{metricMethod}}rement using tags */
+public {{metricMethod}}WithDeltaAndTags(): void {
+  this.counter.{{metricMethod}}({
     delta: 2,
     tags: {tag: 'counter'},
   });
@@ -34,6 +34,6 @@ public {{adapterMethod}}WithDeltaAndTags(): void {
 
 /** will increment using decorator */
 @EventIncrement()
-public async {{adapterMethod}}WithDecorator(): Promise<void> {
+public async {{metricMethod}}WithDecorator(): Promise<void> {
   await new Promise((resolve) => setTimeout(resolve, 500));
 }

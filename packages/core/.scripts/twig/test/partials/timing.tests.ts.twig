@@ -1,29 +1,29 @@
-it('{{controllerClass}}.timeByAdapter() should trigger {{adapterMethod}}() function on all `prometheus` {{adapterType}} adapters', async () => {
+it('{{controllerClass}}.timeByAdapter() should trigger {{metricMethod}}() function on all `prometheus` {{metricType}} adapters', async () => {
   await controller.timeByAdapter('prometheus');
-  expect({{adapterType}}Prometheus.{{adapterMethod}}).to.have.been.calledWith({tags: undefined});
-  expect({{adapterType}}Statsd.{{adapterMethod}}).to.not.have.been.called;
+  expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.calledWith({tags: undefined});
+  expect({{metricType}}Statsd.{{metricMethod}}).to.not.have.been.called;
 });
 
-it('{{controllerClass}}.timeByMetricLabel() should trigger {{adapterMethod}}() function on all `{{adapterType}}` {{adapterType}} adapters', async () => {
-  await controller.timeByMetricLabel(metricName);
-  expect({{adapterType}}Prometheus.{{adapterMethod}}).to.have.been.calledWith({tags: undefined});
-  expect({{adapterType}}Statsd.{{adapterMethod}}).to.have.been.called;
+it('{{controllerClass}}.timeByMetric() should trigger {{metricMethod}}() function on all `{{metricType}}` {{metricType}} adapters', async () => {
+  await controller.timeByMetric(metricName);
+  expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.calledWith({tags: undefined});
+  expect({{metricType}}Statsd.{{metricMethod}}).to.have.been.called;
 });
 
-it('{{controllerClass}}.timeWithTags() should trigger {{adapterMethod}}() function using {tag: `{{adapterType}}`}', async () => {
+it('{{controllerClass}}.timeWithTags() should trigger {{metricMethod}}() function using {tag: `{{metricType}}`}', async () => {
   await controller.timeWithTags();
-  expect({{adapterType}}Prometheus.{{adapterMethod}}).to.have.been.calledWith({tags: {tag: '{{adapterType}}'}});
+  expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.calledWith({tags: {tag: '{{metricType}}'}});
 });
 
-it('{{controllerClass}}.timeWithEndTags() should trigger {{adapterMethod}}() function using {tag: `{{adapterType}}`}', async () => {
+it('{{controllerClass}}.timeWithEndTags() should trigger {{metricMethod}}() function using {tag: `{{metricType}}`}', async () => {
   await controller.timeWithEndTags();
-  expect(endTimer).to.have.been.calledWith({tags: {tag: '{{adapterType}}'}});
+  expect(endTimer).to.have.been.calledWith({tags: {tag: '{{metricType}}'}});
 });
 
 // // TODO: Determine why this isn't working (manual test does)
 // it.skip('{{controllerClass}}.incWithDecorator() should trigger inc() function using a decorator', async () => {
 //   await controller.incWithDecorator();
 
-//   expect({{adapterType}}Prometheus.inc).to.have.been.called;
-//   expect({{adapterType}}Statsd.inc).to.not.have.been.called;
+//   expect({{metricType}}Prometheus.inc).to.have.been.called;
+//   expect({{metricType}}Statsd.inc).to.not.have.been.called;
 // });

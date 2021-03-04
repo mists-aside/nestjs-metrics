@@ -22,7 +22,7 @@ export class CounterMetricController {
   }
 
   /** will increment only adapters with a specific label  */
-  public incByMetricLabel(metric: string): void {
+  public incByMetricName(metric: string): void {
     this.counter.inc({
       metric,
     });

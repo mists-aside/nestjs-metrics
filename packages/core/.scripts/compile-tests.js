@@ -24,8 +24,8 @@ const beautify = (html) => prettier.format(html, {
 
 const renderCounterMetricController = async () => {
   const counter = {
-    adapterMethod: 'inc',
-    adapterType: 'counter',
+    metricMethod: 'inc',
+    metricType: 'counter',
   };
   const incMethods = await twig('./.scripts/twig/src/test/controller/countable.methods.ts.twig', counter);
   const countableController = await twig('./.scripts/twig/src/test/controller/partial/controller.ts.twig', {...counter, incMethods});
@@ -34,8 +34,8 @@ const renderCounterMetricController = async () => {
 
 const renderMetricCounterTests = async () => {
   const counter = {
-    adapterMethod: 'inc',
-    adapterType: 'counter',
+    metricMethod: 'inc',
+    metricType: 'counter',
     controllerClass: 'CounterMetricController',
   };
   const incTests = await twig('./.scripts/twig/test/partials/countable.tests.ts.twig', counter);
@@ -45,28 +45,28 @@ const renderMetricCounterTests = async () => {
 
 const renderMetricGaugeTests = async () => {
   const gauge = {
-    adapterMethod: 'inc',
-    adapterType: 'gauge',
+    metricMethod: 'inc',
+    metricType: 'gauge',
     controllerClass: 'GaugeMetricController',
   };
-  const decTests = await twig('./.scripts/twig/test/partials/countable.tests.ts.twig', {...gauge, adapterMethod: 'dec'});
+  const decTests = await twig('./.scripts/twig/test/partials/countable.tests.ts.twig', {...gauge, metricMethod: 'dec'});
   const incTests = await twig('./.scripts/twig/test/partials/countable.tests.ts.twig', gauge);
-  const setTests = await twig('./.scripts/twig/test/partials/observable.tests.ts.twig', {...gauge, adapterMethod: 'set'});
-  const timingTests = await twig('./.scripts/twig/test/partials/timing.tests.ts.twig', {...gauge, adapterMethod: 'startTimer'});
+  const setTests = await twig('./.scripts/twig/test/partials/observable.tests.ts.twig', {...gauge, metricMethod: 'set'});
+  const timingTests = await twig('./.scripts/twig/test/partials/timing.tests.ts.twig', {...gauge, metricMethod: 'startTimer'});
   const countableTests = await twig('./.scripts/twig/test/metric-gauge.test.ts.twig', {...gauge, incTests, decTests, setTests, timingTests});
   await fs.promises.writeFile('./test/metric-gauge.test.ts', countableTests);
 }
 
-const renderMetricObservableTests = async (adapterType = 'histogram') => {
+const renderMetricObservableTests = async (metricType = 'histogram') => {
   const histogram = {
-    adapterMethod: 'observe',
-    adapterType,
-    controllerClass: `${adapterType.slice(0, 1).toUpperCase()}${adapterType.slice(1)}MetricController`,
+    metricMethod: 'observe',
+    metricType,
+    controllerClass: `${metricType.slice(0, 1).toUpperCase()}${metricType.slice(1)}MetricController`,
   };
   const observeTests = await twig('./.scripts/twig/test/partials/observable.tests.ts.twig', {...histogram});
-  const timingTests = await twig('./.scripts/twig/test/partials/timing.tests.ts.twig', {...histogram, adapterMethod: 'startTimer'});
+  const timingTests = await twig('./.scripts/twig/test/partials/timing.tests.ts.twig', {...histogram, metricMethod: 'startTimer'});
   const countableTests = await twig('./.scripts/twig/test/metric-observable.test.ts.twig', {...histogram, observeTests, timingTests});
-  await fs.promises.writeFile(`./test/metric-${adapterType}.test.ts`, countableTests);
+  await fs.promises.writeFile(`./test/metric-${metricType}.test.ts`, countableTests);
 }
 
 const main = async () => {

@@ -17,16 +17,16 @@ const expect = chai.expect;
 
 const metricName = nanoid();
 
-const {{adapterType}}Prometheus = new CounterPrometheus();
-const {{adapterType}}Statsd = new CounterStatsd();
+const {{metricType}}Prometheus = new CounterPrometheus();
+const {{metricType}}Statsd = new CounterStatsd();
 
 const metricAdapters = [
   {
-    adapter: {{adapterType}}Prometheus,
+    adapter: {{metricType}}Prometheus,
     metric: metricName,
   },
   {
-    adapter: {{adapterType}}Statsd,
+    adapter: {{metricType}}Statsd,
     metric: metricName,
   },
 ];
@@ -45,10 +45,10 @@ describe('src/metric', function () {
 
     beforeEach(async () => {
       sandbox = sinon.createSandbox();
-      sandbox.spy({{adapterType}}Prometheus, 'inc');
-      sandbox.spy({{adapterType}}Prometheus, 'reset');
-      sandbox.spy({{adapterType}}Statsd, 'inc');
-      sandbox.spy({{adapterType}}Statsd, 'reset');
+      sandbox.spy({{metricType}}Prometheus, 'inc');
+      sandbox.spy({{metricType}}Prometheus, 'reset');
+      sandbox.spy({{metricType}}Statsd, 'inc');
+      sandbox.spy({{metricType}}Statsd, 'reset');
 
       harness = await createTestModule(
         {

@@ -79,16 +79,16 @@ describe('src/metric', function () {
       expect(counterStatsd.inc).to.have.been.called;
     });
 
-    it('CounterMetricController.incByAdapter() should trigger inc() function on all `prometheus` counter adapters', () => {
+    it(`CounterMetricController.incByAdapter('prometheus') should trigger inc() function on all 'prometheus' counter adapters`, () => {
       controller.incByAdapter('prometheus');
       expect(counterPrometheus.inc).to.have.been.called;
       expect(counterStatsd.inc).to.not.have.been.called;
     });
 
-    it('CounterMetricController.incByMetricLabel() should trigger inc() function on all `counter1` counter adapters', () => {
-      controller.incByMetricLabel(metricName);
+    it(`CounterMetricController.incByMetricName('${metricName}') should trigger inc() function on all counter adapters`, () => {
+      controller.incByMetricName(metricName);
       expect(counterPrometheus.inc).to.have.been.called;
-      expect(counterStatsd.inc).to.not.have.been.called;
+      expect(counterStatsd.inc).to.have.been.called;
     });
 
     it('CounterMetricController.incWithDelta() should trigger inc() function using {delta: 2}', () => {
@@ -98,7 +98,7 @@ describe('src/metric', function () {
 
     it('CounterMetricController.incWithDeltaAndTags() should trigger inc() function using {tag: `counter`}', () => {
       controller.incWithDeltaAndTags();
-      expect(counterPrometheus.inc).to.have.been.calledWith({delta: 1, tags: {tag: 'counter'}});
+      expect(counterPrometheus.inc).to.have.been.calledWith({delta: 2, tags: {tag: 'counter'}});
     });
 
     // // TODO: investigate why decorators can't be tested

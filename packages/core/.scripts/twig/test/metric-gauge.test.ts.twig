@@ -17,16 +17,16 @@ const expect = chai.expect;
 
 const metricName = nanoid();
 
-const {{adapterType}}Prometheus = new GaugePrometheus();
-const {{adapterType}}Statsd = new GaugeStatsd();
+const {{metricType}}Prometheus = new GaugePrometheus();
+const {{metricType}}Statsd = new GaugeStatsd();
 
 const metricAdapters = [
   {
-    adapter: {{adapterType}}Prometheus,
+    adapter: {{metricType}}Prometheus,
     metric: metricName,
   },
   {
-    adapter: {{adapterType}}Statsd,
+    adapter: {{metricType}}Statsd,
     metric: metricName,
   },
 ];
@@ -45,14 +45,14 @@ describe('src/metric', function () {
 
     beforeEach(async () => {
       sandbox = sinon.createSandbox();
-      sandbox.spy({{adapterType}}Prometheus, 'dec');
-      sandbox.spy({{adapterType}}Prometheus, 'inc');
-      sandbox.spy({{adapterType}}Prometheus, 'set');
-      sandbox.spy({{adapterType}}Prometheus, 'startTimer');
-      sandbox.spy({{adapterType}}Statsd, 'dec');
-      sandbox.spy({{adapterType}}Statsd, 'inc');
-      sandbox.spy({{adapterType}}Statsd, 'set');
-      sandbox.spy({{adapterType}}Statsd, 'startTimer');
+      sandbox.spy({{metricType}}Prometheus, 'dec');
+      sandbox.spy({{metricType}}Prometheus, 'inc');
+      sandbox.spy({{metricType}}Prometheus, 'set');
+      sandbox.spy({{metricType}}Prometheus, 'startTimer');
+      sandbox.spy({{metricType}}Statsd, 'dec');
+      sandbox.spy({{metricType}}Statsd, 'inc');
+      sandbox.spy({{metricType}}Statsd, 'set');
+      sandbox.spy({{metricType}}Statsd, 'startTimer');
 
       harness = await createTestModule(
         {
