@@ -1,0 +1,39 @@
+/** will {{metricMethod}}rement all adapters */
+public {{metricMethod}}AllAdapters(): void {
+  this.counter.{{metricMethod}}();
+}
+
+/** will {{metricMethod}}rement only prometheus adapters */
+public {{metricMethod}}ByAdapter(adapter: AdapterKinds): void {
+  this.counter.{{metricMethod}}({
+    adapter,
+  });
+}
+
+/** will {{metricMethod}}rement only adapters with a specific label  */
+public {{metricMethod}}ByMetricName(metric: string): void {
+  this.counter.{{metricMethod}}({
+    metric,
+  });
+}
+
+/** will {{metricMethod}}rement using different delta */
+public {{metricMethod}}WithDelta(): void {
+  this.counter.{{metricMethod}}({
+    delta: 2,
+  });
+}
+
+/** will {{metricMethod}}rement using tags */
+public {{metricMethod}}WithDeltaAndTags(): void {
+  this.counter.{{metricMethod}}({
+    delta: 2,
+    tags: {tag: 'counter'},
+  });
+}
+
+/** will increment using decorator */
+@EventIncrement()
+public async {{metricMethod}}WithDecorator(): Promise<void> {
+  await new Promise((resolve) => setTimeout(resolve, 500));
+}
