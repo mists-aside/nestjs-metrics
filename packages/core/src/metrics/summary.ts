@@ -1,44 +1,69 @@
-// import {Injectable} from '@nestjs/common';
+import {Provider} from '@nestjs/common';
 
-// import {Adapter, Summary as SummaryInterface, Tags, TimerMethod} from '../interfaces';
-// import {StartTimerOptions} from './gauge';
-// import {ObserveOptions, ResetOptions} from './histogram';
-// import {Metric} from './metric';
+import {SummaryAdapter} from '../adapters';
+import {AdapterKinds, EndTimerMethod, Summary, TimerOptions} from '../interfaces';
+import {ObservableMetricOptions, MetricOptions} from './counter';
+import {TimingMetricOptions} from './gauge';
+import {Metric} from './metric';
 
 // @Injectable()
-// export class Summary extends Metric {
-//   protected static instance: Summary;
+export class SummaryMetric extends Metric implements Summary {
+  metricKind: 'summary' = 'summary';
 
-//   static getInstance(): Summary {
-//     if (!Summary.instance) {
-//       Summary.instance = new Summary();
-//     }
-//     return Summary.instance;
-//   }
+  protected static instance: SummaryMetric;
 
-//   observe(options?: ObserveOptions): void {
-//     const {adapter, label, tags, value} = Object.assign(
-//       {
-//         value: 1,
-//       },
-//       options || {},
-//     );
-//     this.summaryAdapters(adapter).forEach((histogram) => histogram.observe({label, tags, value}));
-//   }
+  static getInstance(): SummaryMetric {
+    if (!SummaryMetric.instance) {
+      SummaryMetric.instance = new SummaryMetric();
+    }
+    return SummaryMetric.instance;
+  }
 
-//   reset(options?: ResetOptions): void {
-//     const {adapter, label, tags} = Object.assign({}, options || {});
-//     this.summaryAdapters(adapter).forEach((histogram) => histogram.reset({label, tags}));
-//   }
+  static getProvider(): Provider<SummaryMetric> {
+    return {
+      provide: SummaryMetric,
+      useValue: SummaryMetric.getInstance(),
+    };
+  }
 
-//   startTimer(options?: StartTimerOptions): TimerMethod[] {
-//     const {adapter, label, tags} = Object.assign({}, options || {});
-//     return this.summaryAdapters(adapter).map((gauge) => gauge.startTimer({label, tags}));
-//   }
+  observe(options: ObservableMetricOptions): void {
+    const {adapter, delta, metric, tags} = options;
 
-//   protected summaryAdapters(adapter?: string): SummaryInterface[] {
-//     return this.searchAdapters(
-//       adapter ? adapter : (value: Adapter): unknown => value.kind === 'summary',
-//     ) as SummaryInterface[];
-//   }
-// }
+    const adapters = this.summaryAdapters(adapter, metric);
+
+    adapters.forEach((summary) => {
+      summary.observe({delta, tags});
+    });
+  }
+
+  startTimer(options?: TimingMetricOptions): EndTimerMethod {
+    const {adapter, metric, tags} = {
+      ...{
+        delta: 1,
+      },
+      ...(options || {}),
+    } as TimingMetricOptions;
+
+    const adapters = this.summaryAdapters(adapter, metric);
+
+    const endTimers = adapters.map((summary) => summary.startTimer({tags}));
+
+    return (options?: TimerOptions) => {
+      endTimers.forEach((end) => end(options));
+    };
+  }
+
+  reset(options?: MetricOptions): void {
+    const {adapter, metric} = {...(options || {})}
+    this.summaryAdapters(adapter, metric).forEach((summary) => {
+      summary.reset();
+    });
+  }
+
+  protected summaryAdapters(adapter?: AdapterKinds, metric?: string): SummaryAdapter[] {
+    return this.searchAdapters({metricKind: 'summary'})
+      .filter((item) => (adapter ? item.adapter.adapterKind === adapter : true))
+      .filter((item) => (metric ? item.metric === metric : true))
+      .map((item) => item.adapter as SummaryAdapter);
+  }
+}

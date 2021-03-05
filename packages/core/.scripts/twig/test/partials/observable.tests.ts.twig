@@ -1,3 +1,11 @@
+// {{metricMethod}}
+
+it('{{controllerClass}}.{{metricMethod}}AllAdapters() should trigger {{metricMethod}}() function on all {{metricType}} adapters', () => {
+  controller.{{metricMethod}}AllAdapters();
+  expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.called;
+  expect({{metricType}}Statsd.{{metricMethod}}).to.have.been.called;
+});
+
 it('{{controllerClass}}.{{metricMethod}}ByAdapter() should trigger {{metricMethod}}() function on all `prometheus` {{metricType}} adapters', () => {
   controller.{{metricMethod}}ByAdapter('prometheus');
   expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.calledWith({delta: 1, tags: undefined});
@@ -12,7 +20,7 @@ it('{{controllerClass}}.{{metricMethod}}ByMetric() should trigger {{metricMethod
 
 it('{{controllerClass}}.{{metricMethod}}WithTags() should trigger {{metricMethod}}() function using {tag: `{{metricType}}`}', () => {
   controller.{{metricMethod}}WithTags();
-  expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.calledWith({delta: 1, tags: {tag: '{{metricType}}'}});
+  expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.calledWith({delta: 2, tags: {tag: '{{metricType}}'}});
 });
 
 // // TODO: Determine why this isn't working (manual test does)

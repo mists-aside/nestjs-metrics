@@ -1,6 +1,6 @@
 // {{metricMethod}}
 
-it('{{controllerClass}}.{{metricMethod}}ByAdapter() should trigger {{metricMethod}}() function on all {{metricType}} adapters', () => {
+it('{{controllerClass}}.{{metricMethod}}AllAdapters() should trigger {{metricMethod}}() function on all {{metricType}} adapters', () => {
   controller.{{metricMethod}}AllAdapters();
   expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.called;
   expect({{metricType}}Statsd.{{metricMethod}}).to.have.been.called;

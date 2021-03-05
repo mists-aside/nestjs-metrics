@@ -75,7 +75,7 @@ describe('src/metric', function () {
 
     // inc
 
-    it('CounterMetricController.incByAdapter() should trigger inc() function on all counter adapters', () => {
+    it('CounterMetricController.incAllAdapters() should trigger inc() function on all counter adapters', () => {
       controller.incAllAdapters();
       expect(counterPrometheus.inc).to.have.been.called;
       expect(counterStatsd.inc).to.have.been.called;

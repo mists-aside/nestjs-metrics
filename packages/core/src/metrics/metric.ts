@@ -1,4 +1,4 @@
-import {CounterAdapter, GaugeAdapter} from '../adapters';
+import {CounterAdapter, GaugeAdapter, HistogramAdapter, SummaryAdapter} from '../adapters';
 import {AdapterItem, Config} from '../config';
 import {MetricKind} from '../interfaces';
 
@@ -10,7 +10,7 @@ export class Metric {
   protected config = Config.getInstance();
 
   public searchAdapters(
-    filter: string | MetricKind<CounterAdapter> | MetricKind<GaugeAdapter> | AdapterItemFilter,
+    filter: string | MetricKind<CounterAdapter> | MetricKind<GaugeAdapter> | MetricKind<HistogramAdapter> | MetricKind<SummaryAdapter> | AdapterItemFilter,
   ): AdapterItem[] {
     if (typeof filter === 'function') {
       return this.config.adapters.filter(filter as AdapterItemFilter);

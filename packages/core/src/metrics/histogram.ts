@@ -1,52 +1,69 @@
-// import {AdapterObserveOptions, AdapterResetOptions} from '../interfaces';
-// import {Injectable} from '@nestjs/common';
+import {Provider} from '@nestjs/common';
 
-// import {Adapter, Histogram as HistogramInterface, Tags, TimerMethod} from '../interfaces';
-// import {Metric} from './metric';
-// import {StartTimerOptions} from './gauge';
-
-// export interface ObserveOptions extends AdapterObserveOptions {
-//   adapter?: string;
-// }
-
-// export interface ResetOptions extends AdapterResetOptions {
-//   adapter?: string;
-// }
+import {HistogramAdapter} from '../adapters';
+import {AdapterKinds, EndTimerMethod, Histogram, TimerOptions} from '../interfaces';
+import {ObservableMetricOptions, MetricOptions} from './counter';
+import {TimingMetricOptions} from './gauge';
+import {Metric} from './metric';
 
 // @Injectable()
-// export class Histogram extends Metric {
-//   protected static instance: Histogram;
+export class HistogramMetric extends Metric implements Histogram {
+  metricKind: 'histogram' = 'histogram';
 
-//   static getInstance(): Histogram {
-//     if (!Histogram.instance) {
-//       Histogram.instance = new Histogram();
-//     }
-//     return Histogram.instance;
-//   }
+  protected static instance: HistogramMetric;
 
-//   observe(options?: ObserveOptions): void {
-//     const {adapter, label, tags, value} = Object.assign(
-//       {
-//         value: 1,
-//       },
-//       options || {},
-//     );
-//     this.histogramAdapters(adapter).forEach((histogram) => histogram.observe({label, tags, value}));
-//   }
+  static getInstance(): HistogramMetric {
+    if (!HistogramMetric.instance) {
+      HistogramMetric.instance = new HistogramMetric();
+    }
+    return HistogramMetric.instance;
+  }
 
-//   reset(options?: ResetOptions): void {
-//     const {adapter, label, tags} = Object.assign({}, options || {});
-//     this.histogramAdapters(adapter).forEach((histogram) => histogram.reset({label, tags}));
-//   }
+  static getProvider(): Provider<HistogramMetric> {
+    return {
+      provide: HistogramMetric,
+      useValue: HistogramMetric.getInstance(),
+    };
+  }
 
-//   startTimer(options?: StartTimerOptions): TimerMethod[] {
-//     const {adapter, label, tags} = Object.assign({}, options || {});
-//     return this.histogramAdapters(adapter).map((gauge) => gauge.startTimer({label, tags}));
-//   }
+  observe(options: ObservableMetricOptions): void {
+    const {adapter, delta, metric, tags} = options;
 
-//   protected histogramAdapters(adapter?: string): HistogramInterface[] {
-//     return this.searchAdapters(
-//       adapter ? adapter : (value: Adapter): unknown => value.kind === 'histogram',
-//     ) as HistogramInterface[];
-//   }
-// }
+    const adapters = this.histogramAdapters(adapter, metric);
+
+    adapters.forEach((histogram) => {
+      histogram.observe({delta, tags});
+    });
+  }
+
+  startTimer(options?: TimingMetricOptions): EndTimerMethod {
+    const {adapter, metric, tags} = {
+      ...{
+        delta: 1,
+      },
+      ...(options || {}),
+    } as TimingMetricOptions;
+
+    const adapters = this.histogramAdapters(adapter, metric);
+
+    const endTimers = adapters.map((histogram) => histogram.startTimer({tags}));
+
+    return (options?: TimerOptions) => {
+      endTimers.forEach((end) => end(options));
+    };
+  }
+
+  reset(options?: MetricOptions): void {
+    const {adapter, metric} = {...(options || {})}
+    this.histogramAdapters(adapter, metric).forEach((histogram) => {
+      histogram.reset();
+    });
+  }
+
+  protected histogramAdapters(adapter?: AdapterKinds, metric?: string): HistogramAdapter[] {
+    return this.searchAdapters({metricKind: 'histogram'})
+      .filter((item) => (adapter ? item.adapter.adapterKind === adapter : true))
+      .filter((item) => (metric ? item.metric === metric : true))
+      .map((item) => item.adapter as HistogramAdapter);
+  }
+}

@@ -49,10 +49,12 @@ describe('src/metric', function () {
       sandbox.spy({{metricType}}Prometheus, 'inc');
       sandbox.spy({{metricType}}Prometheus, 'set');
       sandbox.spy({{metricType}}Prometheus, 'startTimer');
+      sandbox.spy({{metricType}}Prometheus, 'reset');
       sandbox.spy({{metricType}}Statsd, 'dec');
       sandbox.spy({{metricType}}Statsd, 'inc');
       sandbox.spy({{metricType}}Statsd, 'set');
       sandbox.spy({{metricType}}Statsd, 'startTimer');
+      sandbox.spy({{metricType}}Statsd, 'reset');
 
       harness = await createTestModule(
         {
@@ -77,21 +79,16 @@ describe('src/metric', function () {
       sandbox = undefined;
     });
 
-    // dec
 
     {{decTests}}
 
-    // inc
-
     {{incTests}}
-
-    // set
 
     {{setTests}}
 
-    // startTimer
-
     {{timingTests}}
+
+    {{resetTests}}
 
     it('generic', () => {
       expect(true).to.equal(true);

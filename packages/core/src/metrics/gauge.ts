@@ -2,16 +2,10 @@ import {Provider} from '@nestjs/common';
 
 import {GaugeAdapter} from '../adapters';
 import {AdapterKinds, EndTimerMethod, Gauge, TimerOptions} from '../interfaces';
-import {CountableMetricOptions} from './counter';
+import {CountableMetricOptions, ObservableMetricOptions, MetricOptions} from './counter';
 import {Metric} from './metric';
 
-export interface GaugeSetOptions extends CountableMetricOptions {
-  delta: number;
-}
-export interface GaugeTimerOptions extends TimerOptions {
-  adapter?: AdapterKinds;
-  metric?: string;
-}
+export type TimingMetricOptions = TimerOptions & MetricOptions;
 
 // @Injectable()
 export class GaugeMetric extends Metric implements Gauge {
@@ -63,7 +57,7 @@ export class GaugeMetric extends Metric implements Gauge {
     });
   }
 
-  set(options: GaugeSetOptions): void {
+  set(options: ObservableMetricOptions): void {
     const {adapter, delta, metric, tags} = options;
 
     const adapters = this.gaugeAdapters(adapter, metric);
@@ -73,7 +67,7 @@ export class GaugeMetric extends Metric implements Gauge {
     });
   }
 
-  startTimer(options?: GaugeTimerOptions): EndTimerMethod {
+  startTimer(options?: TimingMetricOptions): EndTimerMethod {
     const {adapter, metric, tags} = {
       ...{
         delta: 1,
@@ -88,6 +82,13 @@ export class GaugeMetric extends Metric implements Gauge {
     return (options?: TimerOptions) => {
       endTimers.forEach((end) => end(options));
     };
+  }
+
+  reset(options?: MetricOptions): void {
+    const {adapter, metric} = {...(options || {})}
+    this.gaugeAdapters(adapter, metric).forEach((gauge) => {
+      gauge.reset();
+    });
   }
 
   protected gaugeAdapters(adapter?: AdapterKinds, metric?: string): GaugeAdapter[] {

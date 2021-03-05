@@ -6,7 +6,7 @@ import {nanoid} from 'nanoid';
 import * as sinon from 'sinon';
 import * as sinonChai from 'sinon-chai';
 
-import {GaugeMetric} from '../src';
+import {{'{'}}{{metricType|capitalize}}Metric} from '../src';
 import {Config} from '../src/config';
 import {{'{'}}{{controllerClass}}{{'}'}} from '../src/test';
 import {{'{'}}{{metricType|capitalize}}Prometheus, {{metricType|capitalize}}Statsd, TestHarness, createTestModule} from './utils';
@@ -38,17 +38,19 @@ describe('src/metric', function () {
     Config.getInstance().addAdapters(metricAdapters);
   });
 
-  describe('Controller(Metric::GaugeMetric)', () => {
+  describe('Controller(Metric::{{metricType|capitalize}}Metric)', () => {
     let harness: TestHarness;
-    let controller: GaugeMetricController;
+    let controller: {{metricType|capitalize}}MetricController;
     let sandbox: sinon.SinonSandbox;
 
     beforeEach(async () => {
       sandbox = sinon.createSandbox();
       sandbox.spy({{metricType}}Prometheus, 'observe');
       sandbox.spy({{metricType}}Prometheus, 'startTimer');
+      sandbox.spy({{metricType}}Prometheus, 'reset');
       sandbox.spy({{metricType}}Statsd, 'observe');
       sandbox.spy({{metricType}}Statsd, 'startTimer');
+      sandbox.spy({{metricType}}Statsd, 'reset');
 
       harness = await createTestModule(
         {
@@ -56,7 +58,7 @@ describe('src/metric', function () {
         },
         {
           controllers: [{{controllerClass}}],
-          providers: [GaugeMetric.getProvider()],
+          providers: [{{metricType|capitalize}}Metric.getProvider()],
         },
       );
 
@@ -73,13 +75,11 @@ describe('src/metric', function () {
       sandbox = undefined;
     });
 
-    // observe
-
     {{observeTests}}
 
-    // startTimer
-
     {{timingTests}}
+
+    {{resetTests}}
 
     it('generic', () => {
       expect(true).to.equal(true);

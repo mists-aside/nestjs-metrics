@@ -1,22 +1,30 @@
-it('{{controllerClass}}.timeByAdapter() should trigger {{metricMethod}}() function on all `prometheus` {{metricType}} adapters', async () => {
-  await controller.timeByAdapter('prometheus');
+// startTimer
+
+it('{{controllerClass}}.{{metricMethod}}AllAdapters() should trigger {{metricMethod}}() function on all {{metricType}} adapters', async () => {
+  await controller.{{metricMethod}}AllAdapters();
+  expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.called;
+  expect({{metricType}}Statsd.{{metricMethod}}).to.have.been.called;
+});
+
+it('{{controllerClass}}.{{metricMethod}}ByAdapter() should trigger {{metricMethod}}() function on all `prometheus` {{metricType}} adapters', async () => {
+  await controller.{{metricMethod}}ByAdapter('prometheus');
   expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.calledWith({tags: undefined});
   expect({{metricType}}Statsd.{{metricMethod}}).to.not.have.been.called;
 });
 
-it('{{controllerClass}}.timeByMetric() should trigger {{metricMethod}}() function on all `{{metricType}}` {{metricType}} adapters', async () => {
-  await controller.timeByMetric(metricName);
+it('{{controllerClass}}.{{metricMethod}}ByMetric() should trigger {{metricMethod}}() function on all `{{metricType}}` {{metricType}} adapters', async () => {
+  await controller.{{metricMethod}}ByMetric(metricName);
   expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.calledWith({tags: undefined});
   expect({{metricType}}Statsd.{{metricMethod}}).to.have.been.called;
 });
 
-it('{{controllerClass}}.timeWithTags() should trigger {{metricMethod}}() function using {tag: `{{metricType}}`}', async () => {
-  await controller.timeWithTags();
+it('{{controllerClass}}.{{metricMethod}}WithTags() should trigger {{metricMethod}}() function using {tag: `{{metricType}}`}', async () => {
+  await controller.{{metricMethod}}WithTags();
   expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.calledWith({tags: {tag: '{{metricType}}'}});
 });
 
-it('{{controllerClass}}.timeWithEndTags() should trigger {{metricMethod}}() function using {tag: `{{metricType}}`}', async () => {
-  await controller.timeWithEndTags();
+it('{{controllerClass}}.{{metricMethod}}WithEndTags() should trigger {{metricMethod}}() function using {tag: `{{metricType}}`}', async () => {
+  await controller.{{metricMethod}}WithEndTags();
   expect(endTimer).to.have.been.calledWith({tags: {tag: '{{metricType}}'}});
 });
 

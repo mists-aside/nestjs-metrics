@@ -43,11 +43,11 @@ export class CounterMetricController {
     });
   }
 
-  /** will increment using decorator */
-  @EventIncrement()
-  public async incWithDecorator(): Promise<void> {
-    await new Promise((resolve) => setTimeout(resolve, 500));
-  }
+  // /** will increment using decorator */
+  // @EventIncrement()
+  // public async incWithDecorator(): Promise<void> {
+  //   await new Promise((resolve) => setTimeout(resolve, 500));
+  // }
 
   /** will reset all adapters */
   public resetAllAdapters(): void {
