@@ -1,14 +1,22 @@
 import {MetricKind} from './interfaces';
-import {CounterMetric, CountableMetricOptions} from './metrics/counter';
+import {
+  CountableMetricOptions,
+  CounterMetric,
+  GaugeMetric,
+  HistogramMetric,
+  MetricOptions,
+  ObservableMetricOptions,
+  SummaryMetric,
+} from './metrics';
 
 /**
- * Comment
+ * Increment decorator
  *
  * @returns {MethodDecorator}
  */
-export const EventIncrement = (
+export const MetricReset = (
   options?: CountableMetricOptions,
-  metric: MetricKind<CounterMetric> /*| MetricKind<GaugeMetric> */ = {metricKind: 'counter'},
+  metric: MetricKind<CounterMetric> | MetricKind<GaugeMetric> | MetricKind<HistogramMetric> | MetricKind<SummaryMetric> = {metricKind: 'counter'},
 ): MethodDecorator => (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   target: any,
@@ -19,10 +27,51 @@ export const EventIncrement = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   descriptor.value = (...args: any[]): any => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let metricInstance: CounterMetric /* | GaugeMetric */;
+    let metricInstance: CounterMetric | GaugeMetric | HistogramMetric | SummaryMetric;
     switch (metric.metricKind) {
-      // case 'gauge':
-      // TODO:
+      case 'gauge':
+        metricInstance = GaugeMetric.getInstance();
+        break;
+      case 'histogram':
+        metricInstance = HistogramMetric.getInstance();
+        break;
+      case 'summary':
+        metricInstance = SummaryMetric.getInstance();
+        break;
+      default:
+        metricInstance = CounterMetric.getInstance();
+    }
+    metricInstance.reset(options);
+
+    return oldMethod.call(target, ...args);
+  };
+
+  return descriptor;
+};
+
+/**
+ * Increment decorator
+ *
+ * @returns {MethodDecorator}
+ */
+export const MetricInc = (
+  options?: CountableMetricOptions,
+  metric: MetricKind<CounterMetric> | MetricKind<GaugeMetric> = {metricKind: 'counter'},
+): MethodDecorator => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  target: any,
+  propertyKey: string | symbol,
+  descriptor: PropertyDescriptor,
+): PropertyDescriptor => {
+  const oldMethod = descriptor.value;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  descriptor.value = (...args: any[]): any => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let metricInstance: CounterMetric | GaugeMetric;
+    switch (metric.metricKind) {
+      case 'gauge':
+        metricInstance = GaugeMetric.getInstance();
+        break;
       default:
         metricInstance = CounterMetric.getInstance();
     }
@@ -34,114 +83,118 @@ export const EventIncrement = (
   return descriptor;
 };
 
-// import {Counter, DecOptions, Gauge, Histogram, IncOptions, StartTimerOptions, Summary} from './metrics';
-// import {Metric} from './metrics/metric';
-// import {TimerMethod} from './interfaces';
-// import {Type} from '@nestjs/common';
+/**
+ * Decrement decorator
+ *
+ * @returns {MethodDecorator}
+ */
+export const MetricDec = (options?: CountableMetricOptions): MethodDecorator => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  target: any,
+  propertyKey: string | symbol,
+  descriptor: PropertyDescriptor,
+): PropertyDescriptor => {
+  const oldMethod = descriptor.value;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  descriptor.value = (...args: any[]): any => {
+    GaugeMetric.getInstance().dec(options);
 
-// type IncrementMetric = Type<Counter> | Type<Gauge>;
+    return oldMethod.call(target, ...args);
+  };
 
-// /**
-//  * Comment
-//  *
-//  * @returns {MethodDecorator}
-//  */
-// export const EventIncrement = (
-//   options?: IncOptions,
-//   metric?: IncrementMetric,
-// ): MethodDecorator => (
-//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   target: any,
-//   propertyKey: string | symbol,
-//   descriptor: PropertyDescriptor,
-// ): PropertyDescriptor => {const oldMethod = descriptor.value;
-//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   descriptor.value = (...args: any[]): any => {
-//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//     const metrics: Metric[] = metric ? [(metric as any).getInstance()] : [Counter.getInstance(), Gauge.getInstance()];
+  return descriptor;
+};
 
-//     metrics.forEach((metric) => {
-//       (metric as Counter).inc(options);
-//     });
+/**
+ * Set decorator
+ *
+ * @returns {MethodDecorator}
+ */
+export const MetricSet = (options?: ObservableMetricOptions): MethodDecorator => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  target: any,
+  propertyKey: string | symbol,
+  descriptor: PropertyDescriptor,
+): PropertyDescriptor => {
+  const oldMethod = descriptor.value;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  descriptor.value = (...args: any[]): any => {
+    GaugeMetric.getInstance().set(options);
 
-//     return oldMethod.call(target, ...args);
-//   };
+    return oldMethod.call(target, ...args);
+  };
 
-//   return descriptor;
-// };
+  return descriptor;
+};
 
-// /**
-//  * Comment
-//  *
-//  * @returns {MethodDecorator}
-//  */
-// export const EventDecrement = (options?: DecOptions): MethodDecorator => (
-//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   target: any,
-//   propertyKey: string | symbol,
-//   descriptor: PropertyDescriptor,
-// ): PropertyDescriptor => {
-//   const oldMethod = descriptor.value;
-//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   descriptor.value = (...args: any[]): any => {
-//     Gauge.getInstance().dec(options);
-//     return oldMethod.call(target, ...args);
-//   };
+/**
+ * Observe decorator
+ *
+ * @returns {MethodDecorator}
+ */
+export const MetricObserve = (
+  options?: ObservableMetricOptions,
+  metric: MetricKind<HistogramMetric> | MetricKind<SummaryMetric> = {metricKind: 'histogram'},
+): MethodDecorator => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  target: any,
+  propertyKey: string | symbol,
+  descriptor: PropertyDescriptor,
+): PropertyDescriptor => {
+  const oldMethod = descriptor.value;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  descriptor.value = (...args: any[]): any => {
+    let metricInstance: HistogramMetric | SummaryMetric;
+    switch (metric.metricKind) {
+      case 'summary':
+        metricInstance = SummaryMetric.getInstance();
+        break;
+      default:
+        metricInstance = HistogramMetric.getInstance();
+    }
+    metricInstance.observe(options);
 
-//   return descriptor;
-// };
+    return oldMethod.call(target, ...args);
+  };
 
-// type DurationMetric = Type<Gauge> | Type<Histogram> | Type<Summary> | (Type<Gauge> | Type<Histogram> | Type<Summary>)[];
+  return descriptor;
+};
 
-// /**
-//  * Comment
-//  *
-//  * @returns {MethodDecorator}
-//  */
-// export const EventDuration = (
-//   options?: StartTimerOptions,
-//   metric?: DurationMetric,
-// ): MethodDecorator => (
-//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   target: any,
-//   propertyKey: string | symbol,
-//   descriptor: PropertyDescriptor,
-// ): PropertyDescriptor => {const oldMethod = descriptor.value;
-//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   descriptor.value = (...args: any[]): any => {
-//     const metrics: Metric[] = metric
-//       ? Array.isArray(metric)
-//         ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//           metric.map((item) => (item as any).getInstance())
-//         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//           [(metric as any).getInstance()]
-//       : [Gauge.getInstance(), Histogram.getInstance(), Summary.getInstance()];
+/**
+ * Timing decorator
+ *
+ * @returns {MethodDecorator}
+ */
+export const MetricTiming = (
+  options?: MetricOptions,
+  metric: MetricKind<GaugeMetric> | MetricKind<HistogramMetric> | MetricKind<SummaryMetric> = {metricKind: 'gauge'},
+): MethodDecorator => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  target: any,
+  propertyKey: string | symbol,
+  descriptor: PropertyDescriptor,
+): PropertyDescriptor => {
+  const oldMethod = descriptor.value;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  descriptor.value = async (...args: any[]): Promise<any> => {
+    let metricInstance: GaugeMetric | HistogramMetric | SummaryMetric;
+    switch (metric.metricKind) {
+      case 'histogram':
+        metricInstance = HistogramMetric.getInstance();
+        break;
+      case 'summary':
+        metricInstance = SummaryMetric.getInstance();
+        break;
+      default:
+        metricInstance = GaugeMetric.getInstance();
+    }
+    const endTimer = metricInstance.startTimer(options);
 
-//     const {tags} = options;
+    const result = await oldMethod.call(target, ...args);
 
-//     const ends: TimerMethod[] = metrics
-//       .map((metric) => (metric as Gauge).startTimer(options))
-//       .reduce((a, b) => a.concat(b), []);
-//     const result = oldMethod.call(target, ...args);
+    endTimer();
+    return result;
+  };
 
-//     if (result instanceof Promise) {
-//       return (
-//         result
-//           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//           .then((...args: any[]) => {
-//             ends.forEach((end) => end(tags));
-//             return args;
-//           })
-//           .catch((error) => {
-//             ends.forEach((end) => end(tags));
-//             throw error;
-//           })
-//       );
-//     }
-
-//     ends.forEach((end) => end(tags));
-//     return result;
-//   };
-
-//   return descriptor;
-// };
+  return descriptor;
+};

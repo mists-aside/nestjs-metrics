@@ -77,10 +77,10 @@ export interface Counter extends Metric {
    */
   inc(options?: CountableOptions): void;
 
-	/**
-	 * Reset counter values
-	 */
-	reset(): void;
+  /**
+   * Reset counter values
+   */
+  reset(): void;
 }
 
 /***************************************************************************
@@ -154,20 +154,20 @@ export interface Gauge extends Metric {
 export interface Histogram extends Metric {
   metricKind: 'histogram';
 
-	/**
-	 * Observe value for given labels
-	 */
-	observe(options: ObservableOptions): void;
+  /**
+   * Observe value for given labels
+   */
+  observe(options: ObservableOptions): void;
 
-	/**
-	 * Start a timer where the value in seconds will observed
-	 */
-	startTimer(options?: TimerOptions): EndTimerMethod;
+  /**
+   * Start a timer where the value in seconds will observed
+   */
+  startTimer(options?: TimerOptions): EndTimerMethod;
 
-	/**
-	 * Reset histogram values
-	 */
-	reset(): void;
+  /**
+   * Reset histogram values
+   */
+  reset(): void;
 }
 
 /***************************************************************************

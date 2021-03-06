@@ -1,5 +1,5 @@
 import {Errors} from '../errors';
-import {Adapter, AdapterKinds, Counter, CountableOptions} from '../interfaces';
+import {Adapter, AdapterKinds, CountableOptions, Counter} from '../interfaces';
 
 export class CounterAdapter implements Counter, Adapter {
   adapterKind: AdapterKinds;

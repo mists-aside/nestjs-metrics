@@ -1,6 +1,6 @@
-import { Summary } from './../interfaces';
+import {Summary} from './../interfaces';
 import {Errors} from '../errors';
-import {Adapter, AdapterKinds, ObservableOptions, EndTimerMethod, TimerOptions} from '../interfaces';
+import {Adapter, AdapterKinds, EndTimerMethod, ObservableOptions, TimerOptions} from '../interfaces';
 
 export class SummaryAdapter implements Summary, Adapter {
   adapterKind: AdapterKinds;

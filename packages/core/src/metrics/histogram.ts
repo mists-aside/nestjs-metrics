@@ -1,12 +1,12 @@
 import {Provider} from '@nestjs/common';
 
 import {HistogramAdapter} from '../adapters';
-import {AdapterKinds, EndTimerMethod, Histogram, TimerOptions} from '../interfaces';
-import {ObservableMetricOptions, MetricOptions} from './counter';
+import {AdapterKinds, Histogram} from '../interfaces';
+import {EndTimerMethod} from '../interfaces';
+import {MetricOptions, ObservableMetricOptions} from './counter';
 import {TimingMetricOptions} from './gauge';
 import {Metric} from './metric';
 
-// @Injectable()
 export class HistogramMetric extends Metric implements Histogram {
   metricKind: 'histogram' = 'histogram';
 
@@ -36,11 +36,15 @@ export class HistogramMetric extends Metric implements Histogram {
     });
   }
 
+  reset(options?: MetricOptions): void {
+    const {adapter, metric} = {...(options || {})} as MetricOptions;
+    this.histogramAdapters(adapter, metric).forEach((histogram) => {
+      histogram.reset();
+    });
+  }
+
   startTimer(options?: TimingMetricOptions): EndTimerMethod {
     const {adapter, metric, tags} = {
-      ...{
-        delta: 1,
-      },
       ...(options || {}),
     } as TimingMetricOptions;
 
@@ -48,16 +52,9 @@ export class HistogramMetric extends Metric implements Histogram {
 
     const endTimers = adapters.map((histogram) => histogram.startTimer({tags}));
 
-    return (options?: TimerOptions) => {
+    return (options?: TimingMetricOptions) => {
       endTimers.forEach((end) => end(options));
     };
-  }
-
-  reset(options?: MetricOptions): void {
-    const {adapter, metric} = {...(options || {})}
-    this.histogramAdapters(adapter, metric).forEach((histogram) => {
-      histogram.reset();
-    });
   }
 
   protected histogramAdapters(adapter?: AdapterKinds, metric?: string): HistogramAdapter[] {

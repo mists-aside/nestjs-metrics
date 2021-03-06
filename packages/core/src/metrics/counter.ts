@@ -1,8 +1,7 @@
-import { ObservableOptions } from './../interfaces';
 import {Provider} from '@nestjs/common';
 
 import {CounterAdapter} from '../adapters';
-import {AdapterKinds, Counter, CountableOptions} from '../interfaces';
+import {AdapterKinds, CountableOptions, Counter, ObservableOptions} from '../interfaces';
 import {Metric} from './metric';
 
 export interface MetricOptions {
@@ -14,7 +13,6 @@ export type CountableMetricOptions = CountableOptions & MetricOptions;
 
 export type ObservableMetricOptions = ObservableOptions & MetricOptions;
 
-// @Injectable()
 export class CounterMetric extends Metric implements Counter {
   metricKind: 'counter' = 'counter';
 
@@ -49,7 +47,7 @@ export class CounterMetric extends Metric implements Counter {
   }
 
   reset(options?: MetricOptions): void {
-    const {adapter, metric} = {...(options || {})}
+    const {adapter, metric} = {...(options || {})} as MetricOptions;
     this.counterAdapters(adapter, metric).forEach((counter) => {
       counter.reset();
     });

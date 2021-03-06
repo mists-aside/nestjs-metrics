@@ -1,13 +1,14 @@
 import {Provider} from '@nestjs/common';
 
 import {GaugeAdapter} from '../adapters';
-import {AdapterKinds, EndTimerMethod, Gauge, TimerOptions} from '../interfaces';
-import {CountableMetricOptions, ObservableMetricOptions, MetricOptions} from './counter';
+import {AdapterKinds, CountableOptions, Gauge} from '../interfaces';
+import {EndTimerMethod} from '../interfaces';
+import {CountableMetricOptions} from './counter';
+import {MetricOptions, ObservableMetricOptions} from './counter';
 import {Metric} from './metric';
 
-export type TimingMetricOptions = TimerOptions & MetricOptions;
+export type TimingMetricOptions = Omit<CountableOptions, 'delta'> & MetricOptions;
 
-// @Injectable()
 export class GaugeMetric extends Metric implements Gauge {
   metricKind: 'gauge' = 'gauge';
 
@@ -36,7 +37,6 @@ export class GaugeMetric extends Metric implements Gauge {
     } as CountableMetricOptions;
 
     const adapters = this.gaugeAdapters(adapter, metric);
-
     adapters.forEach((gauge) => {
       gauge.dec({delta, tags});
     });
@@ -51,9 +51,15 @@ export class GaugeMetric extends Metric implements Gauge {
     } as CountableMetricOptions;
 
     const adapters = this.gaugeAdapters(adapter, metric);
-
     adapters.forEach((gauge) => {
       gauge.inc({delta, tags});
+    });
+  }
+
+  reset(options?: MetricOptions): void {
+    const {adapter, metric} = {...(options || {})} as MetricOptions;
+    this.gaugeAdapters(adapter, metric).forEach((gauge) => {
+      gauge.reset();
     });
   }
 
@@ -69,26 +75,16 @@ export class GaugeMetric extends Metric implements Gauge {
 
   startTimer(options?: TimingMetricOptions): EndTimerMethod {
     const {adapter, metric, tags} = {
-      ...{
-        delta: 1,
-      },
       ...(options || {}),
-    } as CountableMetricOptions;
+    } as TimingMetricOptions;
 
     const adapters = this.gaugeAdapters(adapter, metric);
 
     const endTimers = adapters.map((gauge) => gauge.startTimer({tags}));
 
-    return (options?: TimerOptions) => {
+    return (options?: TimingMetricOptions) => {
       endTimers.forEach((end) => end(options));
     };
-  }
-
-  reset(options?: MetricOptions): void {
-    const {adapter, metric} = {...(options || {})}
-    this.gaugeAdapters(adapter, metric).forEach((gauge) => {
-      gauge.reset();
-    });
   }
 
   protected gaugeAdapters(adapter?: AdapterKinds, metric?: string): GaugeAdapter[] {

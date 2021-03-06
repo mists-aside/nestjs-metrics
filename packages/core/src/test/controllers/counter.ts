@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import {Controller} from '@nestjs/common';
 
-import {EventIncrement} from '../../decorators';
+import {MetricInc, MetricReset} from '../../decorators';
 import {AdapterKinds} from '../../interfaces';
 import {CounterMetric} from '../../metrics';
 
@@ -43,11 +43,13 @@ export class CounterMetricController {
     });
   }
 
-  // /** will increment using decorator */
-  // @EventIncrement()
-  // public async incWithDecorator(): Promise<void> {
-  //   await new Promise((resolve) => setTimeout(resolve, 500));
-  // }
+  /** will increment using decorator */
+  @MetricInc({adapter: 'prometheus'}, {metricKind: 'counter'})
+  public async incWithDecorator(): Promise<void> {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
+
+  // reset
 
   /** will reset all adapters */
   public resetAllAdapters(): void {
@@ -68,10 +70,10 @@ export class CounterMetricController {
     });
   }
 
-  // /** will increment using decorator */
-  // @EventReset({adapter: 'counter'})
-  // public async resetWithDecorator(): Promise<void> {
-  //   await new Promise((resolve) => setTimeout(resolve, 500));
-  // }
+  /** will increment using decorator */
+  @MetricReset({adapter: 'prometheus'}, {metricKind: 'counter'})
+  public async resetWithDecorator(): Promise<void> {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
 }
 /* eslint-enable @typescript-eslint/no-empty-function */

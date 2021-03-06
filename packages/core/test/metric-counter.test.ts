@@ -75,69 +75,71 @@ describe('src/metric', function () {
 
     // inc
 
-    it('CounterMetricController.incAllAdapters() should trigger inc() function on all counter adapters', () => {
-      controller.incAllAdapters();
-      expect(counterPrometheus.inc).to.have.been.called;
-      expect(counterStatsd.inc).to.have.been.called;
+    describe('inc()', () => {
+      it('CounterMetricController.incAllAdapters() should trigger inc() function on all counter adapters', () => {
+        controller.incAllAdapters();
+        expect(counterPrometheus.inc).to.have.been.called;
+        expect(counterStatsd.inc).to.have.been.called;
+      });
+
+      it(`CounterMetricController.incByAdapter('prometheus') should trigger inc() function on all 'prometheus' counter adapters`, () => {
+        controller.incByAdapter('prometheus');
+        expect(counterPrometheus.inc).to.have.been.called;
+        expect(counterStatsd.inc).to.not.have.been.called;
+      });
+
+      it(`CounterMetricController.incByMetricName('${metricName}') should trigger inc() function on all counter adapters`, () => {
+        controller.incByMetricName(metricName);
+        expect(counterPrometheus.inc).to.have.been.called;
+        expect(counterStatsd.inc).to.have.been.called;
+      });
+
+      it('CounterMetricController.incWithDelta() should trigger inc() function using {delta: 2}', () => {
+        controller.incWithDelta();
+        expect(counterPrometheus.inc).to.have.been.calledWith({delta: 2, tags: undefined});
+      });
+
+      it('CounterMetricController.incWithDeltaAndTags() should trigger inc() function using {tag: `counter`}', () => {
+        controller.incWithDeltaAndTags();
+        expect(counterPrometheus.inc).to.have.been.calledWith({delta: 2, tags: {tag: 'counter'}});
+      });
+
+      it('CounterMetricController.incWithDecorator() should trigger inc() function using a decorator', async () => {
+        await controller.incWithDecorator();
+
+        expect(counterPrometheus.inc).to.have.been.called;
+        expect(counterStatsd.inc).to.not.have.been.called;
+      });
     });
-
-    it(`CounterMetricController.incByAdapter('prometheus') should trigger inc() function on all 'prometheus' counter adapters`, () => {
-      controller.incByAdapter('prometheus');
-      expect(counterPrometheus.inc).to.have.been.called;
-      expect(counterStatsd.inc).to.not.have.been.called;
-    });
-
-    it(`CounterMetricController.incByMetricName('${metricName}') should trigger inc() function on all counter adapters`, () => {
-      controller.incByMetricName(metricName);
-      expect(counterPrometheus.inc).to.have.been.called;
-      expect(counterStatsd.inc).to.have.been.called;
-    });
-
-    it('CounterMetricController.incWithDelta() should trigger inc() function using {delta: 2}', () => {
-      controller.incWithDelta();
-      expect(counterPrometheus.inc).to.have.been.calledWith({delta: 2, tags: undefined});
-    });
-
-    it('CounterMetricController.incWithDeltaAndTags() should trigger inc() function using {tag: `counter`}', () => {
-      controller.incWithDeltaAndTags();
-      expect(counterPrometheus.inc).to.have.been.calledWith({delta: 2, tags: {tag: 'counter'}});
-    });
-
-    // // TODO: investigate why decorators can't be tested
-    // it.skip('CounterMetricController.incWithDecorator() should trigger inc() function using a decorator', async () => {
-    //   await controller.incWithDecorator();
-
-    //   expect(counterPrometheus.inc).to.have.been.called;
-    //   expect(counterStatsd.inc).to.not.have.been.called;
-    // });
 
     // reset
 
-    it('CounterMetricController.resetByAdapter() should trigger reset() function on all counter adapters', () => {
-      controller.resetAllAdapters();
-      expect(counterPrometheus.reset).to.have.been.called;
-      expect(counterStatsd.reset).to.have.been.called;
+    describe('reset()', () => {
+      it('CounterMetricController.resetByAdapter() should trigger reset() function on all counter adapters', () => {
+        controller.resetAllAdapters();
+        expect(counterPrometheus.reset).to.have.been.called;
+        expect(counterStatsd.reset).to.have.been.called;
+      });
+
+      it(`CounterMetricController.resetByAdapter('prometheus') should trigger reset() function on all 'prometheus' counter adapters`, () => {
+        controller.resetByAdapter('prometheus');
+        expect(counterPrometheus.reset).to.have.been.called;
+        expect(counterStatsd.reset).to.not.have.been.called;
+      });
+
+      it(`CounterMetricController.resetByMetricName('${metricName}') should trigger reset() function on all counter adapters`, () => {
+        controller.resetByMetricName(metricName);
+        expect(counterPrometheus.reset).to.have.been.called;
+        expect(counterStatsd.reset).to.have.been.called;
+      });
+
+      it('CounterMetricController.resetWithDecorator() should trigger reset() function using a decorator', async () => {
+        await controller.resetWithDecorator();
+
+        expect(counterPrometheus.reset).to.have.been.called;
+        expect(counterStatsd.reset).to.not.have.been.called;
+      });
     });
-
-    it(`CounterMetricController.resetByAdapter('prometheus') should trigger reset() function on all 'prometheus' counter adapters`, () => {
-      controller.resetByAdapter('prometheus');
-      expect(counterPrometheus.reset).to.have.been.called;
-      expect(counterStatsd.reset).to.not.have.been.called;
-    });
-
-    it(`CounterMetricController.resetByMetricName('${metricName}') should trigger reset() function on all counter adapters`, () => {
-      controller.resetByMetricName(metricName);
-      expect(counterPrometheus.reset).to.have.been.called;
-      expect(counterStatsd.reset).to.have.been.called;
-    });
-
-    // // TODO: investigate why decorators can't be tested
-    // it.skip('CounterMetricController.resetWithDecorator() should trigger reset() function using a decorator', async () => {
-    //   await controller.resetWithDecorator();
-
-    //   expect(counterPrometheus.reset).to.have.been.called;
-    //   expect(counterStatsd.reset).to.not.have.been.called;
-    // });
 
     it('generic', () => {
       expect(true).to.equal(true);

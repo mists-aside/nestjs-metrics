@@ -1,0 +1,38 @@
+
+/** will {{metricMethod}}() for all adapters */
+public {{metricMethod}}AllAdapters(): void {
+  this.{{metricType}}.{{metricMethod}}({
+    delta: 1
+  });
+}
+
+/** will {{metricMethod}} for specific adapter */
+{{metricMethod}}ByAdapter(adapter: AdapterKinds): void {
+  this.{{metricType}}.{{metricMethod}}({
+    adapter,
+    delta: 1,
+  });
+}
+
+{{metricMethod}}ByMetric(metric: string): void {
+  this.{{metricType}}.{{metricMethod}}({
+    delta: 1,
+    metric,
+  });
+}
+
+{{metricMethod}}WithTags(): void {
+  this.{{metricType}}.{{metricMethod}}({
+    delta: 2,
+    tags: { tag: '{{metricType}}' }
+  });
+}
+
+{% if metricMethod == 'set' %}
+@Metric{{metricMethod|capitalize}}({adapter: 'prometheus', delta: 2})
+{% else %}
+@Metric{{metricMethod|capitalize}}({adapter: 'prometheus', delta: 2}, {metricKind: '{{metricType}}'})
+{% endif %}
+public async {{metricMethod}}WithDecorator(): Promise<void> {
+  await new Promise((resolve) => setTimeout(resolve, 500));
+}

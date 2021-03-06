@@ -1,37 +1,38 @@
 // {{metricMethod}}
 
-it('{{controllerClass}}.{{metricMethod}}AllAdapters() should trigger {{metricMethod}}() function on all {{metricType}} adapters', () => {
-  controller.{{metricMethod}}AllAdapters();
-  expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.called;
-  expect({{metricType}}Statsd.{{metricMethod}}).to.have.been.called;
+describe('{{metricMethod}}()', () => {
+  it('{{controllerClass}}.{{metricMethod}}AllAdapters() should trigger {{metricMethod}}() function on all {{metricType}} adapters', () => {
+    controller.{{metricMethod}}AllAdapters();
+    expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.called;
+    expect({{metricType}}Statsd.{{metricMethod}}).to.have.been.called;
+  });
+
+  it(`{{controllerClass}}.{{metricMethod}}ByAdapter('prometheus') should trigger {{metricMethod}}() function on all 'prometheus' {{metricType}} adapters`, () => {
+    controller.{{metricMethod}}ByAdapter('prometheus');
+    expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.called;
+    expect({{metricType}}Statsd.{{metricMethod}}).to.not.have.been.called;
+  });
+
+  it(`{{controllerClass}}.{{metricMethod}}ByMetricName('${metricName}') should trigger {{metricMethod}}() function on all {{metricType}} adapters`, () => {
+    controller.{{metricMethod}}ByMetricName(metricName);
+    expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.called;
+    expect({{metricType}}Statsd.{{metricMethod}}).to.have.been.called;
+  });
+
+  it('{{controllerClass}}.{{metricMethod}}WithDelta() should trigger {{metricMethod}}() function using {delta: 2}', () => {
+    controller.{{metricMethod}}WithDelta();
+    expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.calledWith({delta: 2, tags: undefined});
+  });
+
+  it('{{controllerClass}}.{{metricMethod}}WithDeltaAndTags() should trigger {{metricMethod}}() function using {tag: `{{metricType}}`}', () => {
+    controller.{{metricMethod}}WithDeltaAndTags();
+    expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.calledWith({delta: 2, tags: {tag: '{{metricType}}'}});
+  });
+
+  it('{{controllerClass}}.{{metricMethod}}WithDecorator() should trigger {{metricMethod}}() function using a decorator', async () => {
+    await controller.{{metricMethod}}WithDecorator();
+
+    expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.called;
+    expect({{metricType}}Statsd.{{metricMethod}}).to.not.have.been.called;
+  });
 });
-
-it(`{{controllerClass}}.{{metricMethod}}ByAdapter('prometheus') should trigger {{metricMethod}}() function on all 'prometheus' {{metricType}} adapters`, () => {
-  controller.{{metricMethod}}ByAdapter('prometheus');
-  expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.called;
-  expect({{metricType}}Statsd.{{metricMethod}}).to.not.have.been.called;
-});
-
-it(`{{controllerClass}}.{{metricMethod}}ByMetricName('${metricName}') should trigger {{metricMethod}}() function on all {{metricType}} adapters`, () => {
-  controller.{{metricMethod}}ByMetricName(metricName);
-  expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.called;
-  expect({{metricType}}Statsd.{{metricMethod}}).to.have.been.called;
-});
-
-it('{{controllerClass}}.{{metricMethod}}WithDelta() should trigger {{metricMethod}}() function using {delta: 2}', () => {
-  controller.{{metricMethod}}WithDelta();
-  expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.calledWith({delta: 2, tags: undefined});
-});
-
-it('{{controllerClass}}.{{metricMethod}}WithDeltaAndTags() should trigger {{metricMethod}}() function using {tag: `{{metricType}}`}', () => {
-  controller.{{metricMethod}}WithDeltaAndTags();
-  expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.calledWith({delta: 2, tags: {tag: '{{metricType}}'}});
-});
-
-// // TODO: investigate why decorators can't be tested
-// it.skip('{{controllerClass}}.{{metricMethod}}WithDecorator() should trigger {{metricMethod}}() function using a decorator', async () => {
-//   await controller.{{metricMethod}}WithDecorator();
-
-//   expect({{metricType}}Prometheus.{{metricMethod}}).to.have.been.called;
-//   expect({{metricType}}Statsd.{{metricMethod}}).to.not.have.been.called;
-// });

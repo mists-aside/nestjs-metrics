@@ -4,13 +4,13 @@ import {describe, it} from 'mocha';
 
 import {Config} from '../src/config';
 import {MetricsModule} from '../src/module';
-import { CounterPrometheus } from './utils/adapters';
+import {CounterPrometheus} from './utils/adapters';
 import {TestHarness} from './utils/harness';
 import {
-  createAsyncTestModule,
-  createTestModule,
   MetricsModuleOptionsService,
   MetricsOptionsModule,
+  createAsyncTestModule,
+  createTestModule,
 } from './utils/module';
 
 const expect = chai.expect;
@@ -41,10 +41,12 @@ describe('src/module', function () {
 
     it('MetricsModule to instantiate properly (with options)', async () => {
       harness = await createTestModule({
-        adapters: [{
-          metric: 'counter',
-          adapter: new CounterPrometheus(),
-        }],
+        adapters: [
+          {
+            metric: 'counter',
+            adapter: new CounterPrometheus(),
+          },
+        ],
       });
       const module = harness.app.get<MetricsModule>(MetricsModule);
       expect(module instanceof MetricsModule).to.equal(true);

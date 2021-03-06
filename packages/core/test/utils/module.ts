@@ -1,13 +1,15 @@
+import {Injectable, Module} from '@nestjs/common';
+import {Test} from '@nestjs/testing';
 import * as request from 'supertest';
 
-import { Injectable, Module } from '@nestjs/common';
-import { Test } from '@nestjs/testing';
-
 import {
-    MetricsModule, MetricsModuleAsyncOptions, MetricsModuleOptions, MetricsModuleOptionsFactory
+  MetricsModule,
+  MetricsModuleAsyncOptions,
+  MetricsModuleOptions,
+  MetricsModuleOptionsFactory,
 } from '../../src/module';
-import { CounterPrometheus } from './adapters';
-import { TestHarness } from './harness';
+import {CounterPrometheus} from './adapters';
+import {TestHarness} from './harness';
 
 export const createTestModule = async (
   options?: MetricsModuleOptions,
@@ -38,10 +40,12 @@ export const createTestModule = async (
 export class MetricsModuleOptionsService implements MetricsModuleOptionsFactory {
   createMetricsModuleOptions(): MetricsModuleOptions {
     return {
-      adapters: [{
-        metric: 'counter',
-        adapter: new CounterPrometheus()
-      }],
+      adapters: [
+        {
+          metric: 'counter',
+          adapter: new CounterPrometheus(),
+        },
+      ],
     };
   }
 }

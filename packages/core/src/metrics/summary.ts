@@ -1,12 +1,12 @@
 import {Provider} from '@nestjs/common';
 
 import {SummaryAdapter} from '../adapters';
-import {AdapterKinds, EndTimerMethod, Summary, TimerOptions} from '../interfaces';
-import {ObservableMetricOptions, MetricOptions} from './counter';
+import {AdapterKinds, Summary} from '../interfaces';
+import {EndTimerMethod} from '../interfaces';
+import {MetricOptions, ObservableMetricOptions} from './counter';
 import {TimingMetricOptions} from './gauge';
 import {Metric} from './metric';
 
-// @Injectable()
 export class SummaryMetric extends Metric implements Summary {
   metricKind: 'summary' = 'summary';
 
@@ -36,11 +36,15 @@ export class SummaryMetric extends Metric implements Summary {
     });
   }
 
+  reset(options?: MetricOptions): void {
+    const {adapter, metric} = {...(options || {})} as MetricOptions;
+    this.summaryAdapters(adapter, metric).forEach((summary) => {
+      summary.reset();
+    });
+  }
+
   startTimer(options?: TimingMetricOptions): EndTimerMethod {
     const {adapter, metric, tags} = {
-      ...{
-        delta: 1,
-      },
       ...(options || {}),
     } as TimingMetricOptions;
 
@@ -48,16 +52,9 @@ export class SummaryMetric extends Metric implements Summary {
 
     const endTimers = adapters.map((summary) => summary.startTimer({tags}));
 
-    return (options?: TimerOptions) => {
+    return (options?: TimingMetricOptions) => {
       endTimers.forEach((end) => end(options));
     };
-  }
-
-  reset(options?: MetricOptions): void {
-    const {adapter, metric} = {...(options || {})}
-    this.summaryAdapters(adapter, metric).forEach((summary) => {
-      summary.reset();
-    });
   }
 
   protected summaryAdapters(adapter?: AdapterKinds, metric?: string): SummaryAdapter[] {

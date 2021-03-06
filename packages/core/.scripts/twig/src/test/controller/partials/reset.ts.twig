@@ -1,3 +1,5 @@
+// reset
+
 /** will reset all adapters */
 public resetAllAdapters(): void {
   this.{{metricType}}.reset();
@@ -17,8 +19,8 @@ public resetByMetricName(metric: string): void {
   });
 }
 
-// /** will increment using decorator */
-// @EventReset({adapter: '{{metricType}}'})
-// public async resetWithDecorator(): Promise<void> {
-//   await new Promise((resolve) => setTimeout(resolve, 500));
-// }
+/** will increment using decorator */
+@MetricReset({adapter: 'prometheus'}, {metricKind: '{{metricType}}'})
+public async resetWithDecorator(): Promise<void> {
+  await new Promise((resolve) => setTimeout(resolve, 500));
+}

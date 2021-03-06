@@ -1,0 +1,13 @@
+{{metricMethod}}(options?: TimingMetricOptions): EndTimerMethod {
+  const {adapter, metric, tags} = {
+    ...(options || {}),
+  } as TimingMetricOptions;
+
+  const adapters = this.{{metricType}}Adapters(adapter, metric);
+
+  const endTimers = adapters.map(({{metricType}}) => {{metricType}}.{{metricMethod}}({tags}));
+
+  return (options?: TimingMetricOptions) => {
+    endTimers.forEach((end) => end(options));
+  };
+}

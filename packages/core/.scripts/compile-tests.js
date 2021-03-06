@@ -22,96 +22,112 @@ const beautify = (html) => prettier.format(html, {
   bracketSpacing: false,
 })
 
-const renderCounterMetricController = async () => {
-  const counter = {
-    metricMethod: 'inc',
-    metricType: 'counter',
-  };
-  const incMethods = await twig('./.scripts/twig/src/test/controller/partials/countable.methods.ts.twig', counter);
-  const resetMethods = await twig('./.scripts/twig/src/test/controller/partials/reset.methods.ts.twig', counter);
-  const countableController = await twig('./.scripts/twig/src/test/controller/counter.ts.twig', {...counter, incMethods, resetMethods});
-  await fs.promises.writeFile('./src/test/controllers/counter.ts', beautify(countableController));
-}
-
-const renderMetricCounterTests = async () => {
-  const counter = {
+const renderCounterMetric = async () => {
+  const options = {
     metricMethod: 'inc',
     metricType: 'counter',
     controllerClass: 'CounterMetricController',
   };
-  const incTests = await twig('./.scripts/twig/test/partials/countable.tests.ts.twig', counter);
-  const resetTests = await twig('./.scripts/twig/test/partials/reset.tests.ts.twig', counter);
-  const countableTests = await twig('./.scripts/twig/test/metric-counter.test.ts.twig', {...counter, incTests, resetTests});
+
+  //
+  // metric
+  //
+  const metricIncMethod = await twig('./.scripts/twig/src/metrics/partials/countable.ts.twig', {...options});
+  const metricResetMethod = await twig('./.scripts/twig/src/metrics/partials/reset.ts.twig', {...options});
+  const counterMetric = await twig('./.scripts/twig/src/metrics/metric.ts.twig', {...options, methods: [metricIncMethod, metricResetMethod]});
+  await fs.promises.writeFile('./src/metrics/counter.ts', beautify(counterMetric));
+
+  //
+  // controller
+  //
+  const controllerIncMethod = await twig('./.scripts/twig/src/test/controller/partials/countable.ts.twig', options);
+  const controllerResetMethod = await twig('./.scripts/twig/src/test/controller/partials/reset.ts.twig', options);
+  const counterController = await twig('./.scripts/twig/src/test/controller/counter.ts.twig', {...options, methods: [controllerIncMethod, controllerResetMethod]});
+  await fs.promises.writeFile('./src/test/controllers/counter.ts', beautify(counterController));
+
+  //
+  // tests
+  //
+  const incTests = await twig('./.scripts/twig/test/partials/countable.tests.ts.twig', options);
+  const resetTests = await twig('./.scripts/twig/test/partials/reset.tests.ts.twig', {...options, metricMethod: 'reset'});
+  const countableTests = await twig('./.scripts/twig/test/metric-counter.test.ts.twig', {...options, incTests, resetTests});
   await fs.promises.writeFile('./test/metric-counter.test.ts', beautify(countableTests));
 }
 
-const renderGaugeMetricController = async () => {
-  const counter = {
-    metricMethod: 'inc',
-    metricType: 'gauge',
-  };
-  const decMethods = await twig('./.scripts/twig/src/test/controller/partials/countable.methods.ts.twig', {...counter, metricMethod: 'dec'});
-  const incMethods = await twig('./.scripts/twig/src/test/controller/partials/countable.methods.ts.twig', counter);
-  const setMethods = await twig('./.scripts/twig/src/test/controller/partials/observable.methods.ts.twig', {...counter, metricMethod: 'set'});
-  const resetMethods = await twig('./.scripts/twig/src/test/controller/partials/reset.methods.ts.twig', counter);
-  const timingMethods = await twig('./.scripts/twig/src/test/controller/partials/timing.methods.ts.twig', {...counter, metricMethod: 'startTimer'});
-  const gaugeController = await twig('./.scripts/twig/src/test/controller/gauge.ts.twig', {...counter, decMethods, incMethods, resetMethods, setMethods, timingMethods});
-  await fs.promises.writeFile('./src/test/controllers/gauge.ts', beautify(gaugeController));
-}
-
-const renderMetricGaugeTests = async () => {
-  const gauge = {
+const renderGaugeMetric = async () => {
+  const options = {
     metricMethod: 'inc',
     metricType: 'gauge',
     controllerClass: 'GaugeMetricController',
   };
-  const decTests = await twig('./.scripts/twig/test/partials/countable.tests.ts.twig', {...gauge, metricMethod: 'dec'});
-  const incTests = await twig('./.scripts/twig/test/partials/countable.tests.ts.twig', gauge);
-  const resetTests = await twig('./.scripts/twig/test/partials/reset.tests.ts.twig', gauge);
-  const setTests = await twig('./.scripts/twig/test/partials/observable.tests.ts.twig', {...gauge, metricMethod: 'set'});
-  const timingTests = await twig('./.scripts/twig/test/partials/timing.tests.ts.twig', {...gauge, metricMethod: 'startTimer'});
-  const gaugeTests = await twig('./.scripts/twig/test/metric-gauge.test.ts.twig', {...gauge, incTests, decTests, resetTests, setTests, timingTests});
+
+  // metric
+  const metricDecMethods = await twig('./.scripts/twig/src/metrics/partials/countable.ts.twig', {...options, metricMethod: 'dec'});
+  const metricIncMethods = await twig('./.scripts/twig/src/metrics/partials/countable.ts.twig', options);
+  const metricResetMethods = await twig('./.scripts/twig/src/metrics/partials/reset.ts.twig', options);
+  const metricSetMethods = await twig('./.scripts/twig/src/metrics/partials/observable.ts.twig', {...options, metricMethod: 'set'});
+  const metricTimingMethods = await twig('./.scripts/twig/src/metrics/partials/timing.ts.twig', {...options, metricMethod: 'startTimer'});
+  const gaugeController = await twig('./.scripts/twig/src/metrics/metric.ts.twig', {...options, methods: [metricDecMethods, metricIncMethods, metricResetMethods, metricSetMethods, metricTimingMethods]});
+  await fs.promises.writeFile('./src/metrics/gauge.ts', beautify(gaugeController));
+
+  // controller
+  const decMethods = await twig('./.scripts/twig/src/test/controller/partials/countable.ts.twig', {...options, metricMethod: 'dec'});
+  const incMethods = await twig('./.scripts/twig/src/test/controller/partials/countable.ts.twig', options);
+  const resetMethods = await twig('./.scripts/twig/src/test/controller/partials/reset.ts.twig', options);
+  const setMethods = await twig('./.scripts/twig/src/test/controller/partials/observable.ts.twig', {...options, metricMethod: 'set'});
+  const timingMethods = await twig('./.scripts/twig/src/test/controller/partials/timing.ts.twig', {...options, metricMethod: 'startTimer'});
+  const gaugeMetric = await twig('./.scripts/twig/src/test/controller/gauge.ts.twig', {...options, methods: [decMethods, incMethods, resetMethods, setMethods, timingMethods]});
+  await fs.promises.writeFile('./src/test/controllers/gauge.ts', beautify(gaugeMetric));
+
+  // tests
+  const decTests = await twig('./.scripts/twig/test/partials/countable.tests.ts.twig', {...options, metricMethod: 'dec'});
+  const incTests = await twig('./.scripts/twig/test/partials/countable.tests.ts.twig', options);
+  const resetTests = await twig('./.scripts/twig/test/partials/reset.tests.ts.twig', {...options, metricMethod: 'reset'});
+  const setTests = await twig('./.scripts/twig/test/partials/observable.tests.ts.twig', {...options, metricMethod: 'set'});
+  const timingTests = await twig('./.scripts/twig/test/partials/timing.tests.ts.twig', {...options, metricMethod: 'startTimer'});
+  const gaugeTests = await twig('./.scripts/twig/test/metric-gauge.test.ts.twig', {...options, incTests, decTests, resetTests, setTests, timingTests});
   await fs.promises.writeFile('./test/metric-gauge.test.ts', beautify(gaugeTests));
 }
 
-const renderObservableMetricController = async (metricType = 'histogram') => {
-  const counter = {
-    metricMethod: 'inc',
-    metricType,
-  };
-  const observeMethods = await twig('./.scripts/twig/src/test/controller/partials/observable.methods.ts.twig', {...counter, metricMethod: 'observe'});
-  const resetMethods = await twig('./.scripts/twig/src/test/controller/partials/reset.methods.ts.twig', counter);
-  const timingMethods = await twig('./.scripts/twig/src/test/controller/partials/timing.methods.ts.twig', {...counter, metricMethod: 'startTimer'});
-  const observableController = await twig('./.scripts/twig/src/test/controller/observable.ts.twig', {...counter, observeMethods, resetMethods, timingMethods});
-  await fs.promises.writeFile(`./src/test/controllers/${metricType}.ts`, beautify(observableController));
-}
 
-const renderMetricObservableTests = async (metricType = 'histogram') => {
-  const histogram = {
-    metricMethod: 'observe',
+const renderObservableMetric = async (metricType = 'histogram') => {
+  const options = {
+    metricMethod: 'inc',
     metricType,
     controllerClass: `${metricType.slice(0, 1).toUpperCase()}${metricType.slice(1)}MetricController`,
   };
-  const observeTests = await twig('./.scripts/twig/test/partials/observable.tests.ts.twig', {...histogram});
-  const resetTests = await twig('./.scripts/twig/test/partials/reset.tests.ts.twig', histogram);
-  const timingTests = await twig('./.scripts/twig/test/partials/timing.tests.ts.twig', {...histogram, metricMethod: 'startTimer'});
-  const observableTests = await twig('./.scripts/twig/test/metric-observable.test.ts.twig', {...histogram, observeTests, resetTests, timingTests});
+
+  // metric
+  const metricObserveMethods = await twig('./.scripts/twig/src/metrics/partials/observable.ts.twig', {...options, metricMethod: 'observe'});
+  const metricResetMethods = await twig('./.scripts/twig/src/metrics/partials/reset.ts.twig', options);
+  const metricTimingMethods = await twig('./.scripts/twig/src/metrics/partials/timing.ts.twig', {...options, metricMethod: 'startTimer'});
+  const observeController = await twig('./.scripts/twig/src/metrics/metric.ts.twig', {...options, methods: [metricObserveMethods, metricResetMethods, metricTimingMethods]});
+  await fs.promises.writeFile(`./src/metrics/${metricType}.ts`, beautify(observeController));
+
+  // controller
+  const observeMethods = await twig('./.scripts/twig/src/test/controller/partials/observable.ts.twig', {...options, metricMethod: 'observe'});
+  const resetMethods = await twig('./.scripts/twig/src/test/controller/partials/reset.ts.twig', options);
+  const timingMethods = await twig('./.scripts/twig/src/test/controller/partials/timing.ts.twig', {...options, metricMethod: 'startTimer'});
+  const observableController = await twig('./.scripts/twig/src/test/controller/observable.ts.twig', {...options, methods: [observeMethods, resetMethods, timingMethods]});
+  await fs.promises.writeFile(`./src/test/controllers/${metricType}.ts`, beautify(observableController));
+
+  // tests
+  const observeTests = await twig('./.scripts/twig/test/partials/observable.tests.ts.twig', {...options, metricMethod: 'observe'});
+  const resetTests = await twig('./.scripts/twig/test/partials/reset.tests.ts.twig', {...options, metricMethod: 'reset'});
+  const timingTests = await twig('./.scripts/twig/test/partials/timing.tests.ts.twig', {...options, metricMethod: 'startTimer'});
+  const observableTests = await twig('./.scripts/twig/test/metric-observable.test.ts.twig', {...options, observeTests, resetTests, timingTests});
   await fs.promises.writeFile(`./test/metric-${metricType}.test.ts`, beautify(observableTests));
 }
 
 const main = async () => {
   try {
-    await renderCounterMetricController();
-    await renderMetricCounterTests();
+    await renderCounterMetric();
 
-    await renderGaugeMetricController();
-    await renderMetricGaugeTests();
+    await renderGaugeMetric();
 
-    await renderObservableMetricController();
-    await renderMetricObservableTests();
+    await renderObservableMetric();
 
-    await renderObservableMetricController('summary');
-    await renderMetricObservableTests('summary');
+    await renderObservableMetric('summary');
   } catch (e) {
     console.error(e);
     process.exit(1);

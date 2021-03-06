@@ -1,5 +1,13 @@
 import {Errors} from '../errors';
-import {Adapter, AdapterKinds, CountableOptions, EndTimerMethod, Gauge, ObservableOptions, TimerOptions} from '../interfaces';
+import {
+  Adapter,
+  AdapterKinds,
+  CountableOptions,
+  EndTimerMethod,
+  Gauge,
+  ObservableOptions,
+  TimerOptions,
+} from '../interfaces';
 
 export class GaugeAdapter implements Gauge, Adapter {
   adapterKind: AdapterKinds;

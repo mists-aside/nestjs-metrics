@@ -32,8 +32,12 @@ public {{metricMethod}}WithDeltaAndTags(): void {
   });
 }
 
-// /** will increment using decorator */
-// @EventIncrement()
-// public async {{metricMethod}}WithDecorator(): Promise<void> {
-//   await new Promise((resolve) => setTimeout(resolve, 500));
-// }
+/** will increment using decorator */
+{% if metricMethod == 'dec' %}
+@Metric{{metricMethod|capitalize}}({adapter: 'prometheus'})
+{% else %}
+@Metric{{metricMethod|capitalize}}({adapter: 'prometheus'}, {metricKind: '{{metricType}}'})
+{% endif %}
+public async {{metricMethod}}WithDecorator(): Promise<void> {
+  await new Promise((resolve) => setTimeout(resolve, 500));
+}

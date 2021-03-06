@@ -1,5 +1,5 @@
 import {Errors} from '../errors';
-import {Adapter, AdapterKinds, ObservableOptions, EndTimerMethod, Histogram, TimerOptions} from '../interfaces';
+import {Adapter, AdapterKinds, EndTimerMethod, Histogram, ObservableOptions, TimerOptions} from '../interfaces';
 
 export class HistogramAdapter implements Histogram, Adapter {
   adapterKind: AdapterKinds;

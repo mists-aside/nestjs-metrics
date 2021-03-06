@@ -1,0 +1,9 @@
+{{metricMethod}}(options: ObservableMetricOptions): void {
+  const {adapter, delta, metric, tags} = options;
+
+  const adapters = this.{{metricType}}Adapters(adapter, metric);
+
+  adapters.forEach(({{metricType}}) => {
+    {{metricType}}.{{metricMethod}}({delta, tags});
+  });
+}

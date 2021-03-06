@@ -1,0 +1,14 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+import {Controller} from '@nestjs/common';
+
+import {MetricInc, MetricReset} from '../../decorators';
+import {AdapterKinds} from '../../interfaces';
+import {{'{'}}{{metricType|capitalize}}Metric} from '../../metrics';
+
+@Controller()
+export class {{metricType|capitalize}}MetricController {
+  constructor(protected {{metricType}}: {{metricType|capitalize}}Metric) {}
+
+  {{methods|join('\n\n')}}
+}
+/* eslint-enable @typescript-eslint/no-empty-function */
