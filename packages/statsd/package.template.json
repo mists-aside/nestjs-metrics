@@ -1,0 +1,11 @@
+{
+  "name": "@mists/nestjs-metrics-statsd",
+  "version": "0.0.0",
+  "description": "NestJs Metrics Adapter - StatsD",
+  "dependencies": {
+    "@mists/nestjs-metrics": "^0.0.2"
+  },
+  "peerDependencies": {
+    "statsd-client": "^0.4.5"
+  }
+}

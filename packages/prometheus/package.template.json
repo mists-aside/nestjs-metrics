@@ -1,0 +1,11 @@
+{
+  "name": "@mists/nestjs-metrics-prometheus",
+  "version": "0.0.0",
+  "description": "NestJs Metrics Adapter - Prometheus",
+  "dependencies": {
+    "@mists/nestjs-metrics": "^0.0.2"
+  },
+  "peerDependencies": {
+    "prom-client": "^12.0.0"
+  }
+}
