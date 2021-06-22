@@ -1,104 +1,140 @@
 @Library('my-jenkins-shared') _
 
+def modules = [:]
 pipeline {
   agent {
     label 'master' // test-1
   }
 
   environment {
-    NVM_DIR = "${HOME}/.nvm"
-    NVM_LOAD = ". ~/.bashrc > /dev/null; set -ex; nvm use 12;"
+    // NODE_VERSIONS = "10 12 13 14 15 16"
+    // error dependency-cruiser@10.0.1: The engine "node" is incompatible with this module. Expected version "^12.20||^14||>=16".
+    // error @babel/eslint-parser@7.14.2: The engine "node" is incompatible with this module. Expected version "^10.13.0 || ^12.13.0 || >=14.0.0".0
+    NODE_VERSIONS = "12 14 16"
+    NODE_VERSION_DEFAULT = "14"
+    RUN_SONAR_SCANNER = 'no'
+  }
+
+  parameters {
+    string(
+      defaultValue: '',
+      description: 'Node.js version to run tests for',
+      name: 'NODE_VERSION',
+      trim: true
+    )
   }
 
   stages {
-    stage('nvm info') {
-      steps {
-        echo "NVM lies in ${NVM_DIR}"
-
-        sh """
-          set -ex;
-          . ~/.bashrc;
-
-          node --version;
-          npm --version;
-          nvm --version;
-          """
-      }
-    }
-
-    stage('init') {
-      steps {
-        script {
-          sh """
-            ${NVM_LOAD}
-            npm install;
-            npm run bootstrap;
-          """
-        }
-      }
-    }
-
-    stage('prettier') {
-      steps {
-        script {
-          sh """
-            ${NVM_LOAD}
-            npm run prettier:write;
-          """
-        }
-      }
-    }
-
-    stage('test') {
-      steps {
-        script {
-          sh """
-            ${NVM_LOAD}
-            # npm run lint:write;
-            npm run jscpd;
-            # npm run depcruise;
-            npm run test;
-          """
-        }
-      }
-    }
-
-    stage('pre-release') {
+    stage('Run by Node.js Version') {
       when {
-        anyOf {
-          branch 'master';
-          branch 'develop';
-        }
+        expression { params.NODE_VERSION != '' }
       }
-      steps {
-        script {
-          env.COMMIT_MESSAGE = GitLastCommitMessage()
+      stages {
+        stage('Info') {
+          steps {
+            script {
+              nvm.info()
+            }
+          }
         }
-        sh "echo \"Commit Message: ${env.COMMIT_MESSAGE}\""
+        stage('Init') {
+          steps {
+            script {
+              // nvm.runSh 'npx yarn i', params.NODE_VERSION
+              npm.install([
+                cacheKey: "node_v${env.NODE_VERSION}",
+                manager:'npx yarn',
+                useNvm: true,
+                nodeVersion: params.NODE_VERSION
+              ])
+            }
+          }
+        }
+        stage("Code Analysis") {
+          steps {
+            script {
+              nvm.runSh "npx yarn run ca", params.NODE_VERSION
+            }
+          }
+        }
+        stage("Code Sonar") {
+          when {
+            expression {
+              return env.RUN_SONAR_SCANNER &&
+                env.RUN_SONAR_SCANNER.toLowerCase() ==~ /(1|y(es)?)/
+            }
+          }
+          steps {
+            script {
+              if (params.NODE_VERSION == env.NODE_VERSION_DEFAULT) {
+                withCredentials([
+                  string(credentialsId: 'sonar_server_host', variable: 'SONAR_HOST'),
+                  string(credentialsId: 'sonar_server_login', variable: 'SONAR_LOGIN')
+                ]) {
+                  nvm.runSh "npx yarn run sonar -- -Dsonar.host.url=${SONAR_HOST} -Dsonar.login=${SONAR_LOGIN}", params.NODE_VERSION
+                }
+              } else {
+                echo "skip"
+              }
+            }
+          }
+        }
+        stage("Code UnitTest") {
+          steps {
+            script {
+              nvm.runSh "npx yarn run test", params.NODE_VERSION
+            }
+          }
+        }
+        stage("Code Docs") {
+          steps {
+            script {
+              if (params.NODE_VERSION == env.NODE_VERSION_DEFAULT) {
+                nvm.runSh "npx yarn run docs", params.NODE_VERSION
+              } else {
+                echo "skipped"
+              }
+            }
+          }
+        }
+        stage("Code Build") {
+          steps {
+            script {
+              nvm.runSh "npx yarn run build", params.NODE_VERSION
+            }
+          }
+        }
       }
     }
-
-    stage('release') {
+    stage("Run All Versions") {
       when {
-        branch 'master';
+        expression { params.NODE_VERSION == '' }
       }
       steps {
         script {
-          npm.release([
-            gitCredentialsId: '83811fdb-744b-45ab-acdb-54ab3baf50b5',
-            npmTokenCredentialId: '52e756f6-5625-41fb-bde9-ead983f84629',
-            preCommand: env.NVM_LOAD
-          ])
+          parallel env.NODE_VERSIONS.split(' ').collectEntries {
+            ["node-${it}": {
+              node {
+                stage("Node.js ${it}.x") {
+                  build job: "${env.JOB_NAME}", parameters: [
+                    string(name: 'NODE_VERSION', value: "${it}"),
+                  ], wait: false
+                }
+              }
+            }]
+          }
         }
       }
     }
   }
   post {
-    always {
-      cleanWs()
-    }
     // https://www.jenkins.io/doc/pipeline/tour/post/
     // https://plugins.jenkins.io/telegram-notifications/
+    always {
+      script {
+        cleanWs()
+      }
+    }
     failure {
       script {
         telegram.sendStatusFail('jk_pipeline_report_to_telegram_token','jk_pipeline_report_to_telegram_chatId')

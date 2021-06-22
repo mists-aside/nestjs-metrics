@@ -46,9 +46,12 @@ typings/
 
 # Optional npm cache directory
 .npm
+package-lock.json
+yarn.lock
 
 # Optional eslint cache
 .eslintcache
+.eslint-output.json
 
 # Optional REPL history
 .node_repl_history
@@ -76,3 +79,10 @@ typings/
 
 # documentation
 docs
+docs.json
+
+
+# dependency-check
+.scripts/dependency-check
+.scripts/dependency-check.zip
+dependency-check-report.html

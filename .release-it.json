@@ -1,12 +1,14 @@
 {
   "git": {
+    "commitArgs": "--no-verify",
     "commitMessage": "chore: release v${version}",
-    "requireBranch": "master"
+    "requireBranch": "master",
+    "requireUpstream": false
   },
   "plugins": {
     "@release-it/conventional-changelog": {
-      "preset": "angular",
-      "infile": "CHANGELOG.md"
+      "infile": "CHANGELOG.md",
+      "preset": "angular"
     }
   }
 }
