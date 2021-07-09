@@ -1,17 +1,23 @@
-import {Errors} from '../errors';
-import {Adapter, AdapterKinds, CountableOptions, Counter} from '../interfaces';
+// import {Injectable, Logger, Provider} from '@nestjs/common';
 
-export class CounterAdapter implements Counter, Adapter {
-  adapterKind: AdapterKinds;
+// import {MetricAdapter, MetricType} from '../enum';
+// import {Errors} from '../errors';
+// import {CountableOptions, Counter, LabelOptions} from '../interfaces';
 
-  readonly metricKind: 'counter' = 'counter';
+// export interface IncMethod {
+//   (labels: string[], value?: number): void;
+// }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  inc(options?: CountableOptions): void {
-    throw new Error(Errors.MethodNotImplemented('inc'));
-  }
+// export class CounterAdapter implements Counter {
+//   adapter: MetricAdapter = MetricAdapter.Mock;
+//   type: MetricType.Counter = MetricType.Counter;
 
-  reset(): void {
-    throw new Error(Errors.MethodNotImplemented('reset'));
-  }
-}
+//   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+//   inc(options: CountableOptions): void {
+//     throw new Error(Errors.MethodNotImplemented('inc'));
+//   }
+
+//   reset(options: LabelOptions): void {
+//     throw new Error(Errors.MethodNotImplemented('reset'));
+//   }
+// }

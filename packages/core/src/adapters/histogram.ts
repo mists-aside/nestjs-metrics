@@ -1,22 +1,22 @@
-import {Errors} from '../errors';
-import {Adapter, AdapterKinds, EndTimerMethod, Histogram, ObservableOptions, TimerOptions} from '../interfaces';
+// import {Errors} from '../errors';
+// import {Adapter, AdapterKinds, EndTimerMethod, Histogram, ObservableOptions, TimerOptions} from '../interfaces';
 
-export class HistogramAdapter implements Histogram, Adapter {
-  adapterKind: AdapterKinds;
+// export class HistogramAdapter implements Histogram, Adapter {
+//   adapterKind: AdapterKinds;
 
-  readonly metricKind: 'histogram' = 'histogram';
+//   readonly metricKind: 'histogram' = 'histogram';
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  observe(options: ObservableOptions): void {
-    throw new Error(Errors.MethodNotImplemented('set'));
-  }
+//   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+//   observe(options: ObservableOptions): void {
+//     throw new Error(Errors.MethodNotImplemented('set'));
+//   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  startTimer(options?: TimerOptions): EndTimerMethod {
-    throw new Error(Errors.MethodNotImplemented('startTimer'));
-  }
+//   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+//   startTimer(options?: TimerOptions): EndTimerMethod {
+//     throw new Error(Errors.MethodNotImplemented('startTimer'));
+//   }
 
-  reset(): void {
-    throw new Error(Errors.MethodNotImplemented('reset'));
-  }
-}
+//   reset(): void {
+//     throw new Error(Errors.MethodNotImplemented('reset'));
+//   }
+// }

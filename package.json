@@ -10,7 +10,6 @@
     "prettier-plugin-import-sort": "^0.0.7"
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap",
     "build": "lerna run build --scope @mists/nestjs-metrics*",
     "ca": "lerna run ca --scope @mists/nestjs-metrics*",
     "clean": "lerna run clean --scope @mists/nestjs-metrics*",

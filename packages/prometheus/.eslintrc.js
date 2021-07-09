@@ -46,7 +46,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
     'max-len': ['error', 120],
-    'max-lines-per-function': ['error', 20],
+    'max-lines-per-function': ['warn', 40],
     'max-params': ['error', 3],
     'no-else-return': 1,
     'sonar/no-invalid-await': 0,

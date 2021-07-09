@@ -1,9 +1,4 @@
-import {Adapter} from './interfaces';
-
-export interface AdapterItem {
-  metric: string;
-  adapter: Adapter;
-}
+import {Adapter, AdapterFilter} from './adapter';
 
 /**
  * @ignore
@@ -18,25 +13,26 @@ export class Config {
     return Config.instance;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  private constructor() {}
+  private cAdapters: Adapter[] = [];
 
-  private cAdapters: AdapterItem[] = [];
-
-  get adapters(): AdapterItem[] {
-    return this.cAdapters;
+  get adapters(): Adapter[] {
+    return this.getAdapters();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  addAdapter(name: string, adapter: Adapter): void {
-    this.cAdapters[name] = adapter;
+  addAdapter(adapter: Adapter): void {
+    this.cAdapters.push(adapter);
   }
 
-  addAdapters(adapters: AdapterItem[]): void {
+  addAdapters(adapters: Adapter[]): void {
     this.cAdapters = [...this.cAdapters, ...adapters];
   }
 
   clear(): void {
     this.cAdapters = [];
+  }
+
+  getAdapters(filter?: AdapterFilter): Adapter[] {
+    filter = filter || (() => true);
+    return this.cAdapters.filter(filter);
   }
 }
