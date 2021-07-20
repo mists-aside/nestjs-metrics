@@ -1,9 +1,10 @@
-import {Adapter, AdapterType} from '../adapter';
-import {MetricType} from '../enum';
+import {Adapter, Counter} from '../interfaces';
+import {MockCounter} from './counter';
 
-export class MockAdapter extends Adapter {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getMetric(metricType: MetricType): unknown {
-    return null;
+export class MockAdapter implements Adapter {
+  constructor(public readonly adapterLabel: string) {}
+
+  getCounter(): Counter {
+    return MockCounter.getInstance();
   }
 }

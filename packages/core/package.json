@@ -111,7 +111,8 @@
   ],
   "dependencies": {
     "@nestjs/common": "^7.6.13",
-    "@nestjs/core": "^7.6.13"
+    "@nestjs/core": "^7.6.13",
+    "reflect-metadata": "^0.1.13"
   },
   "peerDependencies": {
     "@types/statsd-client": "^0.4.1",

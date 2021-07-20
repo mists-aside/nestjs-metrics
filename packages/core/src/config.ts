@@ -1,4 +1,4 @@
-import {Adapter, AdapterFilter} from './adapter';
+import {Adapter, AdapterFilter} from './interfaces';
 
 /**
  * @ignore
