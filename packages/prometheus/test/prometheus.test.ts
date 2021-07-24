@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 /* eslint-disable mocha/no-mocha-arrows */
 import * as chai from 'chai';
 import {describe, it} from 'mocha';

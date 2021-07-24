@@ -45,4 +45,8 @@ describe('Config', function () {
 
     expect(config.getAdapters((adapter: Adapter) => adapter.adapterLabel === 'mock1').length).to.equal(1);
   });
+
+  it('generic', () => {
+    expect(true).to.equal(true);
+  });
 });

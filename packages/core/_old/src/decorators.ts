@@ -178,7 +178,8 @@
 // // export const MetricTiming =
 // //   (
 // //     options?: MetricOptions,
-// //     metric: MetricKind<GaugeMetric> | MetricKind<HistogramMetric> | MetricKind<SummaryMetric> = {metricKind: 'gauge'},
+// //     metric: MetricKind<GaugeMetric> | MetricKind<HistogramMetric>
+// | MetricKind<SummaryMetric> = {metricKind: 'gauge'},
 // //   ): MethodDecorator =>
 // //   (
 // //     // eslint-disable-next-line @typescript-eslint/no-explicit-any

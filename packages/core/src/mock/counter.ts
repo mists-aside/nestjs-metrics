@@ -1,19 +1,25 @@
 import {Logger} from '@nestjs/common';
 
 import {CountableOptions, Counter, LabelOptions} from '../interfaces';
+import {mlm} from './literals';
 
 export class MockCounter implements Counter {
-  private logger = new Logger('MockCounter');
+  public logger = new Logger('MockCounter');
+
+  private static instance: MockCounter;
 
   static getInstance(): MockCounter {
-    return new MockCounter();
+    if (!MockCounter.instance) {
+      MockCounter.instance = new MockCounter();
+    }
+    return MockCounter.instance;
   }
 
   inc(options: CountableOptions): void {
-    this.logger.debug(`Counter.inc(${JSON.stringify(options)})`);
+    this.logger.debug(mlm`Counter.inc${options}`);
   }
 
   reset(options: LabelOptions): void {
-    this.logger.debug(`Counter.reset(${JSON.stringify(options)})`);
+    this.logger.debug(mlm`Counter.reset${options}`);
   }
 }
