@@ -1,8 +1,0 @@
-
-
-reset(options?: MetricOptions): void {
-  const {adapter, metric} = {...(options || {})} as MetricOptions;
-  this.{{metricType}}Adapters(adapter, metric).forEach(({{metricType}}) => {
-    {{metricType}}.reset();
-  });
-}

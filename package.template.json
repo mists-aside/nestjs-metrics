@@ -10,7 +10,7 @@
     "ca:quality": "npm run jscpd && npm run depcruise",
     "ca:security": "npm run license-check && (npm audit || yarn audit --groups=dependencies)",
     "ca": "npm run ca:lint && npm run ca:quality && npm run ca:security",
-    "clean": "rimraf .jscpd coverage dist docs",
+    "clean": "rimraf .jscpd .nyc_output coverage dist docs",
     "depcruise": "depcruise --config .dependency-cruiser.js src -x src/*.d.ts",
     "docs:watch": "nodemon --exec 'npm run doc'",
     "docs": "npx typedoc --out docs --json docs.json --readme none --theme minimal src",

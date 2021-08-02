@@ -5,6 +5,6 @@ export class MockAdapter implements Adapter {
   constructor(public readonly adapterLabel: string) {}
 
   getCounter(): Counter {
-    return MockCounter.getInstance();
+    return MockCounter.getInstance(this.adapterLabel);
   }
 }

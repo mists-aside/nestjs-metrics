@@ -6,13 +6,13 @@ import {mlm} from './literals';
 export class MockCounter implements Counter {
   public logger = new Logger('MockCounter');
 
-  private static instance: MockCounter;
+  private static instance: Record<string, MockCounter> = {};
 
-  static getInstance(): MockCounter {
-    if (!MockCounter.instance) {
-      MockCounter.instance = new MockCounter();
+  static getInstance(adapterLabel = ''): MockCounter {
+    if (!MockCounter.instance[adapterLabel]) {
+      MockCounter.instance[adapterLabel] = new MockCounter();
     }
-    return MockCounter.instance;
+    return MockCounter.instance[adapterLabel];
   }
 
   inc(options: CountableOptions): void {
