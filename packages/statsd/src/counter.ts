@@ -1,28 +1,24 @@
-// import {AdapterKinds, CounterAdapter, CounterOptions} from '@mists/nestjs-metrics';
-// import * as StatsdClient from 'statsd-client';
+import {CountableOptions, Counter, LabelOptions, Tags} from '@mists/nestjs-metrics';
 
-// export class StatsdCounterAdapter extends CounterAdapter {
-//   readonly adapterKind: AdapterKinds = 'statsd';
+import * as StatsdClient from 'statsd-client';
 
-//   readonly metricKind: 'counter' = 'counter';
+export class StatsdCounter implements Counter {
+  private static instance: Record<string, StatsdCounter> = {};
 
-//   constructor(protected label: string, protected statsd: StatsdClient) {
-//     super();
-//   }
+  constructor(public readonly client: StatsdClient) {}
 
-//   /**
-//    * @see Counter.inc()
-//    * @param options
-//    */
-//   inc(options?: CounterOptions): void {
-//     const {delta, tags} = {
-//       ...{
-//         delta: 1,
-//         tags: {},
-//       },
-//       ...(options || {}),
-//     };
+  static getInstance(client: StatsdClient, adapterLabel = ''): StatsdCounter {
+    if (!StatsdCounter.instance[adapterLabel]) {
+      StatsdCounter.instance[adapterLabel] = new StatsdCounter(client);
+    }
+    return StatsdCounter.instance[adapterLabel];
+  }
 
-//     this.statsd.increment(this.label, delta, tags);
-//   }
-// }
+  inc(options: CountableOptions): void {
+    options.labels.forEach((label: string) => this.client.inc(label, options.delta, options.tags));
+  }
+
+  reset(options: LabelOptions): void {
+    options.labels.forEach((label: string) => this.client.reset());
+  }
+}
