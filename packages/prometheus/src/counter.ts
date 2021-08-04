@@ -1,35 +1,51 @@
-// import {AdapterKinds, CounterAdapter, CounterOptions} from '@mists/nestjs-metrics';
-// import * as prometheus from 'prom-client';
+import {CountableOptions, Counter, LabelOptions, Tags} from '@mists/nestjs-metrics';
+import {Counter as PromCounter} from 'prom-client';
 
-// export class PrometheusCounterAdapter extends CounterAdapter {
-//   readonly adapterKind: AdapterKinds = 'prometheus';
+export class PrometheusCounter implements Counter {
+  private static instance: Record<string, PrometheusCounter> = {};
 
-//   readonly metricKind: 'counter' = 'counter';
+  private counters: Record<string, [string[], PromCounter<string>]> = {};
 
-//   protected promCounter: prometheus.Counter<string>;
+  static getInstance(adapterLabel = ''): PrometheusCounter {
+    if (!PrometheusCounter.instance[adapterLabel]) {
+      PrometheusCounter.instance[adapterLabel] = new PrometheusCounter();
+    }
+    return PrometheusCounter.instance[adapterLabel];
+  }
 
-//   constructor(configuration: prometheus.CounterConfiguration<string>) {
-//     super();
-//     this.promCounter = new prometheus.Counter<string>(configuration);
-//   }
+  private getPromCounter(label: string, tags: Tags = {}): PromCounter<string> {
+    const tagKeys = Object.keys(tags);
+    if (!this.counters[label]) {
+      this.counters[label] = [
+        tagKeys,
+        new PromCounter<string>({
+          name: label,
+          help: label,
+          labelNames: tagKeys,
+        }),
+      ];
+    }
+    const tagKeysInt = this.counters[label][0].filter((key: string) => tagKeys.includes(key));
+    if (tagKeysInt.length != tagKeys.length || tagKeysInt.length != this.counters[label][0].length) {
+      this.counters[label] = [
+        [...new Set([...tagKeys, ...this.counters[label][0]])],
+        new PromCounter<string>({
+          name: label,
+          help: label,
+          labelNames: tagKeys,
+        }),
+      ];
+    }
+    return this.counters[label][1];
+  }
 
-//   /**
-//    * @see Counter.inc()
-//    * @param options
-//    */
-//   inc(options?: CounterOptions): void {
-//     const {delta, tags} = {
-//       ...{
-//         delta: 1,
-//         tags: {},
-//       },
-//       ...(options || {}),
-//     };
+  inc(options: CountableOptions): void {
+    options.labels.forEach((label: string) =>
+      this.getPromCounter(label, options.tags).labels(options.tags).inc(options.delta),
+    );
+  }
 
-//     this.promCounter.inc(tags, delta);
-//   }
-
-//   getPromCounter(): prometheus.Counter<string> {
-//     return this.promCounter;
-//   }
-// }
+  reset(options: LabelOptions): void {
+    options.labels.forEach((label: string) => this.getPromCounter(label).reset());
+  }
+}

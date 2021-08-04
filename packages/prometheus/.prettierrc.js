@@ -13,7 +13,7 @@ module.exports = {
     {
       files: '*.json',
       options: {
-        parser: 'json5',
+        parser: 'json',
         singleQuote: false,
       },
     },

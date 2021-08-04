@@ -2,10 +2,10 @@
   "name": "@mists/nestjs-metrics-statsd",
   "version": "0.0.0",
   "description": "NestJs Metrics Adapter - StatsD",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/commonjs/index.js",
+  "types": "dist/commonjs/index.d.ts",
   "scripts": {
-    "build": "tsc -b",
+    "build": "tsc",
     "ca:lint": "npm run prettier:write && npm run lint:write",
     "ca:quality": "npm run jscpd && npm run depcruise",
     "ca:security": "npm run license-check && (npm audit || yarn audit --groups=dependencies)",
