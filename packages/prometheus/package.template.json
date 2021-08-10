@@ -3,9 +3,7 @@
   "version": "0.0.0",
   "description": "NestJs Metrics Adapter - Prometheus",
   "dependencies": {
-    "@mists/nestjs-metrics": "^0.0.2"
-  },
-  "peerDependencies": {
-    "prom-client": "^12.0.0"
+    "@mists/nestjs-metrics": "^0.0.2",
+    "prom-client": "^13.1.0"
   }
 }

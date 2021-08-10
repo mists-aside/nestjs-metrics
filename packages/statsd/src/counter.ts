@@ -1,24 +1,26 @@
 import {CountableOptions, Counter, LabelOptions, Tags} from '@mists/nestjs-metrics';
-
-import * as StatsdClient from 'statsd-client';
+import StatsdClient from 'statsd-client';
 
 export class StatsdCounter implements Counter {
-  private static instance: Record<string, StatsdCounter> = {};
+  private static instances: Record<string, StatsdCounter> = {};
 
   constructor(public readonly client: StatsdClient) {}
 
-  static getInstance(client: StatsdClient, adapterLabel = ''): StatsdCounter {
-    if (!StatsdCounter.instance[adapterLabel]) {
-      StatsdCounter.instance[adapterLabel] = new StatsdCounter(client);
+  static getInstance(client: StatsdClient, adapterLabel = 'default'): StatsdCounter {
+    if (!StatsdCounter.instances[adapterLabel]) {
+      StatsdCounter.instances[adapterLabel] = new StatsdCounter(client);
     }
-    return StatsdCounter.instance[adapterLabel];
+    return StatsdCounter.instances[adapterLabel];
   }
 
   inc(options: CountableOptions): void {
-    options.labels.forEach((label: string) => this.client.inc(label, options.delta, options.tags));
+    const {labels, delta, tags} = options;
+    labels.forEach((label: string) => this.client.increment(label, delta ? delta : 1, tags));
   }
 
-  reset(options: LabelOptions): void {
-    options.labels.forEach((label: string) => this.client.reset());
-  }
+  /**
+   * StatsdClient has no reset method
+   */
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
+  reset(options: LabelOptions): void {}
 }

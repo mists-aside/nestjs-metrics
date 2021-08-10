@@ -1,6 +1,6 @@
 {
   "name": "@mists/nestjs-metrics",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A NestJs plugin for metrics",
   "dependencies": {
     "@nestjs/common": "^7.6.13",

@@ -1,1 +1,2 @@
-// export * from './counter';
+export * from './adapter';
+export * from './counter';

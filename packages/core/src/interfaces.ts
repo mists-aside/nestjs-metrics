@@ -18,14 +18,18 @@ export interface Adapter {
 /***************************************************************************
  * Metric Callable Options
  */
-export interface LabelOptions {
+export interface MetricOptions {
   // the labels in label options refer to the metrics labels
   labels: string[];
+  /**
+   * Additional, particular options for each custom metrics
+   * @TODO: TBD...
+   */
+  options?: Record<string, unknown>;
 }
 
-export interface ObservableOptions extends LabelOptions {
+export interface ObservableOptions extends MetricOptions {
   delta: number;
-  // options?: Record<>;
   tags?: Tags;
 }
 
@@ -64,5 +68,5 @@ export interface Counter {
   /**
    * Reset counter values
    */
-  reset(options: LabelOptions): void;
+  reset(options: MetricOptions): void;
 }

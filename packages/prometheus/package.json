@@ -24,7 +24,7 @@
     "prebuild": "npm run clean",
     "predocs": "rimraf docs",
     "prerelease": "npm run build",
-    "pretest": "npm run clean",
+    "pretest": "npm run build",
     "prettier:check": "npm run prettier -- --list-different",
     "prettier:write": "npm run prettier -- --write",
     "prettier": "prettier ./{src,test}/**/*.ts",
@@ -94,7 +94,8 @@
   },
   "dependencies": {
     "reflect-metadata": "^0.1.13",
-    "@mists/nestjs-metrics": "^0.0.2"
+    "@mists/nestjs-metrics": "^0.0.2",
+    "prom-client": "^13.1.0"
   },
   "importSort": {
     ".js, .jsx": {
@@ -112,8 +113,5 @@
     "docs.json",
     "README.md",
     "LICENSE"
-  ],
-  "peerDependencies": {
-    "prom-client": "^12.0.0"
-  }
+  ]
 }

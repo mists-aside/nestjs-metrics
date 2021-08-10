@@ -4,7 +4,7 @@ import {describe, it} from 'mocha';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-import {CountableOptions, LabelOptions, MockAdapter, MockCounter} from '../src';
+import {CountableOptions, MetricOptions, MockAdapter, MockCounter} from '../src';
 import {mlm} from '../src/mock/literals';
 
 chai.use(sinonChai);
@@ -37,7 +37,7 @@ describe('./mock', function () {
     let counter: MockCounter | undefined;
     let sandbox: sinon.SinonSandbox | undefined;
     let incOptions: CountableOptions | undefined;
-    let resetOptions: LabelOptions | undefined;
+    let resetOptions: MetricOptions | undefined;
 
     beforeEach(function () {
       sandbox = sinon.createSandbox();
@@ -74,7 +74,7 @@ describe('./mock', function () {
     });
 
     it(`.reset(${JSON.stringify(resetOptions)}) to log the right message`, function () {
-      counter?.reset(resetOptions as LabelOptions);
+      counter?.reset(resetOptions as MetricOptions);
 
       expect(counter?.logger.debug).to.have.been.called;
       expect(counter?.logger.debug).to.have.been.calledWith(mlm`Counter.reset${resetOptions}`);

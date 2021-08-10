@@ -1,5 +1,5 @@
-import {CountableOptions, Counter, LabelOptions, Tags} from '@mists/nestjs-metrics';
-import {Counter as PromCounter} from 'prom-client';
+import {CountableOptions, Counter, MetricOptions, Tags} from '@mists/nestjs-metrics';
+import {CounterConfiguration, LabelValues, Counter as PromCounter} from 'prom-client';
 
 export class PrometheusCounter implements Counter {
   private static instance: Record<string, PrometheusCounter> = {};
@@ -13,7 +13,11 @@ export class PrometheusCounter implements Counter {
     return PrometheusCounter.instance[adapterLabel];
   }
 
-  private getPromCounter(label: string, tags: Tags = {}): PromCounter<string> {
+  private getPromCounter(
+    label: string,
+    tags: Tags = {},
+    options?: Omit<CounterConfiguration<string>, 'name' | 'help' | 'labelNames'>,
+  ): PromCounter<string> {
     const tagKeys = Object.keys(tags);
     if (!this.counters[label]) {
       this.counters[label] = [
@@ -22,6 +26,7 @@ export class PrometheusCounter implements Counter {
           name: label,
           help: label,
           labelNames: tagKeys,
+          ...(options || {}),
         }),
       ];
     }
@@ -33,6 +38,7 @@ export class PrometheusCounter implements Counter {
           name: label,
           help: label,
           labelNames: tagKeys,
+          ...(options || {}),
         }),
       ];
     }
@@ -41,11 +47,13 @@ export class PrometheusCounter implements Counter {
 
   inc(options: CountableOptions): void {
     options.labels.forEach((label: string) =>
-      this.getPromCounter(label, options.tags).labels(options.tags).inc(options.delta),
+      this.getPromCounter(label, options.tags, options.options)
+        .labels(options.tags as LabelValues<string>)
+        .inc(options.delta),
     );
   }
 
-  reset(options: LabelOptions): void {
+  reset(options: MetricOptions): void {
     options.labels.forEach((label: string) => this.getPromCounter(label).reset());
   }
 }

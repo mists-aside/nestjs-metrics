@@ -1,12 +1,12 @@
 import {Logger} from '@nestjs/common';
 
-import {CountableOptions, Counter, LabelOptions} from '../interfaces';
+import {CountableOptions, Counter, MetricOptions} from '../interfaces';
 import {mlm} from './literals';
 
 export class MockCounter implements Counter {
   public logger = new Logger('MockCounter');
 
-  private static instance: Record<string, MockCounter> = {};
+  protected static instance: Record<string, MockCounter> = {};
 
   static getInstance(adapterLabel = ''): MockCounter {
     if (!MockCounter.instance[adapterLabel]) {
@@ -19,7 +19,7 @@ export class MockCounter implements Counter {
     this.logger.debug(mlm`Counter.inc${options}`);
   }
 
-  reset(options: LabelOptions): void {
+  reset(options: MetricOptions): void {
     this.logger.debug(mlm`Counter.reset${options}`);
   }
 }
