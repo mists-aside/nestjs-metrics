@@ -1,4 +1,4 @@
-import {CountableOptions, Counter, LabelOptions, Tags} from '@mists/nestjs-metrics';
+import {CountableOptions, Counter, MetricOptions} from '@mists/nestjs-metrics';
 import StatsdClient from 'statsd-client';
 
 export class StatsdCounter implements Counter {
@@ -22,5 +22,5 @@ export class StatsdCounter implements Counter {
    * StatsdClient has no reset method
    */
   // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
-  reset(options: LabelOptions): void {}
+  reset(options: MetricOptions): void {}
 }
