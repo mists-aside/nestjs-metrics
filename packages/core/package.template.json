@@ -3,11 +3,11 @@
   "version": "0.0.3",
   "description": "A NestJs plugin for metrics",
   "dependencies": {
-    "@nestjs/common": "^7.6.13",
-    "@nestjs/core": "^7.6.13"
+  },
+  "devDependencies": {
+    "@types/statsd-client": "^0.4.1"
   },
   "peerDependencies": {
-    "@types/statsd-client": "^0.4.1",
     "prom-client": "^13.1.0",
     "statsd-client": "^0.4.5"
   }

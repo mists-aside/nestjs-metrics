@@ -38,35 +38,48 @@ export class MockPromCounter<T extends string> extends PromCounter<T> {
 }
 
 export class MockPrometheusCounter extends PrometheusCounter {
-  protected getPromCounter(
+  // protected getPromCounter(
+  //   label: string,
+  //   tags: Tags = {},
+  //   options?: Omit<CounterConfiguration<string>, 'name' | 'help' | 'labelNames'>,
+  // ): PromCounter<string> {
+  //   const availableRegistries = options?.registers || [register];
+
+  //   const registriesContainingMetric = availableRegistries.filter((reg) => reg.getSingleMetric(label));
+
+  //   if (registriesContainingMetric.length === 0) {
+  //     return new MockPromCounter<string>({
+  //       name: label,
+  //       help: label,
+  //       labelNames: Object.keys(tags),
+  //       ...(options || {}),
+  //     });
+  //   }
+
+  //   let metric: Metric<string> | undefined;
+  //   availableRegistries.forEach((reg) => {
+  //     if (!metric) {
+  //       metric = reg.getSingleMetric(label);
+  //     }
+  //   });
+  //   availableRegistries.forEach((reg) => {
+  //     if (!reg.getSingleMetric(label)) {
+  //       reg.registerMetric(metric as Metric<string>);
+  //     }
+  //   });
+  //   return availableRegistries[0].getSingleMetric(label) as PromCounter<string>;
+  // }
+
+  protected createNewCounter(
     label: string,
-    tags: Tags = {},
+    tags: Tags,
     options?: Omit<CounterConfiguration<string>, 'name' | 'help' | 'labelNames'>,
   ): PromCounter<string> {
-    const availableRegistries = options?.registers || [register];
-
-    const registriesContainingMetric = availableRegistries.filter((reg) => reg.getSingleMetric(label));
-
-    if (registriesContainingMetric.length === 0) {
-      return new MockPromCounter<string>({
-        name: label,
-        help: label,
-        labelNames: Object.keys(tags),
-        ...(options || {}),
-      });
-    }
-
-    let metric: Metric<string> | undefined;
-    availableRegistries.forEach((reg) => {
-      if (!metric) {
-        metric = reg.getSingleMetric(label);
-      }
+    return new MockPromCounter<string>({
+      name: label,
+      help: label,
+      labelNames: Object.keys(tags),
+      ...(options || {}),
     });
-    availableRegistries.forEach((reg) => {
-      if (!reg.getSingleMetric(label)) {
-        reg.registerMetric(metric as Metric<string>);
-      }
-    });
-    return availableRegistries[0].getSingleMetric(label) as PromCounter<string>;
   }
 }

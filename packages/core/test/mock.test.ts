@@ -4,7 +4,15 @@ import {describe, it} from 'mocha';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-import {CountableOptions, MetricOptions, MockAdapter, MockCounter} from '../src';
+import {
+  CountableOptions,
+  EndTimerMethod,
+  MetricOptions,
+  MockAdapter,
+  MockCounter,
+  MockGauge,
+  TimerOptions,
+} from '../src';
 import {mlm} from '../src/mock/literals';
 
 chai.use(sinonChai);
@@ -78,6 +86,74 @@ describe('./mock', function () {
 
       expect(counter?.logger.debug).to.have.been.called;
       expect(counter?.logger.debug).to.have.been.calledWith(mlm`Counter.reset${resetOptions}`);
+    });
+
+    it('generic', () => {
+      expect(true).to.equal(true);
+    });
+  });
+
+  describe('Gauge', function () {
+    let gauge: MockGauge | undefined;
+    let sandbox: sinon.SinonSandbox | undefined;
+    let incOptions: CountableOptions | undefined;
+    let timerOptions: TimerOptions | undefined;
+
+    beforeEach(function () {
+      sandbox = sinon.createSandbox();
+      gauge = MockGauge.getInstance();
+      sandbox.spy(gauge.logger, 'debug');
+      incOptions = {
+        labels: ['test'],
+        delta: 10,
+      };
+      timerOptions = {
+        tags: {
+          test: 'test',
+        },
+      };
+    });
+
+    afterEach(function () {
+      sandbox?.restore();
+      sandbox = undefined;
+
+      gauge = undefined;
+
+      incOptions = undefined;
+      timerOptions = undefined;
+    });
+
+    it('.getInstance() to return an object', function () {
+      expect(gauge).to.be.an('object');
+      expect(gauge instanceof MockGauge).to.be.true;
+    });
+
+    it(`.dec(${JSON.stringify(incOptions)}) to log the right message`, function () {
+      gauge?.dec(incOptions as CountableOptions);
+
+      expect(gauge?.logger.debug).to.have.been.called;
+      expect(gauge?.logger.debug).to.have.been.calledWith(mlm`Gauge.dec${incOptions}`);
+    });
+
+    it(`.inc(${JSON.stringify(incOptions)}) to log the right message`, function () {
+      gauge?.inc(incOptions as CountableOptions);
+
+      expect(gauge?.logger.debug).to.have.been.called;
+      expect(gauge?.logger.debug).to.have.been.calledWith(mlm`Gauge.inc${incOptions}`);
+    });
+
+    it(`.startTimer(${JSON.stringify(timerOptions)}) to log the right message`, function () {
+      const endTimer = gauge?.startTimer(timerOptions);
+
+      expect(gauge?.logger.debug).to.have.been.called;
+      expect(gauge?.logger.debug).to.have.been.calledWith(mlm`Gauge.startTimer${timerOptions}`);
+
+      expect(typeof endTimer).to.be.equal('function');
+      // you need to cast the method here, not because method may be undefined, but because
+      // it sees gauge as possible undefined which determines endTimer to possible be undefined
+      (endTimer as EndTimerMethod)(timerOptions);
+      expect(gauge?.logger.debug).to.have.been.calledWith(mlm`endTimer${timerOptions}`);
     });
 
     it('generic', () => {

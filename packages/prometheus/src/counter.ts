@@ -21,12 +21,7 @@ export class PrometheusCounter implements Counter {
     const registriesContainingMetric = availableRegistries.filter((reg) => reg.getSingleMetric(label));
 
     if (registriesContainingMetric.length === 0) {
-      return new PromCounter<string>({
-        name: label,
-        help: label,
-        labelNames: Object.keys(tags),
-        ...(options || {}),
-      });
+      return this.createNewCounter(label, tags, options);
     }
 
     let metric: Metric<string> | undefined;
@@ -41,6 +36,19 @@ export class PrometheusCounter implements Counter {
       }
     });
     return availableRegistries[0].getSingleMetric(label) as PromCounter<string>;
+  }
+
+  protected createNewCounter(
+    label: string,
+    tags: Tags,
+    options?: Omit<CounterConfiguration<string>, 'name' | 'help' | 'labelNames'>,
+  ): PromCounter<string> {
+    return new PromCounter<string>({
+      name: label,
+      help: label,
+      labelNames: Object.keys(tags),
+      ...(options || {}),
+    });
   }
 
   inc(options: CountableOptions): void {

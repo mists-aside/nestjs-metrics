@@ -3,11 +3,10 @@
   "version": "0.0.0",
   "description": "NestJs Metrics Adapter - StatsD",
   "devDependencies": {
-    "@mists/nestjs-metrics": "^0.0.2",
     "@types/statsd-client": "^0.4.2"
   },
   "dependencies": {
-    "@nestjs/common": "^8.0.6",
+    "@mists/nestjs-metrics": "^0.0.2",
     "statsd-client": "^0.4.5"
   }
 }
