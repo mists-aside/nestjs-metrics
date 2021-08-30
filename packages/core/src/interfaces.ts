@@ -28,9 +28,12 @@ export interface MetricOptions {
   options?: Record<string, unknown>;
 }
 
-export interface ObservableOptions extends MetricOptions {
-  delta: number;
+export interface TaggableOptions extends MetricOptions {
   tags?: Tags;
+}
+
+export interface ObservableOptions extends TaggableOptions {
+  delta: number;
 }
 
 export interface CountableOptions extends Omit<ObservableOptions, 'delta'> {
@@ -75,9 +78,7 @@ export interface Counter {
  * Gauge
  */
 
-export interface TimerOptions {
-  tags?: Tags;
-}
+export interface TimerOptions extends TaggableOptions {}
 
 export interface EndTimerMethod {
   (options?: TimerOptions): void;

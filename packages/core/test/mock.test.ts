@@ -108,6 +108,7 @@ describe('./mock', function () {
         delta: 10,
       };
       timerOptions = {
+        labels: ['test'],
         tags: {
           test: 'test',
         },
