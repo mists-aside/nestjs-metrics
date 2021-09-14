@@ -66,19 +66,24 @@ describe('./counter', function () {
     );
   });
 
-  // it(`.inc({labels:[...], tags}) to log the right message`, function () {
-  //   const tags = {
-  //     test: 1,
-  //   };
-  //   counter?.inc({
-  //     ...incOptions,
-  //     tags,
-  //   });
+  it(`.inc({labels:[...], tags}) to log the right message`, function () {
+    const tags = {
+      test: 1,
+    };
+    counter?.inc({
+      ...incOptions,
+      tags,
+    });
 
-  //   expect(client?.increment).to.have.been.called;
-  //   expect(client?.increment).to.have.been.calledWith('prom_metric_1', 1, tags);
-  //   expect(client?.increment).to.have.been.calledWith('prom_metric_2', 1, tags);
-  // });
+    expect(mockPromCounterLogger.debug).to.have.been.called;
+
+    expect(mockPromCounterLogger.debug).to.have.been.calledWith(
+      mlm`MockPromCounter.inc${{name: 'prom_metric_1', labels: tags}}`,
+    );
+    expect(mockPromCounterLogger.debug).to.have.been.calledWith(
+      mlm`MockPromCounter.inc${{name: 'prom_metric_2', labels: tags}}`,
+    );
+  });
 
   // it(`.reset(${JSON.stringify(resetOptions)}) to log the right message`, function () {
   //   counter?.reset(resetOptions as LabelOptions);

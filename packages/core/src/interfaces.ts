@@ -78,7 +78,7 @@ export interface Counter {
  * Gauge
  */
 
-export interface TimerOptions extends TaggableOptions {}
+export type TimerOptions = TaggableOptions;
 
 export interface EndTimerMethod {
   (options?: TimerOptions): void;

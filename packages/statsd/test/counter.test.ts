@@ -26,7 +26,7 @@ describe('./counter', function () {
     counter = new StatsdCounter(client);
 
     incOptions = {
-      labels: ['statsd_metric_1', 'statsd_metric_2'],
+      labels: ['statsd_counter_1', 'statsd_counter_2'],
     };
   });
 
@@ -49,8 +49,8 @@ describe('./counter', function () {
     });
 
     expect(client?.increment).to.have.been.called;
-    expect(client?.increment).to.have.been.calledWith('statsd_metric_1');
-    expect(client?.increment).to.have.been.calledWith('statsd_metric_2');
+    expect(client?.increment).to.have.been.calledWith('statsd_counter_1');
+    expect(client?.increment).to.have.been.calledWith('statsd_counter_2');
   });
 
   it(`.inc({labels:[...], delta}) to log the right message`, function () {
@@ -60,8 +60,8 @@ describe('./counter', function () {
     });
 
     expect(client?.increment).to.have.been.called;
-    expect(client?.increment).to.have.been.calledWith('statsd_metric_1', 2);
-    expect(client?.increment).to.have.been.calledWith('statsd_metric_2', 2);
+    expect(client?.increment).to.have.been.calledWith('statsd_counter_1', 2);
+    expect(client?.increment).to.have.been.calledWith('statsd_counter_2', 2);
   });
 
   it(`.inc({labels:[...], tags}) to log the right message`, function () {
@@ -74,8 +74,8 @@ describe('./counter', function () {
     });
 
     expect(client?.increment).to.have.been.called;
-    expect(client?.increment).to.have.been.calledWith('statsd_metric_1', 1, tags);
-    expect(client?.increment).to.have.been.calledWith('statsd_metric_2', 1, tags);
+    expect(client?.increment).to.have.been.calledWith('statsd_counter_1', 1, tags);
+    expect(client?.increment).to.have.been.calledWith('statsd_counter_2', 1, tags);
   });
 
   // it(`.reset(${JSON.stringify(resetOptions)}) to log the right message`, function () {
