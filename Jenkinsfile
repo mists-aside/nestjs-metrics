@@ -130,11 +130,11 @@ pipeline {
   post {
     // https://www.jenkins.io/doc/pipeline/tour/post/
     // https://plugins.jenkins.io/telegram-notifications/
-    always {
-      script {
-        cleanWs()
-      }
-    }
+    // always {
+    //   script {
+    //     cleanWs()
+    //   }
+    // }
     failure {
       script {
         telegram.sendStatusFail('jk_pipeline_report_to_telegram_token','jk_pipeline_report_to_telegram_chatId')
