@@ -1,6 +1,6 @@
 import {Logger} from '@nestjs/common';
 
-import {CountableOptions, EndTimerMethod, Gauge, MetricOptions, ObservableOptions, TimerOptions} from '../interfaces';
+import {CountableOptions, EndTimerMethod, Gauge, ObservableOptions, TimerOptions} from '../interfaces';
 import {mlm} from './literals';
 
 export class MockGauge implements Gauge {

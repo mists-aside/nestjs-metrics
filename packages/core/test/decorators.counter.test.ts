@@ -4,7 +4,7 @@ import {describe, it} from 'mocha';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-import {Config, MockAdapter, MockCounter} from '../src';
+import {Config, MockAdapter} from '../src';
 import {Controller} from '../src/test/controller';
 
 chai.use(sinonChai);
