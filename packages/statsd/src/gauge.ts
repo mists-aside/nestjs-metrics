@@ -1,4 +1,4 @@
-import {CountableOptions, EndTimerMethod, Gauge, TimerOptions} from '@mists/nestjs-metrics';
+import {CountableOptions, EndTimerMethod, Gauge, MetricOptions, TimerOptions} from '@mists/nestjs-metrics';
 import StatsdClient from 'statsd-client';
 
 export class StatsdGauge implements Gauge {
@@ -22,6 +22,12 @@ export class StatsdGauge implements Gauge {
     const {labels, delta, tags} = options;
     labels.forEach((label: string) => this.client.gaugeDelta(label, delta ? delta : 1, tags));
   }
+
+  /**
+   * StatsdClient has no reset method
+   */
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
+  reset(options: MetricOptions): void {}
 
   set(options: CountableOptions): void {
     const {labels, delta, tags} = options;

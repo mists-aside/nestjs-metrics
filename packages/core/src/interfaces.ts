@@ -40,6 +40,13 @@ export interface CountableOptions extends Omit<ObservableOptions, 'delta'> {
   delta?: number;
 }
 
+interface Metric {
+  /**
+   * Reset counter values
+   */
+  reset(options: MetricOptions): void;
+}
+
 /***************************************************************************
  * Counter
  */
@@ -61,17 +68,12 @@ export interface CountableOptions extends Omit<ObservableOptions, 'delta'> {
  * @link https://github.com/msiebuhr/node-statsd-client#counting-stuff
  * @link https://github.com/statsd/statsd/blob/master/docs/metric_types.md#counting
  */
-export interface Counter {
+export interface Counter extends Metric {
   /**
    * Increment
    * @param options
    */
   inc(options: CountableOptions): void;
-
-  /**
-   * Reset counter values
-   */
-  reset(options: MetricOptions): void;
 }
 
 /***************************************************************************
@@ -100,7 +102,7 @@ export interface EndTimerMethod {
  *
  * @param options
  */
-export interface Gauge {
+export interface Gauge extends Metric {
   /**
    * Increment gauge
    * @param options
@@ -146,7 +148,7 @@ export interface Gauge {
  *
  * @param options
  */
-export interface Histogram {
+export interface Histogram extends Metric {
   /**
    * Observe value for given labels
    */
@@ -156,11 +158,6 @@ export interface Histogram {
    * Start a timer where the value in seconds will observed
    */
   startTimer(options?: TimerOptions): EndTimerMethod;
-
-  /**
-   * Reset histogram values
-   */
-  reset(): void;
 }
 
 /***************************************************************************

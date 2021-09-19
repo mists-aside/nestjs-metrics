@@ -16,7 +16,7 @@ import {
   ObservableOptions,
   TimerOptions,
 } from '../src';
-import {mlm} from '../src/mock/literals';
+import {mlm, mlmk} from '../src/mock/literals';
 
 chai.use(sinonChai);
 
@@ -102,6 +102,7 @@ describe('./mock', function () {
     let gauge: MockGauge | undefined;
     let sandbox: sinon.SinonSandbox | undefined;
     let obsOptions: CountableOptions | undefined;
+    let resetOptions: MetricOptions | undefined;
     let timerOptions: TimerOptions | undefined;
 
     beforeEach(function () {
@@ -111,6 +112,9 @@ describe('./mock', function () {
       obsOptions = {
         labels: ['test'],
         delta: 10,
+      };
+      resetOptions = {
+        labels: ['test'],
       };
       timerOptions = {
         labels: ['test'],
@@ -127,6 +131,7 @@ describe('./mock', function () {
       gauge = undefined;
 
       obsOptions = undefined;
+      resetOptions = undefined;
       timerOptions = undefined;
     });
 
@@ -147,6 +152,13 @@ describe('./mock', function () {
 
       expect(gauge?.logger.debug).to.have.been.called;
       expect(gauge?.logger.debug).to.have.been.calledWith(mlm`Gauge.inc${obsOptions}`);
+    });
+
+    it(`.reset(${JSON.stringify(resetOptions)}) to log the right message`, function () {
+      gauge?.reset(resetOptions as MetricOptions);
+
+      expect(gauge?.logger.debug).to.have.been.called;
+      expect(gauge?.logger.debug).to.have.been.calledWith(mlm`Gauge.reset${resetOptions}`);
     });
 
     it(`.startTimer(${JSON.stringify(timerOptions)}) to log the right message`, function () {

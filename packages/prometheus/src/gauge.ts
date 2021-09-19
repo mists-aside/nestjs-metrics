@@ -1,5 +1,13 @@
-import {CountableOptions, EndTimerMethod, Gauge, ObservableOptions, Tags, TimerOptions} from '@mists/nestjs-metrics';
-import {GaugeConfiguration, LabelValues, Gauge as PromGauge, Metric as PromMetric, register} from 'prom-client';
+import {
+  CountableOptions,
+  EndTimerMethod,
+  Gauge,
+  MetricOptions,
+  ObservableOptions,
+  Tags,
+  TimerOptions,
+} from '@mists/nestjs-metrics';
+import {GaugeConfiguration, LabelValues, Gauge as PromGauge} from 'prom-client';
 
 import {Metric, SimplePromMetricConfiguration} from './metric';
 
@@ -38,28 +46,34 @@ export class PrometheusGauge extends Metric implements Gauge {
 
   dec(options: CountableOptions): void {
     options.labels.forEach((label: string) =>
-      this.getPromGauge(label, options.tags, options.options).dec(options.tags as LabelValues<string>, options.delta),
+      this.getPromGauge(label, options.tags, options.options).dec(options.tags || {}, options.delta),
     );
   }
 
+  // jscpd:ignore-start
   inc(options: CountableOptions): void {
     options.labels.forEach((label: string) =>
-      this.getPromGauge(label, options.tags, options.options).inc(options.tags as LabelValues<string>, options.delta),
+      this.getPromGauge(label, options.tags, options.options).inc(options.tags || {}, options.delta),
     );
   }
+
+  reset(options: MetricOptions): void {
+    options.labels.forEach((label: string) => this.getPromGauge(label).reset());
+  }
+  // jscpd:ignore-end
 
   set(options: ObservableOptions): void {
     options.labels.forEach((label: string) =>
-      this.getPromGauge(label, options.tags, options.options).set(options.tags as LabelValues<string>, options.delta),
+      this.getPromGauge(label, options.tags, options.options).set(options.tags || {}, options.delta),
     );
   }
 
   startTimer(options: TimerOptions): EndTimerMethod {
     const methods = options.labels.map((label: string) =>
-      this.getPromGauge(label, options.tags, options.options).startTimer(options.tags as LabelValues<string>),
+      this.getPromGauge(label, options.tags, options.options).startTimer(options.tags || {}),
     );
     return (opts?: TimerOptions) => {
-      methods.forEach((method) => method((opts || options).tags as LabelValues<string>));
+      methods.forEach((method) => method((opts || options).tags || {}));
     };
   }
 }

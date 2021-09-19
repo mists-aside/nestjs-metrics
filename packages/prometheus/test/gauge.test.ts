@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import {CountableOptions, EndTimerMethod, ObservableOptions, TimerOptions} from '@mists/nestjs-metrics';
+import {CountableOptions, EndTimerMethod, MetricOptions, ObservableOptions, TimerOptions} from '@mists/nestjs-metrics';
 import {mlm} from '@mists/nestjs-metrics/dist/commonjs/mock/literals';
 import chai, {expect} from 'chai';
 import {describe, it} from 'mocha';
@@ -16,6 +16,7 @@ describe('./gauge', function () {
   let sandbox: sinon.SinonSandbox | undefined;
   let setOptions: ObservableOptions;
   let incOptions: CountableOptions;
+  let resetOptions: MetricOptions | undefined;
   let timerOptions: TimerOptions;
   let endTimerOptions: TimerOptions;
 
@@ -26,6 +27,9 @@ describe('./gauge', function () {
     gauge = new MockPrometheusGauge();
 
     incOptions = {
+      labels: ['prom_gauge_1', 'prom_gauge_2'],
+    };
+    resetOptions = {
       labels: ['prom_gauge_1', 'prom_gauge_2'],
     };
     setOptions = {
@@ -61,8 +65,12 @@ describe('./gauge', function () {
 
     expect(mockPromGaugeLogger.debug).to.have.been.called;
 
-    expect(mockPromGaugeLogger.debug).to.have.been.calledWith(mlm`MockPromGauge.dec${{name: 'prom_gauge_1'}}`);
-    expect(mockPromGaugeLogger.debug).to.have.been.calledWith(mlm`MockPromGauge.dec${{name: 'prom_gauge_2'}}`);
+    expect(mockPromGaugeLogger.debug).to.have.been.calledWith(
+      mlm`MockPromGauge.dec${{name: 'prom_gauge_1', labels: {}}}`,
+    );
+    expect(mockPromGaugeLogger.debug).to.have.been.calledWith(
+      mlm`MockPromGauge.dec${{name: 'prom_gauge_2', labels: {}}}`,
+    );
   });
 
   it(`.dec({labels:[...], delta}) to log the right message`, function () {
@@ -73,11 +81,16 @@ describe('./gauge', function () {
 
     expect(mockPromGaugeLogger.debug).to.have.been.called;
 
+    const others = {
+      labels: {},
+      value: 2,
+    };
+
     expect(mockPromGaugeLogger.debug).to.have.been.calledWith(
-      mlm`MockPromGauge.dec${{name: 'prom_gauge_1', value: 2}}`,
+      mlm`MockPromGauge.dec${{name: 'prom_gauge_1', ...others}}`,
     );
     expect(mockPromGaugeLogger.debug).to.have.been.calledWith(
-      mlm`MockPromGauge.dec${{name: 'prom_gauge_2', value: 2}}`,
+      mlm`MockPromGauge.dec${{name: 'prom_gauge_2', ...others}}`,
     );
   });
 
@@ -107,8 +120,12 @@ describe('./gauge', function () {
 
     expect(mockPromGaugeLogger.debug).to.have.been.called;
 
-    expect(mockPromGaugeLogger.debug).to.have.been.calledWith(mlm`MockPromGauge.inc${{name: 'prom_gauge_1'}}`);
-    expect(mockPromGaugeLogger.debug).to.have.been.calledWith(mlm`MockPromGauge.inc${{name: 'prom_gauge_2'}}`);
+    expect(mockPromGaugeLogger.debug).to.have.been.calledWith(
+      mlm`MockPromGauge.inc${{name: 'prom_gauge_1', labels: {}}}`,
+    );
+    expect(mockPromGaugeLogger.debug).to.have.been.calledWith(
+      mlm`MockPromGauge.inc${{name: 'prom_gauge_2', labels: {}}}`,
+    );
   });
 
   it(`.inc({labels:[...], delta}) to log the right message`, function () {
@@ -119,11 +136,16 @@ describe('./gauge', function () {
 
     expect(mockPromGaugeLogger.debug).to.have.been.called;
 
+    const others = {
+      labels: {},
+      value: 2,
+    };
+
     expect(mockPromGaugeLogger.debug).to.have.been.calledWith(
-      mlm`MockPromGauge.inc${{name: 'prom_gauge_1', value: 2}}`,
+      mlm`MockPromGauge.inc${{name: 'prom_gauge_1', ...others}}`,
     );
     expect(mockPromGaugeLogger.debug).to.have.been.calledWith(
-      mlm`MockPromGauge.inc${{name: 'prom_gauge_2', value: 2}}`,
+      mlm`MockPromGauge.inc${{name: 'prom_gauge_2', ...others}}`,
     );
   });
 
@@ -146,6 +168,15 @@ describe('./gauge', function () {
     );
   });
 
+  it(`.reset(${JSON.stringify(resetOptions)}) to log the right message`, function () {
+    gauge?.reset(resetOptions as MetricOptions);
+
+    expect(mockPromGaugeLogger.debug).to.have.been.called;
+
+    expect(mockPromGaugeLogger.debug).to.have.been.calledWith(mlm`MockPromGauge.reset${{name: 'prom_gauge_1'}}`);
+    expect(mockPromGaugeLogger.debug).to.have.been.calledWith(mlm`MockPromGauge.reset${{name: 'prom_gauge_2'}}`);
+  });
+
   it(`.set({labels:[...], delta}) to log the right message`, function () {
     gauge?.set({
       ...setOptions,
@@ -153,11 +184,16 @@ describe('./gauge', function () {
 
     expect(mockPromGaugeLogger.debug).to.have.been.called;
 
+    const others = {
+      labels: {},
+      value: 1,
+    };
+
     expect(mockPromGaugeLogger.debug).to.have.been.calledWith(
-      mlm`MockPromGauge.set${{name: 'prom_gauge_1', value: 1}}`,
+      mlm`MockPromGauge.set${{name: 'prom_gauge_1', ...others}}`,
     );
     expect(mockPromGaugeLogger.debug).to.have.been.calledWith(
-      mlm`MockPromGauge.set${{name: 'prom_gauge_2', value: 1}}`,
+      mlm`MockPromGauge.set${{name: 'prom_gauge_2', ...others}}`,
     );
   });
 

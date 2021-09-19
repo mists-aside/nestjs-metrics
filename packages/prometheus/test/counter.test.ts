@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import {CountableOptions} from '@mists/nestjs-metrics';
+import {CountableOptions, MetricOptions} from '@mists/nestjs-metrics';
 import {mlm} from '@mists/nestjs-metrics/dist/commonjs/mock/literals';
 import chai, {expect} from 'chai';
 import {describe, it} from 'mocha';
@@ -15,6 +15,7 @@ describe('./counter', function () {
   let counter: MockPrometheusCounter | undefined;
   let sandbox: sinon.SinonSandbox | undefined;
   let incOptions: CountableOptions;
+  let resetOptions: MetricOptions | undefined;
 
   beforeEach(function () {
     sandbox = sinon.createSandbox();
@@ -23,6 +24,9 @@ describe('./counter', function () {
     counter = new MockPrometheusCounter();
 
     incOptions = {
+      labels: ['prom_metric_1', 'prom_metric_2'],
+    };
+    resetOptions = {
       labels: ['prom_metric_1', 'prom_metric_2'],
     };
   });
@@ -46,8 +50,12 @@ describe('./counter', function () {
 
     expect(mockPromCounterLogger.debug).to.have.been.called;
 
-    expect(mockPromCounterLogger.debug).to.have.been.calledWith(mlm`MockPromCounter.inc${{name: 'prom_metric_1'}}`);
-    expect(mockPromCounterLogger.debug).to.have.been.calledWith(mlm`MockPromCounter.inc${{name: 'prom_metric_2'}}`);
+    expect(mockPromCounterLogger.debug).to.have.been.calledWith(
+      mlm`MockPromCounter.inc${{name: 'prom_metric_1', labels: {}}}`,
+    );
+    expect(mockPromCounterLogger.debug).to.have.been.calledWith(
+      mlm`MockPromCounter.inc${{name: 'prom_metric_2', labels: {}}}`,
+    );
   });
 
   it(`.inc({labels:[...], delta}) to log the right message`, function () {
@@ -58,11 +66,16 @@ describe('./counter', function () {
 
     expect(mockPromCounterLogger.debug).to.have.been.called;
 
+    const others = {
+      labels: {},
+      value: 2,
+    };
+
     expect(mockPromCounterLogger.debug).to.have.been.calledWith(
-      mlm`MockPromCounter.inc${{name: 'prom_metric_1', value: 2}}`,
+      mlm`MockPromCounter.inc${{name: 'prom_metric_1', ...others}}`,
     );
     expect(mockPromCounterLogger.debug).to.have.been.calledWith(
-      mlm`MockPromCounter.inc${{name: 'prom_metric_2', value: 2}}`,
+      mlm`MockPromCounter.inc${{name: 'prom_metric_2', ...others}}`,
     );
   });
 
@@ -85,12 +98,14 @@ describe('./counter', function () {
     );
   });
 
-  // it(`.reset(${JSON.stringify(resetOptions)}) to log the right message`, function () {
-  //   counter?.reset(resetOptions as LabelOptions);
+  it(`.reset(${JSON.stringify(resetOptions)}) to log the right message`, function () {
+    counter?.reset(resetOptions as MetricOptions);
 
-  //   expect(counter?.logger.debug).to.have.been.called;
-  //   expect(counter?.logger.debug).to.have.been.calledWith(mlm`Counter.reset${resetOptions}`);
-  // });
+    expect(mockPromCounterLogger.debug).to.have.been.called;
+
+    expect(mockPromCounterLogger.debug).to.have.been.calledWith(mlm`MockPromCounter.reset${{name: 'prom_metric_1'}}`);
+    expect(mockPromCounterLogger.debug).to.have.been.calledWith(mlm`MockPromCounter.reset${{name: 'prom_metric_2'}}`);
+  });
 
   it('generic', () => {
     expect(true).to.equal(true);

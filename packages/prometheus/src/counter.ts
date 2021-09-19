@@ -40,13 +40,15 @@ export class PrometheusCounter extends Metric implements Counter {
     });
   }
 
+  // jscpd:ignore-start
   inc(options: CountableOptions): void {
     options.labels.forEach((label: string) =>
-      this.getPromCounter(label, options.tags, options.options).inc(options.tags as LabelValues<string>, options.delta),
+      this.getPromCounter(label, options.tags, options.options).inc(options.tags || {}, options.delta),
     );
   }
 
   reset(options: MetricOptions): void {
     options.labels.forEach((label: string) => this.getPromCounter(label).reset());
   }
+  // jscpd:ignore-end
 }

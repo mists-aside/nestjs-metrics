@@ -1,6 +1,6 @@
 import {Logger} from '@nestjs/common';
 
-import {CountableOptions, EndTimerMethod, Gauge, ObservableOptions, TimerOptions} from '../interfaces';
+import {CountableOptions, EndTimerMethod, Gauge, MetricOptions, ObservableOptions, TimerOptions} from '../interfaces';
 import {mlm} from './literals';
 
 export class MockGauge implements Gauge {
@@ -21,6 +21,10 @@ export class MockGauge implements Gauge {
 
   inc(options?: CountableOptions): void {
     this.logger.debug(mlm`Gauge.inc${options}`);
+  }
+
+  reset(options: MetricOptions): void {
+    this.logger.debug(mlm`Gauge.reset${options}`);
   }
 
   set(options: ObservableOptions): void {
