@@ -83,7 +83,7 @@ export interface Counter extends Metric {
 export type TimerOptions = TaggableOptions;
 
 export interface EndTimerMethod {
-  (options?: TimerOptions): void;
+  (options?: TimerOptions): number;
 }
 
 /**

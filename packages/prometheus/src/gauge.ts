@@ -73,7 +73,15 @@ export class PrometheusGauge extends Metric implements Gauge {
       this.getPromGauge(label, options.tags, options.options).startTimer(options.tags || {}),
     );
     return (opts?: TimerOptions) => {
-      methods.forEach((method) => method((opts || options).tags || {}));
+      // TODO: simplify when https://github.com/siimon/prom-client/pull/466 is applied
+      return Math.trunc(
+        methods
+          .map((method) => method((opts || options).tags || {}))
+          .reduce((a, b) => {
+            const c = b as unknown as number;
+            return a + c;
+          }, 0) / methods.length,
+      );
     };
   }
 }

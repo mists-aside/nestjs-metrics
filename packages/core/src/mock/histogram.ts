@@ -23,6 +23,7 @@ export class MockHistogram implements Histogram {
     this.logger.debug(mlm`Histogram.startTimer${options}`);
     return (opts?: TimerOptions) => {
       this.logger.debug(mlm`endTimer${opts}`);
+      return 0;
     };
   }
 

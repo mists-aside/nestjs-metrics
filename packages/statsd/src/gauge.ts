@@ -38,7 +38,11 @@ export class StatsdGauge implements Gauge {
     const start = new Date();
     const {labels, tags} = options;
     return (opts?: TimerOptions) => {
-      labels.forEach((label: string) => this.client.timing(label, start, opts ? opts.tags || tags : tags));
+      return Math.trunc(
+        labels
+          .map((label: string) => this.client.timing(label, start, opts ? opts.tags || tags : tags))
+          .reduce((a) => a + new Date().getTime() - start.getTime(), 0) / labels.length,
+      );
     };
   }
 }

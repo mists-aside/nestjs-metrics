@@ -23,6 +23,7 @@ export class MockSummary implements Summary {
     this.logger.debug(mlm`Summary.startTimer${options}`);
     return (opts?: TimerOptions) => {
       this.logger.debug(mlm`endTimer${opts}`);
+      return 0;
     };
   }
 

@@ -35,6 +35,7 @@ export class MockGauge implements Gauge {
     this.logger.debug(mlm`Gauge.startTimer${options}`);
     return (opts?: TimerOptions) => {
       this.logger.debug(mlm`endTimer${opts}`);
+      return 0;
     };
   }
 }

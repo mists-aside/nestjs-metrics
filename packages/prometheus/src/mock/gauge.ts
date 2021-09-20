@@ -1,35 +1,16 @@
-import {CountableOptions, Tags, TimerOptions} from '@mists/nestjs-metrics';
+import {Tags, TimerOptions} from '@mists/nestjs-metrics';
 import {mlm} from '@mists/nestjs-metrics/dist/commonjs/mock/literals';
 import {Logger} from '@nestjs/common';
 import {GaugeConfiguration, LabelValues, Gauge as PromGauge} from 'prom-client';
 
+import {promMock} from './mock';
 import {PrometheusGauge} from '..';
 
 export const mockPromGaugeLogger = new Logger('mock-prom-client');
 
-export class MockPromGauge<T extends string> extends PromGauge<T> {
-  protected name: string;
+export class MockPromGauge<T extends string> extends promMock<string>(PromGauge) {
   constructor(configuration: GaugeConfiguration<T>) {
     super(configuration);
-
-    this.name = configuration.name;
-  }
-
-  protected parseArgs(labels?: LabelValues<T> | number | null, value?: number): unknown {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let options: Record<string, any> = {
-      name: this.name,
-      labels: typeof labels === 'number' ? null : labels,
-    };
-
-    if (value) {
-      options = {
-        ...options,
-        value: typeof labels === 'number' ? labels : value,
-      };
-    }
-
-    return options;
   }
 
   dec(labels?: LabelValues<T> | number | null, value?: number): void {
@@ -68,6 +49,12 @@ export class MockPromGauge<T extends string> extends PromGauge<T> {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   remove(labels: LabelValues<T> | string, ...values: string[]): void {}
+
+  /**
+   * Set gauge value to current epoch time in ms
+   */
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setToCurrentTime(): void {}
 }
 
 export class MockPrometheusGauge extends PrometheusGauge {
