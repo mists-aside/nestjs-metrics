@@ -19,6 +19,8 @@
     "lint": "lerna run lint:write --scope @mists/nestjs-metrics*",
     "postinstall": "node .scripts/bootstrap.js && lerna bootstrap",
     "prettier": "lerna run prettier:write --scope @mists/nestjs-metrics*",
+    "#start": "lerna run start:dev --scope @mists/nestjs-metrics-demo",
+    "start": "cd packages/demo && npm run start:dev",
     "test": "lerna run test --scope @mists/nestjs-metrics*"
   },
   "importSort": {
