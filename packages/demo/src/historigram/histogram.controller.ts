@@ -1,19 +1,13 @@
 import { Controller, Get, Logger } from '@nestjs/common';
-import {
-  Observe,
-  ObserveMetricType,
-  Timer,
-  TimerMetricType,
-} from '@mists/nestjs-metrics';
+import { Observe, Timer, TimerMetricType } from '@mists/nestjs-metrics';
 
-const logger = new Logger('SummaryController');
+const logger = new Logger('HistogramController');
 
-@Controller('summary')
-export class SummaryController {
+@Controller('histogram')
+export class HistogramController {
   @Get('observe')
   @Observe({
     logger,
-    metricType: ObserveMetricType.Summary,
     options: {
       labels: ['metric_gauge_inc_1'],
       delta: 100,

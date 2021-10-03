@@ -43,15 +43,16 @@
     "test": "jest"
   },
   "dependencies": {
-    "@nestjs/common": "^7.6.15",
-    "@nestjs/core": "^7.6.15",
-    "@nestjs/platform-express": "^7.6.15",
-    "reflect-metadata": "^0.1.13",
-    "rimraf": "^3.0.2",
-    "rxjs": "^6.6.6",
     "@mists/nestjs-metrics": "0.0.2",
     "@mists/nestjs-metrics-prometheus": "0.0.0",
-    "@mists/nestjs-metrics-statsd": "0.0.0"
+    "@mists/nestjs-metrics-statsd": "0.0.0",
+    "@nestjs/common": "^8.0.9",
+    "@nestjs/core": "^8.0.9",
+    "@nestjs/platform-express": "^8.0.9",
+    "prom-client": "^14.0.0",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "rxjs": "^7.3.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.6.0",

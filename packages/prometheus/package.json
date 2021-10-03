@@ -96,7 +96,7 @@
   "dependencies": {
     "reflect-metadata": "^0.1.13",
     "@nestjs/common": "^8.0.6",
-    "@nestjs/core": "^8.0.6",
+    "@nestjs/core": "^8.0.9",
     "@mists/nestjs-metrics": "^0.0.2",
     "prom-client": "^13.1.0"
   },

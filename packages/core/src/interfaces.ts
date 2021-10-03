@@ -13,6 +13,12 @@ export interface Adapter {
   adapterLabel: string;
 
   getCounter(): Counter;
+
+  getGauge(): Gauge;
+
+  getHistogram(): Histogram;
+
+  getSummary(): Summary;
 }
 
 /***************************************************************************

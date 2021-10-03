@@ -15,12 +15,12 @@ export class Controller {
     return Controller.instance;
   }
 
-  @Inc({labels: ['inc_metric_1']})
+  @Inc({options: {labels: ['inc_metric_1']}})
   incByDecorator(): void {}
 
-  @Inc({labels: ['inc_metric_1', 'inc_metric_2']})
+  @Inc({options: {labels: ['inc_metric_1', 'inc_metric_2']}})
   incByDecoratorMultipleLabels(): void {}
 
-  @Inc({labels: ['inc_metric_1']}, ['adapter_1'])
+  @Inc({adapterLabels: ['adapter_1'], options: {labels: ['inc_metric_1']}})
   incByDecoratorWithAdapterList(): void {}
 }
