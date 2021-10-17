@@ -5,6 +5,7 @@ import {Adapter} from './interfaces';
 
 export interface MetricsModuleOptions {
   adapters: Adapter[];
+  instanceLabel?: string;
 }
 
 export interface MetricsModuleOptionsFactory {
@@ -155,6 +156,7 @@ export class MetricsModule {
   private static configureServer(options: MetricsModuleOptions): void {
     const config = Config.getInstance();
     config.addAdapters(options.adapters);
+    config.instanceLabel = options.instanceLabel ? options.instanceLabel : '';
 
     // if (options.prometheus && options.prometheus.route) {
     //   Reflect.defineMetadata(PATH_METADATA, options.prometheus.route, MetricsController);
@@ -164,6 +166,7 @@ export class MetricsModule {
   private static makeDefaultOptions(options?: MetricsModuleOptions): Required<MetricsModuleOptions> {
     return {
       adapters: [...((options && options.adapters) || [])],
+      instanceLabel: '',
     };
   }
 }

@@ -1,18 +1,24 @@
+import { Config, MetricsModule } from '@mists/nestjs-metrics';
+import { PrometheusAdapter } from '@mists/nestjs-metrics-prometheus';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CounterController } from './counter/counter.controller';
 import { GaugeController } from './gauge/gauge.controller';
 import { HistogramController } from './historigram/histogram.controller';
+import { PrometheusController } from './prometheus/prometheus.controller';
 import { SummaryController } from './summary/summary.controller';
-import { MetricsModule } from '@mists/nestjs-metrics';
 import { UrlLoggerMiddleware } from './url-logger.middleware';
-import { MetricsController } from './metrics/metrics.controller';
 
 @Module({
   imports: [
     MetricsModule.register({
-      adapters: [],
+      adapters: [
+        new PrometheusAdapter('prometheus'),
+        // new StatsdAdapter('statsd', null),
+      ],
+      // instanceLabel: 'demo',
     }),
   ],
   controllers: [
@@ -21,9 +27,9 @@ import { MetricsController } from './metrics/metrics.controller';
     GaugeController,
     HistogramController,
     SummaryController,
-    MetricsController,
+    PrometheusController,
   ],
-  providers: [AppService],
+  providers: [AppService, Config],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer): void {

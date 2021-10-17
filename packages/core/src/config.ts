@@ -15,8 +15,18 @@ export class Config {
 
   private cAdapters: Adapter[] = [];
 
+  private cInstanceLabel = '';
+
   get adapters(): Adapter[] {
     return this.getAdapters();
+  }
+
+  get instanceLabel(): string {
+    return this.cInstanceLabel;
+  }
+
+  set instanceLabel(label: string) {
+    this.cInstanceLabel = label;
   }
 
   addAdapter(adapter: Adapter): void {
@@ -29,6 +39,7 @@ export class Config {
 
   clear(): void {
     this.cAdapters = [];
+    this.cInstanceLabel = '';
   }
 
   getAdapters(filter?: AdapterFilter): Adapter[] {
